@@ -242,6 +242,32 @@ Twig 记录（`DAT_004bae08`，每条 `0x38` 字节）：
 验证：`--closetest`（用户截图的 Tutorial 会话 + 锁定环）、`--filltest=0`（逐格填满 Tutorial，
 最终 `WFinishLevelDialog`）、`--piecetest`（多格枝整块保留 / 整块移除）、`--autotest` 烟雾测试、`--wintest`、`--testsound` 全部通过。
 
+---
+
+## 12. 修复补遗（2025-10，与原版逐条对照）
+
+以下结论来自 Ghidra 12.1.4 对 `FiberTwig.exe` 的二次反编译（函数体见 `work/tools/decomp/`），
+以及针对每个问题的回归测试。
+
+| 问题 | 原版依据 | remake 实现 |
+|---|---|---|
+| 取回刚放置的枝 | `FUN_004971b8`：`DAT_004bae78` 保存最近放置的 twig 下标；空手点击它时即使 `TakeAllow=taDenied` 也能拿回（state 1→3），其它场上枝仍需 `DAT_004baded` | `last_placed` 快照 + `_take_back_last()`：恢复放置前的 cell/ghost/pieces/score/combo，并把该枝放回手中；命中检测用屏幕坐标 + `cam_y` 换算到世界坐标（否则点击无效）；锤子/水壶/新放置会清除该状态 |
+| 破碎特效（ClearSteck / 锤子） | `FUN_004aa9e4`：对带上每根枝先调 `HammerFishka` 特效再移除，最后一声 `HammerFishkaSound`；该特效是 `EffectsType.dat` 的 SparkCloneEffect（`star.png` 15 颗，重力 150，255→0 淡出约 1 s，4 帧每 100 ms） | `_spawn_hammer_sparks()`/`_update_sparks()`/`_draw_sparks()`；锤子与 `_give_bonus(1)` 均调用（ClearSteck 实现为逐枝生成火花再清带） |
+| Next Level 技能提示 | 提示只在鼠标悬停对应增益时显示 | `_skill_hover()` 跟踪当前行：换行立即刷新提示、离开关闭；行区域改为各技能实际控件范围 (40,72/172/272/372/472,130×80) |
+| 水壶虚影 | `FUN_004a30c4` 在鼠标格生成形状 | `_amphora_shape_at()` 供 `_use_amphora` 与 `_update_hover` 共用，工具选中时显示同款虚影预览 |
+| DROP SECTION 冷却 + 反向传送带 | `FUN_00490abc`：第二条 `lenta` 画在 (610,482)，源区 `(0x3f-scroll, 0xf7-scroll)`（反向）；`FUN_0048bf78`/`FUN_0048b2d0`：`DAT_004b9790` 暂停、`DAT_004baf74` 为恢复期限 | 枝销毁（x≥795）后 `drop_cd=DROP_COOLDOWN`（加速器生效时为 0），期间 `drop_belt_offset` 冻结；`_draw_belt` 画反向条带 |
+| ClosedLink 误报 | `FUN_004a1130` 只在“合并后的连通块无开放关节且存在其它连通块”时拒绝；`FUN_004971b8` 当**第一格是透明枝**或 `FUN_004a1360` 判定可完成时放行 | `_closes_link` 改为模拟放置 + `_connected_components()`/`_level_complete()`，并加入“首格为 ghost”例外；全部为 ghost 的放置跳过 PutAllow（原版 `local_29`）；提示按原版区分 `LHintMatchingJoints` / `LHintTransparentTwig` / `LHintClosedLink` |
+| 枝接口/位置错误 | 原版从精灵边缘推导接口 | `LAYOUTS` 修正镜像的 `*_1a`（123_134→134_123、124_234→234_124）与 `Skoba1/2`（23_34 / 34_14）；新增 `--shapetest` 用像素连通度校验全部 14 个布局（0 failures） |
+| 场景交互 | `FUN_0049a7e4` 解析 `<Point>`（state 5 隐形枝 + `border`）、`<Bomb>`；`FUN_004a1678` 在点接入主连通块后触发 `FUN_004a1f54/FUN_004a1e5c`（换图）、`FUN_004a22a0`（沿连接摧毁 r 层枝，ghost=true 转透明枝）、`FUN_004a2094`（picturebomb 按 r 移除砖块并画 `bombimage`）与 `StartEffect` 音效 | `BoardWorld.setup` 生成隐形 point 枝并参与连通；`_check_bonus_elements()`/`_activate_bonus()`/`_destroy_twigs_around()`/`world.bomb_bricks()` 实现全部效果 |
+| 组合误判定 | `FUN_004aa128`：只检查 `DAT_004bae98` 指向的当前组合，且必须以刚放置的 twig 为锚点逐格比对 state-1 枝 | `combo_step` + `_matches_combo(c, placement)`：锚点必须是被放置格，point 隐形枝不参与；组合严格按 `CombSequence` 顺序完成 |
+| New Game 从第 1 关开始 | `BNewWTitleMouseUp` 是唯一进入难度框的路径 | `new_game_pending` + `_reset_campaign()`；`_next_level()` 直接开始下一关，不再弹难度框 |
+| 难度框只弹一次 | WTitle 的 `ShowModal WStartDialog` | 同上一行：只在 New Game 且确认后应用 |
+| Demo 按钮 | `BDemoWLoad`：`RunMethod BDemoWTitleMouseUp` + `ChangeModal WGame` | `_start_demo()` 解析 `demo.dat`；`demo_mode` 下 `_update_game` 只走 `_demo_step`（回放事件），结束后 `_end_demo()` 回标题；修复了逐字符拼串导致的 O(n²) 卡死 |
+| 主界面 realArcade 水印 | 非 Puzzle Lab 原版素材，为盗版发行商后加水印 | 用 OpenCV NS 修复去掉 `Title1.jpg` 右下角水印（其余游戏内图片经模板匹配确认无该标志） |
+
+新增自测：`--fixtest`（回滚、弃枝冷却与传送带冻结/恢复、组合顺序、bonus 触发与换图、水壶预览）、
+`--shapetest`（多格枝掩码与贴图边缘一致）、`--demo`（回放 `demo.dat`）。
+
 性能：放置判定所需的连通块/开放关节/“下一格”数据由 `_rebuild_board_cache`
 在棋盘变化时一次性重建，鼠标移动时的检查为 O(被触碰连通块的开放关节)，
 不再每次全盘扫描。

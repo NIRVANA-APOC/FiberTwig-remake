@@ -28,6 +28,13 @@ var preview_shape: Dictionary = {}
 var preview_valid := false
 var bonus_points: Array = []
 var effects: Array = []
+var map_removed: Dictionary = {}     # Vector2i(col, row) -> true (bombed wall bricks)
+var explosions: Array = []           # {pos, tex, t, life}
+## Cells of the level's <Point> markers (state-5 bonus twigs in the original).
+## They occupy the board and carry a joint mask but are never drawn.
+var point_cells: Dictionary = {}     # Vector2i -> true
+## The element that each point cell belongs to (for the trigger check).
+var point_element: Dictionary = {}   # Vector2i -> element dictionary
 var _bg_ref := 0.0
 var _pictures_back: Array = []
 var _pictures_front: Array = []
@@ -43,10 +50,25 @@ func setup(p_level: Dictionary) -> void:
 	pieces.clear()
 	bonus_points.clear()
 	effects.clear()
+	map_removed.clear()
+	explosions.clear()
+	point_cells.clear()
+	point_element.clear()
 	for g in level.get("ghosts", []):
 		ghosts[g.cell] = g.type
 	for f in level.get("fishkas", []):
 		cells[f.cell] = {"type": f.type, "locked": true, "unhammer": f.unhammer}
+	# Bonus points are hidden twigs in the original (state 5, FUN_0049a7e4);
+	# they occupy their cell with the <Point border> mask and can neither be
+	# picked nor hammered.  They join the network like a normal twig.
+	for b in level.get("bonus_elements", []):
+		b["triggered"] = false
+		for p in b.points:
+			var pcell: Vector2i = p.cell
+			cells[pcell] = {"type": int(p.border), "locked": true, "unhammer": true, "point": true}
+			point_cells[pcell] = true
+			point_element[pcell] = b
+			bonus_points.append({"cell": pcell, "active": true, "border": int(p.border)})
 	_pictures_back = []
 	_pictures_front = []
 	for pic in level.get("pictures", []):
@@ -61,9 +83,6 @@ func setup(p_level: Dictionary) -> void:
 	if not _pictures_back.is_empty():
 		_bg_ref = float(_pictures_back[0].y)
 	rain = str(level.get("rain", ""))
-	for b in level.get("bonus_elements", []):
-		for p in b.points:
-			bonus_points.append({"cell": LevelLoader.ghost_cell(int(p.x), int(p.y)), "active": true, "border": p.border})
 	if _camera == null:
 		_camera = Camera2D.new()
 		_camera.enabled = true
@@ -77,6 +96,49 @@ func update_camera() -> void:
 func _process(delta: float) -> void:
 	_time += delta
 	queue_redraw()
+
+## Show/hide a <Picture> by name (RemovePicture / ShowPicture of a bonus
+## element).  Pictures the level declares invisible start hidden.
+func set_picture_visible(pic_name: String, visible: bool) -> void:
+	for pic in _pictures_back + _pictures_front:
+		if str(pic.get("name", "")) == pic_name:
+			pic["visible"] = visible
+
+## A picture bomb removes the wall bricks inside `radius` (pixels) around the
+## world point (x, y) and plays the `image` tile as the destruction effect
+## (FiberTwig.exe FUN_004a2094).  Returns how many bricks were removed.
+func bomb_bricks(x: float, y: float, radius: float, image: String) -> int:
+	var pm: Dictionary = level.get("picture_map", {})
+	if pm.is_empty():
+		return 0
+	var mx := float(pm.x) + 5.0
+	var my := float(pm.y)
+	var removed := 0
+	var rows: Array = pm.rows
+	var r0 := maxi(int(floor((y - radius - my) / CELL)), 0)
+	var r1 := mini(int(ceil((y + radius - my) / CELL)), rows.size() - 1)
+	for r in range(r0, r1 + 1):
+		var row: Array = rows[r]
+		var c0 := maxi(int(floor((x - radius - mx) / CELL)), 0)
+		var c1 := mini(int(ceil((x + radius - mx) / CELL)), row.size() - 1)
+		for c in range(c0, c1 + 1):
+			if int(row[c]) <= 0 or map_removed.has(Vector2i(c, r)):
+				continue
+			var px := mx + c * CELL
+			var py := my + r * CELL
+			# the original tests the distance to the brick's four corners
+			var near := false
+			for corner in [Vector2(0, 0), Vector2(CELL, 0), Vector2(0, CELL), Vector2(CELL, CELL)]:
+				if Vector2(px, py).distance_to(Vector2(x, y) - corner) < radius:
+					near = true
+					break
+			if near:
+				map_removed[Vector2i(c, r)] = true
+				if image != "":
+					var tex := AssetLib.texture("res://assets/squares/%s" % image)
+					explosions.append({"pos": Vector2(px, py), "tex": tex, "t": 0.0, "life": 0.6})
+				removed += 1
+	return removed
 
 func _picture_texture(pic: Dictionary) -> Texture2D:
 	var images: Array = pic.get("images", [])
@@ -103,6 +165,8 @@ func _draw() -> void:
 	var top := cam_y - 64.0
 	var bottom := cam_y + 564.0
 	for pic in _pictures_back:
+		if pic.get("visible", true) == false:
+			continue
 		var tex := _picture_texture(pic)
 		if tex == null:
 			continue
@@ -125,10 +189,14 @@ func _draw() -> void:
 				var v: int = row[c]
 				if v <= 0 or v > images.size():
 					continue
+				if map_removed.has(Vector2i(c, r)):
+					continue
 				var t := AssetLib.texture("res://assets/squares/%s" % images[v - 1])
 				if t:
 					draw_texture(t, Vector2(mx + c * CELL, my + r * CELL))
 	for pic in _pictures_front:
+		if pic.get("visible", true) == false:
+			continue
 		var tex2 := _picture_texture(pic)
 		if tex2 == null:
 			continue
@@ -155,6 +223,8 @@ func _draw() -> void:
 		if o.y < top - 44 or o.y > bottom + 44:
 			continue
 		var info: Dictionary = cells[cell]
+		if bool(info.get("point", false)):
+			continue
 		if not info.has("piece"):
 			var t := LevelLoader.type_texture(info.type)
 			if t:
@@ -199,6 +269,13 @@ func _draw() -> void:
 		var o := LevelLoader.cell_origin(e.cell)
 		draw_rect(Rect2(o.x + 8 - tt * 20, o.y + 8 - tt * 20, 24 + tt * 40, 24 + tt * 40),
 			Color(e.color.r, e.color.g, e.color.b, max(0.0, 1.0 - tt)), false, 3.0)
+	# exploding wall bricks (a picture bomb draws the bombimage tile and fades)
+	for ex in explosions:
+		var t2: Texture2D = ex.tex
+		if t2 == null:
+			continue
+		var f: float = clampf(float(ex.t) / float(ex.life), 0.0, 1.0)
+		draw_texture(t2, ex.pos, Color(1, 1, 1, 1.0 - f))
 
 ## Light that escapes from open joints: Blick1.png is a 4 frame sparkle sheet
 ## (4 x 8x8) drawn stretched along the joint (the RoundBlicks effect uses
@@ -268,6 +345,10 @@ func _physics_process(delta: float) -> void:
 		effects[i].t += delta * 1.6
 		if effects[i].t >= 1.0:
 			effects.remove_at(i)
+	for i in range(explosions.size() - 1, -1, -1):
+		explosions[i].t += delta
+		if explosions[i].t >= float(explosions[i].life):
+			explosions.remove_at(i)
 	# the just-placed highlight is a short flash, not a permanent outline
 	for cell in cells:
 		var info: Dictionary = cells[cell]

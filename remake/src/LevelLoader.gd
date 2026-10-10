@@ -114,16 +114,20 @@ const COMPLEX := {
 const LAYOUTS := {
 	"123_134_1.png": [[[0, 0], [0, 1]], ["123", "134"]],
 	"124_234_1.png": [[[0, 0], [1, 0]], ["124", "234"]],
-	"123_134_1a.png": [[[0, 0], [0, 1]], ["123", "134"]],
-	"124_234_1a.png": [[[0, 0], [1, 0]], ["124", "234"]],
+	# The "a" variants are the horizontally mirrored artwork of the base tiles
+	# (123_134 -> 134_123), so their joint masks are mirrored as well.
+	"123_134_1a.png": [[[0, 0], [0, 1]], ["134", "123"]],
+	"124_234_1a.png": [[[0, 0], [1, 0]], ["234", "124"]],
 	"a123_134_1.png": [[[0, 0], [1, 0]], ["123", "134"]],
 	"a234_124_1.png": [[[0, 0], [0, 1]], ["234", "124"]],
 	"13_124_34_1.png": [[[0, 0], [0, 1], [1, 1]], ["13", "124", "34"]],
 	"123_24_14_1.png": [[[0, 0], [1, 0], [0, 1]], ["123", "24", "14"]],
 	"12_234_13_1.png": [[[0, 0], [1, 0], [1, 1]], ["12", "234", "13"]],
 	"23_24_134_1.png": [[[1, 0], [0, 1], [1, 1]], ["23", "24", "134"]],
-	"Skoba1.png": [[[0, 0], [1, 0]], ["123", "134"]],
-	"Skoba2.png": [[[0, 0], [0, 1]], ["234", "124"]],
+	# Skoba1 is an arch with both feet cut at the bottom edge, Skoba2 a "C"
+	# opening to the right; the masks follow the artwork, not the old guess.
+	"Skoba1.png": [[[0, 0], [1, 0]], ["23", "34"]],
+	"Skoba2.png": [[[0, 0], [0, 1]], ["34", "14"]],
 	"Skoba3.png": [[[0, 0], [1, 0]], ["12", "14"]],
 	"Skoba4.png": [[[0, 0], [0, 1]], ["23", "12"]],
 }
@@ -344,13 +348,14 @@ static func parse_level(path: String) -> Dictionary:
 						})
 					"BonusElement":
 						if not empty:
-							current_bonus = {"points": [], "remove": [], "show": [], "effects": []}
+							current_bonus = {"points": [], "remove": [], "show": [],
+								"bombs": [], "effects": [], "start_effect": {}, "triggered": false}
 							lvl.bonus_elements.append(current_bonus)
 					"Point":
 						if not current_bonus.is_empty():
 							(current_bonus.points as Array).append({
 								"x": _f(attrs.get("x", "0")), "y": _f(attrs.get("y", "0")),
-								"border": _f(attrs.get("border", "0")),
+								"border": int(_f(attrs.get("border", "0"))),
 							})
 					"RemovePicture":
 						if not current_bonus.is_empty():
@@ -358,11 +363,21 @@ static func parse_level(path: String) -> Dictionary:
 					"ShowPicture":
 						if not current_bonus.is_empty():
 							(current_bonus.show as Array).append(attrs.get("name", ""))
+					"Bomb":
+						lvl.bombs.append(attrs)
+						if not current_bonus.is_empty():
+							(current_bonus.bombs as Array).append({
+								"x": _f(attrs.get("x", "0")), "y": _f(attrs.get("y", "0")),
+								"r": _f(attrs.get("r", "0")),
+								"ghost": attrs.get("ghost", "") == "true",
+								"picturebomb": attrs.get("picturebomb", "") == "true",
+								"effectname": attrs.get("effectname", ""),
+								"bombimage": attrs.get("bombimage", ""),
+							})
 					"StartEffect":
 						if not current_bonus.is_empty():
 							(current_bonus.effects as Array).append(attrs)
-					"Bomb":
-						lvl.bombs.append(attrs)
+							(current_bonus.start_effect as Dictionary).merge(attrs, true)
 					"MakeGhostRect":
 						lvl.make_ghost_rects.append(attrs)
 					"PutFishka":
@@ -411,6 +426,15 @@ static func parse_level(path: String) -> Dictionary:
 					current_picture = {}
 				elif parser.get_node_name() == "BonusElement":
 					current_bonus = {}
+
+	# The bonus point / bomb positions use the level editor's screen lattice
+	# with a 15 px vertical offset (FiberTwig.exe FUN_00499e80 called with
+	# y - 0xf, see FUN_0049a7e4); the cell is the artwork anchor cell.
+	for b in lvl.bonus_elements:
+		for p in b.points:
+			p["cell"] = Vector2i(int(floor((float(p.x) - 5.0) / CELL)), int(floor((float(p.y) - 15.0) / CELL)))
+		for bo in b.bombs:
+			bo["cell"] = Vector2i(int(floor((float(bo.x) - 5.0) / CELL)), int(floor((float(bo.y) - 15.0) / CELL)))
 
 	# Derived data -----------------------------------------------------------
 	var fishkas := []

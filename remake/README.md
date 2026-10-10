@@ -15,9 +15,12 @@ tree (`assets/data/interface.json`) with the original backgrounds
 `W410x210.PNG`, `W230x330.jpg`, `W700x500.jpg`) and the shipped bitmap font
 `Arial12lat.png` + metrics from `Arial12.xml`:
 
-* title screen (New Game / Load Game / High Scores / Options / Help / Quit / Demo),
+* title screen (New Game / Load Game / High Scores / Options / Help / Quit /
+  Demo); New Game starts a fresh campaign at level 1,
 * *Select Starting Bonus* dialog (Hammer +5 / Amphora +5 / Score +200) with the
-  four difficulty modes **No Lose / Easy / Normal / Hard**,
+  four difficulty modes **No Lose / Easy / Normal / Hard** — shown only when a
+  game is started from the title (New Game) or loaded, never between levels or
+  after a retry,
 * the in-game screen: 600×500 play field, right panel with the Menu button,
   level/score, the current combination preview, hammer/amphora icons and
   counts, the DROP SECTION area and its arrow button,
@@ -81,17 +84,29 @@ from the shipped screenshots, see §10 of the report):
 * drop section: rectangle `(600,400)-(800,500)` (panel below the tools). A held
   twig dropped there is put on the reverse conveyor at (615, `480−h`), slides
   right at twice the belt speed and is removed at x≥795 (`PutFishkaInOtboynik`);
-  it can be taken back while it slides. The cooldown between drops is shortened
-  by the Drop Section Accelerator,
+  it can be taken back while it slides. The section then has a **cooldown**
+  (belt frozen, no new drop) before the next twig can be destroyed; the Drop
+  Section Accelerator removes the cooldown. The panel's bottom edge has the
+  second, opposite-running `lenta` strip of the original (drawn at 610,482,
+  source `0x3f-scroll … 0xf7-scroll`),
+* the **most recently placed twig** can be taken back into the hand by clicking
+  it (original `DAT_004bae78`): the board, ghosts, score and combo progress are
+  restored exactly as before that placement.  Older twigs stay fixed; any board
+  change (hammer, amphora, another placement) ends the rollback window,
 * placement rules, straight from the executable: the covered cells must be free
   (transparent targets must match their joint mask exactly), every joint that
   meets a neighbour must be answered by the opposite joint, PutAllow
   (`paBorderFish`/`paAll`/`paNearlight` from `options.cfg`) decides whether the
-  placement must cover one of the "next" cells of the pattern, and the
-  **ClosedLink** rule refuses only a placement that leaves a connected
-  component without any open joint while other components still exist (loops
-  are legal); a placement that completes the level is always allowed
-  (`--closetest` covers the cases),
+  placement must cover one of the "next" cells of the pattern (skipped when all
+  covered cells are transparent targets), and the **ClosedLink** rule refuses
+  only a placement that leaves a connected component without any open joint
+  while other components still exist (loops are legal); a placement whose first
+  cell is a transparent target, or that completes the level, is always allowed
+  (`--closetest` covers the cases; the hint texts distinguish matching joints,
+  transparent targets and ClosedLink like the original),
+* the water jug (amphora) shows a **ghost preview** of the shape it would create
+  under the pointer (transparent target mask or the joint mask required by the
+  surrounding twigs),
 * multi-cell twigs (`double1/2`, `double1a/2a`, `tripl1…4`, `adouble1/2`,
   `skoba1…4`): the name encodes the joint mask of every covered cell, the
   shipped artwork (40×80 … 80×80) fixes their layout; a shape is picked up,
@@ -110,7 +125,15 @@ from the shipped screenshots, see §10 of the report):
   (+2 hammers, bomb, +2 amphoras, +100 points, drop accelerator, all twigs
   lucky, time control),
 * scoring from `FishkaScore`, combinations from `FishCombinations.dat` with the
-  level's `CombSequence`, the original hint texts (black hint box),
+  level's `CombSequence` (checked strictly in sequence and anchored at the twig
+  that was just placed, like `FUN_004aa128`), the original hint texts (black
+  hint box),
+* bonus elements (`<BonusElement>`): a `<Point>` becomes an invisible state-5
+  twig; when the network reaches it, the element swaps its pictures
+  (`RemovePicture`/`ShowPicture`), explodes its `<Bomb>`s (connected twigs are
+  destroyed up to `r` joints deep, or turned into transparent targets with
+  `ghost="true"`; picture bombs cut `r`-sized holes into the wall bricks) and
+  plays the `StartEffect` sound (`FUN_004a1678`),
 * original sound effects (mapped exactly like the `[PlaySound]` records of
   `EffectsType.dat`) and music: `WTitle` / `WBetweenLevelMenu` play
   `In the lost forest2.mo3`, a level plays its `<PlayMusic>`, the
@@ -146,6 +169,10 @@ loaded directly from the extracted files, so no import step is required.
 | `--langtest` | all six localizations, Chinese captions and CJK wrapping |
 | `--helptest` | every help topic switches the visible page |
 | `--closetest` | placement/lock rule checks (the tutorial session + rings) |
+| `--fixtest` | take-back, drop-section cooldown, sequential combos, bonus elements, amphora preview |
+| `--shapetest` | every multi-cell mask matches its artwork (pixel edge check) |
+| `--demo` | replay the shipped `assets/demo.dat` recording |
+| `--sparkdemo` | ClearSteck the conveyor (hammer-spark effect check) |
 | `--piecetest` | multi-cell piece checks (whole artwork, whole-piece removal) |
 | `--filltest[=N]` | fills level N cell by cell and checks the completion rule |
 | `--beltspeed=N` | conveyor speed in px/s (default 50 = 2× the original) |
@@ -224,12 +251,15 @@ reached.
 ## Known differences
 
 * The trial/registration screens (`WNotEnabled`, trial timer) are not
-  reproduced; all 18 levels are available and `Demo` is inert.
+  reproduced; all 18 levels are available and `Demo` replays the shipped
+  `demo.dat` recording, returning to the title when it ends.
 * `FragPicN.png` (a runtime generated picture referenced by `<FragPicture>`) is
   not available in the archive; the panel shows the level's first combination
   instead of that blueprint.
-* The joint masks of the `skoba` (ring/arch) shapes are derived from the
-  artwork, not from the executable (see §10.7 of the report).
+* The joint masks of the multi-cell shapes (`double*`, `tripl*`, `skoba*`) are
+taken from the artwork (checked pixel-wise by `--shapetest`), not from the
+  executable's shape table;
+* `<MakeGhostRect>` (level 15 only) and `<FireEffect>` are not implemented.
 * The invalid placement preview is tinted red; the original tint could not be
   measured from the captures.
 * The hero portrait is drawn at its native size at the label position (the

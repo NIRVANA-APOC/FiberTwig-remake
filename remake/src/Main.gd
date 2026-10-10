@@ -30,6 +30,14 @@ const DROP_RECT := Rect2(600, 400, 200, 100)   # original drop section (600,400)
 const DROP_X := 615.0               # dropped twig start (original 0x267)
 const DROP_BOTTOM := 480.0          # dropped twig bottom edge (original 0x1e0)
 const DROP_END := 795.0             # dropped twig is removed at x >= 0x31b
+const DROP_BELT_X := 610.0          # original drop belt strip (FUN_00490abc 0x262)
+const DROP_BELT_Y := 482.0          # original drop belt strip y (0x1e2)
+const DROP_BELT_W := 184.0          # source region width (0xf7 - 0x3f)
+const DROP_BELT_PERIOD := 64.0      # lenta.png pattern period (measured)
+## The drop section pauses (belt stopped) after it has destroyed a twig; the
+## original stores the resume deadline in DAT_004baf74 and DAT_004b9790 is the
+## pause flag (FUN_0048bf78 / FUN_0048b2d0).
+const DROP_COOLDOWN := 4.0
 const OVERFULL_TIME := 2.0          # original overfill delay DAT_004b97a8 (2000 ms)
 # Camera motion: the executable advances a velocity byte by exactly 1 px/tick
 # every game tick (FUN_0048b2d0 0x48b3e4) and moves the camera by that many
@@ -117,6 +125,12 @@ var overfull := false
 var overfull_t := 0.0
 var drop_belt: Array = []           # reverse (drop section) conveyor
 var drop_cd := 0.0
+var drop_belt_offset := 0.0         # drop belt texture scroll (FUN_00490abc)
+## The original DAT_004bae78 keeps the index of the most recently placed twig;
+## clicking it with an empty hand takes it back into the hand (FUN_004971b8).
+var last_placed: Dictionary = {}
+var new_game_pending := false       # WStartDialog was opened by New Game
+var demo_mode := false              # playing the shipped demo.dat recording
 var held: Dictionary = {}
 var has_held := false
 var tool := Tool.NONE
@@ -147,6 +161,11 @@ var capture_count := 1
 var capture_t := 0.0
 var capture_saved := 0
 var combo_counter := 0
+var combo_step := 0                  # DAT_004bae98: index of the current combination
+var skill_hover_label := ""          # between-level skill row currently hovered
+## Hammer / ClearSteck sparks (`HammerFishka`, a SparkCloneEffect of
+## EffectsType.dat: 15 x star.png, gravity 150, fade 255->0 over ~1 s).
+var sparks: Array = []               # screen space {pos, vel, t, life}
 var level_done := false
 ## The game only runs while WGame is the topmost form (the level start progress
 ## bar and the pause menu are pushed on top of it).
@@ -225,6 +244,14 @@ func _ready() -> void:
 		_help_test()
 		get_tree().quit()
 		return
+	if "--shapetest" in args:
+		_shape_test()
+		get_tree().quit()
+		return
+	if "--fixtest" in args:
+		_fix_test()
+		get_tree().quit()
+		return
 	for a in args:
 		if a == "--filltest" or a.begins_with("--filltest="):
 			var flevel := 0
@@ -244,10 +271,21 @@ func _ready() -> void:
 			debug_all_bonus = true
 		elif a == "--allquest":
 			debug_all_quest = true
+		elif a == "--demo":
+			_start_demo()
 	for a in args:
 		if a == "--wintest":
 			wintest = true
 			autotest = true
+		elif a == "--sparkdemo":
+			start_level(0)
+			progress_t = 0.0
+			_pop_modal("WProgressBar")
+			for i in 4:
+				_spawn_twig(true)
+				if not belt.is_empty():
+					belt[belt.size() - 1].x = 200.0 + i * 90.0
+			_give_bonus(1)
 		elif a.begins_with("--autotest="):
 			autotest = true
 			autotest_level = int(a.split("=")[1])
@@ -408,6 +446,12 @@ func _leave_form(form: String) -> void:
 			ui.focus_edit = ""
 	if form == "WGame" and not stack.has("WGame"):
 		_stop_game()
+	if form == "WBetweenLevelMenu":
+		skill_hover_label = ""
+		if hint_label.begins_with("LHintSkill"):
+			message = ""
+			message_t = 0.0
+			hint_label = ""
 
 func _stop_game() -> void:
 	board_container.visible = false
@@ -545,6 +589,7 @@ func _handle_key(event: InputEventKey) -> void:
 				tool = Tool.NONE
 			else:
 				_push_modal("WMenu")
+			_update_hover()
 		elif not _is_screen(form) and stack.size() > 1:
 			_pop_modal(form)
 		queue_redraw()
@@ -558,10 +603,12 @@ func _handle_key(event: InputEventKey) -> void:
 	if event.keycode == KEY_F3:
 		tool = Tool.NONE if tool == Tool.HAMMER else Tool.HAMMER
 		_play_sound("Click.wav")
+		_update_hover()
 		return
 	if event.keycode == KEY_F4:
 		tool = Tool.NONE if tool == Tool.AMPHORA else Tool.AMPHORA
 		_play_sound("Click.wav")
+		_update_hover()
 		return
 	if event.keycode == KEY_SPACE:
 		if not has_held:
@@ -662,15 +709,24 @@ func _method(name: String) -> void:
 	if OS.get_environment("FT_DEBUG") == "1":
 		print("[method] %s" % name)
 	match name:
-		"BNewWTitleMouseUp", "BLoadWTitleMouseUp", "BScoresWTitleMouseUp", "BOptionsWTitleMouseUp", \
+		"BLoadWTitleMouseUp", "BScoresWTitleMouseUp", "BOptionsWTitleMouseUp", \
 		"BHelpWTitleMouseUp", "BNewWTitleMouseDown", "BOptionsWTitleMouseDown", "BQuitWTitleMouseDown":
 			pass
+		"BNewWTitleMouseUp":
+			# New Game starts a fresh campaign from level 1; the difficulty
+			# dialog is only used for this one start (WTitle -> WStartDialog).
+			new_game_pending = true
 		"BQuitWTitleMouseUp":
 			_push_modal("WQuitGameDialog")
 		"BPlayWStartDialogMouseUp":
+			if new_game_pending:
+				new_game_pending = false
+				_reset_campaign()
 			_apply_start_bonus()
 			start_level(level_index)
-		"BBackWStartDialogMouseUp", "BResumeWMenuMouseUp", "BCancelWAbortLivelDialogMouseUp":
+		"BBackWStartDialogMouseUp":
+			new_game_pending = false
+		"BResumeWMenuMouseUp", "BCancelWAbortLivelDialogMouseUp":
 			pass
 		"BCancelWOptionsMouseUp": _restore_options()
 		"BCancelWQuitGameDialogMouseUp", "BCancelWLoadMouseUp", \
@@ -988,10 +1044,24 @@ func _load_progress() -> void:
 		hammers_total = 3
 		caps_total = 3
 
+func _reset_campaign() -> void:
+	# "New Game" starts a fresh run: level 1, no score/experience, default
+	# skills and tools (the original WTitle flow).
+	level_index = 0
+	total_score = 0
+	experience = 0
+	plus = {"otb": 0, "luck": 0, "cap": 0, "life": 0, "hammer": 0}
+	skills = {"otb": 90, "luck": 0, "life": 90}
+	hammers_total = 3
+	caps_total = 3
+	diff_flags = {"no_lose": false, "easy": false, "normal": true, "hard": false}
+	score = 0
+
 func _load_selected() -> void:
 	if save_names.is_empty():
 		return
 	if _read_save(save_names[save_sel]):
+		new_game_pending = false
 		total_score = total_score
 		_pop_modal("WLoad")
 		_change_modal("WStartDialog")
@@ -1098,6 +1168,10 @@ func start_level(idx: int) -> void:
 	overfull_t = 0.0
 	drop_belt.clear()
 	drop_cd = 0.0
+	drop_belt_offset = 0.0
+	sparks.clear()
+	last_placed = {}
+	combo_step = 0
 	_invalidate_board()
 	hint_take_fishka = true
 	hint_take_quest = true
@@ -1150,23 +1224,18 @@ func start_level(idx: int) -> void:
 
 func _level_aborted() -> void:
 	score = 0
+	last_placed = {}
 	_stop_game()
 	stack = ["WBetweenLevelMenu"]
 	_enter_form("WBetweenLevelMenu")
 	queue_redraw()
 
 func _next_level() -> void:
-	if level_index >= 17:
-		stack = ["WGame"]
-		_enter_form("WGame")
-		_push_modal("WGameFinishedDialog")
-		return
-	level_index += 1
-	_write_save("autosave")
-	_save_progress()
-	stack = ["WBetweenLevelMenu"]
-	_enter_form("WBetweenLevelMenu")
-	_change_modal("WStartDialog")
+	# The between-level menu continues the campaign directly: the difficulty /
+	# start-bonus dialog belongs to "New Game" only (original WBetweenLevelMenu
+	# action BNextLevelWBetweenLevelMenuMouseUp).
+	start_level(level_index)
+	queue_redraw()
 
 func _finish_level() -> void:
 	total_score += score
@@ -1209,10 +1278,30 @@ func _update_hover() -> void:
 		hover_cell = Vector2i(int(floor((wp.x - 5.0) / 40.0)), int(floor(wp.y / 40.0)))
 	else:
 		hover_cell = Vector2i(-9999, -9999)
-	world.preview_cell = hover_cell if (has_held and _top() == "WGame") else Vector2i(-9999, -9999)
-	world.preview_shape = held.get("shape", {}) if has_held else {}
-	world.preview_type = int(held.get("type", 0))
-	world.preview_valid = can_place_shape(hover_cell, held.get("shape", {})) if has_held else false
+	var show := _top() == "WGame"
+	if has_held and show:
+		world.preview_cell = hover_cell
+		world.preview_shape = held.get("shape", {})
+		world.preview_type = int(held.get("type", 0))
+		world.preview_valid = can_place_shape(hover_cell, held.get("shape", {}))
+	elif tool == Tool.AMPHORA and caps > 0 and show:
+		# preview the shape the amphora would create at this cell
+		var sh := _amphora_shape_at(hover_cell)
+		if sh.is_empty():
+			world.preview_cell = Vector2i(-9999, -9999)
+			world.preview_shape = {}
+			world.preview_type = 0
+			world.preview_valid = false
+		else:
+			world.preview_cell = hover_cell
+			world.preview_shape = sh
+			world.preview_type = int(sh.masks[0])
+			world.preview_valid = can_place_shape(hover_cell, sh)
+	else:
+		world.preview_cell = Vector2i(-9999, -9999)
+		world.preview_shape = {}
+		world.preview_type = 0
+		world.preview_valid = false
 
 func _game_click(pos: Vector2) -> void:
 	# With a twig in hand the drop section (panel rectangle) or the play field
@@ -1238,12 +1327,18 @@ func _game_click(pos: Vector2) -> void:
 		elif icon == Tool.AMPHORA and caps > 0:
 			tool = Tool.AMPHORA
 			_play_sound("Click.wav")
+		_update_hover()
 		return
 	if tool == Tool.HAMMER or tool == Tool.AMPHORA:
 		if tool == Tool.HAMMER:
 			_use_hammer(hover_cell)
 		elif BOARD_RECT.has_point(pos):
 			_use_amphora(hover_cell)
+		return
+	# The twig placed last can be taken back into the hand by clicking it
+	# (original DAT_004bae78, FUN_004971b8).  Older twigs stay fixed.
+	if not last_placed.is_empty() and _hit_last_placed(pos):
+		_take_back_last()
 		return
 	var slot := _drop_hit(pos)
 	if slot >= 0:
@@ -1269,11 +1364,13 @@ func _on_right_click() -> void:
 	if tool != Tool.NONE:
 		tool = Tool.NONE
 		_play_sound("Click.wav")
+		_update_hover()
 		return
 	if has_held:
 		held.shape = LevelLoader.rotate_shape(held.shape)
 		held.type = int(held.shape.masks[0])
 		_play_sound("RotateFishka.wav")
+		_update_hover()
 
 func _belt_hit(pos: Vector2) -> int:
 	for i in range(belt.size() - 1, -1, -1):
@@ -1342,8 +1439,8 @@ func _drop_held() -> void:
 		"phase": randf() * TAU})
 	has_held = false
 	held = {}
-	# the original uses a cooldown which the Drop Section Accelerator shortens
-	drop_cd = 0.15 if speed_up_t > 0.0 else maxf(0.1, 0.6 * (1.0 - clampf(float(skills.otb) / 100.0, 0.0, 0.9)))
+	# the cooldown of the original only starts when the twig has been destroyed
+	# (x >= 795, FUN_0048bf78); dropping itself is not throttled beyond that.
 	_play_effect("PutFishkaInOtboynik")
 	_update_hover()
 
@@ -1453,9 +1550,17 @@ func can_place_shape(cell: Vector2i, shape: Dictionary, check_lock := true) -> b
 			return false
 	if not _joints_consistent(placement):
 		return false
-	if not _put_allowed(placement):
+	# the original skips the PutAllow rule when every covered cell is a
+	# transparent target (FUN_004971b8 local_29)
+	if not _all_ghost(placement) and not _put_allowed(placement):
 		return false
 	return not (check_lock and _closes_link(placement))
+
+func _all_ghost(placement: Array) -> bool:
+	for p in placement:
+		if not world.ghosts.has(p.cell):
+			return false
+	return not placement.is_empty()
 
 ## Every joint that meets a neighbour (twig or transparent target) must be
 ## answered by the opposite joint on the other side - original FUN_0049f6f0.
@@ -1554,63 +1659,56 @@ func _put_allowed(placement: Array) -> bool:
 		_:
 			return _covers_light(placement)
 
-## Original ClosedLink rule (FUN_004a1130/FUN_004a1360): a placement is refused
-## when its connected component ends up without any open joint (it can never be
-## linked again) while other components still exist.  Loops are not affected;
-## a placement that completes the level is always allowed.
-## Original ClosedLink rule (FUN_004a1130/FUN_004a1360): a placement is refused
-## when its connected component ends up without any open joint (it could never
-## be linked again) while other components still exist.  Loops are not
-## affected; a placement that completes the level is always allowed.
+## Original ClosedLink rule (FUN_004a1130 / FUN_004a1360):
+##  * a placement whose first covered cell is a transparent target is always
+##    allowed (the executable skips the check for it, this was the false
+##    "you cannot complete the maze" rejection),
+##  * the placement is refused when the component it joins would have no open
+##    joint left while twigs outside that component still exist,
+##  * a placement that completes the level is always allowed.
 func _closes_link(placement: Array) -> bool:
-	_rebuild_board_cache()
-	var pl_types := {}
-	for p in placement:
-		pl_types[p.cell] = int(p.type)
-	# components touched by the placement
-	var touched := {}
-	for p in placement:
-		for dir in BoardWorld.DIRS:
-			var q: Vector2i = p.cell + dir.d
-			if _comp_of.has(q):
-				touched[int(_comp_of[q])] = true
-	# would the resulting component still have an open joint?
-	var sealed := true
-	for cid in touched:
-		for open_joint in _comp_open[cid]:
-			var oc: Vector2i = open_joint[0]
-			var dir2: Dictionary = BoardWorld.DIRS[int(open_joint[1])]
-			if not pl_types.has(oc + dir2.d):
-				sealed = false
-				break
-		if not sealed:
-			break
-	if sealed:
-		for p in placement:
-			for dir in BoardWorld.DIRS:
-				if (int(p.type) & int(dir.bit)) == 0:
-					continue
-				var q2: Vector2i = p.cell + dir.d
-				if world.cells.has(q2) or world.ghosts.has(q2):
-					continue
-				if not pl_types.has(q2):
-					sealed = false
-					break
-			if not sealed:
-				break
-	if not sealed:
+	if placement.is_empty():
 		return false
-	# the rule only applies while other components still exist
-	var others := (_comp_count > 0) if touched.is_empty() else (_comp_count > touched.size())
-	if not others:
+	if world.ghosts.has(placement[0].cell):
 		return false
-	# a placement that completes the level is always allowed
+	# simulate the placement (and the transparent targets it covers)
+	var saved_ghosts := {}
 	for p in placement:
 		world.cells[p.cell] = {"type": p.type, "locked": false, "unhammer": false}
+		if world.ghosts.has(p.cell):
+			saved_ghosts[p.cell] = world.ghosts[p.cell]
+			world.ghosts.erase(p.cell)
+	_invalidate_board()
+	var comps := _connected_components()
+	var merged: Array = []
+	for c in comps:
+		if (c as Array).has(placement[0].cell):
+			merged = c
+			break
+	var open_joints := 0
+	for c in merged:
+		var t: int = int(world.cells[c].type)
+		for dir in BoardWorld.DIRS:
+			if (t & int(dir.bit)) == 0:
+				continue
+			var q: Vector2i = c + dir.d
+			var info: Variant = world.cells.get(q)
+			if info == null or (int(info.type) & int(dir.opp)) == 0:
+				open_joints += 1
 	var complete := _level_complete()
+	# undo the simulation
 	for p in placement:
 		world.cells.erase(p.cell)
-	return not complete
+	for c in saved_ghosts:
+		world.ghosts[c] = saved_ghosts[c]
+	_invalidate_board()
+	if open_joints > 0:
+		return false
+	if complete:
+		return false
+	if comps.size() < 2:
+		return false
+	return true
 
 ## Win condition: one connected network, reaching the top row, all transparent
 ## twigs covered.
@@ -1708,10 +1806,21 @@ func _place(cell: Vector2i) -> void:
 	if OS.get_environment("FT_DEBUG") == "1":
 		print("[place] cell=%s shape=%s span=%s valid=%s" % [str(cell), str(shape.get("digits", [])), str(shape.get("box", Vector2i.ONE)), str(valid)])
 	if not valid:
-		_play_effect("ClosedLink")
-		_show_hint("LHintClosedLink")
+		var reason := _place_failure_hint(cell, shape)
+		if OS.get_environment("FT_DEBUG") == "1":
+			var pl := shape_placement(cell, shape)
+			print("[place] refused reason=%s joints=%s put=%s closes=%s" % [reason, str(_joints_consistent(pl)), str(_put_allowed(pl)), str(_closes_link(pl))])
+		if reason == "LHintClosedLink":
+			_play_effect("ClosedLink")
+		if reason != "":
+			_show_hint(reason)
 		return
 	var placement := shape_placement(cell, shape)
+	# Snapshot for the take-back of this (the newest) twig.
+	var covered_cells: Array = []
+	for p in placement:
+		covered_cells.append(p.cell)
+	last_placed = _board_snapshot(shape, bool(held.get("bonus", false)), covered_cells)
 	_play_effect("PutFishka")
 	# A multi-cell fishka is one twig record in the original.  Keep the whole
 	# shape on the board so the artwork is drawn (and removed) as a unit
@@ -1757,9 +1866,40 @@ func _place(cell: Vector2i) -> void:
 	held = {}
 	_invalidate_board()
 	_camera_follow()
-	_check_combos()
+	_check_combos(placement)
+	_check_bonus_elements()
 	_check_state()
 	_update_hover()
+
+## The original distinguishes the refusal reasons (FUN_004971b8): a shape /
+## joint mismatch shows LHintMatchingJoints (or LHintTransparentTwig when a
+## transparent target does not match), a PutAllow failure stays silent and a
+## ClosedLink refusal shows LHintClosedLink.
+func _place_failure_hint(cell: Vector2i, shape: Dictionary) -> String:
+	var placement := shape_placement(cell, shape)
+	if placement.is_empty():
+		return "LHintMatchingJoints"
+	for p in placement:
+		var c: Vector2i = p.cell
+		if c.x < 0 or c.x > 14 or c.y < level.board_top or c.y > level.board_bottom:
+			return "LHintMatchingJoints"
+		if world.cells.has(c):
+			return "LHintMatchingJoints"
+		if world.ghosts.has(c) and int(world.ghosts[c]) != int(p.type):
+			return "LHintTransparentTwig"
+	if not _joints_consistent(placement):
+		return "LHintMatchingJoints"
+	if not _all_ghost(placement) and not _put_allowed(placement):
+		return ""
+	if _closes_link(placement):
+		return "LHintClosedLink"
+	return ""
+
+## Screen-space centre of a belt / drop-section twig (for the hammer sparks).
+func _twig_center(t: Dictionary) -> Vector2:
+	var h := float(t.get("h", BELT_SLOT))
+	var y := float(t.get("y", BELT_BOTTOM - h))
+	return Vector2(float(t.x) + float(t.get("span", BELT_SLOT)) * 0.5, y + h * 0.5)
 
 func _use_hammer(cell: Vector2i) -> void:
 	if hammers <= 0:
@@ -1771,6 +1911,7 @@ func _use_hammer(cell: Vector2i) -> void:
 		if bool(info.get("locked", false)) or bool(info.get("unhammer", false)):
 			_play_effect("UnableHammer")
 			return
+		_spawn_hammer_sparks(LevelLoader.cell_origin(cell) + Vector2(20, 20) - Vector2(0, cam_y))
 		_remove_fishka(cell)
 		hammers -= 1
 		_play_effect("HammerFishka")
@@ -1785,15 +1926,38 @@ func _use_hammer(cell: Vector2i) -> void:
 	if slot < 0:
 		slot = _drop_hit(mouse_pos)
 		if slot >= 0:
+			_spawn_hammer_sparks(_twig_center(drop_belt[slot]))
 			drop_belt.remove_at(slot)
 			hammers -= 1
 			_play_effect("HammerFishka")
 			_play_effect("HammerFishkaSound")
 		return
+	_spawn_hammer_sparks(_twig_center(belt[slot]))
 	belt.remove_at(slot)
 	hammers -= 1
 	_play_effect("HammerFishka")
 	_play_effect("HammerFishkaSound")
+
+## The shape the amphora (water jug) would create at `cell`: the transparent
+## target if one sits there, otherwise the joint mask required by the twigs
+## around it (original FUN_00499aec).
+func _amphora_shape_at(cell: Vector2i) -> Dictionary:
+	if world.cells.has(cell):
+		return {}
+	if cell.x < 0 or cell.x > 14 or cell.y < level.board_top or cell.y > level.board_bottom:
+		return {}
+	var t := 0
+	if world.ghosts.has(cell):
+		t = int(world.ghosts[cell])
+	else:
+		for dir in BoardWorld.DIRS:
+			var n: Vector2i = cell + dir.d
+			var info2: Variant = world.cells.get(n)
+			if info2 != null and (int(info2.type) & int(dir.opp)) != 0:
+				t |= int(dir.bit)
+		if t == 0:
+			return {}
+	return LevelLoader.single_shape(t)
 
 func _use_amphora(cell: Vector2i) -> void:
 	if caps <= 0:
@@ -1804,6 +1968,7 @@ func _use_amphora(cell: Vector2i) -> void:
 		if bool(info.get("locked", false)) or bool(info.get("unhammer", false)):
 			_play_effect("UnableHammer")
 			return
+		last_placed = {}
 		_remove_fishka(cell)
 		caps -= 1
 		_play_effect("ClipperFishkaNew")
@@ -1812,26 +1977,16 @@ func _use_amphora(cell: Vector2i) -> void:
 		_check_state()
 		_update_hover()
 		return
-	if cell.x < 0 or cell.x > 14 or cell.y < level.board_top or cell.y > level.board_bottom:
-		return
 	# create the missing twig: a transparent target is matched exactly, other
 	# places get the joint mask required by the surrounding twigs
-	var t := 0
-	if world.ghosts.has(cell):
-		t = int(world.ghosts[cell])
-	else:
-		for dir in BoardWorld.DIRS:
-			var n: Vector2i = cell + dir.d
-			var info2: Variant = world.cells.get(n)
-			if info2 != null and (int(info2.type) & dir.opp) != 0:
-				t |= dir.bit
-		if t == 0:
-			return
-	var shape := LevelLoader.single_shape(t)
+	var shape := _amphora_shape_at(cell)
+	if shape.is_empty():
+		return
 	if not can_place_shape(cell, shape):
 		_play_effect("ClosedLink")
 		_show_hint("LHintClosedLink")
 		return
+	last_placed = {}
 	for p in shape_placement(cell, shape):
 		world.cells[p.cell] = {"type": p.type, "locked": false, "unhammer": false, "glow": 0.5}
 		if world.ghosts.has(p.cell) and int(world.ghosts[p.cell]) == p.type:
@@ -1843,9 +1998,68 @@ func _use_amphora(cell: Vector2i) -> void:
 	_play_effect("ClipperFishkaNew")
 	_invalidate_board()
 	_camera_follow()
-	_check_combos()
+	_check_combos(shape_placement(cell, shape))
 	_check_state()
 	_update_hover()
+
+## A snapshot of everything a placement can change, used by the take-back of
+## the most recent twig (original DAT_004bae78).
+func _board_snapshot(shape: Dictionary, bonus: bool, covered: Array) -> Dictionary:
+	var done: Array = []
+	for c in combos:
+		done.append(bool(c.get("done", false)))
+	return {
+		"shape": shape.duplicate(true),
+		"bonus": bonus,
+		"covered": covered,
+		"cells": world.cells.duplicate(true),
+		"ghosts": world.ghosts.duplicate(),
+		"pieces": world.pieces.duplicate(true),
+		"score": score,
+		"combos_done": done,
+		"combo_step": combo_step,
+		"combo_counter": combo_counter,
+		"combo_preview": combo_preview.duplicate(true),
+		"ghosts_covered": ghosts_covered,
+	}
+
+func _hit_last_placed(pos: Vector2) -> bool:
+	if not last_placed.has("covered"):
+		return false
+	# `pos` is a screen coordinate, the cells live in world space
+	var wp := pos + Vector2(0, cam_y)
+	for c in last_placed.covered:
+		var o := LevelLoader.cell_origin(c)
+		if Rect2(o.x, o.y, 40, 40).has_point(wp):
+			return true
+	return false
+
+## Take the last placed twig back into the hand (rollback): the board is
+## restored to the state right before that placement and the twig is held
+## again.  Only the newest twig supports this (original FUN_004971b8).
+func _take_back_last() -> void:
+	if last_placed.is_empty():
+		return
+	var snap := last_placed
+	last_placed = {}
+	world.cells = snap.cells
+	world.ghosts = snap.ghosts
+	world.pieces = snap.pieces
+	score = int(snap.score)
+	ghosts_covered = int(snap.ghosts_covered)
+	combo_step = int(snap.combo_step)
+	combo_counter = int(snap.combo_counter)
+	combo_preview = snap.combo_preview
+	var done: Array = snap.combos_done
+	for i in range(mini(done.size(), combos.size())):
+		combos[i].done = bool(done[i])
+	held = {"type": int(snap.shape.masks[0]), "shape": snap.shape, "bonus": bool(snap.bonus), "quest": false}
+	has_held = true
+	_play_effect("TakeFishka")
+	_invalidate_board()
+	_camera_follow()
+	_update_hover()
+	queue_redraw()
 
 ## Removes the twig that occupies `cell`.  Multi-cell pieces (double / triple /
 ## skoba) are a single twig record in the original, so the whole piece goes
@@ -1853,6 +2067,7 @@ func _use_amphora(cell: Vector2i) -> void:
 func _remove_fishka(cell: Vector2i) -> void:
 	if not world.cells.has(cell):
 		return
+	last_placed = {}
 	var info: Dictionary = world.cells[cell]
 	if info.has("piece"):
 		var pid := int(info.piece)
@@ -1863,6 +2078,92 @@ func _remove_fishka(cell: Vector2i) -> void:
 			world.pieces[pid] = null
 	else:
 		world.cells.erase(cell)
+
+## Bonus elements (original FUN_004a1678): when the network reaches a
+## <Point> cell of the element, it triggers - pictures are swapped, the bombs
+## explode (destroying wall bricks or twigs) and the StartEffect plays.
+func _check_bonus_elements() -> void:
+	var elements: Array = level.get("bonus_elements", [])
+	if elements.is_empty():
+		return
+	_rebuild_board_cache()
+	var main := _main_component_cell()
+	for b in elements:
+		if bool(b.get("triggered", false)):
+			continue
+		var fire := false
+		for p in b.points:
+			var pc: Vector2i = p.cell
+			if not world.point_cells.has(pc) or main.x < -999:
+				continue
+			if int(_comp_of.get(pc, -2)) == int(_comp_of.get(main, -3)):
+				fire = true
+				break
+		if fire:
+			_activate_bonus(b)
+
+## The original "main" component is the one created first, i.e. the component
+## of the first pre-placed twig (component id 1).
+func _main_component_cell() -> Vector2i:
+	for f in level.get("fishkas", []):
+		return f.cell
+	return Vector2i(-9999, -9999)
+
+func _activate_bonus(b: Dictionary) -> void:
+	b["triggered"] = true
+	for n in b.get("remove", []):
+		world.set_picture_visible(str(n), false)
+	for n in b.get("show", []):
+		world.set_picture_visible(str(n), true)
+	for bo in b.get("bombs", []):
+		if bool(bo.get("picturebomb", false)):
+			world.bomb_bricks(float(bo.x), float(bo.y), float(bo.r), str(bo.bombimage))
+			if str(bo.effectname) != "":
+				_play_effect(str(bo.effectname))
+		else:
+			_destroy_twigs_around(bo.cell, int(bo.r), bool(bo.ghost), str(bo.effectname))
+	var se: Dictionary = b.get("start_effect", {})
+	if not se.is_empty() and str(se.get("name", "")) != "":
+		_play_effect(str(se.get("name")))
+	_invalidate_board()
+	_camera_follow()
+	_check_state()
+	_update_hover()
+	queue_redraw()
+
+## Non-picture bomb (original FUN_004a22a0): destroy the twigs reachable from
+## the bomb cell within `r` joint steps; with ghost=true the single-cell twigs
+## become transparent targets instead of vanishing.
+func _destroy_twigs_around(cell: Vector2i, r: int, ghost: bool, effect: String) -> void:
+	if r <= 0:
+		return
+	var seen := {}
+	var frontier: Array = [cell]
+	var steps := r
+	while steps > 0 and not frontier.is_empty():
+		var next: Array = []
+		for c in frontier:
+			if seen.has(c):
+				continue
+			seen[c] = true
+			var info: Variant = world.cells.get(c)
+			if info != null:
+				var t := int(info.type)
+				if world.point_cells.has(c):
+					continue
+				if ghost and not (info as Dictionary).has("piece"):
+					world.ghosts[c] = t
+					world.cells.erase(c)
+				else:
+					_remove_fishka(c)
+					world.add_effect(c, Color(1.0, 0.6, 0.2))
+				for dir in BoardWorld.DIRS:
+					if (t & int(dir.bit)) != 0:
+						next.append(c + dir.d)
+		frontier = next
+		steps -= 1
+	if effect != "":
+		_play_effect(effect)
 
 func _load_combos() -> void:
 	if not _all_combos.is_empty():
@@ -1910,21 +2211,27 @@ func _combo_stamp(i: int) -> Array:
 		return []
 	return stamps[0]
 
-func _check_combos() -> void:
-	for c in combos:
-		if bool(c.get("done", false)):
-			continue
-		if _matches_combo(c):
-			c.done = true
-			combo_counter += 1
-			combo_preview = _combo_stamp(combo_counter % maxi(1, combos.size()))
-			_play_effect("CombinationSound")
-			_show_hint("LHintFishComb")
-			_give_bonus(_roll_bonus(level.one_comb_bonus_prob))
-			if combos_done_count() >= combos.size():
-				_give_bonus(_roll_bonus(level.all_comb_bonus_prob))
-			queue_redraw()
-			return
+func _check_combos(placement: Array) -> void:
+	# Original FUN_004aa128: only the combination the level's <CombSequence>
+	# currently points at is checked, and only when it is anchored at the twig
+	# that was just placed.  Later combinations cannot complete early.
+	if combo_step >= combos.size():
+		return
+	var c: Dictionary = combos[combo_step]
+	if not _matches_combo(c, placement):
+		return
+	c.done = true
+	combo_step += 1
+	combo_counter = combo_step
+	_play_effect("CombinationSound")
+	if combo_step < combos.size():
+		combo_preview = _combo_stamp(combo_step)
+		_show_hint("LHintFishComb")
+		_give_bonus(_roll_bonus(level.one_comb_bonus_prob))
+	else:
+		combo_preview = []
+		_give_bonus(_roll_bonus(level.all_comb_bonus_prob))
+	queue_redraw()
 
 func combos_done_count() -> int:
 	var n := 0
@@ -1933,22 +2240,27 @@ func combos_done_count() -> int:
 			n += 1
 	return n
 
-func _matches_combo(c: Dictionary) -> bool:
+## The combination must be anchored at one of the just-placed cells; every
+## other stamp cell has to exist on the board with the same twig type.  Bonus
+## points are hidden state-5 twigs in the original and never count here.
+func _matches_combo(c: Dictionary, placement: Array) -> bool:
 	for stamp in c.stamps:
 		if stamp.is_empty():
 			continue
-		var first: Dictionary = stamp[0]
-		for anchor in world.cells:
-			var base: Vector2i = anchor - first.d
-			var ok := true
-			for item in stamp:
-				var cell: Vector2i = base + item.d
-				var info: Variant = world.cells.get(cell)
-				if info == null or int(info.type) != int(item.type):
-					ok = false
-					break
-			if ok:
-				return true
+		for item in stamp:
+			for p in placement:
+				if int(p.type) != int(item.type):
+					continue
+				var base: Vector2i = p.cell - Vector2i(item.d)
+				var ok := true
+				for other in stamp:
+					var cell: Vector2i = base + Vector2i(other.d)
+					var info: Variant = world.cells.get(cell)
+					if info == null or int(info.type) != int(other.type) or bool(info.get("point", false)):
+						ok = false
+						break
+				if ok:
+					return true
 	return false
 
 func _roll_bonus(probs: Array) -> int:
@@ -1971,10 +2283,12 @@ func _give_bonus(kind: int) -> void:
 			hammers += 2
 			_play_effect("GiveHammer")
 		1:
-			# ClearSteck: the original hammers every twig on the belt
-			# (HammerFishka is visual only, HammerFishkaSound is BreakFishka)
+			# ClearSteck (original FUN_004aa9e4): the HammerFishka effect is
+			# spawned at every conveyor twig before it is removed, the sound
+			# (`HammerFishkaSound`) is played once for the whole belt.
+			for t in belt:
+				_spawn_hammer_sparks(_twig_center(t))
 			belt.clear()
-			_play_effect("BombFishka")
 			_play_effect("HammerFishkaSound")
 		2:
 			caps += 2
@@ -2071,6 +2385,43 @@ func _play_music(file_name: String) -> void:
 	_music_player.stream = stream
 	_music_player.play()
 
+## The visual half of the original `HammerFishka` effect: 15 star.png sparks
+## with gravity that fade out (EffectsType.dat: SparkNum 15, VecY 200,
+## GravY 150, TB 255 / TE 0, TTC 1000, 4 frames at 100 ms).
+func _spawn_hammer_sparks(pos: Vector2, count := 15) -> void:
+	for _i in count:
+		var a := randf() * TAU
+		var speed := randf_range(120.0, 260.0)
+		sparks.append({
+			"pos": pos,
+			"vel": Vector2(cos(a), sin(a)) * speed,
+			"t": 0.0,
+			"life": randf_range(0.7, 1.0),
+		})
+
+func _update_sparks(delta: float) -> void:
+	for i in range(sparks.size() - 1, -1, -1):
+		var s: Dictionary = sparks[i]
+		s.t += delta
+		if float(s.t) >= float(s.life):
+			sparks.remove_at(i)
+			continue
+		s.vel.y += 150.0 * delta
+		s.pos += s.vel * delta
+
+func _draw_sparks(o: Control) -> void:
+	if sparks.is_empty():
+		return
+	var tex := AssetLib.texture("res://assets/game/star.png")
+	if tex == null:
+		return
+	for s in sparks:
+		var f: float = clampf(float(s.t) / float(s.life), 0.0, 1.0)
+		var frame := int(float(s.t) * 10.0) % 4
+		var pos: Vector2 = s.pos
+		o.draw_texture_rect_region(tex, Rect2(pos.x - 16.0, pos.y - 16.0, 32.0, 32.0),
+			Rect2(frame * 24.0, 0.0, 24.0, 24.0), Color(1, 1, 1, 1.0 - f))
+
 func _play_sound(name: String) -> void:
 	var s := AssetLib.sound("res://assets/game/%s" % name)
 	if s == null:
@@ -2112,12 +2463,13 @@ func _start_demo() -> void:
 	var raw := FileAccess.get_file_as_bytes("res://assets/demo.dat")
 	if raw.is_empty():
 		return
+	if OS.get_environment("FT_DEBUG") == "1":
+		print("[demo] parsing %d bytes" % raw.size())
 	for i in raw.size():
 		if raw[i] == 0x0D or raw[i] == 0x0A:
 			raw[i] = 0x20
-	var text := ""
-	for b in raw:
-		text += char(b)
+	# an O(n^2) char-by-char String concatenation froze the menu for minutes
+	var text := raw.get_string_from_ascii()
 	var re := RegEx.new()
 	re.compile("<(\\w+)([^>]*)/>")
 	for m in re.search_all(text):
@@ -2131,7 +2483,10 @@ func _start_demo() -> void:
 			continue
 		demo_events.append({"t": int(attrs.get("time", "0")), "kind": kind, "a": attrs})
 	demo_events.sort_custom(func(x, y): return int(x.t) < int(y.t))
+	if OS.get_environment("FT_DEBUG") == "1":
+		print("[demo] %d events" % demo_events.size())
 	# the demo was recorded on Level3
+	demo_mode = true
 	level_index = 3
 	start_level(3)
 	demo_time = 0.0
@@ -2140,6 +2495,17 @@ func _start_demo() -> void:
 		_leave_form(s)
 	stack = ["WGame"]
 	_enter_form("WGame")
+
+## End of the recorded demo: back to the title screen (the original Demo
+## button is a title-screen attraction).
+func _end_demo() -> void:
+	demo_mode = false
+	demo_index = 0
+	demo_time = 0.0
+	_stop_game()
+	stack = ["WTitle"]
+	_enter_form("WTitle")
+	queue_redraw()
 
 func _demo_step(delta: float) -> void:
 	demo_time += delta * 1000.0
@@ -2159,8 +2525,7 @@ func _demo_step(delta: float) -> void:
 					"phase": randf() * TAU})
 			"MoveSteck":
 				var incr := float(a.get("incr", "1"))
-				for tw in belt:
-					tw.x = maxf(5.0, float(tw.x) - incr)
+				_move_belt(incr)
 			"MouseMove":
 				mouse_pos = Vector2(float(a.get("x", "0")), float(a.get("y", "0")))
 				_update_hover()
@@ -2177,8 +2542,7 @@ func _demo_step(delta: float) -> void:
 				_give_bonus(int(a.get("ind", "0")))
 			_: pass
 	if demo_index >= demo_events.size():
-		demo_index = 0
-		demo_time = 0.0
+		_end_demo()
 
 # ---------------------------------------------------------------------------
 # process
@@ -2246,6 +2610,10 @@ func _update_game(delta: float) -> void:
 	if drop_cd > 0.0:
 		drop_cd = maxf(0.0, drop_cd - delta)
 	_update_camera(delta)
+	_update_sparks(delta)
+	if demo_mode:
+		_demo_step(delta)
+		return
 	_update_belt(delta)
 	_update_drop_belt(delta)
 	_update_generator(delta)
@@ -2254,12 +2622,17 @@ func _update_game(delta: float) -> void:
 ## The conveyor moves every twig left by one step as long as there is room;
 ## the queue piles up at x<=5 with a 2 px gap (original FUN_0048bf78).
 func _update_belt(delta: float) -> void:
+	_move_belt(belt_speed * delta)
+
+## One conveyor step (also used for the recorded <MoveSteck> events, which
+## store the original's per-frame delta).
+func _move_belt(step: float) -> void:
 	belt_moved = false
 	if belt.is_empty():
 		return
-	var step := belt_speed * delta
 	if float(belt[0].x) > 5.0:
 		belt[0].x = maxf(5.0, float(belt[0].x) - step)
+		belt_moved = true
 	for i in range(1, belt.size()):
 		var prev: Dictionary = belt[i - 1]
 		var t: Dictionary = belt[i]
@@ -2271,13 +2644,19 @@ func _update_belt(delta: float) -> void:
 			belt_moved = true
 
 ## Drop section: reverse conveyor at twice the belt speed; the twig is
-## removed when it reaches the right end (original x >= 795).
+## removed when it reaches the right end (original x >= 795).  The belt stops
+## while the section cools down after a destroyed twig (DAT_004b9790) and
+## resumes when the deadline DAT_004baf74 expires (FUN_0048b2d0).
 func _update_drop_belt(delta: float) -> void:
+	if drop_cd <= 0.0:
+		drop_belt_offset = fmod(drop_belt_offset + belt_speed * 2.0 * delta, DROP_BELT_PERIOD)
 	for i in range(drop_belt.size() - 1, -1, -1):
 		var d: Dictionary = drop_belt[i]
 		d.x = float(d.x) + belt_speed * 2.0 * delta
 		if float(d.x) >= DROP_END:
 			drop_belt.remove_at(i)
+			# cooldown starts once the twig is destroyed, not when dropped
+			drop_cd = 0.0 if speed_up_t > 0.0 else DROP_COOLDOWN
 
 ## The original generator adds a twig every Generator period as long as the
 ## belt holds less than 26 twigs (no game over here; the overfill rule does
@@ -2401,6 +2780,7 @@ func _draw_hint(o: Control) -> void:
 
 func _draw_game(o: Control, interactive: bool) -> void:
 	_draw_belt(o)
+	_draw_sparks(o)
 	# HUD labels from the original layout
 	ui.captions["LLevelNumWGame"] = str(level_index + 1)
 	ui.captions["LScoreCountWGame"] = "%06d" % (total_score + score)
@@ -2447,13 +2827,21 @@ func _draw_combo(o: Control) -> void:
 			o.draw_texture(t, pos, Color(1, 1, 1, 0.95))
 
 func _draw_belt(o: Control) -> void:
-	var belt_tex := AssetLib.texture("res://assets/game/lenta.png")
-	if belt_tex:
-		var off := fmod(_time * belt_speed, float(belt_tex.get_width()))
+	var lenta := AssetLib.texture("res://assets/game/lenta.png")
+	if lenta:
+		var off := fmod(_time * belt_speed, float(lenta.get_width()))
 		var x := -off
 		while x < SCREEN.x:
-			o.draw_texture(belt_tex, Vector2(x, 587))
-			x += belt_tex.get_width()
+			o.draw_texture(lenta, Vector2(x, 587))
+			x += lenta.get_width()
+		# The drop section has its own conveyor at its bottom edge, moving in
+		# the opposite direction (original FUN_00490abc: source rect
+		# (0x3f-scroll..0xf7-scroll) drawn at 610,482); it freezes while the
+		# section cools down.
+		var src_x := fmod(DROP_BELT_PERIOD - drop_belt_offset, DROP_BELT_PERIOD)
+		o.draw_texture_rect_region(lenta,
+			Rect2(DROP_BELT_X, DROP_BELT_Y, DROP_BELT_W, 8.0),
+			Rect2(src_x, 0, DROP_BELT_W, 8.0))
 	for t in belt + drop_belt:
 		var tex: Texture2D = null
 		var h := float(t.get("h", BELT_SLOT))
@@ -2524,20 +2912,40 @@ func _between_captions() -> void:
 	else:
 		ui.pics.erase("LLevelHeroWBetweenLevelMenu")
 
+## The between-level skill hints follow the pointer: a row shows its hint while
+## hovered, moving to another row switches the text at once and leaving the
+## rows closes it again.
 func _skill_hover() -> void:
 	if not stack.has("WBetweenLevelMenu"):
 		return
 	var rows := [
-		[Rect2(0, 75, 183, 100), "LHintSkillLive"],
-		[Rect2(0, 175, 183, 100), "LHintSkillDropAccel"],
-		[Rect2(0, 275, 183, 100), "LHintSkillLuckyTwig"],
-		[Rect2(0, 375, 183, 100), "LHintSkillAmphora"],
-		[Rect2(0, 475, 183, 100), "LHintSkillHammer"],
+		[Rect2(40, 72, 130, 80), "LHintSkillLive"],
+		[Rect2(40, 172, 130, 80), "LHintSkillDropAccel"],
+		[Rect2(40, 272, 130, 80), "LHintSkillLuckyTwig"],
+		[Rect2(40, 372, 130, 80), "LHintSkillAmphora"],
+		[Rect2(40, 472, 130, 80), "LHintSkillHammer"],
 	]
+	var label := ""
 	for r in rows:
-		if r[0].has_point(mouse_pos) and message_t <= 0.0:
-			_show_hint(str(r[1]))
-			return
+		if (r[0] as Rect2).has_point(mouse_pos):
+			label = str(r[1])
+			break
+	if label == skill_hover_label:
+		# keep the hint visible while the pointer stays on the row
+		if label != "" and message_t <= 0.0:
+			message_t = 0.0
+			_show_hint(label)
+		return
+	skill_hover_label = label
+	if label != "":
+		# replace a running hint immediately so sliding across the rows
+		# switches the text instead of waiting for the 6 s timeout
+		message_t = 0.0
+		_show_hint(label)
+	elif hint_label.begins_with("LHintSkill"):
+		message = ""
+		message_t = 0.0
+		hint_label = ""
 
 # ---------------------------------------------------------------------------
 # headless self test
@@ -2724,6 +3132,246 @@ func _help_test() -> void:
 			print("[helptest] FAIL: %s: %d help pages visible" % [expected, visible])
 			failures += 1
 	print("[helptest] pages=%d failures=%d" % [pages, failures])
+
+## Validates every COMPLEX layout mask against the actual artwork: a joint
+## must show up as artwork touching that cell edge.  The original derives the
+## connections from the sprite, so a hardcoded mask that disagrees with the
+## art makes placements land "next to nothing" (the reported twig-position
+## bug of the mirrored / skoba variants).
+func _shape_test() -> void:
+	var failures := 0
+	for art in LevelLoader.LAYOUTS:
+		var layout: Array = LevelLoader.LAYOUTS[art]
+		var shape := LevelLoader._make_shape(art, layout[0], layout[1])
+		var tex := AssetLib.texture("res://assets/squares/%s" % art)
+		if tex == null:
+			print("[shapetest] MISSING %s" % art)
+			failures += 1
+			continue
+		var img := tex.get_image()
+		img.convert(Image.FORMAT_RGBA8)
+		var cells: Array = layout[0]
+		for i in cells.size():
+			var c: Array = cells[i]
+			var x0 := int(c[0]) * 40
+			var y0 := int(c[1]) * 40
+			# a real joint leaves a wide (contiguous) pipe opening on the cell
+			# border; the artwork of curved tiles only clips neighbouring cells
+			# with a short sliver, so measure the longest run of opaque pixels.
+			var runs := {"up": 0, "right": 0, "down": 0, "left": 0}
+			var run := 0
+			for j in 40:
+				if img.get_pixel(x0 + j, y0).a > 0.2: run += 1; runs.up = maxi(runs.up, run)
+				else: run = 0
+			run = 0
+			for j in 40:
+				if img.get_pixel(x0 + j, y0 + 39).a > 0.2: run += 1; runs.down = maxi(runs.down, run)
+				else: run = 0
+			run = 0
+			for j in 40:
+				if img.get_pixel(x0, y0 + j).a > 0.2: run += 1; runs.left = maxi(runs.left, run)
+				else: run = 0
+			run = 0
+			for j in 40:
+				if img.get_pixel(x0 + 39, y0 + j).a > 0.2: run += 1; runs.right = maxi(runs.right, run)
+				else: run = 0
+			var art_mask := 0
+			if runs.up >= 12: art_mask |= 1
+			if runs.right >= 12: art_mask |= 2
+			if runs.down >= 12: art_mask |= 4
+			if runs.left >= 12: art_mask |= 8
+			var expected := int(shape.masks[i])
+			var ok := art_mask == expected
+			if not ok:
+				failures += 1
+			print("[shapetest] %s cell%s mask=%s art=%s %s" % [art, str(c),
+				LevelLoader.type_name(expected) if expected <= 15 else str(expected),
+				LevelLoader.type_name(art_mask) if art_mask <= 15 else str(art_mask),
+				"ok" if ok else "MISMATCH"])
+	print("[shapetest] layouts=%d failures=%d" % [LevelLoader.LAYOUTS.size(), failures])
+
+## Smoke test for the October fixes: take-back of the newest twig, the drop
+## section cooldown, the sequential combo check and the bonus element scene
+## changes.
+func _fix_test() -> void:
+	var fails := 0
+	# --- rollback of the newest placed twig ---------------------------------
+	start_level(0)
+	progress_t = 0.0
+	_pop_modal("WProgressBar")
+	var spot := Vector2i(-9999, -9999)
+	for c in _autotest_candidates():
+		if can_place_shape(c, LevelLoader.single_shape(13)):
+			spot = c
+			break
+	if spot.x < -999:
+		print("[fixtest] FAIL: no legal spot")
+		fails += 1
+	else:
+		var before := world.cells.size()
+		held = {"type": 13, "shape": LevelLoader.single_shape(13), "bonus": false, "quest": false}
+		has_held = true
+		_place(spot)
+		var placed_ok: bool = world.cells.size() == before + 1 and not last_placed.is_empty()
+		# click the placed twig through the real input path (screen -> world)
+		var o := LevelLoader.cell_origin(spot) + Vector2(20, 20) - Vector2(0, cam_y)
+		tool = Tool.NONE
+		_game_click(o)
+		var back_ok: bool = world.cells.size() == before and has_held and last_placed.is_empty()
+		if not (placed_ok and back_ok):
+			fails += 1
+		print("[fixtest] rollback placed=%s back=%s held=%d cells=%d" % [str(placed_ok), str(back_ok), int(held.get("type", -1)), world.cells.size()])
+	# --- drop section: cooldown starts after the twig is destroyed -----------
+	start_level(0)
+	progress_t = 0.0
+	_pop_modal("WProgressBar")
+	held = {"type": 13, "shape": LevelLoader.single_shape(13), "bonus": false, "quest": false}
+	has_held = true
+	_drop_held()
+	var cd_on_drop := drop_cd
+	for _i in 200:
+		_update_drop_belt(1.0 / 60.0)
+	var cd_after := drop_cd
+	var off_frozen := drop_belt_offset
+	for _i in 60:
+		_update_drop_belt(1.0 / 60.0)
+	var frozen: bool = is_equal_approx(off_frozen, drop_belt_offset)
+	drop_cd = 0.0
+	for _i in 60:
+		_update_drop_belt(1.0 / 60.0)
+	var resumed: bool = not is_equal_approx(off_frozen, drop_belt_offset)
+	var drop_ok: bool = cd_on_drop == 0.0 and cd_after > 0.0 and drop_belt.is_empty() and frozen and resumed
+	if not drop_ok:
+		fails += 1
+	print("[fixtest] drop cd_on_drop=%.2f cd_after=%.2f empty=%s frozen=%s resumed=%s" % [cd_on_drop, cd_after, str(drop_belt.is_empty()), str(frozen), str(resumed)])
+	# --- combos only advance with an anchored placement ---------------------
+	start_level(0)
+	progress_t = 0.0
+	_pop_modal("WProgressBar")
+	_check_combos([])
+	var combo_ok: bool = combo_step == 0
+	if not combo_ok:
+		fails += 1
+	print("[fixtest] combo without placement step=%d (expect 0)" % combo_step)
+	# --- bonus element: pictures / bricks / sound ----------------------------
+	var bonus_level := -1
+	for i in 18:
+		var lv := LevelLoader.parse_level("res://assets/levels/Level%d.txt" % i)
+		if not lv.bonus_elements.is_empty():
+			bonus_level = i
+			break
+	if bonus_level >= 0:
+		start_level(bonus_level)
+		progress_t = 0.0
+		_pop_modal("WProgressBar")
+		var be: Dictionary = level.bonus_elements[0]
+		_activate_bonus(be)
+		var scene_ok := bool(be.triggered)
+		for n in be.get("remove", []):
+			if _level_picture_visible(str(n)):
+				scene_ok = false
+		for n in be.get("show", []):
+			if not _level_picture_visible(str(n)):
+				scene_ok = false
+		if not world.map_removed.is_empty():
+			scene_ok = true
+		if not scene_ok:
+			fails += 1
+		print("[fixtest] bonus level=%d bricks_removed=%d triggered=%s scene=%s" % [bonus_level, world.map_removed.size(), str(be.triggered), str(scene_ok)])
+	# --- bonus trigger: a point connected to the main network fires --------
+	var fake := {
+		"board_top": 0, "board_bottom": 250, "rain": "", "picture_map": {},
+		"fishkas": [{"cell": Vector2i(6, 99), "type": 5, "unhammer": false}], "ghosts": [],
+		"pictures": [
+			{"name": "P1", "x": 0.0, "y": 0.0, "z": 0.0, "visible": true, "images": [], "curve": {}},
+			{"name": "P2", "x": 0.0, "y": 0.0, "z": 0.0, "visible": false, "images": [], "curve": {}}],
+		"bonus_elements": [{"points": [{"cell": Vector2i(6, 100), "border": 1, "x": 0.0, "y": 0.0}],
+			"remove": ["P1"], "show": ["P2"], "bombs": [], "effects": [], "start_effect": {}, "triggered": false}],
+	}
+	level = fake
+	world.setup(fake)
+	_invalidate_board()
+	_check_bonus_elements()
+	var fe: Dictionary = fake.bonus_elements[0]
+	var trigger_ok: bool = bool(fe.triggered) and not _level_picture_visible("P1") and _level_picture_visible("P2")
+	if not trigger_ok:
+		fails += 1
+	print("[fixtest] bonus trigger=%s P1=%s P2=%s" % [str(fe.triggered), str(_level_picture_visible("P1")), str(_level_picture_visible("P2"))])
+	# --- ClearSteck: every conveyor twig shatters ----------------------------
+	start_level(0)
+	progress_t = 0.0
+	_pop_modal("WProgressBar")
+	_spawn_twig(true)
+	_spawn_twig(true)
+	var belt_n := belt.size()
+	sparks.clear()
+	_give_bonus(1)
+	var sparks_ok: bool = belt.is_empty() and sparks.size() == belt_n * 15
+	if not sparks_ok:
+		fails += 1
+	print("[fixtest] clearsteck twigs=%d sparks=%d" % [belt_n, sparks.size()])
+	# --- between-level skill hints follow the pointer ------------------------
+	stack = ["WBetweenLevelMenu"]
+	mouse_pos = Vector2(90, 125)
+	_skill_hover()
+	var skill1 := hint_label
+	mouse_pos = Vector2(90, 225)
+	_skill_hover()
+	var skill2 := hint_label
+	mouse_pos = Vector2(400, 300)
+	_skill_hover()
+	var skill_ok: bool = skill1 == "LHintSkillLive" and skill2 == "LHintSkillDropAccel" \
+		and hint_label == "" and message_t <= 0.0
+	if not skill_ok:
+		fails += 1
+	print("[fixtest] skill hints %s -> %s -> %s" % [skill1, skill2, hint_label])
+	# --- amphora preview ----------------------------------------------------
+	start_level(0)
+	progress_t = 0.0
+	_pop_modal("WProgressBar")
+	tool = Tool.AMPHORA
+	caps = 3
+	var pv_cell := Vector2i(-9999, -9999)
+	for c in _autotest_candidates():
+		if not _amphora_shape_at(c).is_empty():
+			pv_cell = c
+			break
+	if pv_cell.x < -999:
+		print("[fixtest] FAIL: no amphora preview cell")
+		fails += 1
+	else:
+		cam_y = float(pv_cell.y) * 40.0 - 200.0
+		world.cam_y = cam_y
+		mouse_pos = Vector2(float(pv_cell.x) * 40.0 + 5.0 + 20.0, float(pv_cell.y) * 40.0 + 20.0 - cam_y)
+		_update_hover()
+		var pv_ok: bool = world.preview_cell == pv_cell and not world.preview_shape.is_empty()
+		if not pv_ok:
+			fails += 1
+		print("[fixtest] amphora preview cell=%s got=%s shape=%s" % [str(pv_cell), str(world.preview_cell), str(world.preview_shape.get("digits", []))])
+	tool = Tool.NONE
+	# --- New Game starts at level 1; the start dialog is not repeated --------
+	level_index = 5
+	total_score = 123
+	experience = 42
+	_exec_actions("BNewWTitle", "up")
+	var dlg_ok: bool = _top() == "WStartDialog" and new_game_pending
+	_exec_actions("BPlayWStartDialog", "up")
+	var ng_ok: bool = dlg_ok and level_index == 0 and total_score == 0 and experience == 0
+	# between-level "Next Level" continues directly, without WStartDialog
+	level_index = 1
+	stack = ["WBetweenLevelMenu"]
+	_next_level()
+	var nl_ok: bool = level_index == 1 and _top() != "WStartDialog" and stack.has("WGame")
+	if not (ng_ok and nl_ok):
+		fails += 1
+	print("[fixtest] newgame dialog=%s level=%d score=%d next_level_direct=%s" % [str(dlg_ok), level_index, total_score, str(nl_ok)])
+	print("[fixtest] failures=%d" % fails)
+
+func _level_picture_visible(pic_name: String) -> bool:
+	for pic in level.get("pictures", []):
+		if str(pic.get("name", "")) == pic_name:
+			return pic.get("visible", true) != false
+	return false
 
 ## Smoke test for multi-cell fishkas: place a complex shape, check that it is
 ## kept as one piece on the board, and that hammering one of its cells removes
