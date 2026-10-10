@@ -61,3 +61,16 @@ start.cmd --headless -- --autotest=0 --complex
   每次运行的 cells/components 计数会不同，属正常）
 * 窗口运行 15 秒：`OpenGL API 3.3.0 NVIDIA 610.88 - Compatibility`，
   无错误输出
+
+## 从 GitHub 克隆
+
+仓库：`https://github.com/NIRVANA-APOC/FiberTwig`（私有），已推送分支 `main`。
+`FiberTwig/fiber_twig` 是指向公共仓库 `NIRVANA-APOC/fiber_twig` 的 submodule（固定在 `master` 的 `039d5e5`）。
+
+```bat
+:: 本机用 SSH 别名 github:（~/.ssh/config）克隆
+mkdir D:\Games && cd /d D:\Games
+git clone --recursive github:NIRVANA-APOC/FiberTwig.git
+:: 若 submodule 初始化失败（本机直连 github.com:443 受限制），用 SSH 重写 URL 重试：
+cd FiberTwig && git -c url.github:NIRVANA-APOC/.insteadOf=https://github.com/NIRVANA-APOC/ submodule update --init
+```
