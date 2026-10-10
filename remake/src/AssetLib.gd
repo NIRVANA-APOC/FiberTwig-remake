@@ -6,6 +6,7 @@ extends Node
 var _textures := {}
 var _sounds := {}
 var _index := {}
+var _flash := {}
 
 func _build_index(dir_path: String) -> void:
 	var d := DirAccess.open(dir_path)
@@ -63,6 +64,27 @@ func texture_rot(path: String, quarters: int) -> Texture2D:
 			img.rotate_90(CLOCKWISE)
 		out = ImageTexture.create_from_image(img)
 	_textures[key] = out
+	return out
+
+## Brightened yellow variant used for the lucky-twig flash. Drawing it over
+## the base texture with alpha k yields base + k*(flash-base), i.e. the
+## additive yellow pulse the original applies (FUN_00490abc).
+func flash_texture(tex: Texture2D) -> Texture2D:
+	if tex == null:
+		return null
+	var id := tex.get_instance_id()
+	if _flash.has(id):
+		return _flash[id]
+	var out: Texture2D = null
+	var img := tex.get_image()
+	if img != null and not img.is_empty():
+		img.convert(Image.FORMAT_RGBA8)
+		for y in img.get_height():
+			for x in img.get_width():
+				var c := img.get_pixel(x, y)
+				img.set_pixel(x, y, Color(minf(1.0, c.r + 0.62), minf(1.0, c.g + 0.70), c.b, c.a))
+		out = ImageTexture.create_from_image(img)
+	_flash[id] = out
 	return out
 
 func music(path: String) -> AudioStream:

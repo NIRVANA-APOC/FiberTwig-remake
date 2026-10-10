@@ -93,7 +93,10 @@ from the shipped screenshots, see §10 of the report):
   cell scores and clears its ghost; hammering/clipping any of its cells
   removes the whole piece (`--piecetest` covers this),
 * mystery twigs (`HidenFishkaPicture`, `prob` uses a decimal comma, i.e. 0.1),
-  bonus twigs (`FishkaWithBonus`, 0.05, boosted by the Good Luck skill),
+  bonus twigs (`FishkaWithBonus`, 0.05, boosted by the Good Luck skill) —
+  lucky twigs on the belt get the original golden flash: an additive yellow
+  wash with amount `Sin(ms/300 + phase)*64 + 150` (period ≈1.9 s, random
+  per-twig phase, `FUN_00490abc`),
   the seven bonuses of `BonusTypes.dat`
   (+2 hammers, bomb, +2 amphoras, +100 points, drop accelerator, all twigs
   lucky, time control),
@@ -135,6 +138,8 @@ loaded directly from the extracted files, so no import step is required.
 | `--piecetest` | multi-cell piece checks (whole artwork, whole-piece removal) |
 | `--filltest[=N]` | fills level N cell by cell and checks the completion rule |
 | `--beltspeed=N` | conveyor speed in px/s (default 50 = 2× the original) |
+| `--allbonus` | every generated twig is lucky (flash-test) |
+| `--capture=path,delay[,interval,count]` | save viewport PNGs (frame, then numbered) and quit |
 
 | input | action |
 |---|---|

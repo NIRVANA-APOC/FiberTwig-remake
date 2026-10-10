@@ -131,12 +131,20 @@ var generator_period := 4.0
 var no_lose_t := 0.0
 var speed_up_t := 0.0
 var all_bonus := false
+var debug_all_bonus := false       # --allbonus: every generated twig is lucky
 var sequence: Array = []
 var sequence_index := 0
 var quest_pic := ""
 var quest_prob := 0.0
 var bonus_prob := 0.0
 var combo_preview := []
+# debug: --capture=<path>,<delay>[,<interval>,<count>] saves viewport PNGs
+var capture_path := ""
+var capture_delay := 5.0
+var capture_interval := 1.0
+var capture_count := 1
+var capture_t := 0.0
+var capture_saved := 0
 var combo_counter := 0
 var level_done := false
 ## The game only runs while WGame is the topmost form (the level start progress
@@ -219,6 +227,8 @@ func _ready() -> void:
 			debug_complex = true
 		elif a.begins_with("--beltspeed="):
 			belt_speed = maxf(5.0, float(a.split("=")[1]))
+		elif a == "--allbonus":
+			debug_all_bonus = true
 	for a in args:
 		if a == "--wintest":
 			wintest = true
@@ -250,6 +260,16 @@ func _ready() -> void:
 			hammers_total = 8
 			caps_total = 3
 			start_level(int(a.split("=")[1]))
+	for a in args:
+		if a.begins_with("--capture="):
+			var parts := a.split("=", true, 1)[1].split(",")
+			capture_path = parts[0]
+			if parts.size() > 1:
+				capture_delay = maxf(0.0, float(parts[1]))
+			if parts.size() > 2:
+				capture_interval = maxf(0.05, float(parts[2]))
+			if parts.size() > 3:
+				capture_count = maxi(1, int(parts[3]))
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	set_process(true)
 	queue_redraw()
@@ -1277,7 +1297,8 @@ func _return_held() -> void:
 	var shape: Dictionary = held.shape
 	var h := _belt_height(shape)
 	belt.append({"type": held.type, "shape": shape, "x": BELT_ENTRY, "y": BELT_BOTTOM - h,
-		"span": _belt_span(shape), "h": h, "bonus": bool(held.get("bonus", false)), "quest": bool(held.get("quest", false))})
+		"span": _belt_span(shape), "h": h, "bonus": bool(held.get("bonus", false)), "quest": bool(held.get("quest", false)),
+		"phase": randf() * TAU})
 	has_held = false
 	held = {}
 	_play_sound("Click.wav")
@@ -1291,7 +1312,8 @@ func _drop_held() -> void:
 	var shape: Dictionary = held.shape
 	var h := _belt_height(shape)
 	drop_belt.append({"type": held.type, "shape": shape, "x": DROP_X, "y": DROP_BOTTOM - h,
-		"span": _belt_span(shape), "h": h, "bonus": bool(held.get("bonus", false)), "quest": false})
+		"span": _belt_span(shape), "h": h, "bonus": bool(held.get("bonus", false)), "quest": false,
+		"phase": randf() * TAU})
 	has_held = false
 	held = {}
 	# the original uses a cooldown which the Drop Section Accelerator shortens
@@ -1314,14 +1336,15 @@ func _spawn_twig(force := false) -> bool:
 	var is_bonus := false
 	if quest_pic != "" and quest_prob > 0.0 and randf() < quest_prob:
 		is_quest = true
-	if all_bonus:
+	if all_bonus or debug_all_bonus:
 		is_bonus = true
 	elif bonus_prob > 0.0 and randf() < bonus_prob * (1.0 + float(skills.luck) / 100.0):
 		is_bonus = true
 	# new twigs enter at x=799, bottom aligned with the belt
 	var h := _belt_height(shape)
 	belt.append({"shape": shape, "type": int(shape.masks[0]), "x": BELT_ENTRY, "y": BELT_BOTTOM - h,
-		"span": _belt_span(shape), "h": h, "bonus": is_bonus, "quest": is_quest})
+		"span": _belt_span(shape), "h": h, "bonus": is_bonus, "quest": is_quest,
+		"phase": randf() * TAU})
 	return true
 
 ## Pieces that are wider than one cell need their own slot spacing on the belt.
@@ -2091,7 +2114,8 @@ func _demo_step(delta: float) -> void:
 				var t := int(a.get("fishtype", "1"))
 				var demo_shape := LevelLoader.single_shape(t if t >= 1 and t <= 15 else 1)
 				belt.append({"type": t, "shape": demo_shape, "x": BELT_ENTRY, "y": BELT_BOTTOM - BELT_SLOT,
-					"span": BELT_SLOT, "h": BELT_SLOT, "bonus": a.get("bonus", "false") == "true", "quest": a.get("quest", "false") == "true"})
+					"span": BELT_SLOT, "h": BELT_SLOT, "bonus": a.get("bonus", "false") == "true", "quest": a.get("quest", "false") == "true",
+					"phase": randf() * TAU})
 			"MoveSteck":
 				var incr := float(a.get("incr", "1"))
 				for tw in belt:
@@ -2121,6 +2145,7 @@ func _demo_step(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	_time += delta
+	_update_capture(delta)
 	if message_t > 0.0:
 		message_t -= delta
 	if progress_t > 0.0:
@@ -2240,6 +2265,26 @@ func _update_overfull(delta: float) -> void:
 	else:
 		overfull = false
 		overfull_t = 0.0
+
+func _update_capture(delta: float) -> void:
+	if capture_path == "" or capture_saved >= capture_count:
+		return
+	capture_t += delta
+	if _top() != "WGame" or capture_t < capture_delay + float(capture_saved) * capture_interval:
+		return
+	var base := capture_path
+	var ext := base.get_extension()
+	if ext == "":
+		base += ".png"
+		ext = "png"
+	var path := base
+	if capture_count > 1:
+		path = "%s_%02d.%s" % [base.get_basename(), capture_saved, ext]
+	get_viewport().get_texture().get_image().save_png(path)
+	print("[capture] %s at t=%.2f" % [path, capture_t])
+	capture_saved += 1
+	if capture_saved >= capture_count:
+		get_tree().quit()
 
 # ---------------------------------------------------------------------------
 # drawing
@@ -2362,12 +2407,11 @@ func _draw_belt(o: Control) -> void:
 	if belt_tex:
 		var off := fmod(_time * belt_speed, float(belt_tex.get_width()))
 		var x := -off
-		while x < 600.0:
+		while x < SCREEN.x:
 			o.draw_texture(belt_tex, Vector2(x, 587))
 			x += belt_tex.get_width()
 	for t in belt + drop_belt:
 		var tex: Texture2D = null
-		var cells := 1
 		var h := float(t.get("h", BELT_SLOT))
 		if bool(t.quest):
 			tex = AssetLib.texture("res://assets/squares/%s" % quest_pic)
@@ -2376,14 +2420,18 @@ func _draw_belt(o: Control) -> void:
 			if shape.is_empty():
 				continue
 			tex = LevelLoader.shape_texture(shape)
-			cells = maxi(1, int(shape.get("box", Vector2i.ONE).x))
 		if tex == null:
 			continue
 		var pos := Vector2(float(t.x), float(t.get("y", BELT_BOTTOM - h)))
-		var mid := pos + Vector2(20.0 * cells, h / 2.0)
 		if bool(t.bonus):
-			o.draw_texture(tex, pos, Color(1.0, 0.96, 0.72, 1.0))
-			o.draw_circle(mid, 22.0 + 20.0 * (cells - 1), Color(1, 0.9, 0.3, 0.22))
+			# original FUN_00490abc: lucky twigs get an additive yellow pulse,
+			# amount = Sin(ms/300 + phase)*64 + 150 (period ~1.9 s, per-twig phase);
+			# this is the golden "flash" seen on the conveyor.
+			var k := (sin(_time * 1000.0 / 300.0 + float(t.get("phase", 0.0))) * 64.0 + 150.0) / 255.0
+			o.draw_texture(tex, pos)
+			var flash := AssetLib.flash_texture(tex)
+			if flash:
+				o.draw_texture(flash, pos, Color(1, 1, 1, k))
 		else:
 			o.draw_texture(tex, pos)
 	# overfill indicator while the belt is jammed (original ProgressOTT)
