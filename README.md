@@ -13,9 +13,13 @@ tools/                Python tools recovered from the analysis
   save_codec.py       save-game encode/decode
   build_ui_data.py    FiberTwig.li + Arial12.xml -> remake/assets/data/interface.json
   artmatch.py         locate original artwork inside the reference screenshots
+  make_chs_lng.py     Simplified Chinese localization -> remake/assets/lng/chs_105.lng
+  make_chs_font.py    Noto Sans SC subset (CJK font) -> remake/assets/fonts/
 remake/               Godot 4 remake (see remake/README.md)
   assets/levels/      all 18 levels, decrypted
   assets/squares/ game/  art, audio, fonts extracted from the original
+  assets/lng/         original localizations + Simplified Chinese (chs_105.lng)
+  assets/fonts/       Noto Sans SC subset for the Chinese captions (SIL OFL)
   src/                GDScript sources
 docs/report...        (see REVERSE_ENGINEERING.md)
 ```
@@ -24,6 +28,11 @@ Reference captures of the original game (`assets/*.png`) were used to verify the
 reconstruction: the remake reproduces the original 800x600 client layout, the
 board lattice, the conveyor speed and the placement rules measured from them
 (see section 10 of the report).
+
+The remake ships with the five original localizations (English, German,
+French, Portuguese, Russian) plus a complete **Simplified Chinese** one
+(`简体中文`) that can be selected in *Options → Language*; all interface text,
+help pages, level names and hints are translated (`tools/make_chs_lng.py`).
 
 ## Highlights of the analysis
 

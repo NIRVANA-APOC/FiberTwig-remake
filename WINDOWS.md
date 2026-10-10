@@ -25,8 +25,8 @@ start.cmd                         :: 窗口模式运行游戏
 start.cmd edit                    :: 用 Godot 编辑器打开项目
 start.cmd level 6                 :: 直接运行第 6 关 (0..17)
 start.cmd screen WLoad            :: 指定初始界面（WTitle/WLoad/WOptions/...）
-start.cmd test                    :: 快速 headless 自检（wintest / testsound / autotest=0
-                                  ::   / closetest / piecetest / filltest=0）
+start.cmd test                    :: 快速 headless 自检（wintest / testsound / langtest
+                                  ::   / autotest=0 / closetest / piecetest / filltest=0）
 start.cmd test all                :: headless 自动跑 0..17 关，检查 SCRIPT ERROR
 start.cmd --headless -- --autotest=0 --complex
                                   :: 其余参数原样转交给 Godot
@@ -34,6 +34,23 @@ start.cmd --headless -- --autotest=0 --complex
 
 脚本会自动优先使用 `tools\` 下的 Godot，找不到时回退到 PATH 里的 `godot`；
 检测到 `--headless` 时自动改用 `console.exe` 以保留命令行输出。
+
+## 中文界面（简体中文）
+
+游戏内置 6 种语言：英语、德语、法语、葡萄牙语、俄语，以及新增的
+**简体中文**。切换方式：主菜单或游戏中 `Options`（选项）→ `Language`
+（语言）→ 选择“简体中文”→ `OK`（确定），设置写入 `options.cfg`。
+也可以在启动时指定语言（不修改 `options.cfg`）：
+
+```bat
+start.cmd -- --language=chs          :: 直接以简体中文启动
+start.cmd screen WHelp -- --language=chs
+```
+
+全部界面文字、帮助页、关卡名称与提示均已汉化（`remake\assets\lng\chs_105.lng`，
+UTF-8）。原版位图字体没有汉字，因此中文用随附的 Noto Sans SC 子集
+（`remake\assets\fonts\NotoSansSC-UI.ttf`，SIL OFL 1.1）绘制，并按字符换行；
+字体子集与翻译都可用 `tools\make_chs_lng.py` / `tools\make_chs_font.py` 重新生成。
 
 ## Python 工具（可选）
 
@@ -54,6 +71,7 @@ start.cmd --headless -- --autotest=0 --complex
 
 * `--wintest`：`WFinishLevelDialog`，1 个连通分量
 * `--testsound`：16/16 WAV 加载成功
+* `--langtest`：6 种语言全部加载，中文标题/换行/CJK 字体均通过（failures=0）
 * `--closetest`：放置/锁定规则符合预期（闭合锁定环被拒绝）
 * `--piecetest`：多格枝整块绘制、整块移除、辉光衰减全部通过
 * `--filltest=0`：逐格填充后 `complete=true`，1 个连通分量，0 个开放关节

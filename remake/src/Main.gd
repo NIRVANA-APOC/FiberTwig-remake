@@ -193,6 +193,10 @@ func _ready() -> void:
 	_build_tree()
 	ui = OriginalUI.new()
 	_load_options()
+	# --language=CODE overrides options.cfg (useful to test a localization)
+	for a in OS.get_cmdline_args() + OS.get_cmdline_user_args():
+		if a.begins_with("--language="):
+			opt_language = a.split("=")[1]
 	_apply_language(opt_language)
 	_apply_options()
 	_refresh_saves()
@@ -211,6 +215,10 @@ func _ready() -> void:
 		return
 	if "--piecetest" in args:
 		_piece_test()
+		get_tree().quit()
+		return
+	if "--langtest" in args:
+		_language_test()
 		get_tree().quit()
 		return
 	for a in args:
@@ -514,7 +522,7 @@ func _handle_key(event: InputEventKey) -> void:
 			ui.edit_backspace()
 		elif event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER:
 			_pass_edit_to_handler()
-		elif event.unicode > 31 and event.unicode < 127:
+		elif event.unicode > 31 and event.unicode != 127:
 			ui.edit_insert(char(event.unicode))
 		queue_redraw()
 		return
@@ -764,7 +772,7 @@ func _add_skill(which: String, delta: int) -> void:
 	_write_save("autosave")
 
 func _selected_language() -> String:
-	for code in ["enu", "deu", "fra", "ptb", "rus"]:
+	for code in OriginalUI.LANGS:
 		if ui.checked.get("R%sWLanguage" % code.to_upper(), false):
 			return code
 	return "enu"
@@ -774,9 +782,14 @@ func _apply_language(code: String) -> void:
 		ui.apply_language("enu")
 		code = "enu"
 	opt_language = code
+	var window := get_window()
+	if window != null:
+		window.title = "Fiber Twig 重制版" if code == "chs" else "Fiber Twig Remake"
 	# refresh captions that the game owns
 	ui.captions["LLevelNumWGame"] = str(level_index + 1)
 	ui.captions["LLevelNumWBetweenLevelMenu"] = "%02d." % (level_index + 1)
+	if stack.has("WBetweenLevelMenu"):
+		_between_captions()
 	queue_redraw()
 
 # ---------------------------------------------------------------------------
@@ -864,7 +877,7 @@ func _apply_options() -> void:
 	for i in 6:
 		ui.checked["RMusic%sWOptions" % ["100", "80", "60", "40", "20", "No"][i]] = i == opt_music
 		ui.checked["RSound%sWOptions" % ["100", "80", "60", "40", "20", "No"][i]] = i == opt_sound
-	for code in ["enu", "deu", "fra", "ptb", "rus"]:
+	for code in OriginalUI.LANGS:
 		ui.checked["R%sWLanguage" % code.to_upper()] = code == opt_language
 	world.show_hints = not opt_hints_off
 	_music_player.volume_db = [6.0, -2.0, -6.0, -12.0, -20.0, -80.0][opt_music]
@@ -2291,7 +2304,7 @@ func _update_capture(delta: float) -> void:
 	if capture_path == "" or capture_saved >= capture_count:
 		return
 	capture_t += delta
-	if _top() != "WGame" or capture_t < capture_delay + float(capture_saved) * capture_interval:
+	if capture_t < capture_delay + float(capture_saved) * capture_interval:
 		return
 	var base := capture_path
 	var ext := base.get_extension()
@@ -2469,7 +2482,14 @@ func _draw_belt(o: Control) -> void:
 
 func _between_captions() -> void:
 	ui.level_tab = level_index
-	ui.captions["LLevelWBetweenLevelMenu"] = "Level"
+	# The .li caption has a trailing space and the .lng may override it; read it
+	# directly so switching the language updates it (ui.captions is a cache).
+	var level_caption := "Level"
+	if ui.nodes.has("LLevelWBetweenLevelMenu"):
+		level_caption = str(ui.nodes["LLevelWBetweenLevelMenu"].get("Caption", "Level")).strip_edges()
+	if ui.overrides.has("LLevelWBetweenLevelMenu") and ui.overrides["LLevelWBetweenLevelMenu"].has("Caption"):
+		level_caption = str(ui.overrides["LLevelWBetweenLevelMenu"]["Caption"]).strip_edges()
+	ui.captions["LLevelWBetweenLevelMenu"] = level_caption if level_caption != "" else "Level"
 	ui.captions["LLevelNumWBetweenLevelMenu"] = "%02d." % (level_index + 1)
 	ui.captions["LScoreCountWBetweenLevelMenu"] = str(total_score)
 	ui.captions["LExperienceCountWBetweenLevelMenu"] = str(experience)
@@ -2609,6 +2629,50 @@ func _test_sounds() -> void:
 		var bytes := FileAccess.get_file_as_bytes("res://assets/game/%s" % f)
 		var st := AudioStreamWAV.load_from_buffer(bytes)
 		print("[sound] %s -> %s" % [f, "ok" if st != null else "FAIL"])
+
+## Localization smoke test: every language must load, the language dialog must
+## offer all of them (Simplified Chinese included), selecting Chinese must work
+## through the radio group and produce the Chinese captions/line breaking.
+func _language_test() -> void:
+	var failures := 0
+	var chinese_caption := ""
+	for code in OriginalUI.LANGS:
+		if not ui.apply_language(code):
+			print("[langtest] FAIL: cannot load language %s" % code)
+			failures += 1
+			continue
+		if not ui.nodes.has("RCHSWLanguage"):
+			print("[langtest] FAIL: RCHSWLanguage missing while %s is active" % code)
+			failures += 1
+			continue
+		ui.select_radio("RCHSWLanguage")
+		if _selected_language() != "chs":
+			print("[langtest] FAIL: %s: radio selection did not pick chs" % code)
+			failures += 1
+		_apply_language("chs")
+		chinese_caption = str(ui.prop("BPlayWStartDialog", "Caption", ""))
+		if chinese_caption != "开始":
+			print("[langtest] FAIL: %s: Chinese caption is %s" % [code, chinese_caption])
+			failures += 1
+		var width := ui.text_width("简体中文")
+		if width <= 0.0:
+			print("[langtest] FAIL: %s: CJK text has no width" % code)
+			failures += 1
+		var lines := ui.wrapped("这是一段用来测试自动换行的中文文字，它没有空格，只能按字符断行。", 100.0)
+		if lines.size() < 2:
+			print("[langtest] FAIL: %s: CJK wrapping produced %d line(s)" % [code, lines.size()])
+			failures += 1
+		if ui.cjk_font == null:
+			print("[langtest] FAIL: %s: no CJK font loaded" % code)
+			failures += 1
+	# every language must still be reachable after the Chinese pass
+	for code in OriginalUI.LANGS:
+		_apply_language(code)
+		var caption := str(ui.prop("BPlayWStartDialog", "Caption", ""))
+		if caption.is_empty():
+			print("[langtest] FAIL: %s: empty caption" % code)
+			failures += 1
+	print("[langtest] languages=%d failures=%d chs_caption=%s" % [OriginalUI.LANGS.size(), failures, chinese_caption])
 
 ## Smoke test for multi-cell fishkas: place a complex shape, check that it is
 ## kept as one piece on the board, and that hammering one of its cells removes

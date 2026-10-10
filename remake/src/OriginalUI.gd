@@ -8,6 +8,12 @@ extends RefCounted
 ## and Arial12cyr.png with the RUSSIAN metrics from Arial12.xml.  Captions are
 ## kept byte-wise (CP1251 / CP1252) and indexed directly into the atlas, which
 ## is how the original font files are laid out.
+##
+## The Simplified Chinese localization cannot use that 12 px atlas, so its
+## language file is UTF-8 and its captions are drawn with the bundled subset of
+## Noto Sans SC (assets/fonts/NotoSansSC-UI.ttf) and wrapped per character.
+## Strings outside the subset (say a name typed by the user) fall back to a
+## system CJK font.
 
 var nodes: Dictionary = {}
 var children: Dictionary = {}
@@ -36,7 +42,26 @@ var mouse := Vector2.ZERO
 var pressed := ""
 var hits: Array = []
 
+## Localization: the .lng suffix is five times the internal language id of the
+## original engine (enu 2 -> 10, deu 3 -> 15, ... rus 18 -> 90); the added
+## Simplified Chinese entry therefore uses 105.
+const LANGS := ["enu", "deu", "fra", "ptb", "rus", "chs"]
+const LANG_SUFFIX := {"enu": "10", "deu": "15", "fra": "20", "ptb": "60", "rus": "90", "chs": "105"}
+## Fallback captions for language entries the active .lng does not declare.  The
+## five original names are localized by the shipped files themselves; the
+## Chinese one is always its native name.
+const LANG_NAMES := {"enu": "English", "deu": "German", "fra": "French",
+	"ptb": "Portuguese", "rus": "Russian", "chs": "简体中文"}
+const CJK_FONT_PATH := "res://assets/fonts/NotoSansSC-UI.ttf"
+const CJK_FONT_SIZE := 14
+const CJK_FONT_NAMES := ["Microsoft YaHei UI", "Microsoft YaHei",
+	"Noto Sans CJK SC", "Noto Sans SC", "Source Han Sans SC", "PingFang SC",
+	"Hiragino Sans GB", "WenQuanYi Micro Hei", "SimHei", "DengXian", "sans-serif"]
+var cjk_font: Font = null
+var _utf8_lang := false
+
 func _init() -> void:
+	_load_cjk_font()
 	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://assets/data/interface.json"))
 	metrics_lat = data.metrics
 	atlas_lat = AssetLib.texture("res://assets/game/Arial12lat.png")
@@ -69,6 +94,37 @@ func _set_font(cyr: bool) -> void:
 	atlas = atlas_cyr if cyr else atlas_lat
 	metrics = metrics_cyr if cyr else metrics_lat
 
+## The bitmap fonts of the original are indexed by the bytes of the CP1251 /
+## CP1252 captions, so a legacy language file has its high bytes escaped as
+## numeric character references (the parser then hands back U+0080..U+00FF and
+## the byte index survives).  A UTF-8 file is parsed unchanged.
+func _is_utf8(data: PackedByteArray) -> bool:
+	var i := 0
+	var wide := false
+	while i < data.size():
+		var b := data[i]
+		if b < 0x80:
+			i += 1
+			continue
+		wide = true
+		var n := 0
+		if b >= 0xC2 and b <= 0xDF:
+			n = 1
+		elif b >= 0xE0 and b <= 0xEF:
+			n = 2
+		elif b >= 0xF0 and b <= 0xF4:
+			n = 3
+		else:
+			return false
+		if i + n >= data.size():
+			return false
+		for k in range(1, n + 1):
+			var c := data[i + k]
+			if c < 0x80 or c > 0xBF:
+				return false
+		i += n + 1
+	return wide
+
 ## Load a language file (lng/*.lng); it only overrides properties.
 func apply_language(code: String) -> bool:
 	var path := "res://assets/lng/%s_%s.lng" % [code, _lang_suffix(code)]
@@ -77,17 +133,18 @@ func apply_language(code: String) -> bool:
 	lang = code
 	_set_font(code == "rus")
 	overrides.clear()
-	# The language files are 8 bit encoded (CP1251 / CP1252); escape the high
-	# bytes as numeric character references so the parser keeps the byte values
-	# (the bitmap font atlases are indexed by those values).
 	var raw := FileAccess.get_file_as_bytes(path)
+	_utf8_lang = _is_utf8(raw)
 	var safe := PackedByteArray()
-	for b in raw:
-		if b < 0x80:
-			safe.append(b)
-		else:
-			for c in ("&#%d;" % b).to_utf8_buffer():
-				safe.append(c)
+	if _utf8_lang:
+		safe = raw
+	else:
+		for b in raw:
+			if b < 0x80:
+				safe.append(b)
+			else:
+				for c in ("&#%d;" % b).to_utf8_buffer():
+					safe.append(c)
 	var parser := XMLParser.new()
 	if parser.open_buffer(safe) != OK:
 		return false
@@ -123,19 +180,54 @@ func apply_language(code: String) -> bool:
 				_pending_key = ""
 			XMLParser.NODE_ELEMENT_END:
 				_pending_key = ""
+	_ensure_language_widgets()
 	return true
 
 var _pending_key := ""
 var _cur_class := ""
 
 func _lang_suffix(code: String) -> String:
-	match code:
-		"enu": return "10"
-		"deu": return "15"
-		"fra": return "20"
-		"ptb": return "60"
-		"rus": return "90"
-	return "10"
+	return str(LANG_SUFFIX.get(code, "10"))
+
+## The language dialog must offer every language even when the active .lng does
+## not declare all entries (the shipped files rely on the widgets added by the
+## previously loaded one).  Any missing radio button is cloned from its
+## siblings; the list is kept in LANGS order so it does not depend on which
+## language was loaded first.
+func _ensure_language_widgets() -> void:
+	var parent := "WLanguage"
+	var langs: Array = []
+	for code in LANGS:
+		var name := "R%sWLanguage" % code.to_upper()
+		langs.append(name)
+		if not nodes.has(name):
+			_add_widget(name, "TLabRadioButton")
+			nodes[name]["Caption"] = str(LANG_NAMES.get(code, code))
+	var order: Array = langs.duplicate()
+	for child in children.get(parent, []):
+		if not order.has(child):
+			order.append(child)
+	children[parent] = order
+	for i in langs.size():
+		var name: String = langs[i]
+		nodes[name]["Left"] = 40
+		nodes[name]["Top"] = 32 + i * 30
+		nodes[name]["Width"] = 160
+		nodes[name]["Height"] = 20
+
+## The bundled font (a Noto Sans SC subset) draws the Chinese captions; a
+## system CJK font covers characters outside the subset.
+func _load_cjk_font() -> void:
+	var sys := SystemFont.new()
+	sys.font_names = PackedStringArray(CJK_FONT_NAMES)
+	sys.allow_system_fallback = true
+	var file := FontFile.new()
+	if file.load_dynamic_font(CJK_FONT_PATH) == OK:
+		var fallbacks: Array[Font] = [sys]
+		file.fallbacks = fallbacks
+		cjk_font = file
+	else:
+		cjk_font = sys
 
 ## The language files may add widgets that the base .li does not contain
 ## (the five language radio buttons).  They are created with the class
@@ -192,7 +284,10 @@ func _add_widget(name: String, cls: String) -> void:
 
 ## CP1251/CP1252 bytes -> one codepoint per byte, so the atlas index works.
 ## (High bytes arrive as U+0080..U+00FF from the numeric character references.)
+## A UTF-8 language file has already the final codepoints.
 func _decode(raw: String) -> String:
+	if _utf8_lang:
+		return raw
 	var out := ""
 	for i in raw.length():
 		out += char(raw.unicode_at(i) & 0xFF)
@@ -215,7 +310,21 @@ func color_bgr(value: String) -> Color:
 	var n := int(value)
 	return Color8(n & 255, (n >> 8) & 255, (n >> 16) & 255)
 
+## True for strings the bitmap atlas cannot draw (anything above U+00FF, and
+## every caption while the Chinese localization is active).
+func use_cjk(s: String) -> bool:
+	if cjk_font == null:
+		return false
+	if lang == "chs":
+		return true
+	for i in s.length():
+		if s.unicode_at(i) > 0xFF:
+			return true
+	return false
+
 func text_width(s: String) -> float:
+	if use_cjk(s):
+		return cjk_font.get_string_size(s, HORIZONTAL_ALIGNMENT_LEFT, -1, CJK_FONT_SIZE).x
 	var w := 0.0
 	for i in s.length():
 		var c := s.unicode_at(i) - 32
@@ -223,6 +332,12 @@ func text_width(s: String) -> float:
 	return w
 
 func draw_text(o: CanvasItem, s: String, pos: Vector2, color := Color.BLACK) -> void:
+	if use_cjk(s):
+		# Centre the font's line box on the 18 px line grid of the bitmap font.
+		var baseline := pos.y + (18.0 - cjk_font.get_height(CJK_FONT_SIZE)) * 0.5
+		baseline += cjk_font.get_ascent(CJK_FONT_SIZE)
+		o.draw_string(cjk_font, Vector2(pos.x, baseline), s, HORIZONTAL_ALIGNMENT_LEFT, -1, CJK_FONT_SIZE, color)
+		return
 	var x := pos.x
 	for i in s.length():
 		var c := s.unicode_at(i) - 32
@@ -238,14 +353,33 @@ func wrapped(s: String, width: float) -> Array[String]:
 	s = re.sub(s, "\n\n", true)
 	var lines: Array[String] = []
 	for paragraph in s.split("\n"):
-		var line := ""
-		for word in paragraph.split(" ", false):
-			var candidate := word if line.is_empty() else line + " " + word
-			if text_width(candidate) > width and not line.is_empty():
-				lines.append(line)
-				line = word
-			else:
-				line = candidate
+		lines.append_array(_wrap_paragraph(paragraph, width))
+	return lines
+
+## Word wrap that can also break inside a word: the Chinese text has no spaces
+## between words, so a paragraph is a single "word" there.
+func _wrap_paragraph(p: String, width: float) -> Array[String]:
+	var lines: Array[String] = []
+	var line := ""
+	for word in p.split(" ", false):
+		var sep := "" if line.is_empty() else " "
+		if text_width(line + sep + word) <= width:
+			line += sep + word
+			continue
+		if not line.is_empty():
+			lines.append(line)
+			line = ""
+		# The word starts a new line; break it by character when it does not
+		# fit on its own (Chinese text has no spaces to break at).
+		var chunk := ""
+		for i in word.length():
+			var ch := word[i]
+			if not chunk.is_empty() and text_width(chunk + ch) > width:
+				lines.append(chunk)
+				chunk = ""
+			chunk += ch
+		line = chunk
+	if not line.is_empty() or lines.is_empty():
 		lines.append(line)
 	return lines
 

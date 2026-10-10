@@ -33,9 +33,16 @@ RunMethod` actions stored in the interface file, so the navigation is the
 original one (e.g. `Options → Language` stacks the language dialog on top of
 the options dialog and returns there). Options keep the two radio groups of
 the original (`100…20 %`, `No Music` / `No Sound`); `Cancel` restores the
-state from when the dialog was opened and `OK` writes `options.cfg`. The five
-languages of `lng/*.lng` are switched at runtime (bitmap font
-`Arial12lat.png`/`Arial12cyr.png`, CP1251/CP1252 byte indexing).
+state from when the dialog was opened and `OK` writes `options.cfg`. The
+localizations of `lng/*.lng` are switched at runtime (bitmap font
+`Arial12lat.png`/`Arial12cyr.png`, CP1251/CP1252 byte indexing) and now
+include **Simplified Chinese** (`简体中文`, `lng/chs_105.lng`): that file is
+UTF-8 and is drawn with the bundled Noto Sans SC subset
+(`assets/fonts/NotoSansSC-UI.ttf`, SIL OFL — see `assets/fonts/OFL.txt`),
+which also wraps the Chinese text per character. `--language=CODE` starts the
+game in a language without touching `options.cfg`.
+
+![language](docs/language-chs.png)
 
 **Play mechanics** (all values taken from the original data files or measured
 from the shipped screenshots, see §10 of the report):
@@ -136,10 +143,12 @@ loaded directly from the extracted files, so no import step is required.
 | `--shot=N` | jump into level N with the reference tool counts |
 | `--autotest[=N]` | greedy solver, prints the outcome and quits |
 | `--wintest`, `--testsound` | win condition / WAV loading checks |
+| `--langtest` | all six localizations, Chinese captions and CJK wrapping |
 | `--closetest` | placement/lock rule checks (the tutorial session + rings) |
 | `--piecetest` | multi-cell piece checks (whole artwork, whole-piece removal) |
 | `--filltest[=N]` | fills level N cell by cell and checks the completion rule |
 | `--beltspeed=N` | conveyor speed in px/s (default 50 = 2× the original) |
+| `--language=enu\|deu\|fra\|ptb\|rus\|chs` | start in a language (`options.cfg` is not changed) |
 | `--allbonus` | every generated twig is lucky (flash-test) |
 | `--allquest` | every generated twig is mystery (icon-test) |
 | `--capture=path,delay[,interval,count]` | save viewport PNGs (frame, then numbered) and quit |
@@ -166,6 +175,15 @@ The camera is automatic (original auto-follow); there is no manual scrolling.
 `../tools/decrypt_levels.py`. Music was converted from the BASS `*.mo3`
 modules with `openmpt123` and `oggenc`; the damaged WAV headers were rewritten.
 
+`assets/fonts/NotoSansSC-UI.ttf` is the only added artwork: a subset of Noto
+Sans SC (SIL OFL 1.1) used for the Simplified Chinese localization. Both
+localization files are generated and can be rebuilt:
+
+```bash
+python tools/make_chs_lng.py     # remake/assets/lng/chs_105.lng
+python tools/make_chs_font.py    # the font subset of chs_105.lng
+```
+
 ## Tests
 
 ```bash
@@ -190,6 +208,9 @@ godot --headless --path remake -- --piecetest
 
 # verifies that all 16 original WAVs load
 godot --headless --path remake -- --testsound
+
+# verifies the six localizations (Chinese captions and CJK line breaking)
+godot --headless --path remake -- --langtest
 ```
 
 The self test is a smoke test, not a proof of solvability: it reports how many

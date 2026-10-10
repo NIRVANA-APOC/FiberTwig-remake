@@ -1,0 +1,967 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LabInterface>
+	<o c="TLabButton">
+		<p n="Name">BAbortWMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">放弃关卡</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BBackWStartDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">返回</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BBuyNowWNotEnabled</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">立即购买</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BCancelWAbortLivelDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">取消</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BCancelWClearDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">取消</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BCancelWDeleteGameDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">取消</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BCancelWExitToMainMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">取消</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BCancelWLoad</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">取消</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BCancelWOptions</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">取消</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BCancelWQuitGameDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">取消</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BCancelWReplaceGameDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">取消</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BCancelWSave</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">取消</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BClearWHighScores</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">清空</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BCloseWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">关闭</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BDeleteWLoad</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">删除</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BDeleteWSave</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">删除</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BDemoWLoad</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">演示</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BHelpWBetweenLevelMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">帮助</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BHelpWMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">帮助</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BHelpWTitle</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">帮助</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BLanguageWOptions</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">语言</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BLoadWBetweenLevelMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">载入游戏</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BLoadWLoad</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">载入</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BLoadWMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">载入游戏</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BLoadWTitle</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">载入游戏</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BMainMenuWBetweenLevelMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">主菜单</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BMenuWGame</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">菜单</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BNewWTitle</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">新游戏</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BNextLevelWBetweenLevelMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">下一关</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BOkWAbortLivelDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">确定</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BOkWClearDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">确定</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BOkWDeleteGameDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">确定</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BOkWExitToMainMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">确定</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BOkWFinishLevelDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">确定</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BOkWGameFinishedDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">确定</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BOkWGameOverDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">确定</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BOkWHighScores</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">确定</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BOkWLanguage</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">确定</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BOkWNotEnabled</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">以后再说</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BOkWOptions</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">确定</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BOkWQuitGameDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">确定</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BOkWReplaceGameDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">确定</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BOptionsWBetweenLevelMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">选项</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BOptionsWMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">选项</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BOptionsWTitle</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">选项</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BPlayWStartDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">开始</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BQuitWMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">退出</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BQuitWTitle</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">退出</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BResumeWMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">继续游戏</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BSaveWBetweenLevelMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">保存游戏</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BSaveWSave</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">保存</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">BScoresWTitle</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">最高分</p>
+	</o>
+	<o c="TLabCheckBox">
+		<p n="Name">CheckBoxColorWOptions</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">32 位色彩</p>
+	</o>
+	<o c="TLabCheckBox">
+		<p n="Name">CheckBoxFullScreenWOptions</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">全屏</p>
+	</o>
+	<o c="TLabCheckBox">
+		<p n="Name">CheckBoxHintsWOptions</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">关闭提示</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LCombDoneWGame</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">已完成组合！</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LDropSectionWGame</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">丢弃区</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LExperienceWBetweenLevelMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">经验：</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LHintClosedLink</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">不能封闭图案，否则将无法连接所有树枝。</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LHintFirstTakeBonusFishka</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">这是奖励树枝，使用它就能获得奖励。</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LHintFirstTakeFishka</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">将发光的接口对准相连，就能把树枝连接起来。</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LHintFirstTakeQuestFishka</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">这是神秘树枝，拿起之前不知道它的形状。</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LHintFirstTransparentFishka</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">这是透明树枝，需要用相同形状的树枝覆盖它。</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LHintFishComb</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">您完成了一个树枝组合，获得了奖励。</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LHintLevelTop</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">现在连接所有树枝，恢复图案并完成关卡。</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LHintMatchingJoints</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">只能连接接口相互匹配的树枝。</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LHintSkillAmphora</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">双耳瓶——生成所需形状的树枝并剪除多余的元素。</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LHintSkillDropAccel</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">丢弃区加速器——让丢弃区工作得更快。</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LHintSkillHammer</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">锤子——砸碎传送带上和场地上多余的树枝。</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LHintSkillLive</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">时间控制——即使传送带堆满，也能让您在一段时间内不会失败。</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LHintSkillLuckyTwig</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">好运——带来更多幸运树枝（带有奖励的树枝）。</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LHintTransparentTwig</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">需要用相同形状的树枝覆盖透明树枝。</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LLevel10WBetweenLevelMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">与蘑菇玩捉迷藏</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LLevel11WBetweenLevelMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">拜访美丽的鹰身女妖</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LLevel12WBetweenLevelMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">觐见水下王国的统治者青蛙女王</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LLevel13WBetweenLevelMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">穿过魔术师花园里的茂密灌木</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LLevel14WBetweenLevelMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">半羊人美丽花园里的落花</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LLevel15WBetweenLevelMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">风之精灵在天空中欢唱</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LLevel16WBetweenLevelMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">巨型乌贼花园里的惊险冒险</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LLevel17WBetweenLevelMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">会见万物之主——飞天巨象</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LLevel1WBetweenLevelMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">美丽女巫花园中的花丛间</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LLevel2WBetweenLevelMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">为鸟背上的女士谱写七音符旋律</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LLevel3WBetweenLevelMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">为追星者照亮前路</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LLevel4WBetweenLevelMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">解开智慧猫头鹰的谜题</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LLevel5WBetweenLevelMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">精灵乐师的常春藤花园</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LLevel6WBetweenLevelMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">为看门狗拼出骨头图案</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LLevel7WBetweenLevelMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">点亮半人马黑暗花园里的街灯</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LLevel8WBetweenLevelMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">绿发仙女的领地</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LLevel9WBetweenLevelMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">守护森林迷宫的老矮人</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LLevelCompleteWFinishLevelDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">过关！</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LLevelWBetweenLevelMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">关卡</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LLevelWGame</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">关卡：</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LLinksWNotEnabled</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">www.puzzlelab.com</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LLoadWLoad</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">载入存档</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LLoadingWProgressBar</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">载入中……</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LMusicWOptions</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">音乐音量</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LNameWLoad</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">存档名称：</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LNameWSave</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">存档名称：</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LNotEnabledWNotEnabled</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">希望您喜欢这款游戏！
+
+这是试用版本。您可以使用 14 天或运行 14 次（以先到者为准）。
+注册游戏后可解除所有限制，并开放全部关卡。详情请见</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LSaveWSave</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">保存存档</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LScoreWBetweenLevelMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">分数：</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LScoreWGame</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">分数：</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LSelectBonusWStartDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">选择初始奖励</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LSelectDifficultyWStartDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">选择难度等级</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LSoundWOptions</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">音效音量</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LTotalScoreWGameFinishedDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">总分：</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LTrialConditionLabel</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">这是试用版本。您可以使用 14 天或运行 14 次（以先到者为准）。注册游戏后可解除所有限制，并开放全部关卡。详情请见</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LTrialDaysLabel</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">天</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LTrialEnterKeyButton</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">输入注册码</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LTrialFiveMinutesLabel</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">现在您只能再玩 5 分钟</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LTrialHopeLabel</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">希望您喜欢！</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LTrialOrderLabel</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">订购页面</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LTrialPlayButton</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">开始</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LTrialQuitButton</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">退出</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LTrialRegErrorLabel</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">注册失败！</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LTrialRegistrationButton</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">注册</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LTrialThanksLabel</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">感谢试玩！</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LTrialTimesLabel</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">次</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LYourCapsWGameFinishedDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">剩余双耳瓶：</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LYourHammerWGameFinishedDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">剩余锤子：</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LYourNameWGameFinishedDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">您的名字：</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LYourScoreWGameFinishedDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">本局得分：</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LabelTAboutWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">致谢
+
+Puzzle Lab Studio 衷心感谢以下以各种方式为本项目做出贡献的人：
+
+Anastassia Fomina、Andrey Fomin、Pavel Moskvin、Oleg Ryabinin、Sophia Shishatskaya、Aleksei Fadeev、Dmitry Gorbatkov、Mikhail Tretyakov、Nadezhda Moskvina、Sergey Potapov、Sergey Zakharov、Anton Pishchour、Sergey Kaminsky、Olesya Derkach。</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LabelTArrangingTwigsWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">树枝由屏幕下方的传送带运送。游戏目标是在场地上把树枝彼此连接起来，一直抵达屏幕顶端。传送带上的树枝会慢慢堆积，所以要留意不要让它堆满，否则游戏就会结束。除了普通树枝，还有两种特殊树枝：神秘树枝——在拿起它之前您不知道它的形状；幸运树枝——使用它可以获得某些奖励。场地上还能看到透明树枝——您需要用相同形状的树枝覆盖它们。
+
+树枝有各种形状，接口数量也各不相同。当树枝有未连接的接口时，接口处会发光，表示可以在这里连接另一根树枝。下方的接口不能留空，因为只有所有树枝彼此连接，才能向上推进。妨碍您向上推进的未连接接口会用绿光标示。如果可以连接另一根树枝，您会看到绿色箭头；如果无法连接，则会看到红色叉号。</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LabelTBonusesWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">完成树枝组合或使用奖励树枝时，您可能获得以下奖励：
+
+1. 爆炸炸弹——清空传送带，为新的树枝腾出空间。
+2. 额外锤子——给您一定数量的魔法锤子。
+3. 额外双耳瓶——给您一定数量的魔法双耳瓶。
+4. 额外分数——给您额外分数以提高得分。
+5. 丢弃区加速器——让树枝更快消失，以便扔掉更多树枝。
+6. 好运——让传送带上的所有树枝都带有奖励。
+7. 时间控制——临时奖励，传送带堆满时可以让您在一段时间内不会失败。</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LabelTCombinationsWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">如果在恢复图案时完成特殊的树枝组合，您就能获得各种奖励。完成组合并不难：按照屏幕右侧图片所示的方式连接树枝即可。完成一个组合后，图片会消失，并出现新的组合图片让您用树枝去完成。</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LabelTGettingStartedWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">游戏开始时，系统会请您选择初始奖励和难度等级。
+
+初始奖励可以选择：锤子、双耳瓶和额外分数。选择其中一种后，您将获得更多魔法工具或额外分数。
+
+选好初始奖励后，请选择游戏难度。您可以选择以下游戏模式：
+
+不会失败——永远不会输，但不会获得分数
+简单——树枝移动较慢，可以获得一些分数
+普通——树枝以正常速度出现，您的每个操作都能获得分数
+困难——树枝出现速度很快，可以获得更高分数</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LabelTHowToPlayWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">游戏的基本规则如下：
+
+- 用鼠标左键点击您想使用的树枝。
+- 必要时点击鼠标右键旋转树枝。
+- 用鼠标左键点击场地，把树枝接到场地上的树枝上。
+- 让场地上的所有树枝彼此连接。
+- 将整组树枝连接到屏幕顶端。</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LabelTIntroductionWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">在这款游戏中，您将置身于一座美丽的梦幻花园，这里居住着各种仙子生物。花园里曾用细小的树枝装饰出美丽的图案。一天，可怕的飓风袭来，摧毁了它们，花园昔日最迷人的景致所剩无几。您的任务就是连接树枝，恢复原来的图案。
+
+树枝会从屏幕底部缓缓经过并逐渐堆积。起始树枝已经在场地上，您需要连接一根与它匹配的树枝，再继续把树枝彼此相连，直到抵达屏幕顶端。所有树枝都必须连接起来，否则永远无法到达顶端。如果有树枝留有未连接的接口，您就无法向上推进，因为场地上的所有元素必须彼此连通。同时也要留意传送带，一旦它堆满，您就输了。
+
+有些关卡的场地上会出现一个物体，您需要用树枝把它缠绕进图案中。还有一些飞行的物体，会妨碍您放置树枝，请等它们飞过。魔法工具会在游戏中助您一臂之力——您可以用双耳瓶剪除多余的元素或生成所需形状的树枝，用锤子砸碎屏幕下方的树枝，防止传送带堆满。</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LabelTMagicToolsWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">魔法工具能帮您通关。工具图标右上角的数字表示您还有多少个这种工具。某些奖励可以增加工具的使用次数。
+
+锤子。这个工具可以砸碎传送带上和场地上的树枝（初始树枝除外）。用锤子砸掉不符合图案的树枝，为新的树枝腾出空间。
+
+使用锤子：点击锤子图标将其选中。把锤子移到想要的树枝上，点击鼠标左键将其砸碎。您可以连续砸碎多根树枝。如果想放下锤子，点击鼠标右键即可。
+
+双耳瓶。您可能在两种情况下用到它：找不到所需形状的树枝时，以及需要剪除多余的元素时。
+
+使用双耳瓶：点击图标选中该工具。要生成缺少的树枝，请把双耳瓶移到场地上想要的位置，点击鼠标左键。要剪除多余的元素，请把双耳瓶移到想要的树枝上并点击。点击鼠标右键放下双耳瓶。</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LabelTOptionsWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">您可以调整以下游戏选项：
+
+语言——选择游戏语言
+关闭提示——如果不想看到提示，请勾选此项
+全屏——勾选此项以全屏模式游戏
+32 位色彩——勾选此项以显示真彩色
+音乐音量——调节音乐音量
+音效音量——调节音效音量</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LabelTPlayingFieldWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">游戏场地分为三部分。中央是恢复图案的区域。起始树枝已经给出，您需要连接另一根树枝，并一直延伸到顶端。
+
+屏幕下方是传送带，各种形状的树枝会逐渐出现在上面。当传送带没有空位时，游戏结束。您必须用这些树枝恢复原来的图案。
+
+右侧是信息面板和魔法工具。信息面板显示您的分数、当前关卡和“菜单”按钮。
+
+魔法工具双耳瓶和锤子能在游戏中帮上大忙。您可以用双耳瓶生成所需形状的树枝或剪除多余的元素，用锤子砸碎传送带上和场地上的树枝。工具下方是丢弃区，可以用来扔掉不需要的树枝。</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LabelTRegistrationWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">这是试用版本。您可以使用 14 天或运行 14 次（以先到者为准）。注册游戏后可解除所有限制，并开放全部关卡。详情请访问：
+
+www.puzzlelab.com
+
+注册用户可获得以下好处：
+
+- 数小时的精彩游戏
+- 访问激动人心的新关卡
+- 更多可爱的生物
+- 丰富多样的树枝组合
+- 作弊码：_AddHammers、_AddAmphoras、_ExplodeTwigs</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LabelTScoringPointsWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">场地上的每根树枝都会为您赢得分数。每根树枝的分数取决于它拥有的接口数量，也就是说，接口越多的树枝得分越高。此外，完成树枝组合和使用奖励树枝获得的一些奖励也会带来额外分数。
+
+游戏中您还会获得经验点数。经验点数的多少取决于您恢复图案所使用的树枝数量，以及完成的树枝组合数量（每个组合一点，如果完成了全部组合则再加两点）。所以，尽量使用接口较多的树枝并完成树枝组合，您就能提升自己的技能。</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LabelTShortcutsWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">空格键——拿起传送带上的第一根树枝。如果传送带是空的，则会生成一根新树枝。
+“1”、“2”……“9”——拿起传送带上对应编号的树枝。
+F3——拿起（放下）锤子。
+F4——拿起（放下）双耳瓶。
+Del——扔掉选中的树枝。
+Esc——打开菜单。
+
+作弊码
+
+注册用户可以使用以下作弊码：
+
+1. _AddHammers——依次按 F5 F7 F7 F8 F6。使用次数：5 次。获得五把额外的锤子。每关最多使用五次。
+2. _AddAmphoras——依次按 F5 F6 F8 F7 F8。使用次数：5 次。获得五个额外的双耳瓶。每关最多使用五次。
+3. _ExplodeTwigs——依次按 F5 F8 F7 F6 F7 F8。使用次数：5 次。炸掉传送带上的所有树枝。每关最多使用五次。</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LabelTSkillsAndExperienceWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">每关结束时，您都会获得一些经验点数。经验点数的多少取决于您上一关恢复图案所使用的树枝数量，以及完成的树枝组合数量（每个组合一点，如果完成了全部组合则再加两点）。
+
+您可以把经验点数分配到对话框左侧的五项技能上：
+
+时间控制——即使传送带已经堆满，也能让您在一段时间内不会失败。
+
+丢弃区加速器——让丢弃区工作得更快。
+
+好运——带来更多幸运树枝（带有奖励的树枝）。
+
+双耳瓶——生成所需形状的树枝并剪除多余的元素。
+
+锤子——砸碎传送带上和场地上多余的树枝。</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LabelWAbortLivelDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">确定要放弃本关吗？</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LabelWClearDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">确定要清空最高分记录吗？</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LabelWDeleteGameDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">确定要删除这个存档吗？</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LabelWExitToMainMenu</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">确定要返回主菜单吗？</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LabelWGameFinishedDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">恭喜！您已完全通关 Fiber Twig！</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LabelWGameOverDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">游戏结束！再试一次吧……</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LabelWHighScores</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">最高分排行榜</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LabelWQuitGameDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">确定要退出游戏并放弃已获得的所有分数吗？</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">LabelWReplaceGameDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">已存在同名存档，确定要覆盖它吗？</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RAboutPuzzleLabWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">关于 Puzzle Lab</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RAmphoraWStartDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">双耳瓶（+5）</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RArrangingTwigsWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">摆放树枝</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RBonusesWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">奖励</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">RCHSWLanguage</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">简体中文</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RCombinationsWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">组合</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">RDEUWLanguage</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">德语</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RENUWLanguage</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">英语</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">REasyWStartDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">简单</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">RFRAWLanguage</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">法语</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RGettingStartedWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">新手上路</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RHammerWStartDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">锤子（+5）</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RHardWStartDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">困难</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RHowToPlayWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">玩法说明</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RIntroductionWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">游戏介绍</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RKeyboardShortcutsWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">快捷键</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RMagicToolsWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">魔法工具</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RNoLoseWStartDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">不会失败</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RNoMusicWOptions</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">无音乐</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RNoSoundWOptions</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">无音效</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RNormalWStartDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">普通</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">ROptionsWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">选项</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">RPTBWLanguage</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">葡萄牙语</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RPlayingFieldWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">游戏区域</p>
+	</o>
+	<o c="TLabLabel">
+		<p n="Name">RRUSWLanguage</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">俄语</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RRegistrationWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">注册</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RScoreWStartDialog</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">分数（+200）</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RScoringPointsWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">得分规则</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RSkillsAndExperienceWHelp</p>
+		<p n="CharSet">CHINESE</p>
+		<p n="Caption">技能与经验</p>
+	</o>
+</LabInterface>

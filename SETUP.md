@@ -38,11 +38,14 @@ $G --headless --path remake -- --wintest         # win condition
 $G --headless --path remake -- --testsound       # all 16 WAVs load
 $G --headless --path remake -- --closetest       # placement / lock rule checks
 $G --headless --path remake -- --piecetest       # multi-cell piece bookkeeping
+$G --headless --path remake -- --langtest        # all six localizations (incl. Chinese)
 ```
 
 Debug flags for the screen flow (see `remake/README.md` for the full table):
 `--screen=WTitle|WStartDialog|WOptions|WLanguage|WHelp|WLoad|WSave|WHighScores|WMenu|WBetweenLevelMenu|WGame`,
-`--level=N`, `--complex` (generate multi-cell twigs only), `--shot=N`.
+`--level=N`, `--complex` (generate multi-cell twigs only), `--shot=N`,
+`--language=enu|deu|fra|ptb|rus|chs` (start in a language without writing
+`options.cfg`; `chs` is the added Simplified Chinese localization).
 `FT_DEBUG=1` prints the modal stack, the widget hit of every mouse press and
 every `RunMethod` the interface triggers.
 
