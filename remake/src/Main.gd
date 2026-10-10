@@ -2672,6 +2672,13 @@ func _language_test() -> void:
 		if caption.is_empty():
 			print("[langtest] FAIL: %s: empty caption" % code)
 			failures += 1
+		# The added Chinese entry must keep its native name when the active .lng
+		# does not declare it (this is what a switch back from Chinese used to
+		# break: the cloned sibling caption was shown instead).
+		var chs_caption := str(ui.prop("RCHSWLanguage", "Caption", ""))
+		if chs_caption != "简体中文":
+			print("[langtest] FAIL: %s: Chinese language entry shows %s" % [code, chs_caption])
+			failures += 1
 	print("[langtest] languages=%d failures=%d chs_caption=%s" % [OriginalUI.LANGS.size(), failures, chinese_caption])
 
 ## Smoke test for multi-cell fishkas: place a complex shape, check that it is

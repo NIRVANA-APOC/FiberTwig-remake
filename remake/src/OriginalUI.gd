@@ -210,6 +210,11 @@ func _ensure_language_widgets() -> void:
 	children[parent] = order
 	for i in langs.size():
 		var name: String = langs[i]
+		# The radio buttons are cloned from a sibling, so a language the active
+		# .lng does not declare (Chinese in all the others) would otherwise show
+		# the sibling's caption after a language switch; keep the fallback name.
+		if not (overrides.has(name) and overrides[name].has("Caption")):
+			nodes[name]["Caption"] = str(LANG_NAMES.get(LANGS[i], name))
 		nodes[name]["Left"] = 40
 		nodes[name]["Top"] = 32 + i * 30
 		nodes[name]["Width"] = 160
