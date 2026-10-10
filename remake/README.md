@@ -144,6 +144,7 @@ loaded directly from the extracted files, so no import step is required.
 | `--autotest[=N]` | greedy solver, prints the outcome and quits |
 | `--wintest`, `--testsound` | win condition / WAV loading checks |
 | `--langtest` | all six localizations, Chinese captions and CJK wrapping |
+| `--helptest` | every help topic switches the visible page |
 | `--closetest` | placement/lock rule checks (the tutorial session + rings) |
 | `--piecetest` | multi-cell piece checks (whole artwork, whole-piece removal) |
 | `--filltest[=N]` | fills level N cell by cell and checks the completion rule |
@@ -211,6 +212,9 @@ godot --headless --path remake -- --testsound
 
 # verifies the six localizations (Chinese captions and CJK line breaking)
 godot --headless --path remake -- --langtest
+
+# verifies that every help topic switches the visible page
+godot --headless --path remake -- --helptest
 ```
 
 The self test is a smoke test, not a proof of solvability: it reports how many

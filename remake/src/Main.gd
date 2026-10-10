@@ -221,6 +221,10 @@ func _ready() -> void:
 		_language_test()
 		get_tree().quit()
 		return
+	if "--helptest" in args:
+		_help_test()
+		get_tree().quit()
+		return
 	for a in args:
 		if a == "--filltest" or a.begins_with("--filltest="):
 			var flevel := 0
@@ -428,6 +432,12 @@ func _exec_actions(widget: String, phase: String) -> void:
 			"SetProp":
 				if parts.size() >= 4:
 					ui.props[parts[1]] = (parts[3] == "True")
+					# The help pages are TLabTabForm pages toggled by
+					# `SetProp T<page>WHelp Visible True`; the original hides the
+					# other pages through the radio group, the remake keeps the
+					# active page in tabs.
+					if parts[3] == "True" and str(parts[1]).ends_with("WHelp"):
+						ui.tabs["WHelp"] = parts[1]
 			"RunMethod":
 				_method(parts[1])
 
@@ -2680,6 +2690,40 @@ func _language_test() -> void:
 			print("[langtest] FAIL: %s: Chinese language entry shows %s" % [code, chs_caption])
 			failures += 1
 	print("[langtest] languages=%d failures=%d chs_caption=%s" % [OriginalUI.LANGS.size(), failures, chinese_caption])
+
+## Help screen smoke test: every right-hand topic must switch the visible page.
+## The .li expresses the switch as `SetProp T<page>WHelp Visible True` on the
+## radio's OnMouseUp, and the renderer shows the page named in ui.tabs.
+func _help_test() -> void:
+	var failures := 0
+	var pages := 0
+	for n in ui.nodes.values():
+		var name := str(n.Name)
+		if n.Class != "TLabRadioButton" or not name.ends_with("WHelp"):
+			continue
+		var expected := ""
+		for a in ui.actions(name, "up"):
+			var parts: PackedStringArray = str(a).split(" ", false)
+			if parts.size() >= 4 and parts[0] == "SetProp" and parts[3] == "True":
+				expected = parts[1]
+		if expected == "":
+			print("[helptest] FAIL: %s has no page action" % name)
+			failures += 1
+			continue
+		pages += 1
+		ui.select_radio(name)
+		_exec_actions(name, "up")
+		if str(ui.tabs.get("WHelp", "")) != expected:
+			print("[helptest] FAIL: %s selected but tab is %s" % [expected, ui.tabs.get("WHelp", "")])
+			failures += 1
+		var visible := 0
+		for m in ui.nodes.values():
+			if m.Class == "TLabTabForm" and str(m.Name).ends_with("WHelp") and ui._is_tab_visible(str(m.Name)):
+				visible += 1
+		if visible != 1:
+			print("[helptest] FAIL: %s: %d help pages visible" % [expected, visible])
+			failures += 1
+	print("[helptest] pages=%d failures=%d" % [pages, failures])
 
 ## Smoke test for multi-cell fishkas: place a complex shape, check that it is
 ## kept as one piece on the board, and that hammering one of its cells removes

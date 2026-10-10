@@ -39,6 +39,7 @@ $G --headless --path remake -- --testsound       # all 16 WAVs load
 $G --headless --path remake -- --closetest       # placement / lock rule checks
 $G --headless --path remake -- --piecetest       # multi-cell piece bookkeeping
 $G --headless --path remake -- --langtest        # all six localizations (incl. Chinese)
+$G --headless --path remake -- --helptest       # every help topic switches the page
 ```
 
 Debug flags for the screen flow (see `remake/README.md` for the full table):

@@ -87,6 +87,8 @@ echo [test] --testsound
 "%GODOT_CONSOLE%" --headless --path remake -- --testsound 2>&1 | findstr /i /c:"ERROR" /c:"[sound]" | findstr /v /c:"-> ok"
 echo [test] --langtest
 "%GODOT_CONSOLE%" --headless --path remake -- --langtest 2>&1 | findstr /i /c:"[langtest]" /c:"SCRIPT ERROR"
+echo [test] --helptest
+"%GODOT_CONSOLE%" --headless --path remake -- --helptest 2>&1 | findstr /i /c:"[helptest]" /c:"SCRIPT ERROR"
 echo [test] --autotest=0
 "%GODOT_CONSOLE%" --headless --path remake -- --autotest=0 2>&1 | findstr /i /c:"[autotest]" /c:"SCRIPT ERROR"
 echo [test] --closetest

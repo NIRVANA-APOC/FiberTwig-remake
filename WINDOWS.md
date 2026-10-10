@@ -26,7 +26,7 @@ start.cmd edit                    :: 用 Godot 编辑器打开项目
 start.cmd level 6                 :: 直接运行第 6 关 (0..17)
 start.cmd screen WLoad            :: 指定初始界面（WTitle/WLoad/WOptions/...）
 start.cmd test                    :: 快速 headless 自检（wintest / testsound / langtest
-                                  ::   / autotest=0 / closetest / piecetest / filltest=0）
+                                  ::   / helptest / autotest=0 / closetest / piecetest / filltest=0）
 start.cmd test all                :: headless 自动跑 0..17 关，检查 SCRIPT ERROR
 start.cmd --headless -- --autotest=0 --complex
                                   :: 其余参数原样转交给 Godot
@@ -72,6 +72,7 @@ UTF-8）。原版位图字体没有汉字，因此中文用随附的 Noto Sans S
 * `--wintest`：`WFinishLevelDialog`，1 个连通分量
 * `--testsound`：16/16 WAV 加载成功
 * `--langtest`：6 种语言全部加载，中文标题/换行/CJK 字体均通过（failures=0）
+* `--helptest`：14 个帮助主题逐一切换页面全部通过（failures=0）
 * `--closetest`：放置/锁定规则符合预期（闭合锁定环被拒绝）
 * `--piecetest`：多格枝整块绘制、整块移除、辉光衰减全部通过
 * `--filltest=0`：逐格填充后 `complete=true`，1 个连通分量，0 个开放关节
