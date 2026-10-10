@@ -92,7 +92,9 @@ from the shipped screenshots, see §10 of the report):
   board (the original stores one twig record per piece), and every covered
   cell scores and clears its ghost; hammering/clipping any of its cells
   removes the whole piece (`--piecetest` covers this),
-* mystery twigs (`HidenFishkaPicture`, `prob` uses a decimal comma, i.e. 0.1),
+* mystery twigs (`HidenFishkaPicture`, `prob` uses a decimal comma, i.e. 0.1)
+  are drawn as their picture, bottom-aligned on the belt and spaced by the
+  picture size (`FUN_0048c82c`/`FUN_0048bf78`),
   bonus twigs (`FishkaWithBonus`, 0.05, boosted by the Good Luck skill) —
   lucky twigs on the belt get the original golden flash: an additive yellow
   wash with amount `Sin(ms/300 + phase)*64 + 150` (period ≈1.9 s, random
@@ -139,6 +141,7 @@ loaded directly from the extracted files, so no import step is required.
 | `--filltest[=N]` | fills level N cell by cell and checks the completion rule |
 | `--beltspeed=N` | conveyor speed in px/s (default 50 = 2× the original) |
 | `--allbonus` | every generated twig is lucky (flash-test) |
+| `--allquest` | every generated twig is mystery (icon-test) |
 | `--capture=path,delay[,interval,count]` | save viewport PNGs (frame, then numbered) and quit |
 
 | input | action |

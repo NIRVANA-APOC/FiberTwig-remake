@@ -132,6 +132,7 @@ var no_lose_t := 0.0
 var speed_up_t := 0.0
 var all_bonus := false
 var debug_all_bonus := false       # --allbonus: every generated twig is lucky
+var debug_all_quest := false       # --allquest: every generated twig is mystery
 var sequence: Array = []
 var sequence_index := 0
 var quest_pic := ""
@@ -229,6 +230,8 @@ func _ready() -> void:
 			belt_speed = maxf(5.0, float(a.split("=")[1]))
 		elif a == "--allbonus":
 			debug_all_bonus = true
+		elif a == "--allquest":
+			debug_all_quest = true
 	for a in args:
 		if a == "--wintest":
 			wintest = true
@@ -1336,14 +1339,17 @@ func _spawn_twig(force := false) -> bool:
 	var is_bonus := false
 	if quest_pic != "" and quest_prob > 0.0 and randf() < quest_prob:
 		is_quest = true
+	if debug_all_quest and quest_pic != "":
+		is_quest = true
 	if all_bonus or debug_all_bonus:
 		is_bonus = true
 	elif bonus_prob > 0.0 and randf() < bonus_prob * (1.0 + float(skills.luck) / 100.0):
 		is_bonus = true
-	# new twigs enter at x=799, bottom aligned with the belt
-	var h := _belt_height(shape)
-	belt.append({"shape": shape, "type": int(shape.masks[0]), "x": BELT_ENTRY, "y": BELT_BOTTOM - h,
-		"span": _belt_span(shape), "h": h, "bonus": is_bonus, "quest": is_quest,
+	# new twigs enter at x=799, bottom aligned with the belt; mystery twigs are
+	# as big as their picture, not the hidden shape (original FUN_0048c82c)
+	var sz := _draw_size(shape, is_quest)
+	belt.append({"shape": shape, "type": int(shape.masks[0]), "x": BELT_ENTRY, "y": BELT_BOTTOM - sz.y,
+		"span": sz.x, "h": sz.y, "bonus": is_bonus, "quest": is_quest,
 		"phase": randf() * TAU})
 	return true
 
@@ -1354,6 +1360,16 @@ func _belt_span(shape: Dictionary) -> float:
 ## Belt twigs are bottom aligned: y = 585 - image height (original 0x249 - h).
 func _belt_height(shape: Dictionary) -> float:
 	return float(shape.get("box", Vector2i.ONE).y) * BELT_SLOT
+
+## Belt twigs are sized by the texture they are drawn with: mystery twigs show
+## the level's HidenFishkaPicture instead of the shape (original FUN_0048c82c
+## sets y = 585 - surface height and spaces them by the surface width).
+func _draw_size(shape: Dictionary, is_quest: bool) -> Vector2:
+	if is_quest:
+		var icon := AssetLib.texture("res://assets/squares/%s" % quest_pic)
+		if icon:
+			return Vector2(icon.get_width(), icon.get_height())
+	return Vector2(_belt_span(shape), _belt_height(shape))
 
 func _next_twig_shape() -> Dictionary:
 	if debug_complex:
@@ -2113,8 +2129,10 @@ func _demo_step(delta: float) -> void:
 			"NewFishkaInSteck":
 				var t := int(a.get("fishtype", "1"))
 				var demo_shape := LevelLoader.single_shape(t if t >= 1 and t <= 15 else 1)
-				belt.append({"type": t, "shape": demo_shape, "x": BELT_ENTRY, "y": BELT_BOTTOM - BELT_SLOT,
-					"span": BELT_SLOT, "h": BELT_SLOT, "bonus": a.get("bonus", "false") == "true", "quest": a.get("quest", "false") == "true",
+				var demo_quest: bool = a.get("quest", "false") == "true"
+				var dsz := _draw_size(demo_shape, demo_quest)
+				belt.append({"type": t, "shape": demo_shape, "x": BELT_ENTRY, "y": BELT_BOTTOM - dsz.y,
+					"span": dsz.x, "h": dsz.y, "bonus": a.get("bonus", "false") == "true", "quest": demo_quest,
 					"phase": randf() * TAU})
 			"MoveSteck":
 				var incr := float(a.get("incr", "1"))
@@ -2222,7 +2240,10 @@ func _update_belt(delta: float) -> void:
 	for i in range(1, belt.size()):
 		var prev: Dictionary = belt[i - 1]
 		var t: Dictionary = belt[i]
-		if float(t.x) > 5.0 and float(prev.x) + _belt_span(prev.shape) + BELT_GAP < float(t.x):
+		# the original spaces twigs by the width of the surface they are drawn
+		# with, i.e. the mystery picture for mystery twigs (FUN_0048bf78)
+		var prev_span := float(prev.get("span", _belt_span(prev.shape)))
+		if float(t.x) > 5.0 and float(prev.x) + prev_span + BELT_GAP < float(t.x):
 			t.x = maxf(5.0, float(t.x) - step)
 			belt_moved = true
 
