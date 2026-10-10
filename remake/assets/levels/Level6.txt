@@ -1,0 +1,401 @@
+<Level name="Level3" fragmentation="Squares_" CurrentY="9760" />
+<HeroPicture name="Doggy.png">
+<FragPicture name="FragPic4.png"/>
+<Generator period="3000"/>
+<PlayMusic name="Natureopt.mo3"/>
+<HidenFishkaPicture name="doggyicon.png" prob="0,1"/>
+<FishkaWithBonus prob="0,05"/>
+
+<Fishka frag="3727" type="5" link="1"/>
+
+//Fone
+
+<Picture name="Fone" x="0" y="5600" z="900">
+    <Image name="HillSkyFone3.jpg"/>
+</Picture>
+
+
+//Decor
+
+<Picture name="Doggy1" x="0" y="8604" z="0">
+    <Image name="Doggy.png"/>
+</Picture>
+
+<Picture name="Doggy2" x="404" y="9521" z="0">
+    <Image name="Doggy_1.png"/>
+</Picture>
+
+<Picture name="Doggy3" x="404" y="6165" z="0">
+    <Image name="Doggy_1.png"/>
+</Picture>
+
+<Picture name="f1" x="27" y="9805" z="0">
+    <Image name="flower4.png"/>
+</Picture>
+
+<Picture name="f2" x="498" y="8805" z="0">
+    <Image name="flower4_1.png"/>
+</Picture>
+
+<Picture name="f3" x="505" y="8678" z="0">
+    <Image name="flower4_2.png"/>
+</Picture>
+
+<Picture name="f4" x="498" y="8550" z="0">
+    <Image name="flower4_3.png"/>
+</Picture>
+
+<Picture name="f5" x="414" y="7490" z="0">
+    <Image name="flower5.png"/>
+</Picture>
+
+<Picture name="f6" x="95" y="7009" z="0">
+    <Image name="flower5.png"/>
+</Picture>
+
+<Picture name="f7" x="415" y="6890" z="0">
+    <Image name="flower5.png"/>
+</Picture>
+
+<Picture name="f8" x="27" y="6409" z="0">
+    <Image name="flower4.png"/>
+</Picture>
+
+<Picture name="f9" x="500" y="5934" z="0">
+    <Image name="flower4_2.png"/>
+</Picture>
+
+//Elements
+
+
+
+<FishkaProb>
+  <FProb name="1" prob="5"> 
+  <FProb name="12" prob="13"> 
+  <FProb name="13" prob="8"> 
+  <FProb name="123" prob="10">  
+  <FProb name="1234" prob="3"> 
+  <FProb name="double2" prob="2"> 
+  <FProb name="double2a" prob="2"> 
+  <FProb name="tripl1" prob="1"> 
+  <FProb name="adouble1" prob="1"> 
+  <FProb name="skoba1" prob="2"> 
+</FishkaProb>
+
+<FishkaScore>0 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10</FishkaScore>
+
+<FishkaBonusProb> 10 2 10 30 2 2 2 </FishkaBonusProb>
+
+<FishkaCombination>
+	<CombSequence> 15 11 21 30 27 26 16 38 35 </CombSequence>
+ 	<OneCombBonusProb> 10 0 10 0 0 0 0 </OneCombBonusProb>
+ 	<AllCombBonusProb> 10 0 10 0 0 0 0 </AllCombBonusProb>
+</FishkaCombination>
+
+<PictureMap x="0" y="5881" z="0" OneWidth="40" OneHeight="40">
+  <Images>brick9.png brick9_1.png brick7_1.png</Images>
+  <map> 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 1 2 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 1 1 1 1 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 3 3 3 3 0 </map>
+  <map> 1 0 0 0 0 0 0 0 0 0 0 0 0 3 0 </map>
+  <map> 1 0 0 0 0 0 0 0 0 0 0 0 0 3 0 </map>
+  <map> 1 0 0 0 0 0 0 0 0 0 0 0 0 1 1 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 3 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 3 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 3 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 2 3 3 0 0 0 3 3 2 0 0 0 </map>
+  <map> 0 0 0 1 1 0 0 3 3 3 1 1 0 0 0 </map>
+  <map> 0 0 1 1 0 0 3 0 0 0 0 1 1 0 0 </map>
+  <map> 0 1 1 0 0 3 0 0 0 0 0 0 1 1 0 </map>
+  <map> 2 1 0 0 3 0 0 0 3 0 0 0 0 1 2 </map>
+  <map> 1 0 0 3 0 0 0 0 3 0 0 0 0 0 1 </map>
+  <map> 1 0 3 0 0 0 0 0 3 0 0 0 0 0 1 </map>
+  <map> 1 0 0 0 0 3 3 3 3 3 3 3 0 0 1 </map>
+  <map> 1 0 0 3 3 3 0 0 0 0 0 3 0 0 1 </map>
+  <map> 2 0 0 3 0 0 0 0 0 0 0 3 0 0 2 </map>
+  <map> 1 3 3 3 0 0 0 3 3 0 0 0 0 0 1 </map>
+  <map> 1 0 0 0 0 0 0 0 3 3 0 0 0 0 1 </map>
+  <map> 1 0 0 0 0 0 0 0 0 3 0 0 0 0 1 </map>
+  <map> 1 3 3 3 3 3 0 0 0 3 0 0 0 0 1 </map>
+  <map> 2 0 0 0 0 3 3 0 0 3 3 3 0 0 2 </map>
+  <map> 1 0 0 0 0 0 0 0 0 3 0 0 0 0 1 </map>
+  <map> 1 0 0 0 0 0 0 0 0 3 0 0 0 0 1 </map>
+  <map> 1 0 0 0 3 3 3 3 3 3 3 3 0 0 1 </map>
+  <map> 1 0 0 0 0 0 0 3 0 0 0 0 0 0 1 </map>
+  <map> 2 1 0 0 0 0 0 3 0 0 0 0 0 1 2 </map>
+  <map> 0 1 1 0 0 0 0 3 0 0 0 0 1 1 0 </map>
+  <map> 0 0 1 1 0 0 0 3 0 0 0 1 1 0 0 </map>
+  <map> 0 0 0 2 1 0 0 1 0 0 1 2 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 3 3 3 3 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 1 1 2 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 2 0 0 1 </map>
+  <map> 1 1 0 0 0 0 0 0 0 0 0 2 0 0 1 </map>
+  <map> 0 0 0 0 0 0 0 0 1 0 0 2 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 1 0 0 2 0 0 0 </map>
+  <map> 0 0 0 0 0 2 0 0 1 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 2 0 0 1 0 0 0 0 0 0 </map>
+  <map> 0 0 1 0 0 2 0 0 0 0 0 0 0 0 0 </map>
+  <map> 3 3 1 0 0 2 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 3 3 3 3 0 </map>
+  <map> 3 0 0 0 0 0 0 0 0 0 0 0 0 1 0 </map>
+  <map> 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 </map>
+  <map> 2 0 0 0 0 0 0 0 0 0 0 0 0 1 0 </map>
+  <map> 1 0 0 0 0 0 0 0 0 0 0 0 0 1 1 </map>
+  <map> 2 1 1 1 3 3 2 0 2 3 3 1 1 1 2 </map>
+  <map> 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 </map>
+  <map> 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 </map>
+  <map> 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 </map>
+  <map> 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 </map>
+</PictureMap>
+
+
+<Fishka frag="3710" type="3" link="1"/>
+<Fishka frag="3714" type="9" link="1"/>
+<Fishka frag="3684" type="13" link="1"/>
+<Fishka frag="3680" type="7" link="1"/>
+<Fishka frag="3650" type="7" link="1"/>
+<Fishka frag="3654" type="13" link="1"/>
+<Fishka frag="3664" type="10" link="1"/>
+<Fishka frag="3663" type="3" link="1"/>
+<Fishka frag="3648" type="5" link="1"/>
+<Fishka frag="3633" type="15" link="1"/>
+<Fishka frag="3624" type="12" link="1"/>
+<Fishka frag="3620" type="6" link="1"/>
+<Fishka frag="3531" type="7" link="1"/>
+<Fishka frag="3532" type="13" link="1"/>
+<Fishka frag="3558" type="7" link="1"/>
+<Fishka frag="3559" type="13" link="1"/>
+<Fishka frag="3573" type="5" link="1"/>
+<Fishka frag="3546" type="5" link="1"/>
+<Fishka frag="3490" type="9" link="1"/>
+<Fishka frag="3489" type="7" link="1"/>
+<Fishka frag="3504" type="1" link="1"/>
+<Fishka frag="3462" type="7" link="1"/>
+<Fishka frag="3477" type="1" link="1"/>
+<Fishka frag="3463" type="9" link="1"/>
+  <GhostFishka x="425" y="9060" type="10"/>
+  <GhostFishka x="385" y="9060" type="3"/>
+  <GhostFishka x="385" y="9020" type="12"/>
+  <GhostFishka x="345" y="9020" type="10"/>
+  <GhostFishka x="305" y="8980" type="12"/>
+  <GhostFishka x="265" y="8980" type="10"/>
+  <GhostFishka x="225" y="8980" type="3"/>
+  <GhostFishka x="225" y="8940" type="5"/>
+  <GhostFishka x="145" y="9060" type="3"/>
+  <GhostFishka x="145" y="9020" type="5"/>
+  <GhostFishka x="185" y="9060" type="10"/>
+  <GhostFishka x="225" y="9060" type="12"/>
+  <GhostFishka x="225" y="9100" type="3"/>
+  <GhostFishka x="305" y="9100" type="12"/>
+  <GhostFishka x="305" y="9140" type="3"/>
+  <GhostFishka x="345" y="9140" type="10"/>
+  <GhostFishka x="305" y="9020" type="7"/>
+  <GhostFishka x="305" y="9060" type="9"/>
+  <GhostFishka x="265" y="9060" type="6"/>
+  <GhostFishka x="265" y="9100" type="11"/>
+<Fishka frag="3452" type="7" link="1"/>
+<Fishka frag="3437" type="12" link="1"/>
+<Fishka frag="3467" type="9" link="1"/>
+<Fishka frag="3436" type="11" link="1"/>
+<Fishka frag="3435" type="2" link="1"/>
+<Fishka frag="3466" type="14" link="1"/>
+<Fishka frag="3465" type="2" link="1"/>
+<Fishka frag="3277" type="14" link="1"/>
+<Fishka frag="3278" type="15" link="1"/>
+<Fishka frag="3263" type="14" link="1"/>
+<Fishka frag="3279" type="14" link="1"/>
+<Fishka frag="3280" type="12" link="1"/>
+<Fishka frag="3262" type="3" link="1"/>
+<Fishka frag="3295" type="5" link="1"/>
+<Fishka frag="3310" type="5" link="1"/>
+<Fishka frag="3294" type="5" link="1"/>
+<Fishka frag="3276" type="3" link="1"/>
+<Fishka frag="3132" type="9" link="1"/>
+<Fishka frag="3131" type="14" link="1"/>
+<Fishka frag="3117" type="7" link="1"/>
+<Fishka frag="3174" type="7" link="1"/>
+<Fishka frag="3175" type="9" link="1"/>
+<Fishka frag="3155" type="15" link="1"/>
+<Fishka frag="3154" type="10" link="1"/>
+<Fishka frag="3153" type="3" link="1"/>
+<Fishka frag="3170" type="5" link="1"/>
+<Fishka frag="3077" type="7" link="1"/>
+<Fishka frag="3091" type="6" link="1"/>
+<Fishka frag="3092" type="15" link="1"/>
+<Fishka frag="3052" type="12" link="1"/>
+<Fishka frag="3051" type="3" link="1"/>
+<Fishka frag="3067" type="7" link="1"/>
+<Fishka frag="3031" type="2" link="1"/>
+<Fishka frag="3032" type="11" link="1"/>
+<Fishka frag="3056" type="3" link="1"/>
+<Fishka frag="3057" type="12" link="1"/>
+<Fishka frag="2992" type="10" link="1"/>
+<Fishka frag="2991" type="6" link="1"/>
+<Fishka frag="2993" type="10" link="1"/>
+<Fishka frag="2994" type="15" link="1"/>
+<Fishka frag="2982" type="7" link="1"/>
+<Fishka frag="2967" type="7" link="1"/>
+<Fishka frag="2952" type="12" link="1"/>
+<Fishka frag="2951" type="11" link="1"/>
+<Fishka frag="2903" type="10" link="1"/>
+<Fishka frag="2945" type="10" link="1"/>
+<Fishka frag="2944" type="15" link="1"/>
+<Fishka frag="2927" type="9" link="1"/>
+<Fishka frag="2912" type="6" link="1"/>
+<Fishka frag="2913" type="9" link="1"/>
+<Fishka frag="2898" type="6" link="1"/>
+<Fishka frag="2899" type="9" link="1"/>
+<Fishka frag="2884" type="6" link="1"/>
+<Fishka frag="2926" type="6" link="1"/>
+<Fishka frag="2885" type="9" link="1"/>
+<Fishka frag="2870" type="6" link="1"/>
+<Fishka frag="2871" type="9" link="1"/>
+<Fishka frag="2825" type="13" link="1"/>
+<Fishka frag="2824" type="3" link="1"/>
+<Fishka frag="2810" type="7" link="1"/>
+<Fishka frag="2811" type="9" link="1"/>
+<Fishka frag="2795" type="5" link="1"/>
+<Fishka frag="2840" type="3" link="1"/>
+<Fishka frag="2702" type="3" link="1"/>
+<Fishka frag="2704" type="9" link="1"/>
+<Fishka frag="2703" type="14" link="1"/>
+<Fishka frag="2718" type="5" link="1"/>
+<Fishka frag="2687" type="4" link="1"/>
+<Fishka frag="2689" type="4" link="1"/>
+<Fishka frag="2665" type="7" link="1"/>
+<Fishka frag="2650" type="4" link="1"/>
+<Fishka frag="2666" type="10" link="1"/>
+<Fishka frag="2652" type="4" link="1"/>
+<Fishka frag="2667" type="9" link="1"/>
+<Fishka frag="2680" type="5" link="1"/>
+<Fishka frag="2752" type="15" link="1"/>
+<Fishka frag="2737" type="15" link="1"/>
+<Fishka frag="2753" type="15" link="1"/>
+<Fishka frag="2738" type="15" link="1"/>
+<Fishka frag="2662" type="5" link="1"/>
+<Fishka frag="2647" type="5" link="1"/>
+<Fishka frag="2632" type="5" link="1"/>
+  <GhostFishka x="225" y="6700" type="7"/>
+  <GhostFishka x="265" y="6700" type="9"/>
+  <GhostFishka x="265" y="6660" type="6"/>
+  <GhostFishka x="305" y="6660" type="8"/>
+  <GhostFishka x="145" y="6700" type="13"/>
+  <GhostFishka x="105" y="6700" type="3"/>
+  <GhostFishka x="105" y="6660" type="12"/>
+  <GhostFishka x="65" y="6660" type="2"/>
+  <GhostFishka x="145" y="6740" type="15"/>
+  <GhostFishka x="225" y="6740" type="15"/>
+  <GhostFishka x="185" y="6740" type="10"/>
+  <GhostFishka x="185" y="6780" type="14"/>
+  <GhostFishka x="105" y="6740" type="10"/>
+  <GhostFishka x="265" y="6740" type="10"/>
+  <GhostFishka x="145" y="6780" type="7"/>
+  <GhostFishka x="225" y="6780" type="13"/>
+  <GhostFishka x="145" y="6820" type="9"/>
+  <GhostFishka x="225" y="6820" type="3"/>
+  <GhostFishka x="185" y="6820" type="5"/>
+  <GhostFishka x="185" y="6860" type="11"/>
+  <GhostFishka x="145" y="6660" type="6"/>
+  <GhostFishka x="225" y="6660" type="12"/>
+  <GhostFishka x="185" y="6660" type="11"/>
+<Fishka frag="2454" type="7" link="1"/>
+<Fishka frag="2455" type="14" link="1"/>
+<Fishka frag="2456" type="9" link="1"/>
+<Fishka frag="2439" type="12" link="1"/>
+<Fishka frag="2406" type="3" link="1"/>
+<Fishka frag="2391" type="12" link="1"/>
+<Fishka frag="2390" type="3" link="1"/>
+<Fishka frag="2329" type="12" link="1"/>
+<Fishka frag="2328" type="3" link="1"/>
+<Fishka frag="2313" type="12" link="1"/>
+<Fishka frag="2268" type="4" link="1"/>
+<Fishka frag="2269" type="4" link="1"/>
+<Fishka frag="2270" type="2" link="1"/>
+<Fishka frag="2255" type="2" link="1"/>
+<Fishka frag="3742" type="1" link="1"/>
+<Fishka frag="2243" type="15" link="1"/>
+<Fishka frag="2228" type="5" link="1"/>
+<Fishka frag="2213" type="13" link="1"/>
+<Fishka frag="2197" type="4" link="1"/>
+<Fishka frag="2198" type="7" link="1"/>
+<Fishka frag="2184" type="4" link="1"/>
+<Fishka frag="2183" type="5" link="1"/>
+<Fishka frag="2168" type="13" link="1"/>
+<Fishka frag="2167" type="3" link="1"/>
+<Fishka frag="2153" type="7" link="1"/>
+<Fishka frag="2154" type="9" link="1"/>
+<Fishka frag="2138" type="5" link="1"/>
+<Fishka frag="2123" type="5" link="1"/>
+<Fishka frag="2108" type="4" link="1"/>
+<Fishka frag="2152" type="4" link="1"/>
+<Fishka frag="2139" type="4" link="1"/>
+<Fishka frag="2212" type="11" link="1"/>
+<Fishka frag="2211" type="6" link="1"/>
+<Fishka frag="2226" type="9" link="1"/>
+<Fishka frag="2225" type="6" link="1"/>
+<Fishka frag="2240" type="9" link="1"/>
+<Fishka frag="2239" type="2" link="1"/>
+<Fishka frag="2199" type="11" link="1"/>
+<Fishka frag="2200" type="11" link="1"/>
+<Fishka frag="2185" type="4" link="1"/>
+<Fishka frag="2201" type="9" link="1"/>
+<Fishka frag="2186" type="6" link="1"/>
+<Fishka frag="2187" type="12" link="1"/>
+<Fishka frag="2202" type="3" link="1"/>
+<Fishka frag="2203" type="12" link="1"/>
+<Fishka frag="2218" type="3" link="1"/>
+<Fishka frag="2219" type="8" link="1"/>

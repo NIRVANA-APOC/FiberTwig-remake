@@ -1,0 +1,722 @@
+<LabInterface ver="1.0" name="fra" mode="Modification">
+<o c="TLabLabel">
+<p n="Name">LTrialThanksLabel</p>
+		<p n="CharSet">EASTEUROPE</p>
+<p n="Caption">?????????????</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialHopeLabel</p>
+		<p n="CharSet">EASTEUROPE</p>
+<p n="Caption">Nous esp?rons que vous aimerez Fiber Twig!</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialConditionLabel</p>
+		<p n="CharSet">EASTEUROPE</p>
+<p n="Caption">Fiber Twig est propos? en tant que shareware. Vous pouvez l’utiliser pendant 14 jours ou jouer 14 fois. 
+Une fois enregistr? vous pourrez jouer sans aucune restriction. Pour recevoir plus d’info vous pouvez visiter:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialOrderLabel</p>
+		<p n="CharSet">EASTEUROPE</p>
+<p n="Caption">??????</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialTimesLabel</p>
+		<p n="CharSet">EASTEUROPE</p>
+<p n="Caption">?/?</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialDaysLabel</p>
+		<p n="CharSet">EASTEUROPE</p>
+<p n="Caption">?</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialFiveMinutesLabel</p>
+		<p n="CharSet">EASTEUROPE</p>
+<p n="Caption">?????????</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialPlayButton</p>
+		<p n="CharSet">EASTEUROPE</p>
+<p n="Caption">????/????</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialQuitButton</p>
+		<p n="CharSet">EASTEUROPE</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialEnterKeyButton</p>
+		<p n="CharSet">EASTEUROPE</p>
+<p n="Caption">Rentrer la cl?</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialRegistrationButton</p>
+		<p n="CharSet">EASTEUROPE</p>
+<p n="Caption">??/??/??</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialRegErrorLabel</p>
+		<p n="CharSet">EASTEUROPE</p>
+<p n="Caption">??????</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BNewWTitle</p>
+<p n="Caption">????</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BLoadWTitle</p>
+<p n="Caption">????</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BScoresWTitle</p>
+<p n="Caption">??????????</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BQuitWTitle</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BMenuWGame</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LSelectBonusWStartDialog</p>
+<p n="Caption">S?lectionnez un bonus initial</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RHammerWStartDialog</p>
+<p n="Caption">?????+5?</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RAmphoraWStartDialog</p>
+<p n="Caption">????????????</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RScoreWStartDialog</p>
+<p n="Caption">???+200??</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LSelectDifficultyWStartDialog</p>
+<p n="Caption">S?lectionnez le niveau de complexit?</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RNoLoseWStartDialog</p>
+<p n="Caption">???</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RNormalWStartDialog</p>
+<p n="Caption">???????????????????????</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RHardWStartDialog</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BBackWStartDialog</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BPlayWStartDialog</p>
+<p n="Caption">????/????</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BResumeWMenu</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BAbortWMenu</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BHelpWMenu</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOptionsWTitle</p>
+<p n="Caption">????????????????</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BHelpWTitle</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BLoadWMenu</p>
+<p n="Caption">????</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOptionsWMenu</p>
+<p n="Caption">????????????????</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BQuitWMenu</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWAbortLivelDialog</p>
+<p n="Caption">?tes-vous vraiment s?r de vouloir interrompre le jeu?</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWAbortLivelDialog</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWAbortLivelDialog</p>
+<p n="Caption">????</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevelWBetweenLevelMenu</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LScoreWBetweenLevelMenu</p>
+<p n="Caption">???????????????????????</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BLoadWBetweenLevelMenu</p>
+<p n="Caption">????</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BSaveWBetweenLevelMenu</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOptionsWBetweenLevelMenu</p>
+<p n="Caption">????????????????</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BHelpWBetweenLevelMenu</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BMainMenuWBetweenLevelMenu</p>
+<p n="Caption">???</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BNextLevelWBetweenLevelMenu</p>
+<p n="Caption">????</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLoadWLoad</p>
+<p n="Caption">????</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LNameWLoad</p>
+<p n="Caption">????:</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BLoadWLoad</p>
+<p n="Caption">????</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BDeleteWLoad</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWLoad</p>
+<p n="Caption">????</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWDeleteGameDialog</p>
+<p n="Caption">?tes-vous vraiment s?r de vouloir supprimer ce jeu sauvegard??</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWDeleteGameDialog</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWDeleteGameDialog</p>
+<p n="Caption">????</p>
+</o>
+<o c="TLabForm">
+<p n="ParentName">LabScreen</p>
+<p n="Name">WQuitGameDialog</p>
+<p n="Tag">68</p>
+<p n="Picture">W410x210.png</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWQuitGameDialog</p>
+<p n="Caption">?tes-vous vraiment s?r de vouloir quitter et perdre tous les points accumul?s?</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWQuitGameDialog</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWQuitGameDialog</p>
+<p n="Caption">????</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWReplaceGameDialog</p>
+<p n="Caption">Le m?me nom de jeu existe d?j?. ?tes-vous vraiment s?r de le remplacer?</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWReplaceGameDialog</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWReplaceGameDialog</p>
+<p n="Caption">????</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LSaveWSave</p>
+<p n="Caption">??????</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LNameWSave</p>
+<p n="Caption">????:</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BSaveWSave</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BDeleteWSave</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWSave</p>
+<p n="Caption">????</p>
+</o>
+<o c="TLabRadioButton">
+		<p n="Name">RENUWLanguage</p>
+		<p n="CharSet">EASTEUROPE</p>
+		<p n="Caption">??</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RDEUWLanguage</p>
+		<p n="CharSet">EASTEUROPE</p>
+		<p n="Caption">??</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RRUSWLanguage</p>
+		<p n="CharSet">EASTEUROPE</p>
+		<p n="Caption">??</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RFRAWLanguage</p>
+		<p n="CharSet">EASTEUROPE</p>
+		<p n="Caption">Fran?ais</p>
+	</o>
+<o c="TLabRadioButton">
+		<p n="Name">RPTBWLanguage</p>
+		<p n="CharSet">EASTEUROPE</p>
+		<p n="Caption">????</p>
+	</o>
+<o c="TLabLabel">
+<p n="Name">LabelWClearDialog</p>
+<p n="Caption">?tes-vous vraiment s?r de vouloir vider toute la liste de scores?</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWClearDialog</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWClearDialog</p>
+<p n="Caption">????</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LMusicWOptions</p>
+<p n="Caption">????</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LSoundWOptions</p>
+<p n="Caption">????</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RNoMusicWOptions</p>
+<p n="Caption">???????</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RNoSoundWOptions</p>
+<p n="Caption">????</p>
+</o>
+<o c="TLabCheckBox">
+<p n="Name">CheckBoxHintsWOptions</p>
+<p n="Caption">??????</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BLanguageWOptions</p>
+<p n="Caption">&lt;string&gt;</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWOptions</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWOptions</p>
+<p n="Caption">????</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWFinishLevelDialog</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWGameOverDialog</p>
+<p n="Caption">Le jeu est stopp?! Peut-?tre, la prochaine fois...</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWGameOverDialog</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWGameFinishedDialog</p>
+<p n="Caption">F?licitations! Le jeu est r?ussi!</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWGameFinishedDialog</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LYourNameWGameFinishedDialog</p>
+<p n="Caption">???????:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWHighScores</p>
+<p n="Caption">??????</p>
+</o>
+<o c="TLabGrid">
+<p n="Name">GridWHighScores</p>
+<p n="Cells">(R:1;C:1;Text:N;R:1;C:2;Text:Nom;R:1;C:3;Text:Score)</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWHighScores</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BClearWHighScores</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWLanguage</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabCheckBox">
+<p n="Name">CheckBoxColorWOptions</p>
+<p n="Caption">32???</p>
+</o>
+<o c="TLabCheckBox">
+<p n="Name">CheckBoxFullScreenWOptions</p>
+<p n="Caption">Plein ?cran</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevelWGame</p>
+<p n="Caption">Niveau:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LScoreWGame</p>
+<p n="Caption">???????????????????????</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LDropSectionWGame</p>
+<p n="Caption">??????????</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLoadingWProgressBar</p>
+<p n="Caption">???...</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LNotEnabledWNotEnabled</p>
+<p n="Caption">Nous esperons que vous trouverez notre jeu interessant! Fiber Twig est propose en tant que shareware. Vous pouvez l’utiliser pendant 14 jours ou jouer 14 fois. Une fois enregistre vous pourrez jouer sans aucune restriction. Pour recevoir plus d’info vous pouvez visiter:
+</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWNotEnabled</p>
+<p n="Caption">????</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LExperienceWBetweenLevelMenu</p>
+<p n="Caption">Exp?rience:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevelCompleteWFinishLevelDialog</p>
+<p n="Caption">Le niveau est r?ussi!</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LYourScoreWGameFinishedDialog</p>
+<p n="Caption">????:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LYourHammerWGameFinishedDialog</p>
+<p n="Caption">??????:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LYourCapsWGameFinishedDialog</p>
+<p n="Caption">??????????:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTotalScoreWGameFinishedDialog</p>
+<p n="Caption">???????????????????????</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LCombDoneWGame</p>
+<p n="Caption">???????????????</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel1WBetweenLevelMenu</p>
+<p n="Caption">Parmi les fleurs dans le jardin de L’enchanteresse Belle</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel2WBetweenLevelMenu</p>
+<p n="Caption">Composition de melodie pour la Dame sur L’oiseau</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel3WBetweenLevelMenu</p>
+<p n="Caption">Eclairage du chemin pour le Chasseur d’ Etoiles</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel4WBetweenLevelMenu</p>
+<p n="Caption">R?solution de puzzle de L’hibou Sage</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel5WBetweenLevelMenu</p>
+<p n="Caption">Dans le jardin de lierre de L’elfe Musicien</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel6WBetweenLevelMenu</p>
+<p n="Caption">??????????</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BDemoWLoad</p>
+<p n="Caption">??????????????</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RIntroductionWHelp</p>
+<p n="Caption">????????????</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RGettingStartedWHelp</p>
+<p n="Caption">????</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RPlayingFieldWHelp</p>
+<p n="Caption">L'?cran Du Jeu</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RHowToPlayWHelp</p>
+<p n="Caption">????</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RArrangingTwigsWHelp</p>
+<p n="Caption">????</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RMagicToolsWHelp</p>
+<p n="Caption">??????</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RSkillsAndExperienceWHelp</p>
+<p n="Caption">Entre Les Niveaux</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RCombinationsWHelp</p>
+<p n="Caption">????</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RScoringPointsWHelp</p>
+<p n="Caption">????</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RKeyboardShortcutsWHelp</p>
+<p n="Caption">??????</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">ROptionsWHelp</p>
+<p n="Caption">????????????????</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RBonusesWHelp</p>
+<p n="Caption">????</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RRegistrationWHelp</p>
+<p n="Caption">??/??/??</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RAboutPuzzleLabWHelp</p>
+<p n="Caption">?????</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTIntroductionWHelp</p>
+<p n="Caption">Ce jeu vous transportera au jardin merveilleux habit? par cr?atures de contes. Le jardin ?tait d?cor? avec des beaux rinceaux compos?s de petites brindilles. Un jour un terrible ouragan a balay? et d?truit tous les rinceaux. Votre mission est de joindre toutes les brindilles et retablir les rinceaux initials. 
+                                                                                                                                                                                     Les brindilles sont livr?es par le convoyeur situ? dans la partie basse de l'?cran.  Au d?but du jeu on voit la brindille initiale - vous devez connecter une brindille convenable ? celle-ci et continuer ? retablir le rinceau jusqu'? ce que vous atteigniez la partie haute de l'?cran. Toutes les brindilles doivent ?tre conjointes, sinon vous ne pourrez atteindre le haut. Autrement dit, si quelque brindille au bas de l'?cran a une jonction ouverte, vous ne pourrez monter. Observez le convoyeur, parce que si les brindilles s'entassent, vous perdrez.                                                                                                                                                                                  Dans quelques niveaux il existe les objets bonus sur le champ du jeu, dont vous devez entrelacer en votre rinceau ? l'aide de brindilles. Il existe aussi les objets volants que vous emp?chent de placer les brindilles, c'est pourquoi Il faut attendre un peu. Les outils magiques vous aideront  en cours du jeu - utilisez l’Amphore pour cr?er les brindilles desir?s ou pour couper les ?l?ments superflus, et le Marteau pour casser les brindilles au bas de l'?cran et sur le champ du jeu.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTGettingStartedWHelp</p>
+<p n="Caption">Au d?but du jeu vous pouvez s?lectionner un bonus initial et le niveau de complexit?.                                                                                                                                                                 Il existe les bonus initials suivants: le Marteau, l’Amphore et le Score Additif. Apr?s que vous avez choisi le bonus initial, vous pouvez obtenir plus d’outils magiques ou des points additionnels.                                                                                                                                                               Maintenant s?lectionnez le niveau de complexit?. Vouz pouvez jouer en modes suivants:                                                                                                                                                       Mode Sans Perdre - vous ne pouvez pas perdre, mais vous n’obtenez pas de points                                                                                                                                                                       Mode L?ger - les brindilles arrivent lentement et vous accumulez des points                                                                                                                                                                              Mode Normal - les brindilles arrivent avec vitesse moyenne et accumulez des points                                                                                                                                                                Mode Difficile - les brindilles arrivent avec grande vitesse et vous pouvez obtenir un grand score.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTPlayingFieldWHelp</p>
+<p n="Caption">L’?cran du jeu se compose de trois parties: le convoyeur qui se remplit avec des brindilles, le champ du jeu et le tableau d’information.                                                                                                                                                                                      Le convoyeur se remplit avec des brindilles, que vous devez utiliser pour retablir les rinceaux. Si les brindilles s'entassent dans le convoyeur, le jeu se termine.                                                                                                                                         Le champ du jeu est dans le centre de l'?cran, il y a une brindille initiale, ? quelle vous devez connecter une autre brindille.                                                                                                                                                                                        Le tableau d’information montre le bouton "Menu", votre score et le niveau actuel. En dessous du tableau d'information on voit les Outils Magiques et le Creux Magique pour jeter les brindilles inutiles.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTHowToPlayWHelp</p>
+<p n="Caption">Voici les principales ?tapes du jeu:                                                                                                                                                     1. Cliquez avec le bouton gauche de la souris sur la brindille que vous voulez utiliser. Elle collera au curseur de la souris et se d?placera avec celui-ci.                                                                                                                                            2. Pour faire pivoter une brindille cliquez sur celui-ci avec le bouton droit de la souris ou tournez la roue de la souris.                                                                                                                              3. Cliquez avec le bouton gauche de la souris pour attacher une brindille ? l'autre.                                                                                                                                                   4. Connectez toutes les brindilles sur le champ du jeu.                                                                                                              5. R?tablissez le rinceau initial pour completer le niveau.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTArrangingTwigsWHelp</p>
+<p n="Caption">Les brindilles sont livr?es par le convoyeur situ? dans la partie basse de l'?cran. Le but du jeu est de connecter les brindilles afin de retablir le rinceau initial et atteindre le haut de l'?cran. En dehors de brindilles normales il existe des brindilles sp?ciales: les brindilles cach?es - leur forme devient visible apr?s que vous les prennez, et les brindilles de chance - si vous les utilisez, vous obtenez un bonus. Sur le champ du jeu on peut rencontrer les brindilles transparentes - vous devez les couvrir avec les brindilles de m?me forme et les connecter au rinceau.                                                                                                                                   Les brindilles sont de plusieurs formes.  Ils ont des jonctions - quand la jonction d'une brindille est ouverte elle s'?claircit afin de vous faire comprendre, que vous pouvez y attacher une autre brindille. Faites attention, vous ne pourrez monter, si quelque jonction basse est laiss? ouverte. Les jonctions ouvertes, que vous emp?chent de monter, sont marqu?es par la lumi?re verte.  S'il est possible de connecter une brindille ? l'autre, vous verrez une aiguille verte, et s'il n'est pas possible - la croix rouge. Il existe des brindilles sp?ciales, les "bouchons", qui vous aideront ? fermer des jonctions ouvertes, elles n'ont qu'une jonction. Mais retenez bien que votre but est d'atteindre le haut de l'?cran, c'est pourquoi toujours laissez au moins une jonction ouverte permettant d'avancer.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTMagicToolsWHelp</p>
+<p n="Caption">Les outils magiques vous aideront ? passer les niveaux de ce jeu. Cliquez sur l'image d'un outil magique pour l'utiliser. Le numero dans le coin droit de l'outil magique indique le nombre d'utilisations de celui-ci.                                                                                                                                      Marteau. Vous pouvez utiliser ce outil magique pour casser les brindilles dont vous ne voulez pas vous servir. Utilisez le marteau pour enlever les brindilles mal plac?es ou les brindilles inutiles dans le convoyeur. MODE D'EMPLOI: Cliquez sur l'image du marteau pour le s?lectionner. Placer le marteau sur la brindille desir?e et cliquez avec le bouton gauche de la souris pour la casser. Vous pouvez casser quelques brindilles ? la fois. Pour rel?cher le marteau cliquez sur le bouton droit de la souris. 
+                                                                                                                                      Amphore. Vous pouvez utiliser ce outil magique en deux cas: quand vous manquez la brindille d'une certaine forme et quand il faut couper les ?l?ments superflus. MODE D'EMPLOI: Cliquez sur l'image de l’amphore pour la s?lectionner.  Placez l’amphore dans la position desir?e sur le champ du jeu et cliquez le bouton gauche de la souris - une brindille appara?tra. Pour couper un ?l?ment superflu placez l’amphore sur la brindille desir?e et cliquez le bouton gauche de la souris. Pour rel?cher l’amphore cliquez sur le bouton droit de la souris.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTSkillsAndExperienceWHelp</p>
+<p n="Caption">Au bout de chaque niveau on vous donne quelques points d’exp?rience. Le nombre de points d?pend de nombre de brindilles que vous avez utilis? dans le niveau pr?c?dent et de nombre de combinaisons de brindilles que vous avez fait (un point pour chaque combinaison, et deux points si vous avez fait tous les combinaisons).                                                                                                                                            Vous pouvez distribuer les points d’exp?rience entre les cinq Pouvoirs situ?s dans la partie gauche de la fen?tre:                                                                                                                                   Magie du Temps - permet d'augmenter le temps du jeu, m?me si le convoyeur est rempli.                                                                                                                                                                 Acc?l?rateur du Creux – augmente la vitesse du Creux Magique.                                                                                                                                                                                         Bonne Chance – apporte plus de brindilles de chance (celles-l? avec les bonus).                                                                                                                                                                      Amphore - permet de cr?er  les ?l?ments desir?s et  couper les ?l?ments superflus.                                                                                                                                                                Marteau -  permet de casser les brindilles au bas de l'?cran et sur le champ du jeu.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTCombinationsWHelp</p>
+<p n="Caption">Si vous faites les combinaisons de brindilles pendant que vous retablissez le rinceau, vous pouvez obtenir beaucoup de bonus. Ce n'est pas difficile de faire cettes combinaisons: vous devez connecter les brindilles de sorte qu'il est dessin? sur l'image dans la partie droite de l'?cran.  Lorsque vous faites une combinaison, son image dispara?t, et une nouvelle image appara?t dans la partie droite de l’?cran.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTScoringPointsWHelp</p>
+<p n="Caption">Vous accumulez points pour chaque brindille plac?e sur le champ du jeu. Le nombre de points pour chaque brindille d?pend du nombre de jonctions de cette brindille. C’est pourquoi les brindilles avec le plus grand nombre de jonctions vous apportera beaucoup de points. Vous pouvez aussi obtenir un bonus qui vous apportera quelques points additionnels.                                                                                                                                                                               En cours du jeu vous obtenez les points d’ exp?rience. Le nombre de points d?pend de nombre de brindilles que vous avez utilis? dans le niveau pr?c?dent et de nombre de combinaisons de brindilles que vous avez fait (un point pour chaque combinaison, et deux points si vous avez fait tous les combinaisons). Alors, t?chez d’utiliser les brindilles avec n grand nombre de jonctions et de faire les combinaisons de brindilles – vous pourrez am?liorer vos pouvoirs.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTShortcutsWHelp</p>
+<p n="Caption">Barre d'espacement - prendre la premi?re brindille dans le convoyeur. Si le convoyeur est vide, une nouvelle brindille va appara?tre.                                                                                                      '1', '2' ... '9' -  prendre la brindille avec le num?ro correspondant dans le convoyeur.                                            F3 - prendre (placer) le marteau.                                                                      F4 - prendre (placer) l'amphore.                                             Suppr - jeter la brindille choisi au Creux Magique.                                                         Echap - ouvrir le Menu.                                                                                                                                                                    Cheat Codes                                                                                                                   Voici les cheat codes disponibles pour les utilisateurs enregistr?s:                                                                                                                                                                                1. _AddHammers - F5 F7 F7 F8 F6. Nombre d'utilisations: 5. Vous obtenez cinq marteaux. Vous pouvez l'utiliser cinq fois en cours d'un niveau.                                                                                                                                                                 2. _AddAmphoras - F5 F6 F8 F7 F8. Nombre d'utilisations: 5. Vous obtenez cinq amphores. Vous pouvez l'utiliser cinq fois en cours d'un niveau.                                                                                                                                                                               3. _ExplodeTwigs - F5 F8 F7 F6 F7 F8. Nombre d'utilisations: 5. Nettoie le convoyeur brisant toutes les brindilles. Vous pouvez l'utiliser cinq fois en cours d'un niveau.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTBonusesWHelp</p>
+<p n="Caption">Vous pouvez obtenir les bonus suivants, lorsque vous faites les combinaisons de brindilles ou utilisez les brindilles de chance:                                                                                                                                                                                              1. Explosion Magique – nettoie le convoyeur et vide espace pour les nouvelles brindilles.                                                                                                                                                         2. Marteaux Additifs – vous obtenez quelques marteaux de plus.                                                                                                                                                                                      3. Amphores Additives – vous obtenez quelques amphores de plus.                                                                                                                                                                                      4. Score Additif – vous obtenez quelques points pour augmenter votre score.                                                                                                                                                                                 5. Acc?l?rateur du Creux – acc?l?re la vitesse de disparition de brindilles.                                                                                                                                                                                    6. Bonne Chance – toutes les brindilles dans le convoyeur devient les brindilles de chance.                                                                                                                                          7. Magie du Temps  - un bonus temporaire qui vous laisse jouer sans perte m?me si le convoyeur est rempli.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTOptionsWHelp</p>
+<p n="Caption">La fiche Options pr?sente les options suivantes:                                                                                                                                        Langue - cliquez sur cette option pour s?lectionner la langue du jeu.                                                                                                                                                                                      Couper les hints - cochez cette option si vous ne voulez pas voir les hints.                                                                                                                                                                             Plein ?cran  - cochez cette option pour jouer en mode plein ?cran.                                                                                                                                                                                      Couleur 32-bit - cochez cette option pour obtenir la vraie couleur.                                                                                                                                                                                  Volume de son/musique - cliquez sur ces options pour activer, d?sactiver ou regler le volume des effets sonores et musicaux.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTRegistrationWHelp</p>
+<p n="Caption">Fiber Twig est propos? en tant que shareware. Vous pouvez l’utiliser pendant 14 jours ou jouer 14 fois. 
+Une fois enregistr? vous pourrez jouer sans aucune restriction. Pour recevoir plus d’info vous pouvez visiter: www.PuzzleLab.com                                                                                                     Une fois enregistr? vous obtenez les b?n?fices suivants:                                                                                                                                                                           - Pas de limite de jeu                                                                                                                                                  - Plus de niveaux captivants                                                                                                                                                                - Plus de cr?atures sympa                                                                                                                                                         - Plus de combinaisons                                                                                                                                    - Cheat codes: _AddHammers, _AddAmphoras, _ExplodeTwigs</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTAboutWHelp</p>
+<p n="Caption">Remerciements                                                                                                                                                                       Puzzle Lab Studio veut exprimer ses remerciements aux personnes qui ont apport? leur aide ? ce projet:                                                                                                                                       Asya Fomina, Andrey Fomin, Pavel Moskvin, Oleg Ryabinin, Sophia Shishatskaya, Aleksey Fadeev, Dmitry Gorbatkov, Mikhail Tretyakov, Nadezhda Moskvina, Sergey Potapov, Sergey Zakharov, Anton Pishchour, Sergey Kaminsky, Olesya Derkach.                                                                                                                                                                                                                                                                                                                       </p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCloseWHelp</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel7WBetweenLevelMenu</p>
+<p n="Caption">Les r?verb?res dans le jardin obscur du Centaure</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel8WBetweenLevelMenu</p>
+<p n="Caption">???????????</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel9WBetweenLevelMenu</p>
+<p n="Caption">Rencontre avec le Gn?me qui garde les d?dales de la for?t</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel10WBetweenLevelMenu</p>
+<p n="Caption">??????????</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel11WBetweenLevelMenu</p>
+<p n="Caption">Visite ? la Harpie qui est assise sur les branches</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel12WBetweenLevelMenu</p>
+<p n="Caption">La Reine Grenouille, la r?gente du royaume sous-marin</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel13WBetweenLevelMenu</p>
+<p n="Caption">??????????</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel14WBetweenLevelMenu</p>
+<p n="Caption">????????????</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel15WBetweenLevelMenu</p>
+<p n="Caption">Le G?nie du Vent qui chante dans le ciel</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel16WBetweenLevelMenu</p>
+<p n="Caption">?????????</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel17WBetweenLevelMenu</p>
+<p n="Caption">Rencontre avec le ma?tre des cr?atures - L'?l?phant Volant</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWExitToMainMenu</p>
+<p n="Caption">?tes-vous vraiment s?r de vouloir quitter au menu principal?</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWExitToMainMenu</p>
+<p n="Caption">??</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWExitToMainMenu</p>
+<p n="Caption">????</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintSkillLive</p>
+<p n="Caption">Magie du Temps - permet d'augmenter le temps du jeu, m?me si le convoyeur est rempli.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintSkillDropAccel</p>
+<p n="Caption">Acc?l?rateur du Creux – augmente la vitesse du Creux Magique.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintSkillLuckyTwig</p>
+<p n="Caption">Bonne Chance – apporte plus de brindilles de chance (celles-ci avec les bonus).</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintSkillAmphora</p>
+<p n="Caption">Amphore - permet de cr?er  les ?l?ments desir?s et  couper les ?l?ments superflus.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintSkillHammer</p>
+<p n="Caption">Marteau -  permet de casser les brindilles au bas de l'?cran et sur le champ du jeu.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintClosedLink</p>
+<p n="Caption">???????????????????????????</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintFirstTakeBonusFishka</p>
+<p n="Caption">C’est la brindille de chance. Si vous l’utilisez, vous obtiendrez un bonus.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintFirstTakeQuestFishka</p>
+<p n="Caption">C’est la brindille cach?e. Leur forme devient visible apr?s que vous les prennez.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintFirstTakeFishka</p>
+<p n="Caption">Vous pouvez joindre les brindilles avec les jonctions qui ont la lumi?re.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintMatchingJoints</p>
+<p n="Caption">Vous pouvez joindre les brindilles avec les jonctions convenables une ? une.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintFirstTransparentFishka</p>
+<p n="Caption">Ce sont les brindilles transparentes. Vous devez les couvrir avec les brindilles de la m?me forme.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintTransparentTwig</p>
+<p n="Caption">Vous devez couvrir les brindilles transparentes avec les brindilles de la m?me forme.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintLevelTop</p>
+<p n="Caption">Maintenant connectez tous les brindilles et r?tablissez le rinceau pour completer le niveau.</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">REasyWStartDialog</p>
+<p n="Caption">L?ger</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintFishComb</p>
+<p n="Caption">???????????????</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BBuyNowWNotEnabled</p>
+<p n="Caption">??</p>
+</o>
+</LabInterface>

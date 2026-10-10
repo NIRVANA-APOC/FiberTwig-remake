@@ -1,0 +1,1254 @@
+[EffectType] TwinkleFishka Create
+
+[Effect]
+[WaitBeforStart] 0
+[state] esVisible
+[SurfName] %Fishka1
+[TransBegin] 255
+[TransEnd] 255
+[TransStep] 1
+[CurrentTrans] 255
+[TimeToLive] 1000
+[TimeTransChange] -1
+[TimeToMove] 0
+[ShiftX] %Fishka1
+[ShiftY] %Fishka1
+[X] 0
+[Y] 0
+[RotateAngle] 0 0
+[dx] 1
+[dy] 1
+[toX] 0
+[toY] 0
+[MoveType] mtLine
+[TransChange] tcLine
+[FramesNumber] 1
+[TimeFrameChange] -1
+[CurrentFrameTime] 0
+[CurrentFrame] 1
+[a] 0
+[b] 0
+[StartAngle] 0 0
+[direction] -1
+[gravityX] 0
+[gravityY] 0
+[color] 255 255 255
+[TrackBegin] 255
+[TrackEnd] 1
+[CurrentTrack] 1
+[TimeTrackChange] 300
+[FishkaUnderEffect] %fishka1 
+[Follow] no
+[Clipper] 5 5 605 490
+[/Effect]
+
+[/EffectType]
+
+[EffectType] Rain Create
+[EffectTypeRunEvery] 500000
+
+[RainEffect]
+
+[Effect]
+[WaitBeforStart] 0
+[state] esVisible
+[SurfName] MidRain
+[TransBegin] 150
+[TransEnd] 150
+[TransStep] 1
+[CurrentTrans] 150
+[TimeToLive] 0
+[TimeTransChange] -1
+[TimeToMove] 0
+[ShiftX] 550
+[ShiftY] -40
+[X] 0
+[Y] 0
+[RotateAngle] 0 0
+[dx] 1
+[dy] 1
+[toX] -200
+[toY] 600
+[MoveType] mtLine
+[TransChange] tcLine
+[FramesNumber] 1
+[TimeFrameChange] -1
+[CurrentFrameTime] 0
+[CurrentFrame] 1
+[a] 0
+[b] 0
+[StartAngle] 0 0
+[direction] -1
+[gravityX] 0
+[gravityY] 0
+[color] 255 255 255
+[TrackBegin] 1
+[TrackEnd] 1
+[CurrentTrack] 1
+[TimeTrackChange] -1
+[FishkaUnderEffect] -1 
+[Follow] no
+[Clipper] 5 5 605 490
+
+[RainStartPoint] 100 -200
+[RainWidth] 1000
+[RainHeight] 1200
+[RainAngle] -1 8
+[RainBornEvery] 20
+[RainSpeed] 500
+[RainTimeToWork] 47000
+
+[/Effect]
+[/RainEffect]
+
+[RainEffect]
+
+[Effect]
+[WaitBeforStart] 0
+[state] esVisible
+[SurfName] SmRain
+[TransBegin] 100
+[TransEnd] 100
+[TransStep] 1
+[CurrentTrans] 100
+[TimeToLive] 0
+[TimeTransChange] -1
+[TimeToMove] 0
+[ShiftX] 0
+[ShiftY] 0
+[X] 0
+[Y] 0
+[RotateAngle] 0 0
+[dx] 1
+[dy] 1
+[toX] -200
+[toY] 600
+[MoveType] mtLine
+[TransChange] tcLine
+[FramesNumber] 1
+[TimeFrameChange] -1
+[CurrentFrameTime] 0
+[CurrentFrame] 1
+[a] 0
+[b] 0
+[StartAngle] 0 0
+[direction] -1
+[gravityX] 0
+[gravityY] 0
+[color] 255 255 255
+[TrackBegin] 1
+[TrackEnd] 1
+[CurrentTrack] 1
+[TimeTrackChange] -1
+[FishkaUnderEffect] -1 
+[Follow] no
+[Clipper] 5 5 605 490
+
+[RainStartPoint] 100 -200
+[RainWidth] 1000
+[RainHeight] 1200
+[RainAngle] -1 8
+[RainBornEvery] 10
+[RainSpeed] 300
+[RainTimeToWork] 47000
+
+[/Effect]
+[/RainEffect]
+
+[RainEffect]
+
+[Effect]
+[WaitBeforStart] 0
+[state] esVisible
+[SurfName] RainDrop
+[TransBegin] 150
+[TransEnd] 150
+[TransStep] 1
+[CurrentTrans] 150
+[TimeToLive] 0
+[TimeTransChange] -1
+[TimeToMove] 0
+[ShiftX] 550
+[ShiftY] -40
+[X] 0
+[Y] 0
+[RotateAngle] 0 0
+[dx] 1
+[dy] 1
+[toX] -200
+[toY] 600
+[MoveType] mtLine
+[TransChange] tcLine
+[FramesNumber] 1
+[TimeFrameChange] -1
+[CurrentFrameTime] 0
+[CurrentFrame] 1
+[a] 0
+[b] 0
+[StartAngle] 0 0
+[direction] -1
+[gravityX] 0
+[gravityY] 0
+[color] 255 255 255
+[TrackBegin] 1
+[TrackEnd] 1
+[CurrentTrack] 1
+[TimeTrackChange] -1
+[FishkaUnderEffect] -1 
+[Follow] no
+[Clipper] 5 5 605 490
+
+[RainStartPoint] 100 -200
+[RainWidth] 1000
+[RainHeight] 1200
+[RainAngle] -1 8
+[RainBornEvery] 1000
+[RainSpeed] 700
+[RainTimeToWork] 47000
+
+[/Effect]
+[/RainEffect]
+
+
+[/EffectType] Rain
+
+//----------------------- FlowerFall -------------------------------------------------------------------------------
+
+[EffectType] FlowerFall Create
+[EffectTypeRunEvery] 500000
+
+[RainEffect]
+
+[Effect]
+[WaitBeforStart] 0
+[state] esVisible
+[SurfName] FlowerOne.png
+[TransBegin] 255
+[TransEnd] 255
+[TransStep] 1
+[CurrentTrans] 255
+[TimeToLive] 0
+[TimeTransChange] -1
+[TimeToMove] 0
+[ShiftX] 550
+[ShiftY] -40
+[X] 0
+[Y] 0
+[RotateAngle] 0 0
+[dx] 1
+[dy] 1
+[toX] -200
+[toY] 600
+<MoveSin alX="20" beX="100" gaX="0" alY="5" beY="150" gaY="0" />
+[MoveType] mtLine
+[TransChange] tcLine
+[FramesNumber] 9
+[TimeFrameChange] 50
+[CurrentFrameTime] 0
+[CurrentFrame] 1
+[a] 0
+[b] 0
+[StartAngle] 0 0
+[direction] -1
+[gravityX] 0
+[gravityY] 0
+[color] 255 255 255
+[TrackBegin] 0
+[TrackEnd] 0
+[CurrentTrack] 0
+[TimeTrackChange] -1
+[FishkaUnderEffect] -1 
+[Follow] no
+[Clipper] 5 5 605 490
+
+[RainStartPoint] 100 -200
+[RainWidth] 1000
+[RainHeight] 1200
+[RainAngle] 0 5
+[RainBornEvery] 1500
+[RainSpeed] 25
+[RainTimeToWork] 250000
+
+[/Effect]
+[/RainEffect]
+
+
+[/EffectType] Rain
+
+//------------------------------------------- leaves --------------------------------------------------------------------------
+
+[EffectType] ClosedLinkSound Create
+
+[Effect]
+[WaitBeforStart] 5
+[TimeToLive] 20
+[PlaySound] ClosedLink.wav
+[/Effect]
+
+[/EffectType] ClosedLinkSound
+
+//----------------------------------------------------------------------
+
+[EffectType] Roundy Create
+
+[RoundCloneEffect]
+[RoundSurfName] cap1.png
+[RoundNum] 8
+[RoundSX] 200
+[RoundSY] 9500
+[Roundar] 52
+[Roundbr] 71
+[RoundDir] 1
+[Roundangle] 0 0
+[RoundTTL] -1
+[RoundTTM] 2000
+[RoundFrameN] 1
+[RoundTFC] -1
+[RoundTB] 255
+[RoundTE] 255
+[RoundTTC] -1
+[RoundFollow] -1
+[RoundWait] 20
+[RoundLongYEffect]
+[RoundClipper] 5 5 605 490
+[/RoundCloneEffect]
+             
+[Effect]
+[WaitBeforStart] 20
+[TimeToLive] 1
+[PlaySound] BonusDone.wav
+[/Effect]
+
+[/EffectType] Test
+
+//----------------------------------------------------------------------
+
+[EffectType] RoundBlicks Create
+
+[RoundCloneEffect]
+[RoundSurfName] Blick1.png
+[RoundNum] 1
+[RoundSX] 200
+[RoundSY] 9500
+[Roundar] 55
+[Roundbr] 30
+[RoundDir] 1
+[Roundangle] 0 0
+[RoundTTL] -1
+[RoundTTM] 1500
+[RoundFrameN] 4
+[RoundTFC] 100
+[RoundTB] 255
+[RoundTE] 255
+[RoundTTC] -1
+[RoundFollow] -1
+[RoundWait] 20
+[RoundLongYEffect]
+[RoundClipper] 5 5 605 490
+[/RoundCloneEffect]
+
+[RoundCloneEffect]
+[RoundSurfName] Blick1.png
+[RoundNum] 1
+[RoundSX] 200
+[RoundSY] 9500
+[Roundar] 55
+[Roundbr] 30
+[RoundDir] 1
+[Roundangle] 1 2
+[RoundTTL] -1
+[RoundTTM] 1350
+[RoundFrameN] 4
+[RoundTFC] 100
+[RoundTB] 255
+[RoundTE] 255
+[RoundTTC] -1
+[RoundFollow] -1
+[RoundWait] 500
+[RoundLongYEffect]
+[RoundClipper] 5 5 605 490
+[/RoundCloneEffect]
+             
+[RoundCloneEffect]
+[RoundSurfName] Blick1.png
+[RoundNum] 1
+[RoundSX] 200
+[RoundSY] 9500
+[Roundar] 55
+[Roundbr] 30
+[RoundDir] -1
+[Roundangle] 1 4
+[RoundTTL] -1
+[RoundTTM] 1100
+[RoundFrameN] 4
+[RoundTFC] 100
+[RoundTB] 255
+[RoundTE] 255
+[RoundTTC] -1
+[RoundFollow] -1
+[RoundWait] 500
+[RoundLongYEffect]
+[RoundClipper] 5 5 605 490
+[/RoundCloneEffect]
+             
+[/EffectType] RoundBlicks
+
+//----------------------------------------------------------------------
+
+[EffectType] BonusSmall Create
+
+[RoundCloneEffect]
+[RoundSurfName] cap1.png
+[RoundNum] 6
+[RoundSX] %MouseCursor
+[RoundSY] %MouseCursor
+[Roundar] 100
+[Roundbr] 100
+[RoundDir] 1
+[Roundangle] 0 0
+[RoundTTL] 2000
+[RoundTTM] 2000
+[RoundframeN] 1
+[RoundTFC] -1
+[RoundTB] 0
+[RoundTE] 255
+[RoundTTC] 2000
+[RoundFollow] %MouseCursor
+[RoundWait] 20
+[/RoundCloneEffect]
+             
+[Effect]
+[WaitBeforStart] 20
+[TimeToLive] 1
+[PlaySound] BonusDone.wav
+[/Effect]
+
+[/EffectType] BonusSmall
+
+[EffectType] BonusMiddle Create
+
+[RoundCloneEffect]
+[RoundSurfName] cap1.png
+[RoundNum] 6
+[RoundSX] %MouseCursor
+[RoundSY] %MouseCursor
+[Roundar] 50
+[Roundbr] 50
+[RoundDir] 1
+[Roundangle] 0 0
+[RoundTTL] 2000
+[RoundTTM] 2000
+[RoundframeN] 1
+[RoundTFC] -1
+[RoundTB] 0
+[RoundTE] 255
+[RoundTTC] 50
+[RoundFollow] %MouseCursor
+[RoundWait] 20
+[/RoundCloneEffect]
+
+[RoundCloneEffect]
+[RoundSurfName] cap1.png
+[RoundNum] 9
+[RoundSX] %MouseCursor
+[RoundSY] %MouseCursor
+[Roundar] 80
+[Roundbr] 80
+[RoundDir] -1
+[Roundangle] 0 0
+[RoundTTL] 2000
+[RoundTTM] 2000
+[RoundframeN] 1
+[RoundTFC] -1
+[RoundTB] 0
+[RoundTE] 255
+[RoundTTC] 50
+[RoundFollow] %MouseCursor
+[RoundWait] 30
+[/RoundCloneEffect]
+
+[Effect]
+[WaitBeforStart] 20
+[TimeToLive] 1
+[PlaySound] BonusDone.wav
+[/Effect]
+
+[Effect]
+[WaitBeforStart] 30
+[TimeToLive] 1
+[PlaySound] BonusDone1.wav
+[/Effect]
+
+[/EffectType] BonusMiddle
+
+[EffectType] BonusGrate Create
+
+[RoundCloneEffect]
+[RoundSurfName] EffectPointMid
+[RoundNum] 6
+[RoundSX] %MouseCursor
+[RoundSY] %MouseCursor
+[Roundar] 50
+[Roundbr] 50
+[RoundDir] 1
+[Roundangle] 0 0
+[RoundTTL] 50
+[RoundTTM] 160
+[RoundframeN] 4
+[RoundTFC] 1
+[RoundTB] 0
+[RoundTE] 255
+[RoundTTC] 50
+[RoundFollow] %MouseCursor
+[RoundWait] 20
+[/RoundCloneEffect]
+
+[RoundCloneEffect]
+[RoundSurfName] EffectPointMid
+[RoundNum] 9
+[RoundSX] %MouseCursor
+[RoundSY] %MouseCursor
+[Roundar] 80
+[Roundbr] 80
+[RoundDir] -1
+[Roundangle] 0 0
+[RoundTTL] 50
+[RoundTTM] 160
+[RoundframeN] 4
+[RoundTFC] 1
+[RoundTB] 0
+[RoundTE] 255
+[RoundTTC] 50
+[RoundFollow] %MouseCursor
+[RoundWait] 30
+[/RoundCloneEffect]
+
+[RoundCloneEffect]
+[RoundSurfName] EffectPointMid
+[RoundNum] 12
+[RoundSX] %MouseCursor
+[RoundSY] %MouseCursor
+[Roundar] 110
+[Roundbr] 110
+[RoundDir] 1
+[Roundangle] 0 0
+[RoundTTL] 50
+[RoundTTM] 160
+[RoundframeN] 4
+[RoundTFC] 1
+[RoundTB] 0
+[RoundTE] 255
+[RoundTTC] 50
+[RoundFollow] %MouseCursor
+[RoundWait] 40
+[/RoundCloneEffect]
+
+[Effect]
+[WaitBeforStart] 30
+[TimeToLive] 1
+[PlaySound] BonusDone.wav
+[/Effect]
+
+[Effect]
+[WaitBeforStart] 40
+[TimeToLive] 1
+[PlaySound] BonusDone1.wav
+[/Effect]
+
+[Effect]
+[WaitBeforStart] 50
+[TimeToLive] 1
+[PlaySound] BonusDone2.wav
+[/Effect]
+
+
+[/EffectType] BonusGrate
+
+
+//-------------------------------------------------------------------------
+
+[EffectType] BornFishka Create
+
+[Effect]
+[TimeToLive] 1
+[PlaySound] BornFishka.wav
+[/Effect]
+
+[/EffectType] BornFishka
+
+//-------------------------------------------------------------------------
+
+[EffectType] RotateFishka Create
+
+[Effect]
+[TimeToLive] 1
+[PlaySound] RotateFishka.wav
+[/Effect]
+
+[/EffectType] RotateFishka
+
+[EffectType] RotateFishkaReverse Create
+
+[RoundCloneEffect]
+[RoundSurfName] EffectPoint
+[RoundNum] 6
+[RoundSX] %MouseCursor
+[RoundSY] %MouseCursor
+[Roundar] 30
+[Roundbr] 30
+[RoundDir] -1
+[Roundangle] 0 0
+[RoundTTL] 14
+[RoundTTM] 40
+[RoundframeN] 1
+[RoundTFC] 1
+[RoundTB] 0
+[RoundTE] 150
+[RoundTTC] 14
+[RoundFollow] %MouseCursor
+[RoundWait] 0
+[/RoundCloneEffect]
+
+
+[Effect]
+[TimeToLive] 1
+[PlaySound] RotateFishka.wav
+[/Effect]
+
+[/EffectType] RotateFishkaReverse
+
+[EffectType] PutFishka Create
+
+[Effect]
+[TimeToLive] 1
+[PlaySound] PutFishka.wav
+[/Effect]
+
+[/EffectType] PutFishka
+
+
+//--------------------------------------------------------------------------------------------------------
+[EffectType] TakeFishka Create
+
+[Effect]
+[TimeToLive] 1
+[PlaySound] GetFishka.wav
+[/Effect]
+
+[/EffectType] TakeFishka
+
+//--------------------------------------------------------------------------------------------------------
+[EffectType] TakeQuestFishka Create
+
+[SparkCloneEffect] 
+[SparkSurfName] star.png
+[SparkNum] 7 
+[SparkVecX] 0
+[SparkVecY] 80
+[SparkAngle] 2 1
+[SparkSX] %MouseCursor
+[SparkSY] %MouseCursor
+[SparkFrameN] 4
+[SparkFrameTFC] 100
+[SparkTFC] -1
+[SparkTB] 255
+[SparkTE] 0
+[SparkTTC] 2000
+[SparkFollowMouseCursor] no
+[GravX] 0
+[GravY] 25
+[/SparkCloneEffect]
+
+[Effect]
+[TimeToLive] 1
+[PlaySound] GetFishka.wav
+[/Effect]
+
+[/EffectType] TakeQuestFishka
+//--------------------------------------------------------------------------------------------------------
+[EffectType] HammerFishka Create
+
+[SparkCloneEffect] 
+[SparkSurfName] star.png
+[SparkNum] 15 
+[SparkVecX] 0
+[SparkVecY] 200
+[SparkAngle] 2 1
+[SparkSX] %MouseCursor
+[SparkSY] %MouseCursor
+[SparkFrameN] 4
+[SparkFrameTFC] 100
+[SparkTFC] -1
+[SparkTB] 255
+[SparkTE] 0
+[SparkTTC] 1000
+[SparkFollowMouseCursor] no
+[GravX] 0
+[GravY] 150
+[SparkRandomAngle]
+[/SparkCloneEffect]
+
+[/EffectType] HammerFishka
+//------------------------------------------ Fire -------------------------------------------------------------
+[EffectType] Fire Create
+[EffectTypeRunEvery] 35
+
+[SparkCloneEffect] 
+[SparkSurfName] FireOne.png
+[SparkNum] 1 
+[SparkVecX] 0
+[SparkVecY] 50
+[SparkAngle] 1 5
+[SparkSX] 300
+[SparkSY] 9750
+[SparkLongYEffect]
+[SparkFrameN] 1
+[SparkTFC] -1
+[SparkTB] 200
+[SparkTE] 0
+[SparkTTC] 1200
+[SparkFollowMouseCursor] no
+[GravX] 0
+[GravY] 0
+[SparkRandomAngle]
+[SparkClipper] 5 5 605 490
+[/SparkCloneEffect]
+
+[/EffectType] HammerFishka
+//--------------------------------------------------------------------------------------------------------
+//------------------------------------------ SnowWind -------------------------------------------------------------
+[EffectType] SnowWind Create
+[EffectTypeRunEvery] 100
+
+[SparkCloneEffect] 
+[SparkSurfName] FlakeOne.png
+[SparkNum] 5 
+[SparkVecX] 300
+[SparkVecY] 0
+[SparkAngle] 1 3
+[SparkSX] 300
+[SparkSY] 9750
+[SparkLongYEffect]
+[SparkFrameN] 4
+[SparkFrameTFC] 50
+[SparkTFC] 50
+[SparkTB] 5
+[SparkTE] 100
+[SparkTTC] 1500
+[SparkFollowMouseCursor] no
+[GravX] 0
+[GravY] 0
+[SparkRandomAngle]
+[SparkClipper] 5 5 605 490
+[/SparkCloneEffect]
+
+[/EffectType] HammerFishka
+//------------------------------------------ ReverseSnowWind -------------------------------------------------------------
+[EffectType] ReverseSnowWind Create
+[EffectTypeRunEvery] 100
+
+[SparkCloneEffect] 
+[SparkSurfName] FlakeOne.png
+[SparkNum] 5 
+[SparkVecX] -300
+[SparkVecY] 0
+[SparkAngle] 1 3
+[SparkSX] 300
+[SparkSY] 9750
+[SparkLongYEffect]
+[SparkFrameN] 4
+[SparkFrameTFC] 50
+[SparkTFC] 50
+[SparkTB] 5
+[SparkTE] 250
+[SparkTTC] 1500
+[SparkFollowMouseCursor] no
+[GravX] 0
+[GravY] 0
+[SparkRandomAngle]
+[SparkClipper] 5 5 605 490
+[/SparkCloneEffect]
+
+[/EffectType] HammerFishka
+//--------------------------------------------------------------------------------------------------------
+[EffectType] BombPicture Create
+
+[SparkCloneEffect] 
+[SparkSurfName] Leave1.png
+[SparkNum] 5 
+[SparkVecX] 0
+[SparkVecY] 200
+[SparkAngle] 2 1
+[SparkSX] 10
+[SparkSY] 10
+[SparkFrameN] 4
+[SparkFrameTFC] 100
+[SparkTB] 255
+[SparkTE] 0
+[SparkTTC] 2000
+[SparkFollowMouseCursor] no
+[GravX] 0
+[GravY] 100
+[SparkRandomAngle]
+[SparkLongYEffect]
+[SparkClipper] 5 5 605 490
+[/SparkCloneEffect]
+
+[/EffectType] 
+//--------------------------------------------------------------------------------------------------------
+[EffectType] BombFishka Create
+
+[SparkCloneEffect] 
+[SparkSurfName] FireOne
+[SparkNum] 5 
+[SparkVecX] 0
+[SparkVecY] 40
+[SparkAngle] 1 3
+[SparkSX] 10
+[SparkSY] 10
+[SparkFrameN] 1
+[SparkTFC] -1
+[SparkTB] 255
+[SparkTE] 0
+[SparkTTC] 2500
+[SparkFollowMouseCursor] no
+[GravX] 0
+[GravY] 25
+[SparkLongYEffect]
+[SparkRandomAngle]
+[SparkClipper] 5 5 605 490
+[/SparkCloneEffect]
+
+[/EffectType] 
+//--------------------------------------------------------------------------------------------------------
+
+[EffectType] PutFishkaInOtboynik Create
+
+[Effect]
+[TimeToLive] 1
+[PlaySound] GetFishka.wav
+[/Effect]
+
+[/EffectType] PutFishkaInOtboynik
+
+//--------------------------------------------------------------------------------------------------------
+[EffectType] ExpSound Create
+
+[Effect]
+[TimeToLive] 1
+[PlaySound] LaBomb.wav
+[/Effect]
+
+[/EffectType] ExpSound
+//--------------------------------------------------------------------------------------------------------
+[EffectType] ElementSound Create
+
+[Effect]
+[TimeToLive] 1
+[PlaySound] BonusElement.wav
+[/Effect]
+
+[/EffectType] ElementSound
+//--------------------------------------------------------------------------------------------------------
+[EffectType] HammerFishkaSound Create
+
+[Effect]
+[TimeToLive] 1
+[PlaySound] BreakFishka.wav
+[/Effect]
+
+[/EffectType] HammerFishkaSound
+//--------------------------------------------------------------------------------------------------------
+
+[EffectType] ClipperFishkaNew Create
+
+[Effect]
+[WaitBeforStart] 0
+[state] esVisible
+[SurfName] %Fishka1
+[TransBegin] 0
+[TransEnd] 255
+[TransStep] 1
+[CurrentTrans] 0
+[TimeToLive] 800
+[TimeTransChange] 800
+[TimeToMove] 0
+[ShiftX] %Fishka1
+[ShiftY] %Fishka1
+[X] 0
+[Y] 0
+[RotateAngle] 0 0
+[dx] 1
+[dy] 1
+[toX] 0
+[toY] 0
+[MoveType] mtLine
+[TransChange] tcLine
+[FramesNumber] 1
+[TimeFrameChange] -1
+[CurrentFrameTime] 0
+[CurrentFrame] 1
+[a] 0
+[b] 0
+[StartAngle] 0 0
+[direction] -1
+[gravityX] 0
+[gravityY] 0
+[color] 255 255 255
+[TrackBegin] 255
+[TrackEnd] 255
+[CurrentTrack] 1
+[TimeTrackChange] -1
+[FishkaUnderEffect] %fishka1 
+[Follow] no
+[Clipper] 5 5 605 490
+[/Effect]
+
+[Effect]
+[TimeToLive] 1
+[PlaySound] Clipper.wav
+[/Effect]
+
+
+[/EffectType]
+//--------------------------------------------------------------------------------------------------------
+
+[EffectType] PutBonusFishka Create
+
+[SparkCloneEffect] 
+[SparkSurfName] star.png
+[SparkNum] 7 
+[SparkVecX] 0
+[SparkVecY] 80
+[SparkAngle] 2 1
+[SparkSX] %MouseCursor
+[SparkSY] %MouseCursor
+[SparkFrameN] 4
+[SparkFrameTFC] 50
+[SparkTFC] -1
+[SparkTB] 255
+[SparkTE] 0
+[SparkTTC] 2000
+[SparkFollowMouseCursor] no
+[GravX] 0
+[GravY] 25
+[SparkClipper] 5 5 605 490
+[/SparkCloneEffect]
+
+[Effect]
+[TimeToLive] 1
+[PlaySound] Link.wav
+[/Effect]
+
+[/EffectType] PutBonusFishka
+//--------------------------------------------------------------------------------------------------------
+
+[EffectType] ConnectLink Create
+
+[Effect]
+[WaitBeforStart] 0
+[state] esVisible
+[SurfName] %Fishka1
+[TransBegin] 255
+[TransEnd] 255
+[TransStep] 1
+[CurrentTrans] 255
+[TimeToLive] 400
+[TimeTransChange] -1
+[TimeToMove] 0
+[ShiftX] %Fishka1
+[ShiftY] %Fishka1
+[X] 0
+[Y] 0
+[RotateAngle] 0 0
+[dx] 1
+[dy] 1
+[toX] 0
+[toY] 0
+[MoveType] mtLine
+[TransChange] tcLine
+[FramesNumber] 1
+[TimeFrameChange] -1
+[CurrentFrameTime] 0
+[CurrentFrame] 1
+[a] 0
+[b] 0
+[StartAngle] 0 0
+[direction] -1
+[gravityX] 0
+[gravityY] 0
+[color] 255 255 255
+[TrackBegin] 255
+[TrackEnd] 150
+[CurrentTrack] 1
+[TimeTrackChange] 200
+[FishkaUnderEffect] %Fishka1 
+[Follow] no
+[Clipper] 5 5 605 490
+[/Effect]
+
+[/EffectType]
+//--------------------------------------------------------------------------------------------------------
+
+//--------------------------------------------------------------------------------------------------------
+
+[EffectType] ClosedLink Create
+
+[Effect]
+[WaitBeforStart] 0
+[state] esVisible
+[SurfName] %Fishka1
+[TransBegin] 255
+[TransEnd] 255
+[TransStep] 1
+[CurrentTrans] 255
+[TimeToLive] 250
+[TimeTransChange] -1
+[TimeToMove] 0
+[ShiftX] %Fishka1
+[ShiftY] %Fishka1
+[X] 0
+[Y] 0
+[RotateAngle] 0 0
+[dx] 1
+[dy] 1
+[toX] 0
+[toY] 0
+[MoveType] mtLine
+[TransChange] tcLine
+[FramesNumber] 1
+[TimeFrameChange] -1
+[CurrentFrameTime] 0
+[CurrentFrame] 1
+[a] 0
+[b] 0
+[StartAngle] 0 0
+[direction] -1
+[gravityX] 0
+[gravityY] 0
+[color] 255 0 0
+[TrackBegin] 255
+[TrackEnd] 100
+[CurrentTrack] 1
+[TimeTrackChange] 250
+[FishkaUnderEffect] %Fishka1 
+[Follow] no
+[Clipper] 5 5 605 490
+[/Effect]
+
+[/EffectType]
+//--------------------------------------------------------------------------------------------------------
+
+[EffectType] GiveHammer Create
+
+[SparkCloneEffect] 
+[SparkSurfName] hammer1.png
+[SparkNum] 1 
+[SparkVecX] 2
+[SparkVecY] 20
+[SparkAngle] 1 3
+[SparkSX] %MouseCursor
+[SparkSY] %MouseCursor
+[SparkFrameN] 1
+[SparkTFC] -1
+[SparkTB] 255
+[SparkTE] 0
+[SparkTTC] 2000
+[SparkFollowMouseCursor] no
+[GravX] 0
+[GravY] -30
+[SparkClipper] 5 5 605 490
+[/SparkCloneEffect]
+
+[Effect]
+[TimeToLive] 1
+[PlaySound] GetFishka.wav
+[/Effect]
+
+[/EffectType] PutBonusFishka
+//--------------------------------------------------------------------------------------------------------
+
+[EffectType] GiveClipper Create
+
+[SparkCloneEffect] 
+[SparkSurfName] cap1.png
+[SparkNum] 1 
+[SparkVecX] 2
+[SparkVecY] 20
+[SparkAngle] 1 3
+[SparkSX] %MouseCursor
+[SparkSY] %MouseCursor
+[SparkFrameN] 1
+[SparkTFC] -1
+[SparkTB] 255
+[SparkTE] 0
+[SparkTTC] 2000
+[SparkFollowMouseCursor] no
+[GravX] 0
+[GravY] -30
+[SparkClipper] 5 5 605 490
+[/SparkCloneEffect]
+
+[Effect]
+[TimeToLive] 1
+[PlaySound] GetFishka.wav
+[/Effect]
+
+[/EffectType] PutBonusFishka
+//--------------------------------------------------------------------------------------------------------
+
+[EffectType] GiveScore Create
+
+[SparkCloneEffect] 
+[SparkSurfName] ScoreStar.png
+[SparkNum] 1 
+[SparkVecX] 2
+[SparkVecY] 20
+[SparkAngle] 1 3
+[SparkSX] %MouseCursor
+[SparkSY] %MouseCursor
+[SparkFrameN] 1
+[SparkTFC] -1
+[SparkTB] 255
+[SparkTE] 0
+[SparkTTC] 2000
+[SparkFollowMouseCursor] no
+[GravX] 0
+[GravY] -30
+[SparkClipper] 5 5 605 490
+[/SparkCloneEffect]
+
+[Effect]
+[TimeToLive] 1
+[PlaySound] GetFishka.wav
+[/Effect]
+
+[/EffectType] PutBonusFishka
+//--------------------------------------------------------------------------------------------------------
+[EffectType] GiveBonusFishka Create
+
+[SparkCloneEffect] 
+[SparkSurfName] Lucky1.png
+[SparkNum] 1
+[SparkVecX] 2
+[SparkVecY] 20
+[SparkAngle] 1 3
+[SparkSX] %MouseCursor
+[SparkSY] %MouseCursor
+[SparkFrameN] 1
+[SparkTFC] -1
+[SparkTB] 255
+[SparkTE] 0
+[SparkTTC] 2000
+[SparkFollowMouseCursor] no
+[GravX] 0
+[GravY] -30
+[SparkClipper] 5 5 605 490
+[/SparkCloneEffect]
+
+[/EffectType]
+//--------------------------------------------------------------------------------------------------------
+
+[EffectType] GiveSpeedUpOtb Create
+
+[SparkCloneEffect] 
+[SparkSurfName] DropAxel1.png
+[SparkNum] 1 
+[SparkVecX] 2
+[SparkVecY] 20
+[SparkAngle] 1 3
+[SparkSX] %MouseCursor
+[SparkSY] %MouseCursor
+[SparkFrameN] 1
+[SparkTFC] -1
+[SparkTB] 255
+[SparkTE] 0
+[SparkTTC] 2000
+[SparkFollowMouseCursor] no
+[GravX] 0
+[GravY] -30
+[SparkClipper] 5 5 605 490
+[/SparkCloneEffect]
+
+
+[RoundCloneEffect]
+[RoundSurfName] star.png
+[RoundNum] 8
+[RoundSX] 700
+[RoundSY] 430
+[Roundar] 40
+[Roundbr] 40
+[RoundDir] -1
+[Roundangle] 0 0
+[RoundTTL] 2000
+[RoundTTM] 1500
+[RoundFrameN] 4
+[RoundTFC] 1
+[RoundTB] 255
+[RoundTE] 0
+[RoundTTC] 4000
+[RoundFollow] -1
+[RoundWait] 20
+[/RoundCloneEffect]
+
+[/EffectType]
+//--------------------------------------------------------------------------------------------------------
+
+[EffectType] GiveTimeToNoLoose Create
+
+[SparkCloneEffect] 
+[SparkSurfName] Live1.png
+[SparkNum] 1 
+[SparkVecX] 2
+[SparkVecY] 20
+[SparkAngle] 1 3
+[SparkSX] %MouseCursor
+[SparkSY] %MouseCursor
+[SparkFrameN] 1
+[SparkTFC] -1
+[SparkTB] 255
+[SparkTE] 0
+[SparkTTC] 2000
+[SparkFollowMouseCursor] no
+[GravX] 0
+[GravY] -30
+[SparkClipper] 5 5 605 490
+[/SparkCloneEffect]
+
+[/EffectType] PutBonusFishka
+//--------------------------------------------------------------------------------------------------------
+[EffectType] UnableHammer Create
+
+[Effect]
+[TimeToLive] 1
+[PlaySound] GameOver.wav
+[/Effect]
+
+//--------------------------------------------------------------------------------------------------------
+[/EffectType] GameOver
+
+[EffectType] GameOver Create
+
+[Effect]
+[TimeToLive] 1
+[PlaySound] GameOver.wav
+[/Effect]
+
+[/EffectType] GameOver
+
+// ----------------------------------------------------------------------
+[EffectType] CombinationSound Create
+
+[Effect]
+[WaitBeforStart] 5
+[TimeToLive] 20
+[PlaySound] ClosedLink.wav
+[/Effect]
+
+[/EffectType] 
+
+
+//----------------------------------------------------------------------
+
+
+

@@ -1,0 +1,4 @@
+<AutoImage name="winder_1" autosize="true">
+<AddImage name="winder.png" left="0" top="0" />
+<FlipImageVertical/>
+</AutoImage>

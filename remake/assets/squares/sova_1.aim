@@ -1,0 +1,4 @@
+<AutoImage name="sova_1" autosize="true">
+<AddImage name="sova.png" left="0" top="0" />
+<FlipImageVertical/>
+</AutoImage>

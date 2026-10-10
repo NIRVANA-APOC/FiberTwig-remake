@@ -1,0 +1,5 @@
+<AutoImage name="bomb1_2" autosize="true">
+<AddImage name="bomb1.png" left="0" top="0" />
+<ImageHueChange hue="150" saturation="0" lightness="-30" />
+<RotateImage angle="-90"/>
+</AutoImage>

@@ -1,0 +1,4 @@
+<AutoImage name="BigBrick8_3" autosize="true">
+<AddImage name="BigBrick8.png" left="0" top="0" />
+<ScaleImage width="40" height="40"/>
+</AutoImage>

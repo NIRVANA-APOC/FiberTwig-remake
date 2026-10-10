@@ -1,0 +1,463 @@
+<Level name="Level3" fragmentation="Squares_" CurrentY="9760" />
+<HeroPicture name="shunter.png">
+<FragPicture name="FragPic4.png"/>
+<Generator period="3500"/>
+<PlayMusic name="Sad Song.mo3"/>
+<HidenFishkaPicture name="starhuntericon.png" prob="0,1"/>
+<FishkaWithBonus prob="0,05"/>
+<LevelEffect name="RoundBlicks" x="535" y="9756">
+<LevelEffect name="RoundBlicks" x="107" y="9358">
+<LevelEffect name="RoundBlicks" x="67" y="7917">
+
+<Fishka frag="3727" type="5" link="1"/>
+
+//Fone
+
+<Picture name="" x="0" y="5350" z="500">
+    <Image name="SkyFone2.jpg"/>
+</Picture>
+
+
+//Decor
+
+<Picture name="" x="481" y="9641" z="0">
+    <Image name="fonar1.png"/>
+</Picture>
+
+<Picture name="" x="40" y="9241" z="0">
+    <Image name="fonar1_1.png"/>
+</Picture>
+
+<Picture name="" x="0" y="7801" z="0">
+    <Image name="fonar1_1.png"/>
+</Picture>
+
+<Picture name="" x="400" y="9001" z="0">
+    <Image name="Fonar3on.png" t="4000"/>
+    <Image name="Fonar3.png" t="100"/>
+    <Image name="Fonar3on.png" t="100"/>
+    <Image name="Fonar3.png" t="100"/>
+    <Image name="Fonar3on.png" t="100"/>
+    <Image name="Fonar3.png" t="100"/>
+</Picture>
+
+<Picture name="" x="40" y="8721" z="0">
+    <Image name="Fonar3on_1.png" t="3500"/>
+    <Image name="Fonar3_1.png" t="100"/>
+    <Image name="Fonar3on_1.png" t="100"/>
+    <Image name="Fonar3_1.png" t="100"/>
+    <Image name="Fonar3on_1.png" t="100"/>
+    <Image name="Fonar3_1.png" t="100"/>
+</Picture>
+
+<Picture name="" x="440" y="6801" z="0">
+    <Image name="Fonar3on.png" t="4000"/>
+    <Image name="Fonar3.png" t="100"/>
+    <Image name="Fonar3on.png" t="100"/>
+    <Image name="Fonar3.png" t="100"/>
+    <Image name="Fonar3on.png" t="100"/>
+    <Image name="Fonar3.png" t="100"/>
+</Picture>
+
+<Picture name="" x="40" y="6921" z="0">
+    <Image name="Fonar3on_1.png" t="3500"/>
+    <Image name="Fonar3_1.png" t="100"/>
+    <Image name="Fonar3on_1.png" t="100"/>
+    <Image name="Fonar3_1.png" t="100"/>
+    <Image name="Fonar3on_1.png" t="100"/>
+    <Image name="Fonar3_1.png" t="100"/>
+</Picture>
+
+
+
+<Picture name="" x="4" y="8152" z="0">
+    <Image name="shunter_1.png"/>
+</Picture>
+
+<Picture name="" x="324" y="6192" z="0">
+    <Image name="shunter.png"/>
+</Picture>
+
+//Elements
+
+<Picture name="Blick1.png" x="200" y="9565" z="1" visible="false">
+    <Image name="Blick1.png"/>
+</Picture>
+
+<Picture name="Bonus1" x="199" y="9561" z="0">
+    <Image name="Fonar2.png"/>
+</Picture>
+<Picture name="Bonus1on" x="199" y="9561" z="0" visible="false">
+    <Image name="Fonar2on.png" t="4000"/>
+    <Image name="Fonar2.png" t="100"/>
+    <Image name="Fonar2on.png" t="100"/>
+    <Image name="Fonar2.png" t="100"/>
+    <Image name="Fonar2on.png" t="100"/>
+    <Image name="Fonar2.png" t="100"/>
+</Picture>
+<BonusElement>
+    <Point x="257" y="9659" border="4">
+    </Point>
+    <RemovePicture name="Bonus1"> 
+    <ShowPicture name="Bonus1on"> 
+    <StartEffect name="ElementSound">
+</BonusElement>
+
+<Picture name="Bonus2" x="439" y="8521" z="0">
+    <Image name="Fonar2.png"/>
+</Picture>
+<Picture name="Bonus2on" x="439" y="8521" z="0" visible="false">
+    <Image name="Fonar2on.png" t="4000"/>
+    <Image name="Fonar2.png" t="100"/>
+    <Image name="Fonar2on.png" t="100"/>
+    <Image name="Fonar2.png" t="100"/>
+    <Image name="Fonar2on.png" t="100"/>
+    <Image name="Fonar2.png" t="100"/>
+</Picture>
+<BonusElement>
+    <Point x="501" y="8624" border="4">
+    </Point>
+    <RemovePicture name="Bonus2"> 
+    <ShowPicture name="Bonus2on"> 
+    <StartEffect name="ElementSound">
+</BonusElement>
+
+<Picture name="Bonus3" x="39" y="7280" z="0">
+    <Image name="Fonar2.png"/>
+</Picture>
+<Picture name="Bonus3on" x="39" y="7280" z="0" visible="false">
+    <Image name="Fonar2on.png" t="4000"/>
+    <Image name="Fonar2.png" t="100"/>
+    <Image name="Fonar2on.png" t="100"/>
+    <Image name="Fonar2.png" t="100"/>
+    <Image name="Fonar2on.png" t="100"/>
+    <Image name="Fonar2.png" t="100"/>
+</Picture>
+<BonusElement>
+    <Point x="100" y="7380" border="4">
+    </Point>
+    <RemovePicture name="Bonus3"> 
+    <ShowPicture name="Bonus3on"> 
+    <StartEffect name="ElementSound">
+</BonusElement>
+
+<Picture name="Bonus4" x="439" y="7280" z="0">
+    <Image name="Fonar2.png"/>
+</Picture>
+<Picture name="Bonus4on" x="439" y="7280" z="0" visible="false">
+    <Image name="Fonar2on.png" t="3700"/>
+    <Image name="Fonar2.png" t="100"/>
+    <Image name="Fonar2on.png" t="100"/>
+    <Image name="Fonar2.png" t="100"/>
+    <Image name="Fonar2on.png" t="100"/>
+    <Image name="Fonar2.png" t="100"/>
+</Picture>
+<BonusElement>
+    <Point x="500" y="7380" border="4">
+    </Point>
+    <RemovePicture name="Bonus4"> 
+    <ShowPicture name="Bonus4on"> 
+    <StartEffect name="ElementSound">
+</BonusElement>
+
+
+
+
+<FishkaProb>
+  <FProb name="1" prob="5"> 
+  <FProb name="12" prob="13"> 
+  <FProb name="13" prob="8"> 
+  <FProb name="123" prob="10">  
+  <FProb name="1234" prob="3"> 
+  <FProb name="double2" prob="2"> 
+  <FProb name="double2a" prob="2"> 
+  <FProb name="tripl1" prob="1"> 
+  <FProb name="adouble1" prob="1"> 
+  <FProb name="skoba1" prob="2"> 
+</FishkaProb>
+
+<FishkaScore>0 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10</FishkaScore>
+
+<FishkaBonusProb> 10 2 10 30 2 2 2 </FishkaBonusProb>
+
+<FishkaCombination>
+	<CombSequence> 25 31 26 10 5 16 21 </CombSequence>
+ 	<OneCombBonusProb> 10 0 10 0 0 0 0 </OneCombBonusProb>
+ 	<AllCombBonusProb> 10 0 10 0 0 0 0 </AllCombBonusProb>
+</FishkaCombination>
+
+<PictureMap x="0" y="5881" z="0" OneWidth="40" OneHeight="40">
+  <Images>brick3.png brick3_1.png brick3_2.png brick3_3.png brick3_4.png brick3_5.png</Images>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 3 6 6 4 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 3 6 6 4 0 </map>
+  <map> 4 0 0 0 0 0 0 0 0 0 0 0 3 6 4 </map>
+  <map> 3 4 0 0 0 0 0 0 0 0 0 0 0 3 6 </map>
+  <map> 0 3 4 0 0 0 0 0 0 0 0 0 0 0 1 </map>
+  <map> 0 0 6 0 0 0 0 0 0 0 0 0 0 0 3 </map>
+  <map> 0 0 3 4 0 0 0 0 0 5 0 0 0 0 0 </map>
+  <map> 0 0 0 1 0 0 0 0 0 6 0 0 0 0 0 </map>
+  <map> 0 0 0 3 4 0 0 0 0 3 4 0 0 0 0 </map>
+  <map> 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 </map>
+  <map> 0 0 0 0 6 0 0 0 0 0 6 0 0 0 0 </map>
+  <map> 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 </map>
+  <map> 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 </map>
+  <map> 0 0 0 0 6 0 0 0 0 0 6 0 0 0 0 </map>
+  <map> 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 </map>
+  <map> 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 </map>
+  <map> 0 0 0 0 6 0 0 0 0 0 6 0 0 0 0 </map>
+  <map> 1 1 1 1 1 0 0 0 0 0 1 1 1 1 1 </map>
+  <map> 0 0 0 0 3 0 0 0 0 0 2 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 </map>
+  <map> 6 1 1 0 1 0 6 0 1 0 6 0 1 1 6 </map>
+  <map> 0 3 1 0 0 0 0 0 0 0 0 0 1 2 0 </map>
+  <map> 0 0 1 0 6 0 0 0 0 0 1 0 1 0 0 </map>
+  <map> 0 0 6 0 0 0 0 0 0 0 0 0 6 0 0 </map>
+  <map> 0 0 1 0 1 0 0 0 0 0 6 0 1 0 0 </map>
+  <map> 0 5 1 0 0 0 0 0 0 0 0 0 1 4 0 </map>
+  <map> 6 1 2 0 6 0 1 0 6 0 1 0 3 1 6 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 5 6 1 6 2 0 0 0 0 0 0 0 0 </map>
+  <map> 0 5 6 2 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 5 6 2 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 6 1 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 6 2 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 1 6 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 6 1 2 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 6 1 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 3 1 6 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 3 4 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 3 4 0 0 0 0 0 0 0 0 0 0 0 0 </map>
+  <map> 0 0 1 0 0 0 0 0 0 0 0 0 0 0 5 </map>
+  <map> 0 5 1 0 0 0 0 0 0 0 0 0 0 5 1 </map>
+  <map> 1 6 1 6 1 1 6 0 6 1 1 1 1 1 6 </map>
+  <map> 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 </map>
+  <map> 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 </map>
+  <map> 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 </map>
+  <map> 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 </map>
+</PictureMap>
+
+
+<Fishka frag="3742" type="1" link="1"/>
+<Fishka frag="3636" type="5" link="1"/>
+<Fishka frag="3651" type="7" link="1"/>
+<Fishka frag="3252" type="13" link="1"/>
+<Fishka frag="3251" type="10" link="1"/>
+<Fishka frag="3267" type="5" link="1"/>
+<Fishka frag="2870" type="15" link="1"/>
+<Fishka frag="2872" type="15" link="1"/>
+<Fishka frag="2874" type="15" link="1"/>
+<Fishka frag="2842" type="15" link="1"/>
+<Fishka frag="2840" type="15" link="1"/>
+<Fishka frag="2844" type="15" link="1"/>
+<Fishka frag="2904" type="15" link="1"/>
+<Fishka frag="2902" type="15" link="1"/>
+<Fishka frag="2900" type="15" link="1"/>
+  <GhostFishka x="425" y="8020" type="15"/>
+  <GhostFishka x="425" y="7980" type="13"/>
+  <GhostFishka x="385" y="8020" type="14"/>
+  <GhostFishka x="425" y="8060" type="7"/>
+  <GhostFishka x="465" y="8020" type="11"/>
+  <GhostFishka x="425" y="7940" type="5"/>
+  <GhostFishka x="505" y="8020" type="10"/>
+  <GhostFishka x="425" y="8100" type="5"/>
+  <GhostFishka x="345" y="8020" type="10"/>
+  <GhostFishka x="385" y="7980" type="3"/>
+  <GhostFishka x="465" y="7980" type="6"/>
+  <GhostFishka x="465" y="8060" type="12"/>
+  <GhostFishka x="385" y="8060" type="9"/>
+  <GhostFishka x="385" y="7940" type="4"/>
+  <GhostFishka x="505" y="7980" type="8"/>
+  <GhostFishka x="465" y="8100" type="1"/>
+  <GhostFishka x="345" y="8060" type="2"/>
+<Fishka frag="2777" type="5" link="1"/>
+<Fishka frag="2792" type="11" link="1"/>
+<Fishka frag="2791" type="2" link="1"/>
+<Fishka frag="2793" type="14" link="1"/>
+<Fishka frag="2802" type="11" link="1"/>
+<Fishka frag="2803" type="8" link="1"/>
+<Fishka frag="2787" type="5" link="1"/>
+<Fishka frag="2801" type="14" link="1"/>
+<Fishka frag="2691" type="5" link="1"/>
+<Fishka frag="2693" type="5" link="1"/>
+<Fishka frag="2677" type="15" link="1"/>
+<Fishka frag="2676" type="7" link="1"/>
+<Fishka frag="2678" type="13" link="1"/>
+<Fishka frag="2662" type="15" link="1"/>
+<Fishka frag="2647" type="5" link="1"/>
+<Fishka frag="2706" type="5" link="1"/>
+<Fishka frag="2708" type="5" link="1"/>
+<Fishka frag="2722" type="14" link="1"/>
+<Fishka frag="2527" type="12" link="1"/>
+<Fishka frag="2542" type="5" link="1"/>
+<Fishka frag="2526" type="3" link="1"/>
+<Fishka frag="2511" type="15" link="1"/>
+<Fishka frag="2512" type="11" link="1"/>
+<Fishka frag="2510" type="11" link="1"/>
+  <GhostFishka x="385" y="6620" type="3"/>
+  <GhostFishka x="425" y="6620" type="12"/>
+  <GhostFishka x="425" y="6660" type="3"/>
+  <GhostFishka x="465" y="6660" type="12"/>
+  <GhostFishka x="465" y="6700" type="3"/>
+  <GhostFishka x="505" y="6700" type="8"/>
+  <GhostFishka x="385" y="6580" type="12"/>
+  <GhostFishka x="145" y="6420" type="7"/>
+  <GhostFishka x="185" y="6420" type="13"/>
+  <GhostFishka x="145" y="6380" type="7"/>
+  <GhostFishka x="185" y="6380" type="13"/>
+  <GhostFishka x="145" y="6340" type="7"/>
+  <GhostFishka x="185" y="6340" type="13"/>
+  <GhostFishka x="145" y="6460" type="15"/>
+  <GhostFishka x="185" y="6460" type="15"/>
+  <GhostFishka x="145" y="6300" type="7"/>
+  <GhostFishka x="145" y="6260" type="5"/>
+<Fishka frag="2221" type="10" link="1"/>
+<Fishka frag="2222" type="10" link="1"/>
+<Fishka frag="2224" type="10" link="1"/>
+<Fishka frag="2226" type="10" link="1"/>
+<Fishka frag="2228" type="10" link="1"/>
+<Fishka frag="2229" type="10" link="1"/>
+<Fishka frag="2230" type="10" link="1"/>
+<Fishka frag="2231" type="10" link="1"/>
+<Fishka frag="2232" type="10" link="1"/>
+<Fishka frag="2233" type="10" link="1"/>
+<Fishka frag="2223" type="14" link="1"/>
+<Fishka frag="2225" type="14" link="1"/>
+<Fishka frag="2227" type="14" link="1"/>
+<Fishka frag="2238" type="3" link="1"/>
+<Fishka frag="2242" type="9" link="1"/>
+<Fishka frag="2240" type="15" link="1"/>
+<Fishka frag="2239" type="14" link="1"/>
+<Fishka frag="2241" type="14" link="1"/>
+<Fishka frag="2255" type="5" link="1"/>
+<Fishka frag="2270" type="5" link="1"/>
+<Fishka frag="2254" type="1" link="1"/>
+<Fishka frag="2256" type="1" link="1"/>
+<Fishka frag="3580" type="5" link="1"/>
+<Fishka frag="3565" type="6" link="1"/>
+<Fishka frag="3566" type="11" link="1"/>
+<Fishka frag="3567" type="9" link="1"/>
+<Fishka frag="3552" type="13" link="1"/>
+<Fishka frag="3551" type="6" link="1"/>
+<Fishka frag="3537" type="12" link="1"/>
+  <GhostFishka x="345" y="9300" type="7"/>
+  <GhostFishka x="265" y="9300" type="13"/>
+  <GhostFishka x="305" y="9300" type="5"/>
+  <GhostFishka x="305" y="9260" type="14"/>
+  <GhostFishka x="265" y="9260" type="6"/>
+  <GhostFishka x="345" y="9260" type="12"/>
+  <GhostFishka x="305" y="9340" type="15"/>
+  <GhostFishka x="265" y="9340" type="3"/>
+  <GhostFishka x="345" y="9340" type="9"/>
+<Fishka frag="3337" type="9" link="1"/>
+<Fishka frag="3322" type="6" link="1"/>
+<Fishka frag="3336" type="6" link="1"/>
+<Fishka frag="3323" type="9" link="1"/>
+<Fishka frag="3308" type="6" link="1"/>
+<Fishka frag="3351" type="9" link="1"/>
+<Fishka frag="3350" type="6" link="1"/>
+<Fishka frag="3438" type="5" link="1"/>
+<Fishka frag="3408" type="5" link="1"/>
+<Fishka frag="3423" type="15" link="1"/>
+  <GhostFishka x="345" y="8580" type="7"/>
+  <GhostFishka x="345" y="8540" type="13"/>
+  <GhostFishka x="345" y="8500" type="7"/>
+  <GhostFishka x="385" y="8460" type="13"/>
+  <GhostFishka x="385" y="8420" type="7"/>
+  <GhostFishka x="425" y="8380" type="13"/>
+  <GhostFishka x="345" y="8460" type="6"/>
+  <GhostFishka x="385" y="8500" type="9"/>
+  <GhostFishka x="385" y="8380" type="6"/>
+  <GhostFishka x="425" y="8420" type="9"/>
+  <GhostFishka x="425" y="8340" type="7"/>
+<Fishka frag="2220" type="3" link="1"/>
+<Fishka frag="2234" type="9" link="1"/>
+<Fishka frag="2219" type="5" link="1"/>
+<Fishka frag="2204" type="5" link="1"/>
+<Fishka frag="2189" type="5" link="1"/>
+<Fishka frag="2205" type="5" link="1"/>
+<Fishka frag="2190" type="5" link="1"/>
+<Fishka frag="2175" type="5" link="1"/>
+<Fishka frag="2160" type="5" link="1"/>
+<Fishka frag="2174" type="5" link="1"/>
+<Fishka frag="2145" type="4" link="1"/>
+<Fishka frag="2159" type="4" link="1"/>
+<Fishka frag="3712" type="5" link="1"/>
+<Fishka frag="3666" type="7" link="1"/>
+<Fishka frag="3681" type="3" link="1"/>
+<Fishka frag="3652" type="9" link="1"/>
+<Fishka frag="3637" type="6" link="1"/>
+<Fishka frag="3638" type="9" link="1"/>
+<Fishka frag="3623" type="7" link="1"/>
+<Fishka frag="3536" type="3" link="1"/>
+<Fishka frag="3521" type="12" link="1"/>
+<Fishka frag="3100" type="5" link="1"/>
+<Fishka frag="3085" type="5" link="1"/>
+<Fishka frag="3070" type="5" link="1"/>
+<Fishka frag="2899" type="2" link="1"/>
+<Fishka frag="2905" type="8" link="1"/>
+<Fishka frag="2869" type="2" link="1"/>
+<Fishka frag="2875" type="8" link="1"/>
+<Fishka frag="2765" type="7" link="1"/>
+<Fishka frag="2750" type="6" link="1"/>
+<Fishka frag="2769" type="13" link="1"/>
+<Fishka frag="2754" type="12" link="1"/>

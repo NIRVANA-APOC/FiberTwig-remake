@@ -1,0 +1,4 @@
+<AutoImage name="mushroom_1" autosize="true">
+<AddImage name="mushroom.png" left="0" top="0" />
+<FlipImageVertical/>
+</AutoImage>

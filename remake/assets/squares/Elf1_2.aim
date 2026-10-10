@@ -1,0 +1,4 @@
+<AutoImage name="elf1_2" autosize="true">
+<AddImage name="elf1.png" left="0" top="0" />
+<ScaleImage width="100" height="300"/>
+</AutoImage>

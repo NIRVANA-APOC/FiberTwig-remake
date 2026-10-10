@@ -1,0 +1,45 @@
+; Engine configuration file.
+; Fiber Twig Remake - a faithful recreation of Puzzle Lab's "Fiber Twig" (2004)
+; Reverse engineered level/asset formats, rebuilt with Godot 4.
+
+config_version=5
+
+[application]
+
+config/name="Fiber Twig Remake"
+config/description="Reverse-engineered remake of Puzzle Lab's Fiber Twig (2004)."
+run/main_scene="res://scenes/Main.tscn"
+config/features=PackedStringArray("4.4")
+
+[autoload]
+
+AssetLib="*res://src/AssetLib.gd"
+
+[display]
+
+window/size/viewport_width=800
+window/size/viewport_height=600
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep"
+
+[input]
+
+pick={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"button_index":1)]
+}
+rotate={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"button_index":2)]
+}
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/canvas_textures/default_texture_filter=0
+environment/defaults/default_clear_color=Color(0.05, 0.07, 0.05, 1)
+
+[audio]
+
+buses/default_bus_layout=""

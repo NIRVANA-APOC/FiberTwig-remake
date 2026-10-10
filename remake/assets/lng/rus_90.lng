@@ -1,0 +1,922 @@
+<LabInterface ver="1.0" name="rus" mode="Modification">
+
+<o c="TLabLabel">
+<p n="Name">LTrialThanksLabel</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Спасибо, что выбрали нашу игру!</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialHopeLabel</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Мы надеемся, она вам понравится!</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialConditionLabel</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Это демоверсия игры. Вы можете играть 14 дней или запускать игру 14 раз. Зарегистрированная версия открывает доступ ко всем игровым возможностям. Подробнее:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialOrderLabel</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Страница заказа</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialTimesLabel</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">запусков</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialDaysLabel</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">дней</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialFiveMinutesLabel</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Вам осталось играть всего 5 минут.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialPlayButton</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Играть</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialQuitButton</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Выход</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialEnterKeyButton</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Ввести ключ</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialRegistrationButton</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Регистрация</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialRegErrorLabel</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Введён неверный ключ!</p>
+</o>
+
+<o c="TLabButton">
+<p n="Name">BNewWTitle</p>
+<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Новая игра</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BLoadWTitle</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Загрузить</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BScoresWTitle</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Рекорды</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BQuitWTitle</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Выход</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BMenuWGame</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Меню</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LSelectBonusWStartDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Выберите начальный бонус</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RHammerWStartDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Молоток (+5)</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RAmphoraWStartDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Амфора (+5)</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RScoreWStartDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">(+200) очков</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LSelectDifficultyWStartDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Выберите режим игры</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RNoLoseWStartDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Беспроигрышный</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RNormalWStartDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Нормальный</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RHardWStartDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Сложный</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BBackWStartDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Назад</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BPlayWStartDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Играть</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BResumeWMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Продолжить</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BAbortWMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Прервать</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BHelpWMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Помощь</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOptionsWTitle</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Настройки</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BHelpWTitle</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Помощь</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BLoadWMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Загрузить</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOptionsWMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Настройки</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BQuitWMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Выход</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWAbortLivelDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Вы действительно хотите прервать игру?</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWAbortLivelDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWAbortLivelDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Отмена</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevelWBetweenLevelMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Уровень</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LScoreWBetweenLevelMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Очки:</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BLoadWBetweenLevelMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Загрузить</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BSaveWBetweenLevelMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Сохранить</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOptionsWBetweenLevelMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Настройки</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BHelpWBetweenLevelMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Помощь</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BMainMenuWBetweenLevelMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Главное меню</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BNextLevelWBetweenLevelMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Играть</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLoadWLoad</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Загрузить игру</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LNameWLoad</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Название:</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BLoadWLoad</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Загрузить</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BDeleteWLoad</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Удалить</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWLoad</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Отмена</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWDeleteGameDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Вы действительно хотите удалить сохранённую игру?</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWDeleteGameDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWDeleteGameDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Отмена</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWQuitGameDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Вы действительно хотите выйти из игры и потерять все набранные очки?</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWQuitGameDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWQuitGameDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Отмена</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWReplaceGameDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Игра с таким названием уже существует. Заменить?</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWReplaceGameDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWReplaceGameDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Отмена</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LSaveWSave</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Сохранить игру</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LNameWSave</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Название:</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BSaveWSave</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Сохранить</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BDeleteWSave</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Удалить</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWSave</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Отмена</p>
+</o>
+<o c="TLabGrid">
+	<p n="Name">GridWHighScores</p>
+	<p n="FixedCharSet">RUSSIAN</p>
+	<p n="ColCharSet">RUSSIAN;RUSSIAN;RUSSIAN</p>
+	<p n="Cells">(R:1;C:1;Text:N;R:1;C:2;Text:Имя;R:1;C:3;Text:Очки)</p>
+</o>
+<o c="TLabRadioButton">
+		<p n="Name">RENUWLanguage</p>
+		<p n="CharSet">RUSSIAN</p>
+		<p n="Caption">Английский</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RDEUWLanguage</p>
+		<p n="CharSet">RUSSIAN</p>
+		<p n="Caption">Немецкий</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RRUSWLanguage</p>
+		<p n="CharSet">RUSSIAN</p>
+		<p n="Caption">Русский</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RFRAWLanguage</p>
+		<p n="CharSet">RUSSIAN</p>
+		<p n="Caption">Французский</p>
+	</o>
+<o c="TLabRadioButton">
+		<p n="Name">RPTBWLanguage</p>
+		<p n="CharSet">RUSSIAN</p>
+		<p n="Caption">Португальский</p>
+	</o>
+
+<o c="TLabLabel">
+<p n="Name">LabelWClearDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Вы действительно хотите очистить Таблицу рекордов?</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWClearDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWClearDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Отмена</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LMusicWOptions</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Громкость музыки</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LSoundWOptions</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Громкость звуков</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RNoMusicWOptions</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Без музыки</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RNoSoundWOptions</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Без звуков</p>
+</o>
+<o c="TLabCheckBox">
+<p n="Name">CheckBoxHintsWOptions</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Отключить подсказки</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BLanguageWOptions</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Язык</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWOptions</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWOptions</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Отмена</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWFinishLevelDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWGameOverDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Игра окончена! Попробуйте ещё раз...</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWGameOverDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWGameFinishedDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Поздравляем! Вы полностью закончили игру "Fiber Twig"!</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWGameFinishedDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LYourNameWGameFinishedDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Ваше имя:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWHighScores</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Таблица рекордов</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWHighScores</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BClearWHighScores</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Очистить</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWLanguage</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabCheckBox">
+<p n="Name">CheckBoxColorWOptions</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Цвет 32 бит</p>
+</o>
+<o c="TLabCheckBox">
+<p n="Name">CheckBoxFullScreenWOptions</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Полный экран</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevelWGame</p>
+<p n="Left">15</p>
+<p n="OriginLeft">615</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Уровень:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevelNumWGame</p>
+<p n="Left">120</p>
+<p n="OriginLeft">720</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LScoreWGame</p>
+<p n="Left">14</p>
+<p n="OriginLeft">614</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Очки:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LScoreCountWGame</p>
+<p n="Left">100</p>
+<p n="OriginLeft">700</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LDropSectionWGame</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">ВОЛШЕБНАЯ КОРЗИНКА</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLoadingWProgressBar</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Загрузка...</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LNotEnabledWNotEnabled</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Мы надеемся, вам понравится наша игра! Это демонстрационная версия игры. Вы можете играть 14 дней или запускать игру 14 раз. Зарегистрированная версия не содержит никаких ограничений и открывает доступ ко всем уровням. Для получения более подробной информации зайдите на наш сайт:</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWNotEnabled</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Позже</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LExperienceWBetweenLevelMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Опыт:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevelCompleteWFinishLevelDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Уровень пройден!</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LYourScoreWGameFinishedDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Набраные очки:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LYourHammerWGameFinishedDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Молотки:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LYourCapsWGameFinishedDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Амфоры:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTotalScoreWGameFinishedDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Всего очков:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LCombDoneWGame</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Все комбинации собраны!</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel1WBetweenLevelMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Среди цветов в саду Прекрасной Волшебницы</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel2WBetweenLevelMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Мелодия из семи нот для Королевы Эльфов</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel3WBetweenLevelMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Освещение пути для Звёздного Охотника</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel4WBetweenLevelMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Головоломка, загаданная Мудрой Совой</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel5WBetweenLevelMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">В зарослях плюща в саду Эльфа-Музыканта</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel6WBetweenLevelMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Узоры из веточек для Сторожевого Пса</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BDemoWLoad</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Демо</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RIntroductionWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Введение</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RGettingStartedWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Начало игры</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RPlayingFieldWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Игровое поле</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RHowToPlayWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Основные правила</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RArrangingTwigsWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Виды веточек</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RMagicToolsWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Инструменты</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RSkillsAndExperienceWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Умения и опыт</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RCombinationsWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Комбинации</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RScoringPointsWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Подсчёт очков</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RKeyboardShortcutsWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Горячие клавиши</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">ROptionsWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Настройки</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RBonusesWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Бонусы</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RRegistrationWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Регистрация</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RAboutPuzzleLabWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Puzzle Lab</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTIntroductionWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Игра перенесёт вас в фантастический сад, населённый волшебными существами. Когда-то этот сад был украшен прекрасными узорами из маленьких веточек. Но однажды страшный ураган пронёсся и разрушил узоры, не оставив и следа от былого украшения. Ваша задача – соединить все веточки и восстановить прежние узоры.
+                                                                                                                         Веточки появляются в нижней части экрана, постепенно накапливаясь. Вы можете брать их и присоединять к другим веточкам на игровом поле таким образом, чтобы у вас получился узор. Все веточки должны быть соединены между собой, иначе вы не сможете добраться до верха экрана и завершить уровень. Следите за конвейером, в котором появляются веточки, - если он переполнится, вы проиграете.                                                                                                                                                                                     В некоторых уровнях на игровом поле вам могут встретиться бонусные объекты, которые нужно «вплести» в ваш узор с помощью веточек. Также вам встретятся «летающие объекты», которые мешают положить веточку в нужное место, - нужно подождать, пока они переместятся. Во время игры вы можете пользоваться Волшебными инструментами: Амфорой для создания веточек нужной формы и Молотком для разбивания лишних веточек.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTGettingStartedWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Перед началом игры вам будет предложено выбрать начальный бонус и уровень сложности.
+                                                                                                                 Существует три вида начальных бонусов: Молоток, Амфора и Дополнительные очки. Выбрав один из бонусов, вы получите небольшое преимущество уже в начале игры.
+                                                                                                                               Теперь выберите уровень сложности игры. Вы можете играть в одном из следующих режимов:
+                                                                                                                 Беспроигрышный режим - невозможно проиграть, но и невозможно набрать очки
+                                                                                                                                                       Лёгкий режим – веточки двигаются медленно, и вы можете набирать очки
+                                                                                                                                                                       Нормальный режим - веточки появляются со средней скоростью, и вы можете набирать очки
+                                                                                                                                        Усложнённый режим - веточки двигаются быстрее, и вы можете набрать большее количество очков</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTPlayingFieldWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">В центре находится картинка уровня, на которой уже есть начальная веточка, вам нужно присоединить к ней другую и продолжить соединять веточки, пока вы не достигнете верха экрана.                                                                                                                                                                                   В нижней части экрана находится конвейер, в котором постепенно накапливаются веточки различных форм. Когда конвейер переполняется, игра заканчивается. Веточки нужно использовать для того, чтобы восстановить узор.                                                                                                                 В правом верхнем углу расположена кнопка «Меню», ниже указаны количество очков и текущий уровень.  Далее можно видеть картинку, на которой изображена некоторая комбинация из веточек, - она меняется по мере того, как вы собираете комбинации. Ещё ниже находятся Волшебные инструменты, которые пригодятся вам в ходе игры. Под Волшебными инструментами расположена Волшебная корзинка, куда вы можете выбрасывать лишние веточки.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTHowToPlayWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Основные правила игры таковы:
+                                                                                                                                                   - Щёлкните левой кнопкой мыши на веточке, которую вы хотите взять. Она будет перемещаться вместе с курсором.
+                                                                                                    - Если веточку нужно повернуть, сделайте это нажатием правой кнопки мыши или вращайте колёсико мыши. 
+                                                                                                             - Поднесите одну веточку к другой и соедините их нажатием левой кнопки мыши.                                                                                                                                                        - Соедините все веточки на игровом поле.                                                                                                                                      - Восстановите узор из веточек, чтобы завершить уровень.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTArrangingTwigsWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Веточки постепенно накапливаются в конвейере, расположенном в нижней части экрана. Цель игры – соединить веточки друг с другом на игровом поле, чтобы добраться до верхней части экрана. Помимо обыкновенных веточек, в конвейере появляются два вида особенных веточек: «скрытые веточки» - вы не видите, какая у них форма, пока не возьмёте, и «счастливые веточки» - если вы их используете, вы получите бонус. На игровом поле вы встретите также прозрачные веточки – на них можно положить сверху веточки такой же формы и присоединить к основному узору.                                                                                                                                                                   Веточки имеют различные формы и разное количество ответвлений. Если у веточки есть свободное ответвление, из него выходит свет, показывая, что к этой веточке можно присоединить ещё одну. По мере того, как вы продвигаетесь вверх, следите, чтобы  ответвления нижних веточек не оставались свободными, потому что движение вверх возможно только при условии, что все веточки соединены друг с другом. Свободные ответвления, не позволяющие двигаться вверх, обозначены зелёным светом. Если соединить веточки возможно, вы увидите зелёную стрелочку, если нет – красный крестик.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTMagicToolsWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Волшебные инструменты помогают вам в игре. Цифра в левом нижнем углу иконки инструмента показывает, сколько таких инструментов есть в вашем распоряжении. Некоторые бонусы увеличивают количество использований инструментов.
+                                                                                                                                                                    Молоток. Этот инструмент можно использовать, чтобы разбивать ненужные веточки в конвейере и на игровом поле (все, кроме начальных). ИСПОЛЬЗОВАНИЕ МОЛОТКА: Щёлкните левой кнопкой мыши по иконке молотка, чтобы его взять. Поднесите молоток к веточке и нажмите левую кнопку мыши, чтобы разбить её. Вы можете разбить несколько веточек подряд, как в конвейере, так и на игровом поле. Чтобы вернуть молоток на место, нажмите правую кнопку мыши.
+                                                                                                                                                                       Амфора. Этот инструмент может вам понадобиться в двух случаях: если вы не можете найти веточку нужной формы или если вам нужно обрезать лишние элементы у веточки. ИСПОЛЬЗОВАНИЕ АМФОРЫ: Щёлкните левой кнопкой мыши по иконке амфоры, чтобы её взять. Чтобы создать недостающую веточку или обрезать лишние элементы, поднесите амфору к нужному месту на игровом поле и нажмите левую кнопку мыши. Чтобы вернуть амфору на место, нажмите правую кнопку мыши.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTSkillsAndExperienceWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">В конце каждого уровня вам даётся некоторое количество пунктов опыта. Количество пунктов зависит от количества веточек, которые вы использовали для восстановления узора в предыдущем уровне, а также от количества комбинаций, которые вы собрали из веточек (один пункт за каждую комбинацию и два пункта, если вы собрали все комбинации).
+                                                                                                                                                                                   Вы можете распределить пункты опыта между пятью умениями, которые показаны в диалоговом окне:
+                                                                                                                  Управление временем – позволяет не проигрывать некоторое время после того, как конвейер переполняется. 
+                                                                                                     Ускоритель корзинки  – ускоряет работу Волшебной корзинки, позволяя вам выбрасывать больше веточек.
+                                                                                                Счастливый случай – увеличивает вероятность появления «счастливых веточек» (которые приносят бонусы).
+                                                                                                                           Амфора – создаёт веточки желаемой формы.
+                                                                                                              Молоток -  разбивает ненужные веточки.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTCombinationsWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Если вы составляете специальные комбинации из веточек, восстанавливая узор, вы получаете различные бонусы. Составлять такие комбинации несложно: вам нужно соединить веточки так, как показано на картинке в правой части экрана.  Когда вы составляете одну комбинацию, картинка исчезает и на её месте появляется новая, с новой комбинацией, которую можно собрать.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTScoringPointsWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Вы набираете очки за каждую веточку, использованную для восстановления узора. Количество очков за веточку зависит от количества её ответвлений. Это означает, что чем больше у веточки ответвлений, тем больше очков вы получите, если её используете. Кроме того, вы получаете дополнительные очки, если используете бонусные веточки или составляете комбинации из веточек.
+                                                                                                                                   Во время игры вы также зарабатываете опыт. Количество пунктов опыта зависит от количества веточек, которые вы использовали для восстановления узора, и от количества комбинаций, которые вы составили (один пункт за каждую комбинацию и два пункта, если вы собрали все комбинации).  Поэтому старайтесь использовать веточки с наибольшим количеством ответвлений и собирайте как можно больше комбинаций – тогда вы сможете улучшать свои умения.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTShortcutsWHelp</p>
+<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Пробел - взять первую веточку в конвейере. Если конвейер пуст, нажатие пробела генерирует новую веточку.                                  '1', '2' ... '9' - взять веточку с соответствующим номером в конвейере.                                                              F3 -  взять (положить) молоток.                                                                      F4 - взять (положить) амфору.                               Del - выбросить веточку в волшебную корзинку.                                                                 Esc - открыть меню.                                                                                                                                                                                         Чит-коды                                                                                                                          В зарегистрированной версии работают следующие чит-коды:                                                                                                                                                                                    1. _AddHammers - F5 F7 F7 F8 F6. Количество использований: 5. Вы получаете 5 дополнительных молотков. Этот код можно использовать в одном уровне 5 раз.                                                                                                                                                                                                   2. _AddAmphoras - F5 F6 F8 F7 F8. Количество использований: 5. Вы получаете 5 дополнительных амфор. Этот код можно использовать в одном уровне 5 раз.                                                                                                                  3. _ExplodeTwigs - F5 F8 F7 F6 F7 F8. Количество использований: 5. Взрывает все веточки в конвейере. Этот код можно использовать в одном уровне 5 раз.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTBonusesWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Вы можете получить следующие бонусы, если вы составляете комбинации или используете бонусные веточки:
+                                                                                                                                                                                     1. Волшебный взрыв – полностью очищает конвейер, освобождая место для новых веточек
+                                                                                                                                         2. Дополнительные молотки – вы получаете некоторое количество волшебных молотков
+                                                                                                                                                   3. Дополнительные амфоры - вы получаете некоторое количество волшебных амфор
+                                                                                                                                                   4. Дополнительные очки – вы получаете дополнительные очки
+                                                                                                                                                                                          5. Ускоритель Корзинки - ускоряет работу Волшебной корзинки, позволяя вам выбрасывать больше веточек.
+                                                                                                               6. Счастливый случай – увеличивает вероятность появления «счастливых веточек» (которые приносят бонусы).
+                                                                                                                                                                                    7. Управление временем – позволяет не проигрывать некоторое время после того, как конвейер переполняется.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTOptionsWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Вы можете регулировать следующие игровые возможности:
+                                                                                                                                                                         Язык – выберите язык игры
+                                                                                                                                                       Отключить подсказки – отметьте этот пункт, если вы не хотите видеть подсказки во время игры
+                                                                                                                                             Полный экран - отметьте этот пункт, если вы хотите играть в полноэкранном режиме 
+                                                                                                                                             Цвет 32-бит - отметьте этот пункт, если хотите получить более глубокий цвет 
+                                                                                                                                                       Громкость музыки – выберите нужный уровень громкости музыки
+                                                                                                                                                                        Громкость звука - выберите нужный уровень громкости звука</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTRegistrationWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Это демонстрационная версия игры. Вы можете играть 14 дней или запускать игру 14 раз. Зарегистрированная версия не содержит никаких ограничений и открывает доступ ко всем уровням. Для получения более подробной информации зайдите на наш сайт: www.PuzzleLab.com
+                                                                                                        Преимущества зарегистрированной версии:                                                                                                                                                     - Неограниченное время игры                                                                                                                                                            - Новые захватывающие уровни                                                                                                                                                       - Новые симпатичные существа                                                                                                                                                    - Новые интересные комбинации                                                                                                                   - Чит-коды: _AddHammers, _AddAmphoras, _ExplodeTwigs</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTAboutWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Благодарности
+                                                                                                                                                                            Puzzle Lab выражает благодарность всем, кто принял участие в данном проекте:
+                                                                                                                                                                Анастасия Фомина, Андрей Фомин, Павел Москвин, Олег Рябинин, Софья Шишацкая, Алексей Фадеев, Дмитрий Горбатков, Михаил Третьяков, Надежда Москвина, Сергей Потапов, Сергей Захаров, Антон Пищур, Сергей Каминский, Олеся Деркач.
+                                                                                                                                                                  
+                                                                                                                                                  </p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCloseWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Закрыть</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel7WBetweenLevelMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Уличные фонари в тёмном саду Кентавра</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel8WBetweenLevelMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Во владениях зеленоволосой Нимфы</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel9WBetweenLevelMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Встреча со старым гномом, охраняющим лесные лабиринты</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel10WBetweenLevelMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Игра в прятки с Мухоморами</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel11WBetweenLevelMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Визит к прекрасной Гарпии, сидящей на ветвях</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel12WBetweenLevelMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">В гостях у Царевны-лягушки, хозяйки подводного мира</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel13WBetweenLevelMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Густые заросли в саду Волшебника</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel14WBetweenLevelMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Падающие цветы в прекрасном саду Сатира</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel15WBetweenLevelMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Дух ветра, поющий свою весёлую песню в небесах</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel16WBetweenLevelMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Приключение в саду Гигантского Кальмара</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel17WBetweenLevelMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Встреча с Летающим Слоном, повелителем всех существ</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWExitToMainMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Вы действительно хотите выйти в Главное меню?</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWExitToMainMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWExitToMainMenu</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Отмена</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintSkillLive</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Управление временем – позволяет не проигрывать некоторое время после того, как конвейер переполняется.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintSkillDropAccel</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Ускоритель Корзинки  – ускоряет работу Волшебной корзинки, позволяя вам выбрасывать больше веточек.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintSkillLuckyTwig</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Счастливый случай – увеличивает вероятность появления «счастливых веточек» (которые приносят бонусы).</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintSkillAmphora</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Амфора – создаёт веточки нужной формы.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintSkillHammer</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Молоток -  разбивает ненужные веточки.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintClosedLink</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Узор нельзя замкнуть, иначе вы не сможете продолжить узор и завершить уровень.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintFirstTakeBonusFishka</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Вы взяли «счастливую» веточку. Если вы её используете, то получите бонус.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintFirstTakeQuestFishka</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Вам попалась «скрытая» веточка. Вы увидите, какой она формы только после того, как возьмёте.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintFirstTakeFishka</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Можно присоединять одну веточку к другой, если их ответвления подсвечиваются.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintMatchingJoints</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Нельзя соединить веточки с неподходящими ответвлениями.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintFirstTransparentFishka</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Перед вами прозрачные веточки. Поверх них можно положить другие веточки такой же формы.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintTransparentTwig</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Прозрачные веточки можно покрывать только веточками такой же формы.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintLevelTop</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Теперь соедините между собой все веточки, чтобы восстановить узор и завершить уровень.</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">REasyWStartDialog</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Лёгкий</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintFishComb</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Вы составили комбинацию из веточек и получили бонус.</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BBuyNowWNotEnabled</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">Купить игру</p>
+</o>
+</LabInterface>

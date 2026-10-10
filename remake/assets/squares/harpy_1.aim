@@ -1,0 +1,4 @@
+<AutoImage name="harpy_1" autosize="true">
+<AddImage name="harpy.png" left="0" top="0" />
+<FlipImageVertical/>
+</AutoImage>

@@ -1,0 +1,788 @@
+<LabInterface ver="1.0" name="deu" mode="Modification">
+<o c="TLabLabel">
+<p n="Name">LTrialThanksLabel</p>
+<p n="Caption">Vielen Dank für das Testen unseres Spiels!</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialHopeLabel</p>
+<p n="Caption">Wir hoffen, Dir gefällt Fiber Tiwg!</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialConditionLabel</p>
+<p n="Caption">Dies ist eine Testversion. Du kannst Sie für 14 Tage oder 14 Starts nutzen (was als erstes Verbraucht ist). Die Registrierung des Spiels entfernt alle Beschränkungen und gibt alle Level frei. Für mehr Details siehe:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialOrderLabel</p>
+<p n="Caption">Bestell Seite</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialTimesLabel</p>
+<p n="Caption">Starts</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialDaysLabel</p>
+<p n="Caption">Tage</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialFiveMinutesLabel</p>
+<p n="Caption">Jetzt hast Du nur noch 5 Minuten Spielzeit.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialPlayButton</p>
+<p n="Caption">Spielen</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialQuitButton</p>
+<p n="Caption">Beenden</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialEnterKeyButton</p>
+<p n="Caption">Register Code eingeben</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialRegistrationButton</p>
+<p n="Caption">Registrierung</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialRegErrorLabel</p>
+<p n="Caption">Registrierung fehlgeschlagen!</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BNewWTitle</p>
+<p n="Caption">Neues Spiel</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BLoadWTitle</p>
+<p n="Caption">Spiel laden</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BScoresWTitle</p>
+<p n="Caption">High Score</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BQuitWTitle</p>
+<p n="Caption">Beenden</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BMenuWGame</p>
+<p n="Caption">Menu</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LSelectBonusWStartDialog</p>
+<p n="Caption">Wähle Anfangsbonus</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RHammerWStartDialog</p>
+<p n="Caption">Hammer (+5)</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RAmphoraWStartDialog</p>
+<p n="Caption">Amphore (+5)</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RScoreWStartDialog</p>
+<p n="Caption">Punkte (+200)</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LSelectDifficultyWStartDialog</p>
+<p n="Caption">Wähle den Schwierigkeitsgrad</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RNoLoseWStartDialog</p>
+<p n="Caption">Nie verlieren</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RNormalWStartDialog</p>
+<p n="Caption">Normal</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RHardWStartDialog</p>
+<p n="Caption">Schwer</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BBackWStartDialog</p>
+<p n="Caption">Zurück</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BPlayWStartDialog</p>
+<p n="Caption">Spielen</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BResumeWMenu</p>
+<p n="Caption">Fortfahren</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BAbortWMenu</p>
+<p n="Caption">Level abbrechen</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BHelpWMenu</p>
+<p n="Caption">Hilfe</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOptionsWTitle</p>
+<p n="Caption">Optionen</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BHelpWTitle</p>
+<p n="Caption">Hilfe</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BLoadWMenu</p>
+<p n="Caption">Laden</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOptionsWMenu</p>
+<p n="Caption">Optionen</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BQuitWMenu</p>
+<p n="Caption">Beenden</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWAbortLivelDialog</p>
+<p n="Caption">Are you sure you want to abort this game?</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWAbortLivelDialog</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWAbortLivelDialog</p>
+<p n="Caption">Abbruch</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevelWBetweenLevelMenu</p>
+<p n="Caption">Level</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LScoreWBetweenLevelMenu</p>
+<p n="Caption">Punkte:</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BLoadWBetweenLevelMenu</p>
+<p n="Caption">Spiel laden</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BSaveWBetweenLevelMenu</p>
+<p n="Caption">Spiel speichern</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOptionsWBetweenLevelMenu</p>
+<p n="Caption">Optionen</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BHelpWBetweenLevelMenu</p>
+<p n="Caption">Hilfe</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BMainMenuWBetweenLevelMenu</p>
+<p n="Caption">Hauptmenü</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BNextLevelWBetweenLevelMenu</p>
+<p n="Caption">Nächster Level</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLoadWLoad</p>
+<p n="Caption">Spiel laden</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LNameWLoad</p>
+<p n="Caption">Spiel Name:</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BLoadWLoad</p>
+<p n="Caption">Laden</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BDeleteWLoad</p>
+<p n="Caption">Löschen</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWLoad</p>
+<p n="Caption">Abbruch</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWDeleteGameDialog</p>
+<p n="Caption">Sicher, dass Du das gespeicherte Spiel löschen möchtest?</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWDeleteGameDialog</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWDeleteGameDialog</p>
+<p n="Caption">Abbruch</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWQuitGameDialog</p>
+<p n="Caption">Sicher, dass Du das Spiel beenden und alle Punkte verlieren willst?</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWQuitGameDialog</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWQuitGameDialog</p>
+<p n="Caption">Abbruch</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWReplaceGameDialog</p>
+<p n="Caption">Ein gleichnamiges Spiel existiert bereits. Bist Du sicher, dass Du es ersetzen willst?</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWReplaceGameDialog</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWReplaceGameDialog</p>
+<p n="Caption">Abbruch</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LSaveWSave</p>
+<p n="Caption">Spiel speichern</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LNameWSave</p>
+<p n="Caption">Spiel Name:</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BSaveWSave</p>
+<p n="Caption">Speichern</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BDeleteWSave</p>
+<p n="Caption">Löschen</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWSave</p>
+<p n="Caption">Abbruch</p>
+</o>
+<o c="TLabGrid">
+	<p n="Name">GridWHighScores</p>
+	<p n="FixedCharSet">EASTEUROPE</p>
+	<p n="ColCharSet">EASTEUROPE;EASTEUROPE;EASTEUROPE</p>
+	<p n="Cells">(R:1;C:1;Text:N;R:1;C:2;Text:Name;R:1;C:3;Text:Punkte)</p>
+</o>
+<o c="TLabRadioButton">
+		<p n="Name">RENUWLanguage</p>
+		<p n="Caption">Englisch</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RDEUWLanguage</p>
+		<p n="Caption">Deutsch</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RRUSWLanguage</p>
+		<p n="Caption">Russisch</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RFRAWLanguage</p>
+		<p n="Caption">Französisch</p>
+	</o>
+        <o c="TLabRadioButton">
+		<p n="Name">RPTBWLanguage</p>
+		<p n="Caption">Portugisisch</p>
+	</o>
+<o c="TLabLabel">
+<p n="Name">LabelWClearDialog</p>
+<p n="Caption">Sicher, Du willst die High Score Tabelle löschen?</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWClearDialog</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWClearDialog</p>
+<p n="Caption">Abbruch</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LMusicWOptions</p>
+<p n="Caption">Musiklautstärke</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LSoundWOptions</p>
+<p n="Caption">Geräuschlautstärke</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RNoMusicWOptions</p>
+<p n="Caption">Keine Musik</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RNoSoundWOptions</p>
+<p n="Caption">Keine Geräusche</p>
+</o>
+<o c="TLabCheckBox">
+<p n="Name">CheckBoxHintsWOptions</p>
+<p n="Caption">Tipps abschalten</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BLanguageWOptions</p>
+<p n="Caption">Sprache</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWOptions</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWOptions</p>
+<p n="Caption">Abbruch</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWFinishLevelDialog</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWGameOverDialog</p>
+<p n="Caption">Game over! Vielleicht nächstes mal...</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWGameOverDialog</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWGameFinishedDialog</p>
+<p n="Caption">Glückwunsch! Du hast Fiber Twig komplett geschafft!</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWGameFinishedDialog</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LYourNameWGameFinishedDialog</p>
+<p n="Caption">Dein Name:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWHighScores</p>
+<p n="Caption">High Score</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWHighScores</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BClearWHighScores</p>
+<p n="Caption">Löschen</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWLanguage</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabCheckBox">
+<p n="Name">CheckBoxColorWOptions</p>
+<p n="Caption">32 bit Farben</p>
+</o>
+<o c="TLabCheckBox">
+<p n="Name">CheckBoxFullScreenWOptions</p>
+<p n="Caption">Vollbild</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevelWGame</p>
+<p n="Left">15</p>
+<p n="OriginLeft">615</p>
+<p n="Caption">Level:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevelNumWGame</p>
+<p n="Left">120</p>
+<p n="OriginLeft">720</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LScoreWGame</p>
+<p n="Left">14</p>
+<p n="OriginLeft">614</p>
+<p n="Caption">Punkte:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LScoreCountWGame</p>
+<p n="Left">100</p>
+<p n="OriginLeft">700</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LDropSectionWGame</p>
+<p n="Caption">Falltür</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLoadingWProgressBar</p>
+<p n="Caption">Ladevorgang...</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LNotEnabledWNotEnabled</p>
+<p n="Caption">Wir hoffen, Dir gefollt Fiber Tiwg!  Dies ist eine Testversion. Du kannst Sie für 14 Tage oder 14 Starts nutzen (was als erstes Verbraucht ist). Die Registrierung des Spiels entfernt alle Beschränkungen und gibt alle Level frei. Für mehr Details siehe:</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWNotEnabled</p>
+<p n="Caption">Später kaufen?</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LExperienceWBetweenLevelMenu</p>
+<p n="Caption">Erfahrungswert:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevelCompleteWFinishLevelDialog</p>
+<p n="Caption">Level geschafft!</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LYourScoreWGameFinishedDialog</p>
+<p n="Caption">Deine Punkte:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LYourHammerWGameFinishedDialog</p>
+<p n="Caption">Deine Hammer:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LYourCapsWGameFinishedDialog</p>
+<p n="Caption">Deine Amphoren:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTotalScoreWGameFinishedDialog</p>
+<p n="Caption">Endpunktzahl:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LCombDoneWGame</p>
+<p n="Caption">Du hast alle Twig Kombinationen gelöst!</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel1WBetweenLevelMenu</p>
+<p n="Caption">Zwischen den Blumen im Garten der schönen Zauberin</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel2WBetweenLevelMenu</p>
+<p n="Caption">Komponiere eine 7-Noten Melodie für die Dame auf dem Vogel</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel3WBetweenLevelMenu</p>
+<p n="Caption">Beleuchte den Weg für den Sternenjäger</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel4WBetweenLevelMenu</p>
+<p n="Caption">Löse das Puzzle der weisen Eule</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel5WBetweenLevelMenu</p>
+<p n="Caption">Im Efeugarten des musizierenden Elfen</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel6WBetweenLevelMenu</p>
+<p n="Caption">Bilde knochenähnliche Muster für den Wachhund</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BDemoWLoad</p>
+<p n="Caption">Demo</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RIntroductionWHelp</p>
+<p n="Caption">Einleitung</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RGettingStartedWHelp</p>
+<p n="Caption">Der Anfang</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RPlayingFieldWHelp</p>
+<p n="Caption">Das Spielfeld</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RHowToPlayWHelp</p>
+<p n="Caption">Spielregeln</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RArrangingTwigsWHelp</p>
+<p n="Caption">Zweige anordnen</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RMagicToolsWHelp</p>
+<p n="Caption">magische Geräte</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RSkillsAndExperienceWHelp</p>
+<p n="Caption">Fähigkeiten</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RCombinationsWHelp</p>
+<p n="Caption">Kombinationen</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RScoringPointsWHelp</p>
+<p n="Caption">Punkte sammeln</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RKeyboardShortcutsWHelp</p>
+<p n="Caption">Tastatur Kurzbefehle</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">ROptionsWHelp</p>
+<p n="Caption">Optionen</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RBonusesWHelp</p>
+<p n="Caption">Bonus</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RRegistrationWHelp</p>
+<p n="Caption">Registrierung</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RAboutPuzzleLabWHelp</p>
+<p n="Caption">Puzzle Lab</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTIntroductionWHelp</p>
+<p n="Caption">In diesem Spiel findest Du Dich in einem schönen Fantasiegarten wieder, der von märchenhaften Kreaturen bewohnt wird. Der Garten war mit herrlichen Mustern verziert, die aus kleinen Twigs (Zweigen) gemacht wurden. Eines Tages brach ein schrecklicher Sturm herein und zerstörte alles. Zurück blieben nur Fragmente von dem, was einst die Attraktion des Gartens war. Deine Mission ist es, die Zweigreste zusammenzufügen und die original Muster zu rekonstruieren.
+                                                                                                                                                                             Die Zweige werden am unteren Bildschirmrand auf einem Förderband herein transportiert und sammeln sich langsam. Der Anfang ist bereits auf dem Spielfeld und Du solltest einen Zweig anfügen, der passt und weitere Legemöglichkeiten bietet. Füge die Zweige zusammen, bis Du den oberen Bildschirmrand erreicht hast. Alle Zweige sollten verbunden sein, lasse keine offenen Stellen, sonst wirst Du niemals weiter kommen. Pass aber auch auf das Förderband auf. Wenn es überfüllt wird mit Zweigen, verlierst Du das Spiel.                                                                                                       In einigen Leveln befindet sich ein Objekt auf dem Spielfeld, welches mit Hilfe der Zweige in das Muster verflochten werden muss. Es gibt auch fliegende Objekte, die Dich am Legen der Zweige hindern, dann musst Du warten, bis sie fort geflogen sind.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTGettingStartedWHelp</p>
+ 
+<p n="Caption">Beim Spielstart werden Dir verschiedene Schwierigkeitsgrade und Startbonus zur Auswahl vorgeschlagen.
+                                                                                                                                    Du kannst als Startbonus den Hammer, die Amphore oder zusätzliche Punkte wählen. Je nach Auswahl erhälst Du entsprechend mehr davon im Spiel.
+                                                                                                                               Nachdem der Startbonus gewählt ist, wähle den Schwierigkeitsgrad. Du kannst folgendes auswählen:
+                                                                                                                 Nie verlieren – Du verlierst wirklich niemals, sammelst aber auch keine Punkte.                                                                                                                                                                                 Einfach – Zweige kommen langsam hinzu und Du sammelst einige Punkte.
+                                                                                                                                                                       Normal – Zweige kommen in normaler Geschwindigkeit und Du sammelst Punkte für Aktionen.
+                                                                                                                                        Schwer – Zweige kommen sehr schnell und Du bekommst die höchsten Punkte.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTPlayingFieldWHelp</p>
+<p n="Caption">Das Spielfeld besteht aus drei Teilen. In der Mitte sollen die Zweigmuster gelegt werden. Der Anfangszweig ist bereits gelegt und Du sollst weitere Zweige anfügen, bis der obere Rand erreicht ist.                                                                                                                                                                                   Am unteren Rand des Bildschirms ist das Förderband, welches allmählich die verschiedenen Zweige herein befördert. Wenn kein Platz mehr übrig ist, verlierst Du das Spiel. Du musst die Zweige im Spielfeld verwenden.                                                                                                                 Auf der rechten Seite ist das Informationsfeld und die magischen Geräte. Im Informationsfeld werden die Punkte, der aktuelle Level und der Menü Knopf angezeigt.  Die magischen Geräte, Hammer und Amphore, können während des Spiels sehr hilfreich sein. Du kannst die Amphore nutzen um fehlende Zweige zu gießen oder Zweige abzuschneiden. Mit dem Hammer zerschlägst Du Zweige auf dem Förderband oder im Spielfeld. Unter den Geräten findest Du noch eine Falltür, wirf hier die unbrauchbaren Zweige einfach fort.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTHowToPlayWHelp</p>
+ 
+<p n="Caption">Die Basisregeln des Spiels sind wie folgt:
+                                                                                                                                       - Ein Linksklick auf den Zweig, der benutzt werden soll, nimmt ihn auf.
+                                                                                                                                                                             - drehe den Zweig wenn nötig durch klicken der rechten Maustaste. 
+                                                                                                                                                                                    - lege den Zweig auf die gewählte Stelle im Spielfeld durch Linksklick mit der Maus.                                                                                                                                                                             - verbinde alle Zwege auf dem Spielfeld miteinander.                                                                                                     - Stelle das Original Zweigmuster wieder her.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTArrangingTwigsWHelp</p>
+ 
+<p n="Caption">Die Zweige werden mit dem Förderband ins Bild transportiert. Das Ziel des Spiels ist es, die Zweige auf dem Spielfeld miteinander zu verbinden um den oberen Bildschirmrand zu erreichen. Neben den normalen Zweigen gibt es zwei spezielle Typen: „Puzzle Twigs“, bei denen du nicht weißt, welche Form sie haben, bis Du sie aufgenommen hast und „Lucky Twigs“, mit denen Du extra Bonus erreichen kannst. Auf dem Spielfeld kannst Du auch durchsichtige Zweige sehen. Du solltest sie mit Zweigen gleicher Form abdecken und mit dem Hauptmuster verbinden.                                                                                                                                                                   Die Zweige können verschiedene Formen haben und alle haben verschiedene Verbindungspunkte. Wenn ein Zweig einen offenen Verbindungspunkt hat, ist es durch einen Lichtschein sichtbar, dort muss ein weiterer Zweig angefügt werden. Du solltest von unten nach oben arbeiten und keine offenen Stellen hinterlassen, denn Du kommst nur weiter, wenn alle Verbindungspunkte genutzt wurden. Du erkennst die Störstellen am grünen Licht. Zusätzlich siehst Du an einem grünen Pfeil, ob es möglich ist den gewählten Zweig zu legen. Wenn es nicht passt, dann erscheint ein rotes Kreuz.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTMagicToolsWHelp</p>
+ 
+<p n="Caption">Die magischen Geräte helfen Dir, die Level zu meistern. Die Anzahl oben rechts zeigt an, wie viele Geräte des Types Du zur Verfügung hast. Durch manchen Bonus bekommst Du mehr davon.
+                                                                                                                                                                                Der Hammer: Dieses Gerät kann benutzt werden, um Zweige auf dem Förderband oder auf dem Spielfeld zu zerstören (nicht die beim Start vorhandenen). Benutze den Hammer z.B. um Platz zu schaffen und Zeit zu gewinnen. Benutzung des Hammers: klicke mit der Maus auf das Hammersymbol um es auszuwählen. Führe den Hammer über den Zweig und klicke mit der linken Maustaste um ihn zu zerstören. Du kannst es so oft ausführen, wie die Anzahl reicht. Um den Hammer weg zu legen, klicke die rechte Maustaste.
+                                                                                                                                                                       Die Amphore. Du kannst die Amphore zweifach nutzen: wenn kein passender Zweig vorhanden ist oder wenn unpassende Teile abgeschnitten werden müssen. Benutzung der Amphore: klicke mit der Maus auf das Amphorensymbol um es auszuwählen. Führe die Amphore auf die ausgewählte Position im Spielfeld und klicke mit der linken Maustaste. Um Teile abzuschneiden, führe die Amphore auf den Zweig und klicke mit der linken Maustaste. Um die Amphore zurück zu stellen, klicke die rechte Maustaste.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTSkillsAndExperienceWHelp</p>
+ 
+<p n="Caption">Am Ende jeden Levels bekommst Du Erfahrungspunkte. Die Anzahl der Erfahrungspunkte ist abhängig von der Anzahl der Zweige, die Du im vergangenen Level benutzt hast. Und auch abhängig von der Anzahl der Kombinationen, die Du legen konntest (einen Punkt für jede Kombination und zwei Punkte wenn alle Kombinationen gelegt wurden).
+                                                                                                                                   Du kannst Deine Erfahrungspunkte den fünf verschiedenen Fähigkeiten zuordnen, die links im Dialogfenster angezeigt werden:
+                                                                                                                                                                       Zeitkontrolle – für diese Zeit verlierst Du das Spiel nicht, auch wenn das Förderband voll läuft. 
+                                                                                                                                                      Falltür Beschleuniger – bewirkt, dass die Falltür schneller wieder öffnet.
+                                                                                                                                                                         Viel Glück – bringt mehr “Lucky Twigs” (Bonus Zweige) in das Spiel.
+                                                                                                                                                                                           Amphore – gießt fehlende Zweige und schneidet unnötige Elemente.
+                                                                                                                                                                                Hammer – zerstört unnötige Zweige.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTCombinationsWHelp</p>
+ 
+<p n="Caption">Wenn Du während des Spiels eine spezielle Kombination aus Zweigen legst, bekommst du verschiedene Bonuse dafür. Diese Kombinationen sind nicht schwierig, Du siehst sie am rechten Bildschirmrand angezeigt. Wenn du eine Kombination gelegt hast, erscheint eine neue Kombination in der Anzeige.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTScoringPointsWHelp</p>
+ 
+<p n="Caption">Du sammelst Punkte für jeden Zweig auf dem Spielfeld. Die Anzahl der Punkte je Zweig sind abhängig von der Anzahl Verbindungspunkte des Zweiges. Das bedeutet, je mehr Verbindungspunkte ein Zweig hat, um so mehr Punkte bekommst Du. Zusäztlich bringen einige Bonuse extra Punkte ein.
+                                                                                                                                                                                               Während des Spiels bekommst Du Erfahrungspunkte. Die Anzahl der Erfahrungspunkte ist abhängig von der Anzahl Zweige, die genutzt werden konnten und abhängig von der Anzahl Kombinationen, die Du legen konntest (einen Punkt für jede Kombination und zwei Punkte wenn alle Kombinationen gelegt wurden). Je größere Zweige und je mehr Kombinationen Du legen kannst, um so schneller verbessern sich Deine Fähigkeiten.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTShortcutsWHelp</p>
+<p n="Caption">Leertaste – nimmt den ersten Zweig vom Förderband. Ist das Förderband leer, der nächste Zweig wird generiert.                  Zahlen 1 bis 9 – nimmt den Zweig an der entsprechenden Position vom Förderband auf.                                                    F3 – nimmt den Hammer, oder legt ihn wieder weg.                          F4 – nimmt die Amphore, oder stellt sie wieder weg.                               Del - throw away the selected twig.                                            Entf – legt alles aufgenommene wieder weg.
+                                                                                                             Ein Cheat Code ist eine Tastaturkombination zum schummeln. Du bekommst extra Kraft, um den Level zu überstehen. Wenn du merkst, Du verlierst, kannst Du einen Cheat Code tippen und das Spiel retten. Folgende Codes sind für registrierte Benutzer verfügbar:                                                                                                                                                                     1. _AddHammers - F5 F7 F7 F8 F6.  Anwendbar: 5 mal. Beschreibung: Erzeugt fünf zusätzliche Hammer. Du kannst den Code fünfmal pro Level nutzen.                                                                                                                                                      2. _AddAmphoras - F5 F6 F8 F7 F8. Anwendbar: 5 mal. Beschreibung: Erzeugt fünf zusätzliche Amhporen. Du kannst den Code fünfmal pro Level nutzen.                                                                                                                                           3. _ExplodeTwigs - F5 F8 F7 F6 F7 F8. Anwendbar: 5 mal. Beschreibung: Zerstört alle Zweige im Förderband. Du kannst den Code fünfmal pro Level nutzen.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTBonusesWHelp</p>
+ 
+<p n="Caption">Du kannst folgende Bonuse erhalten, wenn Du Kombinationen legst oder Bonuszweige benutzt:
+                                                                                                                           1. Die Bombe – leert das Förderband, macht Platz für neue Zweige
+                                                                                                                                                                                        2. zusätzliche Hammer – erzeugt eine gewisse Menge magischer Hammer
+                                                                                                                                                                       3. zusätzliche Amhporen – erzeugt eine gewisse Menge magische Amphoren
+                                                                                                                                                                       4. zusätzliche Punkte – Du bekommst zusätzliche Punkte
+                                                                                                       5. Falltür Beschleuniger – beschleunigt das Öffnen, es können mehr Zweige abgelegt werden.
+                                                                                                                                              6. Viel Glück – verwandelt alle Zweige im Förderband in Bonuszweige.
+                                                                                                                                                                                    7. Zeitkontrolle – vergänglicher Bonus, erlaubt nicht zu verlieren, auch wenn das Förderband voll ist.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTOptionsWHelp</p>
+ 
+<p n="Caption">Folgende Optionen kannst Du verändern:
+                                                                                                                                                              Sprache – wähle die Sprache für das Spiel
+                                                                                                  Tipps abschalten – setze den Haken, wenn Du keine Tipps möchtest
+                                                                                                                                                                                  Vollbild – schaltet um auf Vollbild Anzeige 
+                                                                                                                                             32 bit Farben – wähle diese Option, um Echtfarben anzuzeigen 
+                                                                                                                                                                         Musik Lautstärke – reguliert die Lautstärke der Musik
+                                                                                                                           Geräusch Lautstärke – reguliert die Lautstärke der Geräusche</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTRegistrationWHelp</p>
+ 
+<p n="Caption">Du spielst eine Testversion. Du kannst das Spiel für 14 Tage oder 14 Starts nutzen (was zuerst erreicht ist). Die Registrierung entfernt alle Einschränkungen und schaltet alle Level frei. Für Einzelheiten siehe www.puzzlelab.com
+                                                                                                                    Als registrierter Benutzer hast Du folgende Vorteile:                                                                                                                                 - stundenlangen faszinierenden Spielspaß                                                                                                                                               - Zugriff auf neue spannende Level                                                                                                                                                       - Viele andere liebenswerte Kreaturen                                                                                                                                      - eine Auswahl an Kombinationen                                                                                                               - Die Möglichkeit Cheat Codes einzusetzen</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTAboutWHelp</p>
+ 
+<p n="Caption">Danksagung
+                                                                                                                                                                            Puzzle Lab Studio möchte sich insbesondere bei den Menschen bedanken, die in verschiedenster Weise an diesem Projekt mitgewirkt haben:
+                                                                                                                                                                Anastassia Fomina, Andrey Fomin, Pavel Moskvin, Oleg Ryabinin, Sophia Shishatskaya, Aleksei Fadeev, Dmitry Gorbatkov, Mikhail Tretyakov, Nadezhda Moskvina, Sergey Potapov, Sergey Zakharov, Anton Pishchour, Sergey Kaminsky, Olesya Derkach.
+                                                                                                                                                                  </p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCloseWHelp</p>
+ 
+<p n="Caption">Schließen</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel7WBetweenLevelMenu</p>
+ 
+<p n="Caption">Entzünde die Straßenlaternen im dunklen Garten des Zentauren</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel8WBetweenLevelMenu</p>
+ 
+<p n="Caption">Im Reich der grünhaarigen Nymphe</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel9WBetweenLevelMenu</p>
+ 
+<p n="Caption">Der alte Zwerg wacht über den Irrgarten des Waldes</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel10WBetweenLevelMenu</p>
+ 
+<p n="Caption">Versteckspiel mit Pilzen</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel11WBetweenLevelMenu</p>
+ 
+<p n="Caption">Statte der grandiosen Harfe einen Besuch ab</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel12WBetweenLevelMenu</p>
+ 
+<p n="Caption">Begegnung mit der Froschkönigin, Herrscherin des Unterwasser Köngireiches</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel13WBetweenLevelMenu</p>
+ 
+<p n="Caption">Bezwinge die dichten Büsche im Garten des Magiers</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel14WBetweenLevelMenu</p>
+ 
+<p n="Caption">Blumenregen im Garten des Satyr</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel15WBetweenLevelMenu</p>
+ 
+<p n="Caption">Die Seele des Windes singt sein fröhliches Lied im Himmel</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel16WBetweenLevelMenu</p>
+ 
+<p n="Caption">Ein aufregendes Abenteuer im Garten des riesigen Tintenfisches</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel17WBetweenLevelMenu</p>
+ 
+<p n="Caption">Begegnung mit dem Meister aller Kreaturen – der fliegende Elefant</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWExitToMainMenu</p>
+ 
+<p n="Caption">Sicher, Du willst zurück zum Hauptmenü?</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWExitToMainMenu</p>
+ 
+<p n="Caption">OK</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWExitToMainMenu</p>
+ 
+<p n="Caption">Abbruch</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintSkillLive</p>
+ 
+<p n="Caption">Zeitkontrolle – vergänglicher Bonus, erlaubt nicht zu verlieren, auch wenn das Förderband voll ist.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintSkillDropAccel</p>
+ 
+<p n="Caption">Falltür Beschleuniger – beschleunigt das Öffnen, es können mehr Zweige abgelegt werden.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintSkillLuckyTwig</p>
+ 
+<p n="Caption">Viel Glück – verwandelt alle Zweige im Förderband in Bonuszweige.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintSkillAmphora</p>
+ 
+<p n="Caption">Amphore – gießt fehlende Zweige und schneidet unnötige Elemente.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintSkillHammer</p>
+ 
+<p n="Caption">Hammer – zerstört unnötige Zweige im Förderband und auf dem Spielfeld.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintClosedLink</p>
+ 
+<p n="Caption">Du kannst das Muster nicht schließen, sonst können nicht alle Zweige verbunden werden.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintFirstTakeBonusFishka</p>
+ 
+<p n="Caption">Dies ist ein Bonuszweig. Wenn Du ihn benutzt bekommst Du einen Bonus.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintFirstTakeQuestFishka</p>
+ 
+<p n="Caption">Dies ist ein „Puzzle Twig“. Du wirst die Form nicht erkennen, bis Du ihn aufnimmst.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintFirstTakeFishka</p>
+ 
+<p n="Caption">Du kannst Zweige an den beleuchteten Verbindungspunkten miteinander verbinden.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintMatchingJoints</p>
+ 
+<p n="Caption">Du kannst nur Zweige verbinden, wenn die Punkte zueinander passen.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintFirstTransparentFishka</p>
+ 
+<p n="Caption">Dies sind transparente Zweige. Bedecke sie mit Zweigen von gleicher Form.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintTransparentTwig</p>
+ 
+<p n="Caption">Du solltest transparente Zweige nur mit gleichförmigen Zweigen bedecken.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintLevelTop</p>
+ 
+<p n="Caption">Verbinde nun alle Zweige um das Muster zu rekonstruieren und den Level zu beenden.</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">REasyWStartDialog</p>
+ 
+<p n="Caption">Einfach</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintFishComb</p>
+ 
+<p n="Caption">Du hast eine Kombination gelegt und bekommst einen Bonus.</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BBuyNowWNotEnabled</p>
+ 
+<p n="Caption">Jetzt kaufen</p>
+</o>
+</LabInterface>

@@ -1,0 +1,725 @@
+<LabInterface ver="1.0" name="ptb" mode="Modification">
+<o c="TLabLabel">
+<p n="Name">LTrialThanksLabel</p>
+		<p n="CharSet">EASTEUROPE</p>
+<p n="Caption">Obrigado por experimentar o jogo!</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialHopeLabel</p>
+		<p n="CharSet">EASTEUROPE</p>
+<p n="Caption">É nosso desejo que goste de Fiber Twig.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialConditionLabel</p>
+		<p n="CharSet">EASTEUROPE</p>
+<p n="Caption">Isto é uma versão para experimentar o jogo. Pode utilizá-la durante 14 dias ou executá-la 14 vezes. Registando o jogo, ficam removidas todas as limitações e abre acesso a todos os níveis. Para mais detalhes, consulte:</p>
+
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialOrderLabel</p>
+		<p n="CharSet">EASTEUROPE</p>
+<p n="Caption">Página para Encomenda</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialTimesLabel</p>
+		<p n="CharSet">EASTEUROPE</p>
+<p n="Caption">vezes</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialDaysLabel</p>
+		<p n="CharSet">EASTEUROPE</p>
+<p n="Caption">dias</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialFiveMinutesLabel</p>
+		<p n="CharSet">EASTEUROPE</p>
+<p n="Caption">Agora tem apenas 5 minutos para jogar.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialPlayButton</p>
+		<p n="CharSet">EASTEUROPE</p>
+<p n="Caption">Jogar</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialQuitButton</p>
+		<p n="CharSet">EASTEUROPE</p>
+<p n="Caption">Sair</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialEnterKeyButton</p>
+		<p n="CharSet">EASTEUROPE</p>
+<p n="Caption">Escreva a chave</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialRegistrationButton</p>
+		<p n="CharSet">EASTEUROPE</p>
+<p n="Caption">Registo</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTrialRegErrorLabel</p>
+		<p n="CharSet">EASTEUROPE</p>
+<p n="Caption">Registo falhou!</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BNewWTitle</p>
+<p n="Caption">Novo Jogo</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BLoadWTitle</p>
+<p n="Caption">Carregar</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BScoresWTitle</p>
+<p n="Caption">Records</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BQuitWTitle</p>
+<p n="Caption">Sair</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BMenuWGame</p>
+<p n="Caption">Menu</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LSelectBonusWStartDialog</p>
+<p n="Caption">Escolha o bonus inicial:</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RHammerWStartDialog</p>
+<p n="Caption">Martelo (+5)</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RAmphoraWStartDialog</p>
+<p n="Caption">Ânfora (+5)</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RScoreWStartDialog</p>
+<p n="Caption">Pontos (+200)</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LSelectDifficultyWStartDialog</p>
+<p n="Caption">Escolha o nível de dificuldade:</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RNoLoseWStartDialog</p>
+<p n="Caption">Sem perder</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RNormalWStartDialog</p>
+<p n="Caption">Normal</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RHardWStartDialog</p>
+<p n="Caption">Difícil</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BBackWStartDialog</p>
+<p n="Caption">Voltar</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BPlayWStartDialog</p>
+<p n="Caption">Jogar</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BResumeWMenu</p>
+<p n="Caption">Continuar</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BAbortWMenu</p>
+<p n="Caption">Desistir do nível</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BHelpWMenu</p>
+<p n="Caption">Ajuda</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOptionsWTitle</p>
+<p n="Caption">Opções</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BHelpWTitle</p>
+<p n="Caption">Ajuda</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BLoadWMenu</p>
+<p n="Caption">Carregar Jogo</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOptionsWMenu</p>
+<p n="Caption">Opções</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BQuitWMenu</p>
+<p n="Caption">Sair</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWAbortLivelDialog</p>
+<p n="Caption">Tem a certeza que quer desistir do jogo?</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWAbortLivelDialog</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWAbortLivelDialog</p>
+<p n="Caption">Cancelar</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevelWBetweenLevelMenu</p>
+<p n="Caption">Nível:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LScoreWBetweenLevelMenu</p>
+<p n="Caption">Pontos:</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BLoadWBetweenLevelMenu</p>
+<p n="Caption">Carregar Jogo</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BSaveWBetweenLevelMenu</p>
+<p n="Caption">Gravar Jogo</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOptionsWBetweenLevelMenu</p>
+<p n="Caption">Opções</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BHelpWBetweenLevelMenu</p>
+<p n="Caption">Ajuda</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BMainMenuWBetweenLevelMenu</p>
+<p n="Caption">Menu Principal</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BNextLevelWBetweenLevelMenu</p>
+<p n="Caption">Próximo Nível</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLoadWLoad</p>
+<p n="Caption">Carregar Jogo</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LNameWLoad</p>
+<p n="Caption">Nome do Jogo:</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BLoadWLoad</p>
+<p n="Caption">Carregar</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BDeleteWLoad</p>
+<p n="Caption">Apagar</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWLoad</p>
+<p n="Caption">Cancelar</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWDeleteGameDialog</p>
+<p n="Caption">Tem a certeza que quer apagar esse nome de jogo gravado?</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWDeleteGameDialog</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWDeleteGameDialog</p>
+<p n="Caption">Cancelar</p>
+</o>
+<o c="TLabForm">
+<p n="ParentName">LabScreen</p>
+<p n="Name">WQuitGameDialog</p>
+<p n="Tag">68</p>
+<p n="Picture">W410x210.png</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWQuitGameDialog</p>
+<p n="Caption">Tem a certeza que quer sair e perder todos os pontos que marcou?</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWQuitGameDialog</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWQuitGameDialog</p>
+<p n="Caption">Cancelar</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWReplaceGameDialog</p>
+<p n="Caption">Já existe um jogo com o mesmo nome. Tem a certeza quer quer sobreescrevê-lo?</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWReplaceGameDialog</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWReplaceGameDialog</p>
+<p n="Caption">Cancelar</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LSaveWSave</p>
+<p n="Caption">Gravar Jogo</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LNameWSave</p>
+<p n="Caption">Nome do Jogo:</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BSaveWSave</p>
+<p n="Caption">Gravar</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BDeleteWSave</p>
+<p n="Caption">Apagar</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWSave</p>
+<p n="Caption">Cancelar</p>
+</o>
+<o c="TLabRadioButton">
+		<p n="Name">RENUWLanguage</p>
+		<p n="CharSet">EASTEUROPE</p>
+		<p n="Caption">Inglês</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RDEUWLanguage</p>
+		<p n="CharSet">EASTEUROPE</p>
+		<p n="Caption">Alemóo</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RRUSWLanguage</p>
+		<p n="CharSet">EASTEUROPE</p>
+		<p n="Caption">Russo</p>
+	</o>
+	<o c="TLabRadioButton">
+		<p n="Name">RFRAWLanguage</p>
+		<p n="CharSet">EASTEUROPE</p>
+		<p n="Caption">Francês</p>
+	</o>
+<o c="TLabRadioButton">
+		<p n="Name">RPTBWLanguage</p>
+		<p n="CharSet">EASTEUROPE</p>
+		<p n="Caption">Português</p>
+	</o>
+<o c="TLabLabel">
+<p n="Name">LabelWClearDialog</p>
+<p n="Caption">Tem a certeza que quer limpar a tabela com as melhores pontuações?</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWClearDialog</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWClearDialog</p>
+<p n="Caption">Cancelar</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RadioWLanguage</p>
+<p n="Caption"></p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LMusicWOptions</p>
+<p n="Caption">Volume da Música</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LSoundWOptions</p>
+<p n="Caption">Volume do Som</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RNoMusicWOptions</p>
+<p n="Caption">Sem música</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RNoSoundWOptions</p>
+<p n="Caption">Sem sons</p>
+</o>
+<o c="TLabCheckBox">
+<p n="Name">CheckBoxHintsWOptions</p>
+<p n="Caption">Desligar dicas</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BLanguageWOptions</p>
+<p n="Caption">Idioma</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWOptions</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWOptions</p>
+<p n="Caption">Cancelar</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWFinishLevelDialog</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWGameOverDialog</p>
+<p n="Caption">Final do Jogo! Talvez, na próxima vez...</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWGameOverDialog</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWGameFinishedDialog</p>
+<p n="Caption">Parabéns! Você acaba de concluir Fiber Twig!</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWGameFinishedDialog</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LYourNameWGameFinishedDialog</p>
+<p n="Caption">O seu nome:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWHighScores</p>
+<p n="Caption">Records</p>
+</o>
+<o c="TLabGrid">
+<p n="Name">GridWHighScores</p>
+<p n="Cells">(R:1;C:1;Text:N;R:1;C:2;Text:Nome;R:1;C:3;Text:Pontos)</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWHighScores</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BClearWHighScores</p>
+<p n="Caption">Limpar</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWLanguage</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabCheckBox">
+<p n="Name">CheckBoxColorWOptions</p>
+<p n="Caption">Cor 32 bits</p>
+</o>
+<o c="TLabCheckBox">
+<p n="Name">CheckBoxFullScreenWOptions</p>
+<p n="Caption">Ecran completo</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevelWGame</p>
+<p n="Caption">Nível:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LScoreWGame</p>
+<p n="Caption">Pontos:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LDropSectionWGame</p>
+<p n="Caption">Secção de Recolha</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLoadingWProgressBar</p>
+<p n="Caption">Carregando...</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LNotEnabledWNotEnabled</p>
+<p n="Caption">Obrigado por experimentar o nosso jogo! É nosso desejo que goste de Fiber Twig. Isto é uma versão para experimentar o jogo. Pode utilizá-la durante 14 dias ou executá-la 14 vezes (aquela que expirar primeiro). Registando o jogo, ficam removidas todas as limitações e abre acesso a todos os níveis. Para mais detalhes, consulte:</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWNotEnabled</p>
+<p n="Caption">Mais tarde</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LExperienceWBetweenLevelMenu</p>
+<p n="Caption">Experiência:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevelCompleteWFinishLevelDialog</p>
+<p n="Caption">Nível completado!</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LYourScoreWGameFinishedDialog</p>
+<p n="Caption">A sua pontuação:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LYourHammerWGameFinishedDialog</p>
+<p n="Caption">Os seus Martelos:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LYourCapsWGameFinishedDialog</p>
+<p n="Caption">As suas Ânforas:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LTotalScoreWGameFinishedDialog</p>
+<p n="Caption">Pontuação total:</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LCombDoneWGame</p>
+<p n="Caption">Você realizou todas as combinações de ramais!</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel1WBetweenLevelMenu</p>
+<p n="Caption">Entre as Flores no Jardim da Bela Feiticeira</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel2WBetweenLevelMenu</p>
+<p n="Caption">Compondo uma Melodia com Sete Notas para a Dama em cima do Pássaro</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel3WBetweenLevelMenu</p>
+<p n="Caption">Iluminando o Caminho para o Caçador de Estrelas</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel4WBetweenLevelMenu</p>
+<p n="Caption">Resolvendo o Enigma do Mocho Sábio</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel5WBetweenLevelMenu</p>
+<p n="Caption">No Jardim das Heras do Duende Músico</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel6WBetweenLevelMenu</p>
+<p n="Caption">Fazendo Decorações em forma de Osso para o Cão de Guarda</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BDemoWLoad</p>
+<p n="Caption">Demo</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RIntroductionWHelp</p>
+<p n="Caption">Introdução</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RGettingStartedWHelp</p>
+<p n="Caption">Para Começar</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RPlayingFieldWHelp</p>
+<p n="Caption">O Campo de Jogo</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RHowToPlayWHelp</p>
+<p n="Caption">Como Jogar</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RArrangingTwigsWHelp</p>
+<p n="Caption">Os Ramais</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RMagicToolsWHelp</p>
+<p n="Caption">As Ferramentas</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RSkillsAndExperienceWHelp</p>
+<p n="Caption">Entre Níveis</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RCombinationsWHelp</p>
+<p n="Caption">Combinações</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RScoringPointsWHelp</p>
+<p n="Caption">Forma de Pontuar</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RKeyboardShortcutsWHelp</p>
+<p n="Caption">Teclas de Atalho</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">ROptionsWHelp</p>
+<p n="Caption">Opções</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RBonusesWHelp</p>
+<p n="Caption">Bónus</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RRegistrationWHelp</p>
+<p n="Caption">Registo</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">RAboutPuzzleLabWHelp</p>
+<p n="Caption">Puzzle Lab</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTIntroductionWHelp</p>
+<p n="Caption">Neste jogo, você encontrar-se-á num belo jardim de fantasia habitado por criaturas do mundo das fadas. O jardim foi decorado com modelos lindos feitos com ramais pequeninos. Um dia, um furacão terrível assolou e destruiu-os, tendo restado pouco do que costumavam ser a principal atracção do jardim. A sua missão é unir os ramais e recuperar as decorações originais.                                                                                                                                                                 Os ramais passam no fundo do ecran, acumulando-se pouco a pouco. O primeiro ramal está já no campo de jogo, você deve uni-lo a um ramal que encaixe, e continuar a unir ramais uns com os outros, até alcançar o topo do ecran. Todos os ramais devem ficar unidos, caso contrário nunca alcançará o topo. Por outras palavras, se um ramal tiver uma junta aberta, você não se moverá para cima, porque é necessário que todos os elementos do campo de jogo estejam unidos entre eles. é também importante prestar atenção ao tapete rolante, porque se fica lotado, você perde.                                                                                                                                                   Em alguns níveis há um objecto no campo de jogo que você deve englobar no seu modelo com o recurso aos ramais. Também há objectos voadores que o impedem de colocar ramais, por isso tem de esperar até que eles passem. As ferramentas mágicas ajudá-lo-ão durante o jogo.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTGettingStartedWHelp</p>
+<p n="Caption">Quando começa o jogo, é-lhe sugerido que escolha o bónus inicial e o nível de dificuldade.                                                                                                                                                    Pode escolher entre os seguintes bónus iniciais: o Martelo, a Ânfora e Pontuação Adicional. Escolhendo um destes bónus iniciais, ficará com mais ferramentas mágicas ou pontuação adicional.                                                                                                                                                                           Depois de seleccionar um bónus inicial, escolha o nível de dificuldade do jogo. Pode jogar nos seguintes modos de jogo:
+                                                                                                  Sem perder – nunca perde mas não marca pontos                                                                                                                                 Fácil – os ramais movem-se devagar e marca alguns pontos                                                                                                                                                                                      Normal – os ramais vêm a uma velocidade normal e ganha pontos pelas suas acções                                                                                                                                                                  Difícil – os ramais vêm a grande velocidade e pode obter uma pontuação mais elevada</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTPlayingFieldWHelp</p>
+<p n="Caption">O campo de jogo é composto por três partes. No centro, há um campo para recuperar um modelo decorativo. O ramal inicial é logo dado, deve uni-lo a outro ramal e continuar até alcançar o topo.                                                                                                                                                                       No fundo do ecran, há um tapete rolante que vai enchendo gradualmente com ramais de diversas formas. Quando não houver espaço livre, perde o jogo. Deve utilizar os ramais para recuperar o modelo decorativo original.                                                                                                                                        Do lado direito, estão o painel com informações e as ferramentas mágicas. O painal de informações mostra a sua pontuação, o nível em que se encontra e o botão “Menu”.                                                                                                                    As ferramentas mágicas, o Martelo e a Ânfora, podem ajudá-lo bastante durante o jogo. Pode utilizar a Ânfora para inserir ramais ou para cortar elementos desnecessários, e o Martelo para desfazer ramais no tapete rolante e no campo de jogo. Por baixo dos instrumentos, está a Secção de Recolha, que pode ser utilizada para deitar fora ramais desnecessários.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTHowToPlayWHelp</p>
+<p n="Caption">As principais regras do jogo são as seguintes:                                                                                                                                  1. Clique no ramal que quer utilizar com o botão esquerdo do rato.                                                                                                                                                                                        2. Rode o ramal se necessário, clicando no botão direito do rato.                                                                                                                                                                                            3. Prenda o ramal àquele que está no campo de jogo, clicando no botão do lado esquerdo.                                                                                                                                                    4. Una todos os ramais no campo de jogo entre eles.                                                                                                                        5. Recupere o modelo decorativo original feito com ramais.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTArrangingTwigsWHelp</p>
+<p n="Caption">Os ramais são fornecidos pelo tapete rolante no fundo do ecran. O objectivo do jogo é unir os ramais entre eles, no campo de jogo, para alcançar o topo do ecran. Para além dos ramais comuns, há dois tipos de ramais especiais: Ramais Enigma – você não sabe a sua forma até o apanhar, e os Ramais da Sorte – quando os utiliza obtém determinados bónus. No campo de jogo, pode ainda ver Ramais Transparentes – deve cobri-los com ramais da mesma forma e uni-los ao modelo principal.                                                                                                                                                        Os ramais têm diversas formas e todas elas têm um número diferente de juntas. Quando um ramal tem uma junta aberta, aparece de lá uma luz para mostrar que é possível unir aí outro ramal. As juntas mais abaixo não devem ser deixadas abertas, porque mover mais para cima só é possível quando todos os ramais estão unido entre eles. Juntas abertas que o impedem de subir estão indicadas com uma luz verde. Se for possível unir um ramal a outro, verá uma seta verde, se for impossível, verá uma seta vermelha.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTMagicToolsWHelp</p>
+<p n="Caption">Ferramentas Mágicas podem ajudá-lo a  a ultrapassar os níveis do jogo. O número no canto superior direito do ícone da ferramenta representa o número de ferramentas desse tipo de que dispõe. Alguns bónus podem aumentar o número de utilizações de uma ferramenta.                                                                                                                                      Martelo. Esta ferramenta pode ser utilizada para desfazer ramais no tapete rolante e no campo de jogo (com excepção dos iniciais). Utilize o martelo para desfazer os ramais que não encaixem no seu modelo para libertar espaço para os que estão para vir. UTILIZANDO O MARTELO: Clique no ícone com um martelo para o seleccionar. Coloque o martelo no ramal pretendido e clique com o botão esquerdo do rato para o desfazer. Pode desfazer vários ramais de uma só vez.  Se quiser largar o martelo, basta clicar no botão direito do mouse. 
+                                                                                                                                                                                   Ânfora: pode querer utilizar esta ferramenta quando não encontrar um ramal do forma desejada e quando precisar de cortar elementos desnecessários. UTILIZANDO A ÂNFORA: Clique no ícone com uma Ânfora para a seleccionar. Para criar um ramal em falta, coloque a Ânfora na posição pretendida no campo de jogo e clique no botão esquerdo do rato. Para cortar elementos desnecessários, coloque a Ânfora sobre o ramal pretendido e clique nele. Clique no lado direito do mouse para largar a Ânfora.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTSkillsAndExperienceWHelp</p>
+<p n="Caption">No final de cada nível, são-lhe dado alguns pontos de Experiência. O número de pontos de experiência depende do número de ramais que utilizou para recuperar o nível anterior e do número de combinações de ramais que fez (um ponto por combinação, e dois pontos se tiverem sido feitas todas as combinações).                                                                                                                                                                             Pode distribuir os pontos de experiência por cinco Habilidades apresentadas na parte esquerda da janela de diálogo:                                                                                                                                                                                                    Controlo de Tempo – permite-lhe não perder durante algum tempo se o tapete rolante ficar lotado com peças.                                                                                                                           Acelerador da Secção de Recolha – faz com que a Secção de Recolha funcione com mais rapidez.                                                                                                                         Boa Sorte – traz-lhe mais Ramais de Sorte (aqueles que têm bónus).                                                                                                                                                                                            Ânfora – cria ramais da forma pretendida e corta os elementos desnecessários.                                                                                                                                                Martelo – desfaz os ramais desnecessários.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTCombinationsWHelp</p>
+<p n="Caption">Se fizer combinações especiais de ramais enquanto recupera um modelo, pode obter diversos bónus. Não é difícil fazer combinações: deve unir ramais da forma que é apresentada na imagem do lado direito do ecran. Quando fizer uma combinação, a imagem desaparece e aparece uma nova para você fazer com a ajuda dos ramais.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTScoringPointsWHelp</p>
+<p n="Caption">Marca Pontos por cada ramal no campo. O número de pontos de cada ramal depende do seu número de juntas. Significa que um grande número de juntas dá-lhe mais pontos. Além disso, algunsbónus conseguem-se fazendo combinações de ramais, e utilizar ramais com bónus também lhe dá pontos adicionais.                                                                                                                                                                                              Durante o jogo, também ganha Pontos de Experiência. O número de pontos de experiência depende do número de ramais que utilizou para recuperar o modelo e do número de combinações de ramais que fez um ponto por combinação, e dois pontos se tiverem sido feitas todas as combinações). Por isso, tente utilizar peças com um grande número de juntas e faça as combinações de ramais – e poderá assim melhorar as suas habilidades.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTShortcutsWHelp</p>
+<p n="Caption">Barra de Espaço – apanha o primeiro ramal no tapete rolante. Se o tapete estiver vazio, um novo ramal será gerado.                      ‘1’, ‘2’,…’9’ – apanha o ramal cuja posição no tapete rolante corresponda ao número.                                                               F3 – apanha (devolve) o Martelo.                                                           F4 – apanha (devolve) a Ânfora.                                             Del – deita fora o ramal seleccionado.                                                                        Esc – ver o menu.                                                                                                                                                                    Códigos de Batota                                                                                                                   Estão disponíveis os seguintes códigos de batota para utilizadores registados:                                                                                                                                                                       1. _AddHammers - F5 F7 F7 F8 F6. Descrição: Dá-lhe 5 martelos adicionais. Só pode utilizá-lo cinco vezes em cada nível.                                                                                                                                                                                                   2. _AddAmphoras - F5 F6 F8 F7 F8. Descrição: Dá-lhe 5 Ânforas adicionais. Só pode utilizá-lo cinco vezes em cada nível.                                                                                                                                                                                             3. _ExplodeTwigs - F5 F8 F7 F6 F7 F8. Descrição: Explode todos os ramais no tapete rolante. Só pode utilizá-lo cinco vezes em cada nível.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTBonusesWHelp</p>
+<p n="Caption">Pode conseguir os seguintes bonus se fizer combinações de ramais ou se utilizar ramais com bónus:                                                                                                                                                1. Bombas Devastadoras – limpam o tapete rolante, libertando espaço para novos ramais.                                                                                                                                                         2. Martelos Adicionais – dá-lhe um determinado número de Martelos Mágicos.                                                                                                                                                                        3. Ânforas Adicionais – dá-lhe um determinado número de Ânforas Mágicas.                                                                                                                                                                          4. Pontos Adicionais – dá-lhe um determinado número de pontos para aumentar a sua pontuação.                                                                                                                                5. Acelerador da Secção de Recolha – faz com que os ramais desapareçam mais rapidamente para que possa deitar mais ramais fora .                                                                                                                                                               6. Boa Sorte – faz com que todos os ramais no tapete rolante tenham um bónus.                                                                                                                                                                      7. Controlo de Tempo – Bónus Temporário que permite-lhe não perder durante algum tempo quando o tapete rolante ficar lotado.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTOptionsWHelp</p>
+<p n="Caption">Pode ajustar as seguintes opções de jogo:                                                                                                                                        Idioma – seleccione o idioma do jogo.                                                                                                                                                          Desligar dicas – assinale esta checkbox se não quiser ver dicas.                                                                                                                                                                             Ecran Completo - assinale esta checkbox para jogar em todo o ecran.                                                                                                                                                                                      Cor 32 bits - assinale esta checkbox para ver as cores genuínas.                                                                                                                                                                                 Volume da Música – regule o volume da música.                                                                                                                       Volume do Som – regule o volume do som.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTRegistrationWHelp</p>
+<p n="Caption">Esta é uma versão para experimentar o jogo. Pode utilizá-la durante 14 dias ou executá-la 14 vezes (aquela que expirar primeiro). Registando o jogo, ficam removidas todas as limitações e abre acesso a todos os níveis. Para mais detalhes, consulte: www.PuzzleLab.com                                                                                                                                   Como utilizador registado, usufrui dos seguintes benefícios:
+                                                                                                                                                       - Horas de jogo absorventes                                                                                                                                   - Acesso a novos níveis excitantes                                                                                                                                                          - Muitas outras belas criaturas                                                                                                                                        - Uma variedade de combinações de ramais                                                                                                                 - Códigos de Batota: _AddHammers, _AddAmphoras, _ExplodeTwigs</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelTAboutWHelp</p>
+<p n="Caption">Agradecimentos                                                                                                                                                                     Puzzle Lab Studio quer deixar uma especial palavra de agradecimento para todos aqueles que contribuíram de diversas formas neste projecto:                                                                                                                                                Asya Fomina, Andrey Fomin, Pavel Moskvin, Oleg Ryabinin, Sophia Shishatskaya, Aleksey Fadeev, Dmitry Gorbatkov, Mikhail Tretyakov, Nadezhda Moskvina, Sergey Potapov, Sergey Zakharov, Anton Pishchour, Sergey Kaminsky, Olesya Derkach.                                                                                                                                                                                                                                                                                                                                                                  </p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCloseWHelp</p>
+<p n="Caption">Fechar</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel7WBetweenLevelMenu</p>
+<p n="Caption">Acendendo os Candeeiros Exteriores no Jardim Escuro do Centauro</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel8WBetweenLevelMenu</p>
+<p n="Caption">Na Terra da Ninfa de Cabelo Verde</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel9WBetweenLevelMenu</p>
+<p n="Caption">O Anão Ancião Tomando Conta dos Labirintos da Floresta</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel10WBetweenLevelMenu</p>
+<p n="Caption">Jogando às Escondidas com Cogumelos</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel11WBetweenLevelMenu</p>
+<p n="Caption">Retribuindo a Visita da Harpia Esplendorosa</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel12WBetweenLevelMenu</p>
+<p n="Caption">Encontro com a Rainha Sapo, a Soberana do Reino Subaquático</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel13WBetweenLevelMenu</p>
+<p n="Caption">Movendo-se entre os Arbustos Cerrados no Jardim do Mágico</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel14WBetweenLevelMenu</p>
+<p n="Caption">Flores Cadentes no Belo Jardim Sátiro</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel15WBetweenLevelMenu</p>
+<p n="Caption">O Espírito do Vento, Cantando a sua Cantiga Jubilosa nos Céus</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel16WBetweenLevelMenu</p>
+<p n="Caption">A Aventura Excitante no Jardim da Lula Gigante</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LLevel17WBetweenLevelMenu</p>
+<p n="Caption">Encontro com o Mestre de Todas as Criaturas – O Elefante Voador</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LabelWExitToMainMenu</p>
+<p n="Caption">Tem a certeza que quer sair do menu principal?</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BOkWExitToMainMenu</p>
+<p n="Caption">OK</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BCancelWExitToMainMenu</p>
+<p n="Caption">Cancelar</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintSkillLive</p>
+<p n="Caption">Controlo de Tempo – bónus temporário que lhe  permite não perder durante algum tempo se o tapete rolante ficar lotado.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintSkillDropAccel</p>
+<p n="Caption">Acelerador da Secção de Recolha – faz com que os ramais depareçam mais rapidamente para que possa dieitar fora mais ramais.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintSkillLuckyTwig</p>
+<p n="Caption">Boa Sorte – faz com que todos os ramais no tapete rolante tenham um bónus.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintSkillAmphora</p>
+<p n="Caption">Ânfora – cria ramais da forma pretendida e corta os elementos desnecessários.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintSkillHammer</p>
+<p n="Caption">Martelo – desfaz os ramais desnecessários no tapete rolante e no campo de jogo.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintClosedLink</p>
+<p n="Caption">Você não pode bloquear um modelo, caso contrário não poderá unir todos os ramais.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintFirstTakeBonusFishka</p>
+<p n="Caption">Este é um Ramal Bónus. Se o utilizar, obterá um bónus.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintFirstTakeQuestFishka</p>
+<p n="Caption">Este é o Ramal Enigma. Só conhecerá a sua forma quando o apanhar.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintFirstTakeFishka</p>
+<p n="Caption">Pode ligar ramais entre eles unindo as juntas das quais venha uma luz.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintMatchingJoints</p>
+<p n="Caption">Só pode unir ramais que juntas que se encaixem.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintFirstTransparentFishka</p>
+<p n="Caption">Estes são Ramais Transparentes. Tem de cobri-los com ramais da mesma forma.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintTransparentTwig</p>
+<p n="Caption">Tem de cobrir ramais transparentes com ramais da mesma forma.</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintLevelTop</p>
+<p n="Caption">Agora, una todos os ramais para recuperar o modelo e completar o nível.</p>
+</o>
+<o c="TLabRadioButton">
+<p n="Name">REasyWStartDialog</p>
+<p n="Caption">Fácil</p>
+</o>
+<o c="TLabLabel">
+<p n="Name">LHintFishComb</p>
+<p n="Caption">Você fez uma combinação de ramais e obteve um bónus.</p>
+</o>
+<o c="TLabButton">
+<p n="Name">BBuyNowWNotEnabled</p>
+<p n="Caption">Comprar agora</p>
+</o>
+</LabInterface>

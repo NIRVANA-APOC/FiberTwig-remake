@@ -1,0 +1,33 @@
+<LabInterface>
+	<o c="TLabButton">
+		<p n="Name">RENUWLanguage</p>
+		<p n="CharSet">EASTEUROPE</p>
+		<p n="Caption">English</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">RDEUWLanguage</p>
+		<p n="CharSet">EASTEUROPE</p>
+		<p n="Caption">German</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">RRUSWLanguage</p>
+		<p n="CharSet">EASTEUROPE</p>
+		<p n="Caption">Russian</p>
+	</o>
+	<o c="TLabButton">
+		<p n="Name">RFRAWLanguage</p>
+		<p n="CharSet">EASTEUROPE</p>
+		<p n="Caption">French</p>
+	</o>
+        <o c="TLabButton">
+		<p n="Name">RPTBWLanguage</p>
+		<p n="CharSet">EASTEUROPE</p>
+		<p n="Caption">Portuguese</p>
+	</o>
+<o c="TLabLabel">
+<p n="Name">LabelTAboutWHelp</p>
+		<p n="CharSet">RUSSIAN</p>
+<p n="Caption">                                  Acknowledgements                                                                                                                                Puzzle Lab Studio wants to say a special word of thanks to those who contributed in various ways to this project:                                                                                                                  Anastassia Fomina, Andrey Fomin, Pavel Moskvin, Oleg Ryabinin, Sophia Shishatskaya, Aleksei Fadeev, Dmitry Gorbatkov, Mikhail Tretyakov, Nadezhda Moskvina, Sergey Potapov, Sergey Zakharov, Anton Pishchour, Sergey Kaminsky, Olesya Derkach.                                                                                                                                                                                                                                                                                                                        
+</o>
+
+</LabInterface>

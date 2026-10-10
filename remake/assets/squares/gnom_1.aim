@@ -1,0 +1,4 @@
+<AutoImage name="gnom_1" autosize="true">
+<AddImage name="gnom.png" left="0" top="0" />
+<FlipImageVertical/>
+</AutoImage>

@@ -1,0 +1,4 @@
+<AutoImage name="BigBrick8_1" autosize="true">
+<AddImage name="BigBrick8.png" left="0" top="0" />
+<ImageHueChange hue="-20" saturation="-20" lightness="0" />
+</AutoImage>

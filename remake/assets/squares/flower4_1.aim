@@ -1,0 +1,4 @@
+<AutoImage name="flower4_1" autosize="true">
+<AddImage name="flower4.png" left="0" top="0" />
+<FlipImageVertical/>
+</AutoImage>

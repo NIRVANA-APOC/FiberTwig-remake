@@ -1,0 +1,841 @@
+//----1-----  |-+  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="15" />
+	<FishkaInStamp x="0" y="40" type="11" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="7" />
+	<FishkaInStamp x="40" y="0" type="15" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="14" />
+	<FishkaInStamp x="0" y="40" type="15" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="15" />
+	<FishkaInStamp x="40" y="0" type="13" />
+    </Stamp>	
+</FishkaCombination>
+
+//----2-----  |-+  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="11" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="7" />
+	<FishkaInStamp x="40" y="0" type="9" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="14" />
+	<FishkaInStamp x="0" y="40" type="3" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="40" y="0" type="13" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="0" y="40" type="11" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="7" />
+	<FishkaInStamp x="40" y="0" type="12" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="14" />
+	<FishkaInStamp x="0" y="40" type="9" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="3" />
+	<FishkaInStamp x="40" y="0" type="13" />
+    </Stamp>	
+</FishkaCombination>
+
+
+//--------- крест с затычками двумя ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="2" />
+	<FishkaInStamp x="40" y="0" type="15" />
+	<FishkaInStamp x="80" y="0" type="8" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="4" />
+	<FishkaInStamp x="0" y="40" type="15" />
+	<FishkaInStamp x="0" y="80" type="1" />
+    </Stamp>	
+</FishkaCombination>
+
+
+//--------- H ---------------------------------
+//--------- H ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="7" />
+	<FishkaInStamp x="40" y="0" type="13" />
+	<FishkaInStamp x="0" y="40" type="7" />
+	<FishkaInStamp x="40" y="40" type="13" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="14" />
+	<FishkaInStamp x="40" y="0" type="14" />
+	<FishkaInStamp x="0" y="40" type="11" />
+	<FishkaInStamp x="40" y="40" type="11" />
+    </Stamp>	
+</FishkaCombination>
+
+
+//--------- змейки ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="40" y="0" type="9" />
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="0" y="40" type="9" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="3" />
+	<FishkaInStamp x="40" y="0" type="12" />
+	<FishkaInStamp x="40" y="40" type="3" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="40" y="0" type="6" />
+	<FishkaInStamp x="40" y="40" type="9" />
+	<FishkaInStamp x="0" y="40" type="6" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="3" />
+	<FishkaInStamp x="40" y="40" type="12" />
+    </Stamp>	
+</FishkaCombination>
+
+//--------- Буква 0 с двумя крестами ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="40" y="0" type="15" />
+	<FishkaInStamp x="80" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="3" />
+	<FishkaInStamp x="40" y="40" type="15" />
+	<FishkaInStamp x="80" y="40" type="9" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="40" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="15" />
+	<FishkaInStamp x="40" y="40" type="15" />
+	<FishkaInStamp x="0" y="80" type="3" />
+	<FishkaInStamp x="40" y="80" type="9" />
+    </Stamp>	
+</FishkaCombination>
+
+//--------- Квадрат с ответвлениями из трешек ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="7" />
+	<FishkaInStamp x="40" y="0" type="14" />
+	<FishkaInStamp x="0" y="40" type="11" />
+	<FishkaInStamp x="40" y="40" type="13" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="14" />
+	<FishkaInStamp x="40" y="0" type="13" />
+	<FishkaInStamp x="0" y="40" type="7" />
+	<FishkaInStamp x="40" y="40" type="11" />
+    </Stamp>	
+</FishkaCombination>
+
+
+//--------- крест с трешками со всех сторон ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="40" y="0" type="14" />
+	<FishkaInStamp x="0" y="40" type="7" />
+	<FishkaInStamp x="40" y="40" type="15" />
+	<FishkaInStamp x="80" y="40" type="13" />
+	<FishkaInStamp x="40" y="80" type="11" />
+    </Stamp>	
+</FishkaCombination>
+
+
+//--------- большая Х с ответвлениями  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="12" />
+	<FishkaInStamp x="40" y="0" type="6" />
+	<FishkaInStamp x="0" y="40" type="22" />
+	<FishkaInStamp x="0" y="80" type="9" />
+	<FishkaInStamp x="40" y="80" type="3" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="3" />
+	<FishkaInStamp x="0" y="40" type="6" />
+	<FishkaInStamp x="80" y="40" type="12" />
+	<FishkaInStamp x="80" y="0" type="9" />
+	<FishkaInStamp x="40" y="0" type="23" />
+    </Stamp>	
+</FishkaCombination>
+
+//--------- 10  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="40" y="0" type="7" />
+	<FishkaInStamp x="80" y="0" type="9" />
+	<FishkaInStamp x="0" y="40" type="6" />
+	<FishkaInStamp x="40" y="40" type="13" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="11" />
+	<FishkaInStamp x="40" y="40" type="14" />
+	<FishkaInStamp x="40" y="80" type="3" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="3" />
+	<FishkaInStamp x="40" y="0" type="13" />
+	<FishkaInStamp x="40" y="40" type="7" />
+	<FishkaInStamp x="80" y="40" type="12" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="40" y="0" type="6" />
+	<FishkaInStamp x="0" y="40" type="14" />
+	<FishkaInStamp x="40" y="40" type="11" />
+	<FishkaInStamp x="0" y="80" type="9" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 11  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="40" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="3" />
+	<FishkaInStamp x="40" y="40" type="15" />
+	<FishkaInStamp x="80" y="40" type="12" />
+	<FishkaInStamp x="40" y="80" type="3" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="40" y="0" type="6" />
+	<FishkaInStamp x="0" y="40" type="6" />
+	<FishkaInStamp x="40" y="40" type="15" />
+	<FishkaInStamp x="80" y="40" type="9" />
+	<FishkaInStamp x="40" y="80" type="9" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 12  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="40" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="15" />
+	<FishkaInStamp x="40" y="40" type="9" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="15" />
+	<FishkaInStamp x="40" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="3" />
+	<FishkaInStamp x="40" y="40" type="9" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="40" y="0" type="15" />
+	<FishkaInStamp x="0" y="40" type="3" />
+	<FishkaInStamp x="40" y="40" type="9" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="40" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="3" />
+	<FishkaInStamp x="40" y="40" type="15" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 13  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="40" y="0" type="5" />
+	<FishkaInStamp x="0" y="40" type="10" />
+	<FishkaInStamp x="40" y="40" type="15" />
+	<FishkaInStamp x="80" y="40" type="10" />
+	<FishkaInStamp x="40" y="80" type="5" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 14  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="14" />
+	<FishkaInStamp x="0" y="40" type="5" />
+	<FishkaInStamp x="0" y="80" type="11" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="7" />
+	<FishkaInStamp x="40" y="0" type="10" />
+	<FishkaInStamp x="80" y="0" type="13" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 15  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="40" y="0" type="10" />
+	<FishkaInStamp x="0" y="40" type="5" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="5" />
+	<FishkaInStamp x="0" y="40" type="3" />
+	<FishkaInStamp x="40" y="40" type="10" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="40" y="0" type="5" />
+	<FishkaInStamp x="0" y="40" type="10" />
+	<FishkaInStamp x="40" y="40" type="9" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="10" />
+	<FishkaInStamp x="40" y="0" type="12" />
+	<FishkaInStamp x="40" y="40" type="5" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 16  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="40" y="0" type="15" />
+	<FishkaInStamp x="0" y="40" type="15" />
+	<FishkaInStamp x="40" y="40" type="9" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="15" />
+	<FishkaInStamp x="40" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="3" />
+	<FishkaInStamp x="40" y="40" type="15" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 17  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="14" />
+	<FishkaInStamp x="40" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="3" />
+	<FishkaInStamp x="40" y="40" type="11" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="40" y="0" type="13" />
+	<FishkaInStamp x="0" y="40" type="7" />
+	<FishkaInStamp x="40" y="40" type="9" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="40" y="0" type="14" />
+	<FishkaInStamp x="0" y="40" type="11" />
+	<FishkaInStamp x="40" y="40" type="9" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="7" />
+	<FishkaInStamp x="40" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="3" />
+	<FishkaInStamp x="40" y="40" type="13" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 18  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="5" />
+	<FishkaInStamp x="0" y="80" type="3" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="0" y="40" type="5" />
+	<FishkaInStamp x="0" y="80" type="9" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="3" />
+	<FishkaInStamp x="40" y="0" type="10" />
+	<FishkaInStamp x="80" y="0" type="12" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="40" y="0" type="10" />
+	<FishkaInStamp x="80" y="0" type="9" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 19  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="10" />
+	<FishkaInStamp x="40" y="0" type="15" />
+	<FishkaInStamp x="80" y="0" type="10" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="5" />
+	<FishkaInStamp x="0" y="40" type="15" />
+	<FishkaInStamp x="0" y="80" type="5" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 20  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="40" y="0" type="14" />
+	<FishkaInStamp x="0" y="40" type="10" />
+	<FishkaInStamp x="40" y="40" type="15" />
+	<FishkaInStamp x="80" y="40" type="10" />
+	<FishkaInStamp x="40" y="80" type="11" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="40" y="0" type="5" />
+	<FishkaInStamp x="0" y="40" type="7" />
+	<FishkaInStamp x="40" y="40" type="15" />
+	<FishkaInStamp x="80" y="40" type="13" />
+	<FishkaInStamp x="40" y="80" type="5" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 21  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="40" y="0" type="5" />
+	<FishkaInStamp x="0" y="40" type="3" />
+	<FishkaInStamp x="40" y="40" type="15" />
+	<FishkaInStamp x="80" y="40" type="9" />
+	<FishkaInStamp x="40" y="80" type="11" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="40" y="0" type="6" />
+	<FishkaInStamp x="0" y="40" type="7" />
+	<FishkaInStamp x="40" y="40" type="15" />
+	<FishkaInStamp x="80" y="40" type="10" />
+	<FishkaInStamp x="40" y="80" type="3" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="40" y="0" type="14" />
+	<FishkaInStamp x="0" y="40" type="6" />
+	<FishkaInStamp x="40" y="40" type="15" />
+	<FishkaInStamp x="80" y="40" type="12" />
+	<FishkaInStamp x="40" y="80" type="5" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="40" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="10" />
+	<FishkaInStamp x="40" y="40" type="15" />
+	<FishkaInStamp x="80" y="40" type="13" />
+	<FishkaInStamp x="40" y="80" type="9" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 22  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="40" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="9" />
+	<FishkaInStamp x="40" y="40" type="3" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="3" />
+	<FishkaInStamp x="40" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="6" />
+	<FishkaInStamp x="40" y="40" type="9" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="12" />
+	<FishkaInStamp x="40" y="0" type="6" />
+	<FishkaInStamp x="0" y="40" type="3" />
+	<FishkaInStamp x="40" y="40" type="9" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="40" y="0" type="9" />
+	<FishkaInStamp x="0" y="40" type="3" />
+	<FishkaInStamp x="40" y="40" type="12" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 23  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="40" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="5" />
+	<FishkaInStamp x="40" y="40" type="5" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="10" />
+	<FishkaInStamp x="40" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="10" />
+	<FishkaInStamp x="40" y="40" type="9" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="5" />
+	<FishkaInStamp x="40" y="0" type="5" />
+	<FishkaInStamp x="0" y="40" type="3" />
+	<FishkaInStamp x="40" y="40" type="9" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="40" y="0" type="10" />
+	<FishkaInStamp x="0" y="40" type="3" />
+	<FishkaInStamp x="40" y="40" type="10" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 24  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="40" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="13" />
+	<FishkaInStamp x="40" y="40" type="7" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="11" />
+	<FishkaInStamp x="40" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="14" />
+	<FishkaInStamp x="40" y="40" type="9" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="13" />
+	<FishkaInStamp x="40" y="0" type="7" />
+	<FishkaInStamp x="0" y="40" type="3" />
+	<FishkaInStamp x="40" y="40" type="9" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="40" y="0" type="11" />
+	<FishkaInStamp x="0" y="40" type="3" />
+	<FishkaInStamp x="40" y="40" type="14" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 25  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="40" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="3" />
+	<FishkaInStamp x="40" y="40" type="9" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="0" y="40" type="3" />
+	<FishkaInStamp x="40" y="40" type="9" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="40" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="3" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="40" y="0" type="12" />
+	<FishkaInStamp x="40" y="40" type="9" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 26  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="40" y="0" type="12" />
+	<FishkaInStamp x="40" y="40" type="3" />
+	<FishkaInStamp x="80" y="40" type="9" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="40" y="0" type="6" />
+	<FishkaInStamp x="80" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="3" />
+	<FishkaInStamp x="40" y="40" type="9" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="0" y="40" type="3" />
+	<FishkaInStamp x="40" y="40" type="12" />
+	<FishkaInStamp x="40" y="80" type="9" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="40" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="6" />
+	<FishkaInStamp x="40" y="40" type="9" />
+	<FishkaInStamp x="0" y="80" type="3" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 27  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="40" y="0" type="15" />
+	<FishkaInStamp x="80" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="15" />
+	<FishkaInStamp x="40" y="40" type="15" />
+	<FishkaInStamp x="80" y="40" type="15" />
+	<FishkaInStamp x="0" y="80" type="3" />
+	<FishkaInStamp x="40" y="80" type="15" />
+	<FishkaInStamp x="80" y="80" type="9" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 28  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="40" y="0" type="6" />
+	<FishkaInStamp x="80" y="0" type="10" />
+	<FishkaInStamp x="0" y="40" type="10" />
+	<FishkaInStamp x="40" y="40" type="9" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="10" />
+	<FishkaInStamp x="40" y="0" type="12" />
+	<FishkaInStamp x="40" y="40" type="3" />
+	<FishkaInStamp x="80" y="40" type="10" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="5" />
+	<FishkaInStamp x="0" y="40" type="3" />
+	<FishkaInStamp x="40" y="40" type="12" />
+	<FishkaInStamp x="40" y="80" type="5" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="40" y="0" type="5" />
+	<FishkaInStamp x="0" y="40" type="6" />
+	<FishkaInStamp x="40" y="40" type="9" />
+	<FishkaInStamp x="0" y="80" type="5" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 29  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="5" />
+	<FishkaInStamp x="0" y="80" type="9" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="0" y="40" type="5" />
+	<FishkaInStamp x="0" y="80" type="3" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="3" />
+	<FishkaInStamp x="40" y="0" type="10" />
+	<FishkaInStamp x="80" y="0" type="9" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="40" y="0" type="10" />
+	<FishkaInStamp x="80" y="0" type="12" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 30  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="15" />
+	<FishkaInStamp x="40" y="0" type="10" />
+	<FishkaInStamp x="80" y="0" type="15" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="15" />
+	<FishkaInStamp x="0" y="40" type="5" />
+	<FishkaInStamp x="0" y="80" type="15" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 31  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="10" />
+	<FishkaInStamp x="40" y="0" type="10" />
+	<FishkaInStamp x="80" y="0" type="10" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="5" />
+	<FishkaInStamp x="0" y="40" type="5" />
+	<FishkaInStamp x="0" y="80" type="5" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 32  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="9" />
+	<FishkaInStamp x="40" y="0" type="3" />
+	<FishkaInStamp x="0" y="40" type="12" />
+	<FishkaInStamp x="40" y="40" type="6" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 33  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="5" />
+	<FishkaInStamp x="40" y="0" type="5" />
+	<FishkaInStamp x="80" y="0" type="5" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="10" />
+	<FishkaInStamp x="0" y="40" type="10" />
+	<FishkaInStamp x="0" y="80" type="10" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 34  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="3" />
+	<FishkaInStamp x="40" y="0" type="9" />
+	<FishkaInStamp x="0" y="40" type="14" />
+	<FishkaInStamp x="40" y="40" type="14" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="12" />
+	<FishkaInStamp x="40" y="0" type="7" />
+	<FishkaInStamp x="0" y="40" type="9" />
+	<FishkaInStamp x="40" y="40" type="7" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="11" />
+	<FishkaInStamp x="40" y="0" type="11" />
+	<FishkaInStamp x="0" y="40" type="6" />
+	<FishkaInStamp x="40" y="40" type="12" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="13" />
+	<FishkaInStamp x="40" y="0" type="6" />
+	<FishkaInStamp x="0" y="40" type="13" />
+	<FishkaInStamp x="40" y="40" type="3" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 35  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="3" />
+	<FishkaInStamp x="40" y="0" type="14" />
+	<FishkaInStamp x="80" y="0" type="9" />
+	<FishkaInStamp x="0" y="40" type="2" />
+	<FishkaInStamp x="40" y="40" type="15" />
+	<FishkaInStamp x="80" y="40" type="8" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="2" />
+	<FishkaInStamp x="40" y="0" type="15" />
+	<FishkaInStamp x="80" y="0" type="8" />
+	<FishkaInStamp x="0" y="40" type="6" />
+	<FishkaInStamp x="40" y="40" type="11" />
+	<FishkaInStamp x="80" y="40" type="12" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="12" />
+	<FishkaInStamp x="40" y="0" type="4" />
+	<FishkaInStamp x="0" y="40" type="7" />
+	<FishkaInStamp x="40" y="40" type="15" />
+	<FishkaInStamp x="0" y="80" type="9" />
+	<FishkaInStamp x="40" y="80" type="1" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="4" />
+	<FishkaInStamp x="40" y="0" type="6" />
+	<FishkaInStamp x="0" y="40" type="15" />
+	<FishkaInStamp x="40" y="40" type="13" />
+	<FishkaInStamp x="0" y="80" type="1" />
+	<FishkaInStamp x="40" y="80" type="3" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 36  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="9" />
+	<FishkaInStamp x="80" y="0" type="3" />
+	<FishkaInStamp x="40" y="40" type="15" />
+	<FishkaInStamp x="0" y="80" type="12" />
+	<FishkaInStamp x="80" y="80" type="6" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 37  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="40" y="0" type="1" />
+	<FishkaInStamp x="0" y="40" type="8" />
+	<FishkaInStamp x="80" y="40" type="2" />
+	<FishkaInStamp x="40" y="80" type="4" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 38  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="0" y="40" type="9" />
+	<FishkaInStamp x="40" y="40" type="6" />
+	<FishkaInStamp x="40" y="80" type="9" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="40" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="12" />
+	<FishkaInStamp x="40" y="40" type="3" />
+	<FishkaInStamp x="0" y="80" type="3" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="40" y="0" type="3" />
+	<FishkaInStamp x="80" y="0" type="12" />
+	<FishkaInStamp x="0" y="40" type="3" />
+	<FishkaInStamp x="40" y="40" type="12" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="6" />
+	<FishkaInStamp x="40" y="0" type="9" />
+	<FishkaInStamp x="40" y="40" type="6" />
+	<FishkaInStamp x="80" y="40" type="9" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 39  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="2" />
+	<FishkaInStamp x="40" y="0" type="9" />
+	<FishkaInStamp x="80" y="0" type="4" />
+	<FishkaInStamp x="0" y="40" type="12" />
+	<FishkaInStamp x="80" y="40" type="3" />
+	<FishkaInStamp x="0" y="80" type="1" />
+	<FishkaInStamp x="40" y="80" type="6" />
+	<FishkaInStamp x="80" y="80" type="8" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="4" />
+	<FishkaInStamp x="40" y="0" type="3" />
+	<FishkaInStamp x="80" y="0" type="8" />
+	<FishkaInStamp x="0" y="40" type="9" />
+	<FishkaInStamp x="80" y="40" type="6" />
+	<FishkaInStamp x="0" y="80" type="2" />
+	<FishkaInStamp x="40" y="80" type="12" />
+	<FishkaInStamp x="80" y="80" type="1" />
+    </Stamp>	
+</FishkaCombination>
+//--------- 40  ---------------------------------
+<FishkaCombination>
+    <Stamp>
+	<FishkaInStamp x="40" y="0" type="4" />
+	<FishkaInStamp x="0" y="40" type="14" />
+	<FishkaInStamp x="40" y="40" type="11" />
+	<FishkaInStamp x="80" y="40" type="14" />
+	<FishkaInStamp x="0" y="80" type="1" />
+	<FishkaInStamp x="80" y="80" type="1" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="4" />
+	<FishkaInStamp x="80" y="0" type="4" />
+	<FishkaInStamp x="0" y="40" type="11" />
+	<FishkaInStamp x="40" y="40" type="14" />
+	<FishkaInStamp x="80" y="40" type="11" />
+	<FishkaInStamp x="40" y="80" type="1" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="0" y="0" type="2" />
+	<FishkaInStamp x="40" y="0" type="13" />
+	<FishkaInStamp x="40" y="40" type="7" />
+	<FishkaInStamp x="80" y="40" type="8" />
+	<FishkaInStamp x="0" y="80" type="2" />
+	<FishkaInStamp x="40" y="80" type="13" />
+    </Stamp>	
+    <Stamp>
+	<FishkaInStamp x="40" y="0" type="7" />
+	<FishkaInStamp x="80" y="0" type="8" />
+	<FishkaInStamp x="0" y="40" type="2" />
+	<FishkaInStamp x="40" y="40" type="13" />
+	<FishkaInStamp x="40" y="80" type="7" />
+	<FishkaInStamp x="80" y="80" type="8" />
+    </Stamp>	
+</FishkaCombination>
+
+
+
+
+
+
+
+

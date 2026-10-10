@@ -1,0 +1,4 @@
+<AutoImage name="brick15_1" autosize="true">
+<AddImage name="brick15.png" left="0" top="0" />
+<ImageHueChange hue="40" saturation="0" lightness="0" />
+</AutoImage>

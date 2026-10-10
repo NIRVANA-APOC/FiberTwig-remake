@@ -1,0 +1,4 @@
+<AutoImage name="BigBrick1_1" autosize="true">
+<AddImage name="BigBrick1.png" left="0" top="0" />
+<RotateImage angle="1"/>
+</AutoImage>

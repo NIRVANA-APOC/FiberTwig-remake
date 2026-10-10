@@ -1,0 +1,7 @@
+<BonusType ClearSteck="false" PlusHummers="2" PlusCaps="0" PlusScore="0" SpeedUpOtb="0" MakeFishesWithBonus="false" TimeToNoLose="0" />
+<BonusType ClearSteck="true" PlusHummers="0" PlusCaps="0" PlusScore="0" SpeedUpOtb="0" MakeFishesWithBonus="false" TimeToNoLose="0" />
+<BonusType ClearSteck="false" PlusHummers="0" PlusCaps="2" PlusScore="0" SpeedUpOtb="0" MakeFishesWithBonus="false" TimeToNoLose="0" />
+<BonusType ClearSteck="false" PlusHummers="0" PlusCaps="0" PlusScore="100" SpeedUpOtb="0" MakeFishesWithBonus="false" TimeToNoLose="0" />
+<BonusType ClearSteck="false" PlusHummers="0" PlusCaps="0" PlusScore="0" SpeedUpOtb="60000" MakeFishesWithBonus="false" TimeToNoLose="0" />
+<BonusType ClearSteck="false" PlusHummers="0" PlusCaps="0" PlusScore="0" SpeedUpOtb="0" MakeFishesWithBonus="true" TimeToNoLose="0" />
+<BonusType ClearSteck="false" PlusHummers="0" PlusCaps="0" PlusScore="0" SpeedUpOtb="0" MakeFishesWithBonus="false" TimeToNoLose="60000" />

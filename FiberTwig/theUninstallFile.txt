@@ -1,0 +1,45 @@
+[Folders]
+Dir1=F:\rgame\Fiber Twig\
+Dir2=F:\rgame\Fiber Twig\Saves\
+Dir3=F:\rgame\Fiber Twig\temp\
+Dir4=F:\rgame\Fiber Twig\lng\
+Dir5=F:\rgame\Fiber Twig\Game\
+Dir6=F:\rgame\Fiber Twig\Levels\
+[TotalChanges]
+Folders=6
+RegKeys=11
+Files=21
+[RegKeys]
+Reg1=-2147483648\SOFTWARE\RealNetworks\Update\6.0\Preferences\Components\RA337B765C1DD211B2A12000D0B7142009:1.D
+Reg2=-2147483648\SOFTWARE\RealNetworks\Update\6.0\Preferences\Components\RA337B765C1DD211B2A12000D0B7142009:1.D\Uninstall
+Reg3=-2147483648\SOFTWARE\RealNetworks\Update\6.0\Preferences\Components\RA337B765C1DD211B2A12000D0B7142009:1.D\Product0
+Reg4=-2147483648\SOFTWARE\RealNetworks\Update\6.0\Preferences\Components\RA337B765C1DD211B2A12000D0B7142009:1.D\DisplayName
+Reg5=-2147483648\SOFTWARE\RealNetworks\Update\6.0\Preferences\Components\RA337B765C1DD211B2A12000D0B7142009:1.D\DisplayName
+Reg6=-2147483648\SOFTWARE\RealNetworks\Update\6.0\Preferences\Components\RA337B765C1DD211B2A12000D0B7142009:1.D\Product1
+Reg7=-2147483648\SOFTWARE\RealNetworks\Games\fibertwig
+Reg8=-2147483648\SOFTWARE\RealNetworks\Games\fibertwig\1
+Reg9=-2147483648\SOFTWARE\RealNetworks\Games\fibertwig\1\Executable
+Reg10=-2147483648\SOFTWARE\RealNetworks\Games\fibertwig\1\InstallPath
+Reg11=-2147483648\SOFTWARE\RealNetworks\Games\fibertwig\1\GameName
+[Files]
+File1=F:\rgame\Fiber Twig\options.cfg
+File2=F:\rgame\Fiber Twig\demo.dat
+File3=F:\rgame\Fiber Twig\bass.dll
+File4=F:\rgame\Fiber Twig\connector_r1a.exe
+File5=F:\rgame\Fiber Twig\setup.ini
+File6=F:\rgame\Fiber Twig\launch.ini
+File7=F:\rgame\Fiber Twig\lng\enu_10.lng
+File8=F:\rgame\Fiber Twig\lng\deu_15.lng
+File9=F:\rgame\Fiber Twig\lng\ptb_60.lng
+File10=F:\rgame\Fiber Twig\lng\fra_20.lng
+File11=F:\rgame\Fiber Twig\lng\rus_90.lng
+File12=F:\rgame\Fiber Twig\fibertwig.exe.manifest
+File13=F:\rgame\Fiber Twig\generic.spc
+File14=F:\rgame\Fiber Twig\version.txt
+File15=F:\rgame\Fiber Twig\readme.txt
+File16=F:\rgame\Fiber Twig\license.txt
+File17=F:\rgame\Fiber Twig\fibertwig.udf
+File18=F:\rgame\Fiber Twig\Game\game.zxc
+File19=F:\rgame\Fiber Twig\Levels\squares.zxc
+File20=F:\rgame\Fiber Twig\setup.ini
+File21=D:\Documents and Settings\幻想\「开始」菜单\Programs\Real\Games\Fiber Twig.lnk

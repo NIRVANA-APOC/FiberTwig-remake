@@ -1,0 +1,4 @@
+<AutoImage name="bomb1_1" autosize="true">
+<AddImage name="bomb1.png" left="0" top="0" />
+<FlipImageVertical/>
+</AutoImage>

@@ -1,0 +1,4 @@
+<AutoImage name="SmRain" autosize="true">
+<AddImage name="RainDrop.png" left="0" top="0" />
+<ScaleImage width="13" height="24"/>
+</AutoImage>

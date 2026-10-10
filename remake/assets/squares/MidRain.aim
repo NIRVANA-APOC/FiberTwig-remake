@@ -1,0 +1,4 @@
+<AutoImage name="MidRain" autosize="true">
+<AddImage name="RainDrop.png" left="0" top="0" />
+<ScaleImage width="20" height="40"/>
+</AutoImage>
