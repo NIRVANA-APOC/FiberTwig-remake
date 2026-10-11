@@ -18,9 +18,9 @@ tree (`assets/data/interface.json`) with the original backgrounds
 * title screen (New Game / Load Game / High Scores / Options / Help / Quit /
   Demo); New Game starts a fresh campaign at level 1,
 * *Select Starting Bonus* dialog (Hammer +5 / Amphora +5 / Score +200) with the
-  four difficulty modes **No Lose / Easy / Normal / Hard** — shown only when a
-  game is started from the title (New Game) or loaded, never between levels or
-  after a retry,
+  four difficulty modes **No Lose / Easy / Normal / Hard** — shown only for
+  New Game from the title screen; loading a save resumes directly with the
+  stored values and no dialog appears between levels or after a retry,
 * the in-game screen: 600×500 play field, right panel with the Menu button,
   level/score, the current combination preview, hammer/amphora icons and
   counts, the DROP SECTION area and its arrow button,
@@ -80,7 +80,11 @@ from the shipped screenshots, see §10 of the report):
   generates one immediately and postpones the next automatic one. Game over
   only when the belt is completely jammed (first twig at the stop, last two
   overlapping, no twig moving) for about **2 s** — the original draws a
-  `ProgressOTT` bar while that timer runs,
+  `ProgressOTT` bar while that timer runs. The `lenta` strip and every belt /
+  drop twig are clipped at x = 794 (the original `0x31a` clip in
+  `FUN_00490abc`) so they stop at the panel frame, and the whole conveyor
+  (twigs + sparks) is drawn over the panel widgets so a dropped twig covers
+  the `DROP SECTION` caption,
 * drop section: rectangle `(600,400)-(800,500)` (panel below the tools). A held
   twig dropped there is put on the reverse conveyor at (615, `480−h`), slides
   right at twice the belt speed and is removed at x≥795 (`PutFishkaInOtboynik`);

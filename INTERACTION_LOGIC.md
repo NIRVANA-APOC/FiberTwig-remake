@@ -260,7 +260,8 @@ Twig 记录（`DAT_004bae08`，每条 `0x38` 字节）：
 | 枝接口/位置错误 | 原版从精灵边缘推导接口 | `LAYOUTS` 修正镜像的 `*_1a`（123_134→134_123、124_234→234_124）与 `Skoba1/2`（23_34 / 34_14）；新增 `--shapetest` 用像素连通度校验全部 14 个布局（0 failures） |
 | 场景交互 | `FUN_0049a7e4` 解析 `<Point>`（state 5 隐形枝 + `border`）、`<Bomb>`；`FUN_004a1678` 在点接入主连通块后触发 `FUN_004a1f54/FUN_004a1e5c`（换图）、`FUN_004a22a0`（沿连接摧毁 r 层枝，ghost=true 转透明枝）、`FUN_004a2094`（picturebomb 按 r 移除砖块并画 `bombimage`）与 `StartEffect` 音效 | `BoardWorld.setup` 生成隐形 point 枝并参与连通；`_check_bonus_elements()`/`_activate_bonus()`/`_destroy_twigs_around()`/`world.bomb_bricks()` 实现全部效果 |
 | 组合误判定 | `FUN_004aa128`：只检查 `DAT_004bae98` 指向的当前组合，且必须以刚放置的 twig 为锚点逐格比对 state-1 枝 | `combo_step` + `_matches_combo(c, placement)`：锚点必须是被放置格，point 隐形枝不参与；组合严格按 `CombSequence` 顺序完成 |
-| New Game 从第 1 关开始 | `BNewWTitleMouseUp` 是唯一进入难度框的路径 | `new_game_pending` + `_reset_campaign()`；`_next_level()` 直接开始下一关，不再弹难度框 |
+| New Game 从第 1 关开始 | `BNewWTitleMouseUp` 是唯一进入难度框的路径 | `new_game_pending` + `_reset_campaign()`；`_next_level()` 直接开始下一关，不再弹难度框；**载入存档也直接恢复（`start_level(..., false)`），不弹难度/初始增益框** |
+| 传送带 / 弃枝区图层 | `FUN_00490abc` 将 twig 与 lenta 条带裁剪在 `0x31a`（794px）以内；游戏场景（传送带、弃枝枝）绘制在面板控件之后 | `BELT_CLIP`/`_draw_twig_clipped()` 裁剪 twig 与闪光；主 lenta 同原版画在 `(5,587)` 宽 789；`_draw_belt`/`_draw_sparks` 移到 `ui.draw_form("WGame")` 之后，弃枝区的 twig 现在盖住“丢弃区”字样 |
 | 难度框只弹一次 | WTitle 的 `ShowModal WStartDialog` | 同上一行：只在 New Game 且确认后应用 |
 | Demo 按钮 | `BDemoWLoad`：`RunMethod BDemoWTitleMouseUp` + `ChangeModal WGame` | `_start_demo()` 解析 `demo.dat`；`demo_mode` 下 `_update_game` 只走 `_demo_step`（回放事件），结束后 `_end_demo()` 回标题；修复了逐字符拼串导致的 O(n²) 卡死 |
 | 主界面 realArcade 水印 | 非 Puzzle Lab 原版素材，为盗版发行商后加水印 | 用 OpenCV NS 修复去掉 `Title1.jpg` 右下角水印（其余游戏内图片经模板匹配确认无该标志） |

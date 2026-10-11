@@ -34,6 +34,10 @@ const DROP_BELT_X := 610.0          # original drop belt strip (FUN_00490abc 0x2
 const DROP_BELT_Y := 482.0          # original drop belt strip y (0x1e2)
 const DROP_BELT_W := 184.0          # source region width (0xf7 - 0x3f)
 const DROP_BELT_PERIOD := 64.0      # lenta.png pattern period (measured)
+## The original clips belt / drop twigs and the lenta strip at x = 0x31a/0x31b
+## (794, FUN_00490abc) so they never draw over the panel frame.
+const BELT_CLIP := Rect2(0.0, 0.0, 794.0, 600.0)
+const BELT_STRIP := Rect2(5.0, 587.0, 789.0, 8.0)   # original dest (5, 0x24b)
 ## The drop section pauses (belt stopped) after it has destroyed a twig; the
 ## original stores the resume deadline in DAT_004baf74 and DAT_004b9790 is the
 ## pause flag (FUN_0048bf78 / FUN_0048b2d0).
@@ -286,6 +290,9 @@ func _ready() -> void:
 				if not belt.is_empty():
 					belt[belt.size() - 1].x = 200.0 + i * 90.0
 			_give_bonus(1)
+			var dshape := LevelLoader.single_shape(13)
+			drop_belt.append({"type": 13, "shape": dshape, "x": 650.0, "y": DROP_BOTTOM - 40.0,
+				"span": 40.0, "h": 40.0, "bonus": false, "quest": false, "phase": 0.0})
 		elif a.begins_with("--autotest="):
 			autotest = true
 			autotest_level = int(a.split("=")[1])
@@ -1062,9 +1069,10 @@ func _load_selected() -> void:
 		return
 	if _read_save(save_names[save_sel]):
 		new_game_pending = false
-		total_score = total_score
 		_pop_modal("WLoad")
-		_change_modal("WStartDialog")
+		# The original resumes a loaded run directly: no difficulty / starting
+		# bonus dialog, the values stored in the save are used as they are.
+		start_level(level_index, false)
 
 func _save_selected() -> void:
 	save_names[save_sel] = ui.edit_text if ui.edit_text != "" else "autosave"
@@ -1129,8 +1137,9 @@ func _set_difficulty_from_ui() -> void:
 	if not (diff_flags.no_lose or diff_flags.easy or diff_flags.normal or diff_flags.hard):
 		diff_flags.normal = true
 
-func start_level(idx: int) -> void:
-	_set_difficulty_from_ui()
+func start_level(idx: int, sync_difficulty := true) -> void:
+	if sync_difficulty:
+		_set_difficulty_from_ui()
 	level_index = clampi(idx, 0, 17)
 	level = LevelLoader.parse_level("res://assets/levels/Level%d.txt" % level_index)
 	world.setup(level)
@@ -2779,8 +2788,6 @@ func _draw_hint(o: Control) -> void:
 		ui.draw_text(o, lines[i], Vector2(pos.x, pos.y + i * 18), Color(1, 1, 1))
 
 func _draw_game(o: Control, interactive: bool) -> void:
-	_draw_belt(o)
-	_draw_sparks(o)
 	# HUD labels from the original layout
 	ui.captions["LLevelNumWGame"] = str(level_index + 1)
 	ui.captions["LScoreCountWGame"] = "%06d" % (total_score + score)
@@ -2790,6 +2797,11 @@ func _draw_game(o: Control, interactive: bool) -> void:
 	ui.captions["LDropAccelCounWGame"] = str(int(ceil(speed_up_t))) if speed_up_t > 0.0 else str(int(skills.otb))
 	ui.captions["LLiveCountWGame"] = str(int(ceil(no_lose_t))) if no_lose_t > 0.0 else str(int(skills.life))
 	ui.draw_form(o, "WGame", interactive)
+	# The conveyor and its twigs are part of the game scene and are drawn after
+	# the panel widgets: a dropped twig covers the "DROP SECTION" caption and a
+	# delivered twig is clipped at the panel frame (original render order).
+	_draw_belt(o)
+	_draw_sparks(o)
 	var hammer := AssetLib.texture("res://assets/game/hammer1.png")
 	var cap := AssetLib.texture("res://assets/game/cap1.png")
 	if hammer:
@@ -2826,14 +2838,25 @@ func _draw_combo(o: Control) -> void:
 		if t:
 			o.draw_texture(t, pos, Color(1, 1, 1, 0.95))
 
+## Draw `tex` at `pos`, clipped to `clip` (screen space).  The original clips
+## conveyor twigs at x = 0x31a (FUN_00490abc), so they never cross the panel
+## frame / stay inside the conveyor window.
+func _draw_twig_clipped(o: CanvasItem, tex: Texture2D, pos: Vector2, clip: Rect2, col := Color.WHITE) -> void:
+	if tex == null:
+		return
+	var dest := Rect2(pos, tex.get_size())
+	var r := dest.intersection(clip)
+	if r.size.x < 1.0 or r.size.y < 1.0:
+		return
+	o.draw_texture_rect_region(tex, r, Rect2(r.position - dest.position, r.size), col)
+
 func _draw_belt(o: Control) -> void:
 	var lenta := AssetLib.texture("res://assets/game/lenta.png")
 	if lenta:
-		var off := fmod(_time * belt_speed, float(lenta.get_width()))
-		var x := -off
-		while x < SCREEN.x:
-			o.draw_texture(lenta, Vector2(x, 587))
-			x += lenta.get_width()
+		# main conveyor: the original blits a 789 px wide window of lenta.png at
+		# (5, 587), so the strip stops at the panel frame like the twigs do
+		var off := fmod(_time * belt_speed, DROP_BELT_PERIOD)
+		o.draw_texture_rect_region(lenta, BELT_STRIP, Rect2(off, 0.0, BELT_STRIP.size.x, BELT_STRIP.size.y))
 		# The drop section has its own conveyor at its bottom edge, moving in
 		# the opposite direction (original FUN_00490abc: source rect
 		# (0x3f-scroll..0xf7-scroll) drawn at 610,482); it freezes while the
@@ -2860,12 +2883,12 @@ func _draw_belt(o: Control) -> void:
 			# amount = Sin(ms/300 + phase)*64 + 150 (period ~1.9 s, per-twig phase);
 			# this is the golden "flash" seen on the conveyor.
 			var k := (sin(_time * 1000.0 / 300.0 + float(t.get("phase", 0.0))) * 64.0 + 150.0) / 255.0
-			o.draw_texture(tex, pos)
+			_draw_twig_clipped(o, tex, pos, BELT_CLIP)
 			var flash := AssetLib.flash_texture(tex)
 			if flash:
-				o.draw_texture(flash, pos, Color(1, 1, 1, k))
+				_draw_twig_clipped(o, flash, pos, BELT_CLIP, Color(1, 1, 1, k))
 		else:
-			o.draw_texture(tex, pos)
+			_draw_twig_clipped(o, tex, pos, BELT_CLIP)
 	# overfill indicator while the belt is jammed (original ProgressOTT)
 	if overfull and not level_done:
 		var ot := AssetLib.texture("res://assets/game/ProgressOTT.png")
@@ -3365,6 +3388,30 @@ func _fix_test() -> void:
 	if not (ng_ok and nl_ok):
 		fails += 1
 	print("[fixtest] newgame dialog=%s level=%d score=%d next_level_direct=%s" % [str(dlg_ok), level_index, total_score, str(nl_ok)])
+	# --- loading a save resumes directly, without the start dialog -----------
+	start_level(0)
+	progress_t = 0.0
+	_pop_modal("WProgressBar")
+	level_index = 4
+	total_score = 777
+	hammers_total = 9
+	diff_flags = {"no_lose": false, "easy": false, "normal": false, "hard": true}
+	_write_save("fixtest")
+	level_index = 0
+	total_score = 0
+	hammers_total = 3
+	diff_flags = {"no_lose": false, "easy": false, "normal": true, "hard": false}
+	ui.checked["RHardWStartDialog"] = false
+	ui.checked["RNormalWStartDialog"] = true
+	stack = ["WTitle", "WLoad"]
+	save_names = ["fixtest"]
+	save_sel = 0
+	_load_selected()
+	var load_ok: bool = level_index == 4 and total_score == 777 and hammers_total == 9 \
+		and diff_flags.hard and not stack.has("WStartDialog") and stack.has("WGame")
+	if not load_ok:
+		fails += 1
+	print("[fixtest] load level=%d score=%d hammers=%d hard=%s dialog=%s" % [level_index, total_score, hammers_total, str(diff_flags.hard), str(stack.has("WStartDialog"))])
 	print("[fixtest] failures=%d" % fails)
 
 func _level_picture_visible(pic_name: String) -> bool:
