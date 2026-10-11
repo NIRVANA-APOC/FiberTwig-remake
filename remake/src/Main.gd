@@ -2830,6 +2830,18 @@ func _demo_test() -> void:
 	if not ok:
 		push_error("[demotest] FAIL")
 
+## The original animates the title screen's bird (FUN_004946a8): every frame it
+## overwrites the label's runtime position from GetTickCount with two sines, so
+## the decoration wobbles slowly around (462, 10) instead of sitting at the
+## static .li position (479, 8):
+##   x = Round(462 + 8  * Sin(t / 550 + 1.07))
+##   y = Round(10  + 10 * Sin(t / 700))       (t in milliseconds)
+func _update_title_bird() -> void:
+	var t := _time * 1000.0
+	ui.positions["LBirdWTitle"] = Vector2(
+		roundf(462.0 + 8.0 * sin(t / 550.0 + 1.07)),
+		roundf(10.0 + 10.0 * sin(t / 700.0)))
+
 # ---------------------------------------------------------------------------
 # process
 # ---------------------------------------------------------------------------
@@ -2837,6 +2849,8 @@ func _demo_test() -> void:
 func _process(delta: float) -> void:
 	_time += delta
 	_update_capture(delta)
+	if stack.has("WTitle"):
+		_update_title_bird()
 	if message_t > 0.0:
 		message_t -= delta
 	if progress_t > 0.0:
@@ -3790,6 +3804,29 @@ func _fix_test() -> void:
 	if not light_ok:
 		fails += 1
 	print("[fixtest] hint lights (light1..4 + UpArrow)=%s" % str(light_ok))
+	# --- title bird wobble (original FUN_004946a8) ---------------------------
+	stack = ["WTitle"]
+	_time = 0.0
+	_update_title_bird()
+	var bird_start: Vector2 = ui.positions.get("LBirdWTitle", Vector2.ZERO)
+	var min_x := 9999.0
+	var max_x := -9999.0
+	var min_y := 9999.0
+	var max_y := -9999.0
+	for ms in range(0, 12000, 20):
+		_time = float(ms) / 1000.0
+		_update_title_bird()
+		var p: Vector2 = ui.positions["LBirdWTitle"]
+		min_x = minf(min_x, p.x)
+		max_x = maxf(max_x, p.x)
+		min_y = minf(min_y, p.y)
+		max_y = maxf(max_y, p.y)
+	var bird_ok: bool = bird_start == Vector2(469, 10) and min_x == 454.0 and max_x == 470.0 \
+		and min_y == 0.0 and max_y == 20.0
+	if not bird_ok:
+		fails += 1
+	print("[fixtest] title bird start=(%d,%d) x=%d..%d y=%d..%d" % [
+		int(bird_start.x), int(bird_start.y), int(min_x), int(max_x), int(min_y), int(max_y)])
 	print("[fixtest] failures=%d" % fails)
 
 func _level_picture_visible(pic_name: String) -> bool:

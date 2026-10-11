@@ -35,6 +35,7 @@ var props: Dictionary = {}       # runtime property overrides (Visible ...)
 var tabs := {"WHelp": "TIntroductionWHelp"}
 var level_tab := 0
 var pics: Dictionary = {}        # widget -> runtime Picture override
+var positions: Dictionary = {}   # widget -> Vector2 runtime draw position override
 var grid_items: Dictionary = {}  # grid widget -> Array[String] of rows
 var grid_sel: Dictionary = {}    # grid widget -> selected row index
 var grid_first: Dictionary = {}  # grid widget -> first visible row
@@ -483,6 +484,8 @@ func _draw_node(o: CanvasItem, name: String, origin: Vector2, interactive: bool,
 	var cls: String = n.Class
 	if cls == "TLabTabForm" and not _is_tab_visible(name): return
 	var pos := origin + Vector2(float(prop(name, "Left", 0)), float(prop(name, "Top", 0)))
+	if positions.has(name):
+		pos = origin + positions[name]
 	var size := Vector2(float(prop(name, "Width", 0)), float(prop(name, "Height", 0)))
 	var rect := Rect2(pos, size)
 	var over := interactive and rect.has_point(mouse)

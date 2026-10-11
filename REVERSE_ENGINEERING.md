@@ -339,6 +339,25 @@ routines:
 | `0x49A7E4` | level XML parser (`TStringList` based) |
 | `0x484348` | level start / HUD setup |
 | `0x48D1E0` | between-level menu |
+| `0x4946A8` | title screen update: wobbles `LBirdWTitle` (see below) |
+
+### 7.1 Title screen bird
+
+The title form rewrites the runtime position of the `LBirdWTitle` label every
+frame (`GetTickCount` in milliseconds):
+
+```
+x = Round(462 + 8  * Sin(t / 550 + 1.07))
+y = Round(10  + 10 * Sin(t / 700))
+```
+
+The static `.li` position (479, 8) is overwritten, so the bird swings between
+(454…470, 0…20) with periods 2π·550 ms ≈ 3.46 s and 2π·700 ms ≈ 4.40 s. The
+constants sit right behind the widget name in the executable (`0x494bd4` =
+700, `0x494bd8` = 10, `0x494bdc` = 550, `0x494be0` = 1.07 extended, `0x494bec`
+= 8, `0x494bf0` = 462). A memory scan of the running original confirms the two
+fields oscillate over exactly those ranges even when the local capture build
+does not draw the picture.
 
 ---
 

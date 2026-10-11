@@ -16,7 +16,9 @@ tree (`assets/data/interface.json`) with the original backgrounds
 `Arial12lat.png` + metrics from `Arial12.xml`:
 
 * title screen (New Game / Load Game / High Scores / Options / Help / Quit /
-  Demo); New Game starts a fresh campaign at level 1,
+  Demo); New Game starts a fresh campaign at level 1, and the top-right bird
+  portrait wobbles on the original's two sines (FUN_004946a8:
+  `x = 462 + 8·sin(t/550 + 1.07)`, `y = 10 + 10·sin(t/700)` in milliseconds),
 * the **Demo** attraction replays the shipped 409 s `demo.dat` session of level
   3 through a controller of its own: the recorded pointer path is replayed into
   `demo_cursor`, clicks are snapped to the nearest twig or legal cell when the
