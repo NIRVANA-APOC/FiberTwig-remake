@@ -177,7 +177,14 @@ var playing: bool:
 	get:
 		return not stack.is_empty() and stack.back() == "WGame"
 
-var mouse_pos := Vector2(300, 250)
+## The real pointer and the demo's own virtual pointer are kept apart: while
+## the recorded session plays, `mouse_pos` follows the recording and the user's
+## mouse cannot disturb it (the original Demo button).
+var user_mouse := Vector2(300, 250)
+var demo_cursor := Vector2(300, 250)
+var mouse_pos: Vector2:
+	get:
+		return demo_cursor if demo_mode else user_mouse
 var hover_cell := Vector2i(-9999, -9999)
 var message := ""
 var message_t := 0.0
@@ -188,7 +195,24 @@ var progress_t := 0.0
 var demo_events: Array = []          # [{t, kind, data}]
 var demo_index := 0
 var demo_time := 0.0
-var demo_loops := 0
+var demo_idle := 0.0                 # seconds without a successful demo action
+var demo_done_t := 0.0               # time since the level was completed
+var demo_next_report := 0.0
+## The recorded `fishtype` values 16..29 name the engine's multi-cell twigs in
+## the order of its type table.  The five variants used by demo.dat match
+## Level3's complex <FProb> entries (double2, tripl1, adouble1, skoba1 and
+## double2a), so the recorded belt keeps the original piece classes.
+const DEMO_COMPLEX_TYPES := {
+	16: "double2", 17: "double1", 18: "tripl1", 19: "tripl2", 20: "tripl3",
+	21: "tripl4", 22: "adouble1", 23: "adouble2", 24: "skoba1", 25: "skoba2",
+	26: "skoba3", 27: "skoba4", 28: "double1a", 29: "double2a",
+}
+## How long the demo may make no progress before it helps itself (seconds).
+const DEMO_IDLE_TIMEOUT := 6.0
+## A recorded click is snapped to the nearest twig / legal cell within this
+## distance, so the replay survives a camera or belt that drifted from the
+## original capture.
+const DEMO_SNAP_DIST := 110.0
 
 var _music_player: AudioStreamPlayer
 var _current_music := ""
@@ -228,6 +252,10 @@ func _ready() -> void:
 	_play_music(MENU_MUSIC)
 	var args := OS.get_cmdline_args()
 	args.append_array(OS.get_cmdline_user_args())
+	if "--demotest" in args:
+		_demo_test()
+		get_tree().quit()
+		return
 	if "--testsound" in args:
 		_test_sounds()
 		get_tree().quit()
@@ -290,7 +318,7 @@ func _ready() -> void:
 				if not belt.is_empty():
 					belt[belt.size() - 1].x = 200.0 + i * 90.0
 			_give_bonus(1)
-			mouse_pos = Vector2(300.0, 260.0)
+			user_mouse = Vector2(300.0, 260.0)
 			_give_bonus(0)
 			var dshape := LevelLoader.single_shape(13)
 			drop_belt.append({"type": 13, "shape": dshape, "x": 650.0, "y": DROP_BOTTOM - 40.0,
@@ -504,14 +532,22 @@ func _play_widget_sound(widget: String) -> void:
 # ---------------------------------------------------------------------------
 
 func _unhandled_input(event: InputEvent) -> void:
+	if demo_mode:
+		# The recorded session drives its own pointer, so the real mouse and the
+		# keyboard must not interfere with the playback.  Any press stops the
+		# attraction and returns to the title screen.
+		if (event is InputEventMouseButton and event.pressed) \
+				or (event is InputEventKey and event.pressed and not event.echo):
+			_end_demo()
+		return
 	if event is InputEventMouseMotion:
-		mouse_pos = get_local_mouse_position()
+		user_mouse = get_local_mouse_position()
 		if _top() == "WGame":
 			_update_hover()
 		queue_redraw()
 		return
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		mouse_pos = event.position
+		user_mouse = event.position
 		if event.pressed:
 			if _top() == "WGame":
 				_update_hover()
@@ -1277,6 +1313,11 @@ func _finish_level() -> void:
 		_push_modal("WGameFinishedDialog")
 	else:
 		level_index += 1
+		# The between-level screen belongs to the level that is about to be
+		# played, so its tab and hero portrait come from Level<level_index>.
+		# (Loading it here matters after level 1: Level0.txt has no
+		# <HeroPicture>, and the stale level used to leave the portrait blank.)
+		level = LevelLoader.parse_level("res://assets/levels/Level%d.txt" % level_index)
 		_write_save("autosave")
 		_save_progress()
 		_stop_game()
@@ -2515,6 +2556,9 @@ func _start_demo() -> void:
 	demo_events.clear()
 	demo_index = 0
 	demo_time = 0.0
+	demo_idle = 0.0
+	demo_done_t = 0.0
+	demo_next_report = 0.0
 	var raw := FileAccess.get_file_as_bytes("res://assets/demo.dat")
 	if raw.is_empty():
 		return
@@ -2527,25 +2571,26 @@ func _start_demo() -> void:
 	var text := raw.get_string_from_ascii()
 	var re := RegEx.new()
 	re.compile("<(\\w+)([^>]*)/>")
+	var are := RegEx.new()
+	are.compile("(\\w+)=\"([^\"]*)\"")
 	for m in re.search_all(text):
 		var attrs := {}
-		var are := RegEx.new()
-		are.compile("(\\w+)=\"([^\"]*)\"")
 		for a in are.search_all(m.get_string(2)):
 			attrs[a.get_string(1)] = a.get_string(2)
-		var kind := m.get_string(1)
-		if kind == "MouseMove":
-			continue
-		demo_events.append({"t": int(attrs.get("time", "0")), "kind": kind, "a": attrs})
+		demo_events.append({"t": int(attrs.get("time", "0")), "kind": m.get_string(1), "a": attrs})
 	demo_events.sort_custom(func(x, y): return int(x.t) < int(y.t))
 	if OS.get_environment("FT_DEBUG") == "1":
 		print("[demo] %d events" % demo_events.size())
 	# the demo was recorded on Level3
 	demo_mode = true
+	demo_cursor = Vector2(300, 250)
 	level_index = 3
 	start_level(3)
 	demo_time = 0.0
 	demo_index = 0
+	demo_idle = 0.0
+	demo_done_t = 0.0
+	demo_next_report = 0.0
 	for s in stack:
 		_leave_form(s)
 	stack = ["WGame"]
@@ -2557,47 +2602,233 @@ func _end_demo() -> void:
 	demo_mode = false
 	demo_index = 0
 	demo_time = 0.0
+	demo_idle = 0.0
+	demo_done_t = 0.0
+	# the real pointer was frozen during the playback; pick it up again
+	user_mouse = get_local_mouse_position()
 	_stop_game()
 	stack = ["WTitle"]
 	_enter_form("WTitle")
 	queue_redraw()
 
+## Advance the recorded session.  The session has a pointer of its own
+## (`demo_cursor`), so the real mouse can move freely without disturbing it.
 func _demo_step(delta: float) -> void:
 	demo_time += delta * 1000.0
-	var placements := 0
+	demo_idle += delta
+	if level_done:
+		# won: let the finish dialog show for a moment, then end the attract
+		demo_done_t += delta
+		if demo_done_t >= 3.0:
+			_end_demo()
+		return
 	while demo_index < demo_events.size() and float(demo_events[demo_index].t) <= demo_time:
 		var e: Dictionary = demo_events[demo_index]
 		demo_index += 1
-		var a: Dictionary = e.a
-		match str(e.kind):
-			"NewFishkaInSteck":
-				var t := int(a.get("fishtype", "1"))
-				var demo_shape := LevelLoader.single_shape(t if t >= 1 and t <= 15 else 1)
-				var demo_quest: bool = a.get("quest", "false") == "true"
-				var dsz := _draw_size(demo_shape, demo_quest)
-				belt.append({"type": t, "shape": demo_shape, "x": BELT_ENTRY, "y": BELT_BOTTOM - dsz.y,
-					"span": dsz.x, "h": dsz.y, "bonus": a.get("bonus", "false") == "true", "quest": demo_quest,
-					"phase": randf() * TAU})
-			"MoveSteck":
-				var incr := float(a.get("incr", "1"))
-				_move_belt(incr)
-			"MouseMove":
-				mouse_pos = Vector2(float(a.get("x", "0")), float(a.get("y", "0")))
-				_update_hover()
-			"MouseLDown":
-				mouse_pos = Vector2(float(a.get("x", "0")), float(a.get("y", "0")))
-				_update_hover()
-				var before := world.cells.size()
-				_game_click(mouse_pos)
-				if world.cells.size() > before:
-					placements += 1
-			"MouseRDown":
-				_on_right_click()
-			"GiveBonus":
-				_give_bonus(int(a.get("ind", "0")))
-			_: pass
+		_demo_event(e)
 	if demo_index >= demo_events.size():
 		_end_demo()
+		return
+	if demo_idle >= DEMO_IDLE_TIMEOUT:
+		_demo_nudge()
+	if OS.get_environment("FT_DEBUG") == "1" and demo_time >= demo_next_report:
+		demo_next_report = floorf(demo_time / 10000.0) * 10000.0 + 10000.0
+		print("[demo] t=%.1fs idx=%d/%d cells=%d belt=%d drop=%d held=%s score=%d idle=%.1f" % [
+			demo_time / 1000.0, demo_index, demo_events.size(), world.cells.size(), belt.size(),
+			drop_belt.size(), str(has_held), score, demo_idle])
+
+func _demo_event(e: Dictionary) -> void:
+	var a: Dictionary = e.a
+	match str(e.kind):
+		"NewFishkaInSteck":
+			_demo_new_twig(a)
+		"MoveSteck":
+			_move_belt(float(a.get("incr", "1")))
+		"MouseMove":
+			demo_cursor = Vector2(float(a.get("x", "0")), float(a.get("y", "0")))
+			_update_hover()
+		"MouseLDown":
+			demo_cursor = Vector2(float(a.get("x", "0")), float(a.get("y", "0")))
+			_update_hover()
+			_demo_click()
+		"MouseRDown":
+			_on_right_click()
+		"GiveBonus":
+			_give_bonus(int(a.get("ind", "0")))
+			demo_idle = 0.0
+		_: pass
+
+## Spawn the twig recorded by <NewFishkaInSteck>.  Types 1..15 are joint masks,
+## 16..29 the multi-cell pieces (see DEMO_COMPLEX_TYPES).
+func _demo_new_twig(a: Dictionary) -> void:
+	var shape := _demo_shape_for_type(int(a.get("fishtype", "1")))
+	var quest: bool = a.get("quest", "false") == "true"
+	var dsz := _draw_size(shape, quest)
+	belt.append({"type": int(shape.masks[0]), "shape": shape, "x": BELT_ENTRY, "y": BELT_BOTTOM - dsz.y,
+		"span": dsz.x, "h": dsz.y, "bonus": a.get("bonus", "false") == "true", "quest": quest,
+		"phase": randf() * TAU})
+
+func _demo_shape_for_type(t: int) -> Dictionary:
+	if t >= 1 and t <= 15:
+		return LevelLoader.single_shape(t)
+	var name := str(DEMO_COMPLEX_TYPES.get(t, ""))
+	if name == "":
+		return LevelLoader.single_shape(1 + randi() % 15)
+	return LevelLoader.shape_of_name(name)
+
+## Replay a recorded left click.  The exact hit test runs first; when the
+## remake's camera or belt has drifted from the capture, the click snaps to the
+## nearest legal action instead of being lost (which used to stall the demo).
+func _demo_click() -> void:
+	if not stack.has("WGame"):
+		return
+	var pos := demo_cursor
+	var held_before := has_held
+	var cells_before := world.cells.size()
+	var drop_before := drop_belt.size()
+	var tool_before := tool
+	_game_click(pos)
+	if has_held != held_before or world.cells.size() != cells_before \
+			or drop_belt.size() != drop_before or tool != tool_before:
+		demo_idle = 0.0
+		return
+	if has_held:
+		if DROP_RECT.has_point(pos):
+			_drop_held()
+			demo_idle = 0.0
+			return
+		var place := _demo_nearest_place(pos, 3)
+		if not place.is_empty():
+			_demo_apply_place(place)
+		return
+	var slot := _demo_nearest_twig(pos)
+	if not slot.is_empty():
+		_pickup(int(slot.i), bool(slot.drop))
+		demo_idle = 0.0
+
+## Screen space centre of a whole (possibly multi-cell) piece.
+func _demo_shape_center(cell: Vector2i, shape: Dictionary) -> Vector2:
+	var sum := Vector2.ZERO
+	var n := 0
+	for c in LevelLoader.shape_cells(shape):
+		sum += LevelLoader.cell_origin(cell + c) + Vector2(20, 20)
+		n += 1
+	if n == 0:
+		return Vector2(float(cell.x) * 40.0 + 25.0, float(cell.y) * 40.0 + 20.0 - cam_y)
+	return sum / float(n) - Vector2(0, cam_y)
+
+## Nearest legal placement for the twig in hand.  `radius` limits the search to
+## the cells around `pos`; a negative radius considers every open joint (the
+## watchdog's fallback).  The current rotation wins so the recorded right
+## clicks keep their meaning; the others are tried only when nothing fits.
+func _demo_nearest_place(pos: Vector2, radius: int) -> Dictionary:
+	var shape: Dictionary = held.get("shape", {})
+	if shape.is_empty():
+		return {}
+	var candidates: Array = []
+	if radius < 0:
+		candidates = _light_cells().keys()
+	else:
+		var base := Vector2i(int(floor((pos.x - 5.0) / 40.0)), int(floor((pos.y + cam_y) / 40.0)))
+		for dy in range(-radius, radius + 1):
+			for dx in range(-radius, radius + 1):
+				candidates.append(base + Vector2i(dx, dy))
+	var best := {}
+	for rot in 4:
+		if rot > 0:
+			shape = LevelLoader.rotate_shape(shape)
+		for c in candidates:
+			var cell: Vector2i = c
+			if not can_place_shape(cell, shape):
+				continue
+			var d := _demo_shape_center(cell, shape).distance_squared_to(pos)
+			if best.is_empty() or d < float(best.d):
+				best = {"cell": cell, "shape": shape, "d": d}
+		if not best.is_empty():
+			break     # an existing rotation fits: do not rotate the piece
+	return best
+
+func _demo_apply_place(place: Dictionary) -> void:
+	var shape: Dictionary = place.shape
+	if shape != held.shape:
+		held.shape = shape
+		held.type = int(shape.masks[0])
+	demo_cursor = _demo_shape_center(Vector2i(place.cell), shape)
+	_update_hover()
+	_place(Vector2i(place.cell))
+	demo_idle = 0.0
+
+## Twig (belt or drop section) nearest to the recorded click.
+func _demo_nearest_twig(pos: Vector2) -> Dictionary:
+	var best := {}
+	var limit := DEMO_SNAP_DIST * DEMO_SNAP_DIST
+	for i in drop_belt.size():
+		var rect := _demo_twig_rect(drop_belt[i])
+		var d := rect.get_center().distance_squared_to(pos)
+		if d <= limit and (best.is_empty() or d < float(best.d)):
+			best = {"i": i, "drop": true, "d": d}
+	for i in belt.size():
+		var rect := _demo_twig_rect(belt[i])
+		var d := rect.get_center().distance_squared_to(pos)
+		if d <= limit and (best.is_empty() or d < float(best.d)):
+			best = {"i": i, "drop": false, "d": d}
+	return best
+
+func _demo_twig_rect(t: Dictionary) -> Rect2:
+	var h := float(t.get("h", BELT_SLOT))
+	var y := float(t.get("y", BELT_BOTTOM - h))
+	return Rect2(float(t.x), y, float(t.get("span", BELT_SLOT)), h)
+
+## Watchdog: a recording made on the original state machine can drift from the
+## remake; rather than idling until the file runs out, the demo takes the next
+## sensible action itself so the attraction always keeps playing.
+func _demo_nudge() -> void:
+	demo_idle = 0.0
+	if has_held:
+		var place := _demo_nearest_place(demo_cursor, -1)
+		if not place.is_empty():
+			_demo_apply_place(place)
+		else:
+			_drop_held()
+		return
+	if not drop_belt.is_empty():
+		_pickup(drop_belt.size() - 1, true)
+	elif not belt.is_empty():
+		_pickup(belt.size() - 1)
+	else:
+		_spawn_twig(true)
+
+## Headless check of the recorded demo: it must play to the end on its own,
+## drive real gameplay while doing so, and keep the user's pointer out of it.
+func _demo_test() -> void:
+	user_mouse = Vector2(700, 500)
+	_start_demo()
+	var started: bool = demo_mode and _top() == "WGame"
+	# the user pointer must not leak into the playback
+	demo_cursor = Vector2(120, 130)
+	var isolated: bool = mouse_pos == Vector2(120, 130)
+	var ev := InputEventMouseMotion.new()
+	ev.position = Vector2(10, 10)
+	_unhandled_input(ev)
+	isolated = isolated and mouse_pos == Vector2(120, 130)
+	var placements := 0
+	var pickups := 0
+	var steps := 0
+	while demo_mode and steps < 60 * 600:
+		var cells := world.cells.size()
+		var held := has_held
+		_update_game(1.0 / 60.0)
+		steps += 1
+		if world.cells.size() > cells:
+			placements += 1
+		if has_held and not held:
+			pickups += 1
+	var ended: bool = not demo_mode and _top() == "WTitle"
+	var ok: bool = started and isolated and ended and placements > 0 and pickups > 0
+	print("[demotest] started=%s isolated=%s ended=%s placements=%d pickups=%d steps=%d belt=%d" % [
+		str(started), str(isolated), str(ended), placements, pickups, steps, belt.size()])
+	if not ok:
+		push_error("[demotest] FAIL")
 
 # ---------------------------------------------------------------------------
 # process
@@ -2667,6 +2898,10 @@ func _update_game(delta: float) -> void:
 	_update_camera(delta)
 	_update_sparks(delta)
 	if demo_mode:
+		# the recording only holds the player's actions; the drop section keeps
+		# running by itself exactly like in the original session, otherwise
+		# discarded twigs would pile up and block the next drop
+		_update_drop_belt(delta)
 		_demo_step(delta)
 		return
 	_update_belt(delta)
@@ -2975,11 +3210,14 @@ func _between_captions() -> void:
 	ui.captions["LLiveCountWBetweenLevelMenu"] = str(int(skills.life))
 	ui.captions["LDropAccelCountWBetweenLevelMenu"] = str(int(skills.otb))
 	ui.captions["LLuckyTwigCountWBetweenLevelMenu"] = str(int(skills.luck))
-	ui.captions["LLiveExpWBetweenLevelMenu"] = "%+d" % int(plus.life)
-	ui.captions["LDropAccelExpWBetweenLevelMenu"] = "%+d" % int(plus.otb)
-	ui.captions["LLuckyTwigExpWBetweenLevelMenu"] = "%+d" % int(plus.luck)
-	ui.captions["LAmphoraExpWBetweenLevelMenu"] = "%+d" % int(plus.cap)
-	ui.captions["LHammerExpWBetweenLevelMenu"] = "%+d" % int(plus.hammer)
+	# The .li already carries a separate "+" label (LabLabel203203..207207)
+	# between the skill count and its allocated points, so the value itself is
+	# unsigned like in the original ("99999 + 0", never "99999 + +0").
+	ui.captions["LLiveExpWBetweenLevelMenu"] = "%d" % int(plus.life)
+	ui.captions["LDropAccelExpWBetweenLevelMenu"] = "%d" % int(plus.otb)
+	ui.captions["LLuckyTwigExpWBetweenLevelMenu"] = "%d" % int(plus.luck)
+	ui.captions["LAmphoraExpWBetweenLevelMenu"] = "%d" % int(plus.cap)
+	ui.captions["LHammerExpWBetweenLevelMenu"] = "%d" % int(plus.hammer)
 	ui.hidden["LLevelNameWBetweenLevelMenu"] = true
 	# The hero portrait comes from <HeroPicture name="..."> of the level that is
 	# about to be played; it is drawn at its native size, which is why the
@@ -3410,7 +3648,7 @@ func _fix_test() -> void:
 	print("[fixtest] clearsteck twigs=%d sparks=%d" % [belt_n, sparks.size()])
 	# --- tool / score bonuses spawn the original icon spark at the cursor ----
 	sparks.clear()
-	mouse_pos = Vector2(300.0, 250.0)
+	user_mouse = Vector2(300.0, 250.0)
 	_give_bonus(0)
 	var is0: bool = sparks.size() == 1 and sparks[0].get("tex") != null \
 		and int(sparks[0].get("frames", 0)) == 1 and absf(float(sparks[0].get("grav", 0.0)) + 30.0) < 0.01 \
@@ -3425,13 +3663,13 @@ func _fix_test() -> void:
 	print("[fixtest] icon sparks hammer=%s clipper=%s score=%s" % [str(is0), str(is1), str(is2)])
 	# --- between-level skill hints follow the pointer ------------------------
 	stack = ["WBetweenLevelMenu"]
-	mouse_pos = Vector2(90, 125)
+	user_mouse = Vector2(90, 125)
 	_skill_hover()
 	var skill1 := hint_label
-	mouse_pos = Vector2(90, 225)
+	user_mouse = Vector2(90, 225)
 	_skill_hover()
 	var skill2 := hint_label
-	mouse_pos = Vector2(400, 300)
+	user_mouse = Vector2(400, 300)
 	_skill_hover()
 	var skill_ok: bool = skill1 == "LHintSkillLive" and skill2 == "LHintSkillDropAccel" \
 		and hint_label == "" and message_t <= 0.0
@@ -3470,7 +3708,7 @@ func _fix_test() -> void:
 	else:
 		cam_y = float(pv_cell.y) * 40.0 - 200.0
 		world.cam_y = cam_y
-		mouse_pos = Vector2(float(pv_cell.x) * 40.0 + 5.0 + 20.0, float(pv_cell.y) * 40.0 + 20.0 - cam_y)
+		user_mouse = Vector2(float(pv_cell.x) * 40.0 + 5.0 + 20.0, float(pv_cell.y) * 40.0 + 20.0 - cam_y)
 		_update_hover()
 		var pv_ok: bool = world.preview_cell == pv_cell and not world.preview_shape.is_empty()
 		if not pv_ok:
@@ -3485,6 +3723,22 @@ func _fix_test() -> void:
 	var dlg_ok: bool = _top() == "WStartDialog" and new_game_pending
 	_exec_actions("BPlayWStartDialog", "up")
 	var ng_ok: bool = dlg_ok and level_index == 0 and total_score == 0 and experience == 0
+	# --- the between-level screen shows the hero of the level to play -------
+	# Level0.txt has no <HeroPicture>, so the stale level used to leave the
+	# portrait blank after finishing level 1; entering the screen must load
+	# Level<level_index> instead of reusing the level just played.
+	_finish_level()
+	var hero_ok: bool = level_index == 1 and str(level.get("hero", "")) == "Elf1_2.png" \
+		and str(ui.pics.get("LLevelHeroWBetweenLevelMenu", "")) == "Elf1_2.png"
+	if not hero_ok:
+		fails += 1
+	print("[fixtest] between hero level=%d hero=%s pic=%s" % [level_index, str(level.get("hero", "")), str(ui.pics.get("LLevelHeroWBetweenLevelMenu", ""))])
+	# The allocated points carry no sign of their own: the "+" between the
+	# count and the value is the separate .li label (no "+ +0").
+	var exp_caption: String = str(ui.captions.get("LLiveExpWBetweenLevelMenu", ""))
+	if exp_caption != "0":
+		fails += 1
+	print("[fixtest] between exp caption='%s' (expect '0', the .li label draws the +)" % exp_caption)
 	# between-level "Next Level" continues directly, without WStartDialog
 	level_index = 1
 	stack = ["WBetweenLevelMenu"]

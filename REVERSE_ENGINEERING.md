@@ -425,6 +425,13 @@ cell (7,250) and violate the placement rule.
   clicking `BGenerateFishWGame` (design 768,506 — the left arrow in the drop
   panel) pushes a new twig onto the belt (the demo shows a
   `NewFishkaInSteck` within ~120 ms after every click on it).
+* `NewFishkaInSteck fishtype` is the twig's joint mask for the 15 single-cell
+  shapes (1..15) and, for the multi-cell pieces, the engine's type index
+  16..29 in the order of its name table (`double2, double1, tripl1, tripl2,
+  tripl3, tripl4, adouble1, adouble2, skoba1, skoba2, skoba3, skoba4,
+  double1a, double2a`). The five values the recording uses — 16, 18, 22, 24,
+  29 — are exactly Level3's complex `<FProb>` classes (`double2`, `tripl1`,
+  `adouble1`, `skoba1`, `double2a`), which confirms the numbering.
 * `quest`/`bonus` flags confirm the mystery (hidden shape) and bonus twigs.
 * `GiveBonus ind` indexes `BonusTypes.dat` (see §6.3).
 * `MouseRDown` rotates the twig in hand; `MouseLDown` over the play field

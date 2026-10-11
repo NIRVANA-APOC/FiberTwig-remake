@@ -17,6 +17,14 @@ tree (`assets/data/interface.json`) with the original backgrounds
 
 * title screen (New Game / Load Game / High Scores / Options / Help / Quit /
   Demo); New Game starts a fresh campaign at level 1,
+* the **Demo** attraction replays the shipped 409 s `demo.dat` session of level
+  3 through a controller of its own: the recorded pointer path is replayed into
+  `demo_cursor`, clicks are snapped to the nearest twig or legal cell when the
+  remake's state has drifted from the capture, the drop section keeps running
+  and a watchdog keeps the session moving to its end. The real mouse and
+  keyboard are ignored during the playback (any press ends the demo and
+  returns to the title), so waving the mouse around cannot disturb it;
+  `--demotest` checks this headlessly,
 * *Select Starting Bonus* dialog (Hammer +5 / Amphora +5 / Score +200) with the
   four difficulty modes **No Lose / Easy / Normal / Hard** — shown only for
   New Game from the title screen; loading a save resumes directly with the
@@ -199,6 +207,7 @@ loaded directly from the extracted files, so no import step is required.
 | `--fixtest` | take-back, drop-section cooldown, sequential combos, bonus elements, amphora preview |
 | `--shapetest` | every multi-cell mask matches its artwork (pixel edge check) |
 | `--demo` | replay the shipped `assets/demo.dat` recording |
+| `--demotest` | headless run of the whole demo: isolation, progress and return to the title |
 | `--sparkdemo` | ClearSteck the conveyor (hammer-spark effect check) |
 | `--piecetest` | multi-cell piece checks (whole artwork, whole-piece removal) |
 | `--filltest[=N]` | fills level N cell by cell and checks the completion rule |
@@ -292,7 +301,8 @@ reached.
 
 * The trial/registration screens (`WNotEnabled`, trial timer) are not
   reproduced; all 18 levels are available and `Demo` replays the shipped
-  `demo.dat` recording, returning to the title when it ends.
+  `demo.dat` recording through its own virtual pointer, returning to the title
+  when it ends (or as soon as the user clicks or presses a key).
 * `FragPicN.png` (a runtime generated picture referenced by `<FragPicture>`) is
   not available in the archive; the panel shows the level's first combination
   instead of that blueprint.

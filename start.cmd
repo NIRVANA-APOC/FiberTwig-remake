@@ -11,7 +11,8 @@ rem    start.cmd screen NAME            start on a screen, e.g. WTitle,
 rem                                     WLoad, WGame, WOptions, WHelp ...
 rem    start.cmd test                   quick headless self-checks
 rem                                     (wintest / testsound / autotest=0 /
-rem                                      closetest / piecetest / filltest=0)
+rem                                      closetest / piecetest / filltest=0 /
+rem                                      demotest)
 rem    start.cmd test all               autotest levels 0..17
 rem
 rem  Any other arguments are forwarded to Godot, e.g.:
@@ -97,6 +98,8 @@ echo [test] --piecetest
 "%GODOT_CONSOLE%" --headless --path remake -- --piecetest 2>&1 | findstr /i /c:"[piecetest]" /c:"SCRIPT ERROR"
 echo [test] --filltest=0
 "%GODOT_CONSOLE%" --headless --path remake -- --filltest=0 2>&1 | findstr /i /c:"[filltest]" /c:"SCRIPT ERROR"
+echo [test] --demotest
+"%GODOT_CONSOLE%" --headless --path remake -- --demotest 2>&1 | findstr /i /c:"[demotest]" /c:"SCRIPT ERROR"
 echo [test] done.
 exit /b 0
 
