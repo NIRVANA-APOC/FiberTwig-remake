@@ -48,9 +48,12 @@ start.cmd screen WHelp -- --language=chs
 ```
 
 全部界面文字、帮助页、关卡名称与提示均已汉化（`remake\assets\lng\chs_105.lng`，
-UTF-8）。原版位图字体没有汉字，因此中文用随附的 Noto Sans SC 子集
-（`remake\assets\fonts\NotoSansSC-UI.ttf`，SIL OFL 1.1）绘制，并按字符换行；
-字体子集与翻译都可用 `tools\make_chs_lng.py` / `tools\make_chs_font.py` 重新生成。
+UTF-8）。原版位图字体没有汉字，因此中文用随附的霞鹜文楷屏幕阅读版子集
+（`remake\assets\fonts\LXGWWenKaiScreen-UI.ttf`，SIL OFL 1.1）绘制：楷体的笔锋
+与原版手绘画面相配，14 px 下的字宽（汉字 14 px、拉丁 x 7 px、行框 17 px）与旧
+字体完全一致，所以版面不变；中文按字符换行，并且不会把句号甩到下一行开头。
+字体子集与翻译都可用 `tools\make_chs_lng.py` / `tools\make_chs_font.py` 重新生成
+（改动任何文案后都要重跑字体脚本，否则新字会回退到系统字体）。
 
 ## Python 工具（可选）
 

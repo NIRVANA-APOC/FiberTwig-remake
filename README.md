@@ -11,15 +11,21 @@ tools/                Python tools recovered from the analysis
   zxc.py              .zxc archive list/extract/pack
   decrypt_levels.py   level decryption (cipher + key derivation)
   save_codec.py       save-game encode/decode
-  build_ui_data.py    FiberTwig.li + Arial12.xml -> remake/assets/data/interface.json
+  build_ui_data.py     FiberTwig.li + Arial12.xml -> remake/assets/data/interface.json
   artmatch.py         locate original artwork inside the reference screenshots
-  make_chs_lng.py     Simplified Chinese localization -> remake/assets/lng/chs_105.lng
-  make_chs_font.py    Noto Sans SC subset (CJK font) -> remake/assets/fonts/
+  make_chs_lng.py     merged Simplified Chinese localization -> remake/assets/lng/chs_105.lng
+  make_chs_font.py    LXGW WenKai Screen subset (CJK font) -> remake/assets/fonts/
+i18n/                 the Chinese localization sources (see i18n/glossary.md)
+  extract_en.py       every English caption in interface order -> i18n/en_source.json
+  split_blocks.py     the three translation briefs -> i18n/en_{ui,help,levels}.md
+  glossary.md         term base + style guide the translations obey
+  zh_{ui,help,levels}.json  the reviewed translations, merged by make_chs_lng.py
+  fitcheck.py         checks every caption against its widget box
 remake/               Godot 4 remake (see remake/README.md)
   assets/levels/      all 18 levels, decrypted
   assets/squares/ game/  art, audio, fonts extracted from the original
   assets/lng/         original localizations + Simplified Chinese (chs_105.lng)
-  assets/fonts/       Noto Sans SC subset for the Chinese captions (SIL OFL)
+  assets/fonts/       LXGW WenKai Screen subset for the Chinese captions (SIL OFL)
   src/                GDScript sources
 docs/report...        (see REVERSE_ENGINEERING.md)
 ```
@@ -32,7 +38,14 @@ board lattice, the conveyor speed and the placement rules measured from them
 The remake ships with the five original localizations (English, German,
 French, Portuguese, Russian) plus a complete **Simplified Chinese** one
 (`简体中文`) that can be selected in *Options → Language*; all interface text,
-help pages, level names and hints are translated (`tools/make_chs_lng.py`).
+help pages, level names and hints are translated. The translations live in
+`i18n/` as three reviewed per-block files (see `i18n/glossary.md` for the term
+base and `tools/make_chs_lng.py` for the merge):
+
+```bash
+python tools/make_chs_lng.py     # i18n/zh_*.json -> remake/assets/lng/chs_105.lng
+python tools/make_chs_font.py    # remakes the CJK subset from that .lng
+```
 
 ## Highlights of the analysis
 

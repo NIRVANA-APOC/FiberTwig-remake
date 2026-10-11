@@ -1,0 +1,1202 @@
+=== ENGLISH SOURCE STRINGS (interface order) ===
+
+--- id: BNewWTitle
+    widget: TLabButton  size: 190x  parent: WTitle
+    text:
+      | New Game
+
+--- id: BLoadWTitle
+    widget: TLabButton  size: 190x  parent: WTitle
+    text:
+      | Load Game
+
+--- id: BScoresWTitle
+    widget: TLabButton  size: 190x  parent: WTitle
+    text:
+      | High Scores
+
+--- id: BQuitWTitle
+    widget: TLabButton  size: 190x  parent: WTitle
+    text:
+      | Quit
+
+--- id: BMenuWGame
+    widget: TLabButton  size: 150x  parent: WGame
+    text:
+      | Menu
+
+--- id: LSelectBonusWStartDialog
+    widget: TLabLabel  size: 420x  parent: WStartDialog
+    text:
+      | Select Starting Bonus
+
+--- id: RHammerWStartDialog
+    widget: TLabRadioButton  size: 90x130  parent: WStartDialog
+    text:
+      | Hammer (+5)
+
+--- id: RAmphoraWStartDialog
+    widget: TLabRadioButton  size: 90x130  parent: WStartDialog
+    text:
+      | Amphora (+5)
+
+--- id: RScoreWStartDialog
+    widget: TLabRadioButton  size: 90x130  parent: WStartDialog
+    text:
+      | Score (+200)
+
+--- id: LSelectDifficultyWStartDialog
+    widget: TLabLabel  size: 368x  parent: WStartDialog
+    text:
+      | Select Difficulty Level
+
+--- id: RNoLoseWStartDialog
+    widget: TLabRadioButton  size: 100x  parent: WStartDialog
+    text:
+      | No Lose
+
+--- id: RNormalWStartDialog
+    widget: TLabRadioButton  size: 90x  parent: WStartDialog
+    text:
+      | Normal
+
+--- id: RHardWStartDialog
+    widget: TLabRadioButton  size: 70x  parent: WStartDialog
+    text:
+      | Hard
+
+--- id: BBackWStartDialog
+    widget: TLabButton  size: 150x  parent: WStartDialog
+    text:
+      | Back
+
+--- id: BPlayWStartDialog
+    widget: TLabButton  size: 200x  parent: WStartDialog
+    text:
+      | Play
+
+--- id: BResumeWMenu
+    widget: TLabButton  size: x  parent: WMenu
+    text:
+      | Resume
+
+--- id: BAbortWMenu
+    widget: TLabButton  size: x  parent: WMenu
+    text:
+      | Abort Level
+
+--- id: BHelpWMenu
+    widget: TLabButton  size: x  parent: WMenu
+    text:
+      | Help
+
+--- id: BOptionsWTitle
+    widget: TLabButton  size: 190x  parent: WTitle
+    text:
+      | Options
+
+--- id: BHelpWTitle
+    widget: TLabButton  size: 190x  parent: WTitle
+    text:
+      | Help
+
+--- id: BLoadWMenu
+    widget: TLabButton  size: x  parent: WMenu
+    text:
+      | Load Game
+
+--- id: BOptionsWMenu
+    widget: TLabButton  size: x  parent: WMenu
+    text:
+      | Options
+
+--- id: BQuitWMenu
+    widget: TLabButton  size: x  parent: WMenu
+    text:
+      | Quit
+
+--- id: LabelWAbortLivelDialog
+    widget: TLabLabel  size: 330x60  parent: WAbortLevelDialog
+    text:
+      | Are you sure you want to abort the game?
+
+--- id: BOkWAbortLivelDialog
+    widget: TLabButton  size: x  parent: WAbortLevelDialog
+    text:
+      | OK
+
+--- id: BCancelWAbortLivelDialog
+    widget: TLabButton  size: x  parent: WAbortLevelDialog
+    text:
+      | Cancel
+
+--- id: LLevelWBetweenLevelMenu
+    widget: TLabLabel  size: 100x  parent: WBetweenLevelMenu
+    text:
+      | Level
+
+--- id: LScoreWBetweenLevelMenu
+    widget: TLabLabel  size: 100x  parent: WBetweenLevelMenu
+    text:
+      | Score:
+
+--- id: BLoadWBetweenLevelMenu
+    widget: TLabButton  size: x  parent: WBetweenLevelMenu
+    text:
+      | Load Game
+
+--- id: BSaveWBetweenLevelMenu
+    widget: TLabButton  size: x  parent: WBetweenLevelMenu
+    text:
+      | Save Game
+
+--- id: BOptionsWBetweenLevelMenu
+    widget: TLabButton  size: x  parent: WBetweenLevelMenu
+    text:
+      | Options
+
+--- id: BHelpWBetweenLevelMenu
+    widget: TLabButton  size: x  parent: WBetweenLevelMenu
+    text:
+      | Help
+
+--- id: BMainMenuWBetweenLevelMenu
+    widget: TLabButton  size: x  parent: WBetweenLevelMenu
+    text:
+      | Main Menu
+
+--- id: BNextLevelWBetweenLevelMenu
+    widget: TLabButton  size: 190x  parent: WBetweenLevelMenu
+    text:
+      | Next Level
+
+--- id: LLoadWLoad
+    widget: TLabLabel  size: 200x  parent: WLoad
+    text:
+      | Load the game
+
+--- id: LNameWLoad
+    widget: TLabLabel  size: 200x  parent: WLoad
+    text:
+      | Game name:
+
+--- id: BLoadWLoad
+    widget: TLabButton  size: x  parent: WLoad
+    text:
+      | Load
+
+--- id: BDeleteWLoad
+    widget: TLabButton  size: x  parent: WLoad
+    text:
+      | Delete
+
+--- id: BCancelWLoad
+    widget: TLabButton  size: x  parent: WLoad
+    text:
+      | Cancel
+
+--- id: LabelWDeleteGameDialog
+    widget: TLabLabel  size: 305x60  parent: WDeleteGameDialog
+    text:
+      | Are you sure you want to delete the saved game name?
+
+--- id: BOkWDeleteGameDialog
+    widget: TLabButton  size: x  parent: WDeleteGameDialog
+    text:
+      | OK
+
+--- id: BCancelWDeleteGameDialog
+    widget: TLabButton  size: x  parent: WDeleteGameDialog
+    text:
+      | Cancel
+
+--- id: LabelWQuitGameDialog
+    widget: TLabLabel  size: 305x80  parent: WQuitGameDialog
+    text:
+      | Are you sure you want to quit the game and lose all the points you have scored?
+
+--- id: BOkWQuitGameDialog
+    widget: TLabButton  size: x  parent: WQuitGameDialog
+    text:
+      | OK
+
+--- id: BCancelWQuitGameDialog
+    widget: TLabButton  size: x  parent: WQuitGameDialog
+    text:
+      | Cancel
+
+--- id: LabelWReplaceGameDialog
+    widget: TLabLabel  size: 310x80  parent: WReplaceGameDialog
+    text:
+      | The game with such name already exists. Are you sure you want to replace it?
+
+--- id: BOkWReplaceGameDialog
+    widget: TLabButton  size: x  parent: WReplaceGameDialog
+    text:
+      | OK
+
+--- id: BCancelWReplaceGameDialog
+    widget: TLabButton  size: x  parent: WReplaceGameDialog
+    text:
+      | Cancel
+
+--- id: LSaveWSave
+    widget: TLabLabel  size: 200x  parent: WSave
+    text:
+      | Save the game
+
+--- id: LNameWSave
+    widget: TLabLabel  size: 200x  parent: WSave
+    text:
+      | Game name:
+
+--- id: BSaveWSave
+    widget: TLabButton  size: 150x45  parent: WSave
+    text:
+      | Save
+
+--- id: BDeleteWSave
+    widget: TLabButton  size: 150x45  parent: WSave
+    text:
+      | Delete
+
+--- id: BCancelWSave
+    widget: TLabButton  size: 150x45  parent: WSave
+    text:
+      | Cancel
+
+--- id: RENUWLanguage
+    widget: TLabRadioButton  size: 160x  parent: WLanguage
+    text:
+      | English
+
+--- id: LabelWClearDialog
+    widget: TLabLabel  size: 310x60  parent: WClearDialog
+    text:
+      | Are you sure you want to clear the High Scores List?
+
+--- id: BOkWClearDialog
+    widget: TLabButton  size: 150x45  parent: WClearDialog
+    text:
+      | OK
+
+--- id: BCancelWClearDialog
+    widget: TLabButton  size: 150x45  parent: WClearDialog
+    text:
+      | Cancel
+
+--- id: LMusicWOptions
+    widget: TLabLabel  size: 180x  parent: WOptions
+    text:
+      | Music Volume
+
+--- id: LSoundWOptions
+    widget: TLabLabel  size: 180x  parent: WOptions
+    text:
+      | Sound Volume
+
+--- id: RMusic80WOptions
+    widget: TLabRadioButton  size: 80x  parent: WOptions
+    text:
+      | 80 %
+
+--- id: RMusic60WOptions
+    widget: TLabRadioButton  size: 80x  parent: WOptions
+    text:
+      | 60 %
+
+--- id: RMusic40WOptions
+    widget: TLabRadioButton  size: 80x  parent: WOptions
+    text:
+      | 40 %
+
+--- id: RMusic20WOptions
+    widget: TLabRadioButton  size: 80x  parent: WOptions
+    text:
+      | 20 %
+
+--- id: RNoMusicWOptions
+    widget: TLabRadioButton  size: 110x  parent: WOptions
+    text:
+      | No Music
+
+--- id: RSound80WOptions
+    widget: TLabRadioButton  size: 100x  parent: WOptions
+    text:
+      | 80 %
+
+--- id: RSound60WOptions
+    widget: TLabRadioButton  size: 80x  parent: WOptions
+    text:
+      | 60 %
+
+--- id: RSound40WOptions
+    widget: TLabRadioButton  size: 80x  parent: WOptions
+    text:
+      | 40 %
+
+--- id: RSound20WOptions
+    widget: TLabRadioButton  size: 80x  parent: WOptions
+    text:
+      | 20 %
+
+--- id: RNoSoundWOptions
+    widget: TLabRadioButton  size: 115x  parent: WOptions
+    text:
+      | No Sound
+
+--- id: CheckBoxHintsWOptions
+    widget: TLabCheckBox  size: 160x  parent: WOptions
+    text:
+      | Turn off hints
+
+--- id: BLanguageWOptions
+    widget: TLabButton  size: x  parent: WOptions
+    text:
+      | Language
+
+--- id: BOkWOptions
+    widget: TLabButton  size: x  parent: WOptions
+    text:
+      | OK
+
+--- id: BCancelWOptions
+    widget: TLabButton  size: x  parent: WOptions
+    text:
+      | Cancel
+
+--- id: BOkWFinishLevelDialog
+    widget: TLabButton  size: 152x  parent: WFinishLevelDialog
+    text:
+      | OK
+
+--- id: LabelWGameOverDialog
+    widget: TLabLabel  size: 300x  parent: WGameOverDialog
+    text:
+      | Game over! Try once again...
+
+--- id: BOkWGameOverDialog
+    widget: TLabButton  size: x  parent: WGameOverDialog
+    text:
+      | OK
+
+--- id: LabelWGameFinishedDialog
+    widget: TLabLabel  size: 360x90  parent: WGameFinishedDialog
+    text:
+      | Congratulations!
+      | 
+      | You have completely finished Fiber Twig!
+
+--- id: BOkWGameFinishedDialog
+    widget: TLabButton  size: x  parent: WGameFinishedDialog
+    text:
+      | OK
+
+--- id: LYourNameWGameFinishedDialog
+    widget: TLabLabel  size: 150x  parent: WGameFinishedDialog
+    text:
+      | Your name:
+
+--- id: LabelWHighScores
+    widget: TLabLabel  size: 340x  parent: WHighScores
+    text:
+      | High Scores List
+
+--- id: BOkWHighScores
+    widget: TLabButton  size: x  parent: WHighScores
+    text:
+      | OK
+
+--- id: BClearWHighScores
+    widget: TLabButton  size: x  parent: WHighScores
+    text:
+      | Clear
+
+--- id: BOkWLanguage
+    widget: TLabButton  size: x  parent: WLanguage
+    text:
+      | OK
+
+--- id: CheckBoxColorWOptions
+    widget: TLabCheckBox  size: x  parent: WOptions
+    text:
+      | 32 bit color
+
+--- id: CheckBoxFullScreenWOptions
+    widget: TLabCheckBox  size: x  parent: WOptions
+    text:
+      | Full screen
+
+--- id: LLevelWGame
+    widget: TLabLabel  size: 90x  parent: WGame
+    text:
+      | Level:
+
+--- id: LLevelNumWGame
+    widget: TLabLabel  size: 50x  parent: WGame
+    text:
+      | 1
+
+--- id: LScoreWGame
+    widget: TLabLabel  size: 90x  parent: WGame
+    text:
+      | Score:
+
+--- id: LScoreCountWGame
+    widget: TLabLabel  size: 70x  parent: WGame
+    text:
+      | 000000
+
+--- id: LDropSectionWGame
+    widget: TLabLabel  size: 186x  parent: WGame
+    text:
+      | DROP SECTION
+
+--- id: LHammerCountWGame
+    widget: TLabLabel  size: 40x  parent: WGame
+    text:
+      | 0
+
+--- id: LClipperCountWGame
+    widget: TLabLabel  size: 40x  parent: WGame
+    text:
+      | 0
+
+--- id: LLoadingWProgressBar
+    widget: TLabLabel  size: 230x  parent: WProgressBar
+    text:
+      | Loading...
+
+--- id: LNotEnabledWNotEnabled
+    widget: TLabLabel  size: 390x220  parent: WNotEnabled
+    text:
+      | We hope you'll like it!
+      | 
+      | This is a trial version. You can use it for 14 days
+      | 
+      | or run 14 times (whichever expires first).
+      | 
+      | Registering the game removes all limitation and
+      | 
+      | opens access to all levels. For details see
+
+--- id: BOkWNotEnabled
+    widget: TLabButton  size: x  parent: WNotEnabled
+    text:
+      | Maybe later
+
+--- id: LLevelNumWBetweenLevelMenu
+    widget: TLabLabel  size: 30x  parent: WBetweenLevelMenu
+    text:
+      | 00.
+
+--- id: LScoreCountWBetweenLevelMenu
+    widget: TLabLabel  size: 86x  parent: WBetweenLevelMenu
+    text:
+      | 0
+
+--- id: LHammerCountWBetweenLevelMenu
+    widget: TLabLabel  size: 34x  parent: WBetweenLevelMenu
+    text:
+      | 0
+
+--- id: LExperienceWBetweenLevelMenu
+    widget: TLabLabel  size: 140x  parent: WBetweenLevelMenu
+    text:
+      | Experience:
+
+--- id: LClipperCountWBetweenLevelMenu
+    widget: TLabLabel  size: 34x  parent: WBetweenLevelMenu
+    text:
+      | 0
+
+--- id: LLevelCompleteWFinishLevelDialog
+    widget: TLabLabel  size: 246x  parent: WFinishLevelDialog
+    text:
+      | Level Complete !!!
+
+--- id: LYourScoreWGameFinishedDialog
+    widget: TLabLabel  size: 135x  parent: WGameFinishedDialog
+    text:
+      | Your Score:
+
+--- id: LYourHammerWGameFinishedDialog
+    widget: TLabLabel  size: 130x  parent: WGameFinishedDialog
+    text:
+      | Your Hammers:
+
+--- id: LYourCapsWGameFinishedDialog
+    widget: TLabLabel  size: 130x  parent: WGameFinishedDialog
+    text:
+      | Your Amphoras:
+
+--- id: LTotalScoreWGameFinishedDialog
+    widget: TLabLabel  size: 150x  parent: WGameFinishedDialog
+    text:
+      | Total Score:
+
+--- id: LYourScoreCountWGameFinishedDialog
+    widget: TLabLabel  size: 100x  parent: WGameFinishedDialog
+    text:
+      | 0
+
+--- id: LYourHammerCountWGameFinishedDialog
+    widget: TLabLabel  size: 300x  parent: WGameFinishedDialog
+    text:
+      | 0
+
+--- id: LYourCapsCountWGameFinishedDialog
+    widget: TLabLabel  size: 100x  parent: WGameFinishedDialog
+    text:
+      | 0
+
+--- id: LTotalScoreCountWGameFinishedDialog
+    widget: TLabLabel  size: 100x  parent: WGameFinishedDialog
+    text:
+      | 0
+
+--- id: LExperienceCountWBetweenLevelMenu
+    widget: TLabLabel  size: 40x  parent: WBetweenLevelMenu
+    text:
+      | 0
+
+--- id: LLuckyTwigCountWBetweenLevelMenu
+    widget: TLabLabel  size: 34x  parent: WBetweenLevelMenu
+    text:
+      | 0
+
+--- id: LDropAccelCountWBetweenLevelMenu
+    widget: TLabLabel  size: 34x  parent: WBetweenLevelMenu
+    text:
+      | 0
+
+--- id: LLiveCountWBetweenLevelMenu
+    widget: TLabLabel  size: 34x  parent: WBetweenLevelMenu
+    text:
+      | 0
+
+--- id: LabLabel203203
+    widget: TLabLabel  size: 10x  parent: WBetweenLevelMenu
+    text:
+      | +
+
+--- id: LabLabel204204
+    widget: TLabLabel  size: 10x  parent: WBetweenLevelMenu
+    text:
+      | +
+
+--- id: LabLabel205205
+    widget: TLabLabel  size: 10x  parent: WBetweenLevelMenu
+    text:
+      | +
+
+--- id: LabLabel206206
+    widget: TLabLabel  size: 10x  parent: WBetweenLevelMenu
+    text:
+      | +
+
+--- id: LabLabel207207
+    widget: TLabLabel  size: 10x  parent: WBetweenLevelMenu
+    text:
+      | +
+
+--- id: LLiveExpWBetweenLevelMenu
+    widget: TLabLabel  size: 30x  parent: WBetweenLevelMenu
+    text:
+      | 0
+
+--- id: LDropAccelExpWBetweenLevelMenu
+    widget: TLabLabel  size: 30x  parent: WBetweenLevelMenu
+    text:
+      | 0
+
+--- id: LLuckyTwigExpWBetweenLevelMenu
+    widget: TLabLabel  size: 30x  parent: WBetweenLevelMenu
+    text:
+      | 0
+
+--- id: LAmphoraExpWBetweenLevelMenu
+    widget: TLabLabel  size: 30x  parent: WBetweenLevelMenu
+    text:
+      | 0
+
+--- id: LHammerExpWBetweenLevelMenu
+    widget: TLabLabel  size: 30x  parent: WBetweenLevelMenu
+    text:
+      | 0
+
+--- id: LCombDoneWGame
+    widget: TLabLabel  size: x  parent: WGame
+    text:
+      | Combinations Done !
+
+--- id: LCombCountWGame
+    widget: TLabLabel  size: 60x  parent: WGame
+    text:
+      | 0 / 0
+
+--- id: LLiveCountWGame
+    widget: TLabLabel  size: 20x  parent: WGame
+    text:
+      | 90
+
+--- id: LLevel1WBetweenLevelMenu
+    widget: TLabLabel  size: 300x70  parent: TLevel1WBetweenLevelMenu
+    text:
+      | Among The Flowers In The Garden Of The Beautiful Enchantress
+
+--- id: LLevel2WBetweenLevelMenu
+    widget: TLabLabel  size: 300x70  parent: TLevel2WBetweenLevelMenu
+    text:
+      | Composing A Seven-Note Melody For The Lady On The Bird
+
+--- id: LLevel3WBetweenLevelMenu
+    widget: TLabLabel  size: 300x70  parent: TLevel3WBetweenLevelMenu
+    text:
+      | Lighting Up The Way For The Star Hunter
+
+--- id: LLevel4WBetweenLevelMenu
+    widget: TLabLabel  size: 300x70  parent: TLevel4WBetweenLevelMenu
+    text:
+      | Solving The Puzzle Of The Wise Owl
+
+--- id: LLevel5WBetweenLevelMenu
+    widget: TLabLabel  size: 300x70  parent: TLevel5WBetweenLevelMenu
+    text:
+      | In The Ivy Garden Of The Elf Musician
+
+--- id: LLevel6WBetweenLevelMenu
+    widget: TLabLabel  size: 300x70  parent: TLevel6WBetweenLevelMenu
+    text:
+      | Making Bone-Like Patterns For The Watchdog
+
+--- id: LLevel9WBetweenLevelMenu
+    widget: TLabLabel  size: 300x70  parent: TLevel9WBetweenLevelMenu
+    text:
+      | The Old Dwarf Watching Over The Forest Labyrinths
+
+--- id: LLevel10WBetweenLevelMenu
+    widget: TLabLabel  size: 300x70  parent: TLevel10WBetweenLevelMenu
+    text:
+      | Playing Hide-And-Seek With Mushrooms
+
+--- id: LLevel11WBetweenLevelMenu
+    widget: TLabLabel  size: 300x70  parent: TLevel11WBetweenLevelMenu
+    text:
+      | Paying A Visit To The Gorgeous Harpy
+
+--- id: LLevel12WBetweenLevelMenu
+    widget: TLabLabel  size: 300x70  parent: TLevel12WBetweenLevelMenu
+    text:
+      | Meeting With The Frog Queen, The Ruler Of The Underwater Kingdom
+
+--- id: LLevel13WBetweenLevelMenu
+    widget: TLabLabel  size: 300x70  parent: TLevel13WBetweenLevelMenu
+    text:
+      | Moving Through The Thick Bushes In The Magician's Garden
+
+--- id: LLevel14WBetweenLevelMenu
+    widget: TLabLabel  size: 300x70  parent: TLevel14WBetweenLevelMenu
+    text:
+      | Falling Flowers In The Satyr's Beautiful Garden
+
+--- id: LLevel15WBetweenLevelMenu
+    widget: TLabLabel  size: 300x70  parent: TLevel15WBetweenLevelMenu
+    text:
+      | The Spirit Of Wind, Singing His Joyous Song In The Skies
+
+--- id: LLevel16WBetweenLevelMenu
+    widget: TLabLabel  size: 300x70  parent: TLevel16WBetweenLevelMenu
+    text:
+      |  An Exciting Adventure In The Giant Squid's Garden
+
+--- id: LLevel17WBetweenLevelMenu
+    widget: TLabLabel  size: 300x70  parent: TLevel17WBetweenLevelMenu
+    text:
+      | Meeting With The Master Of All Creatures - The Flying Elefant
+
+--- id: LDropAccelCounWGame
+    widget: TLabLabel  size: 20x  parent: WGame
+    text:
+      | 90
+
+--- id: BDemoWLoad
+    widget: TLabButton  size: 190x  parent: WTitle
+    text:
+      | Demo
+
+--- id: RIntroductionWHelp
+    widget: TLabRadioButton  size: x  parent: WHelp
+    text:
+      | Introduction
+
+--- id: RGettingStartedWHelp
+    widget: TLabRadioButton  size: x  parent: WHelp
+    text:
+      | Getting Started
+
+--- id: RPlayingFieldWHelp
+    widget: TLabRadioButton  size: x  parent: WHelp
+    text:
+      | Playing Field
+
+--- id: RHowToPlayWHelp
+    widget: TLabRadioButton  size: x  parent: WHelp
+    text:
+      | How To Play
+
+--- id: RArrangingTwigsWHelp
+    widget: TLabRadioButton  size: x  parent: WHelp
+    text:
+      | Arranging Twigs
+
+--- id: RMagicToolsWHelp
+    widget: TLabRadioButton  size: x  parent: WHelp
+    text:
+      | Magic Tools
+
+--- id: RSkillsAndExperienceWHelp
+    widget: TLabRadioButton  size: x  parent: WHelp
+    text:
+      | Skills And Experience
+
+--- id: RCombinationsWHelp
+    widget: TLabRadioButton  size: x  parent: WHelp
+    text:
+      | Combinations
+
+--- id: RScoringPointsWHelp
+    widget: TLabRadioButton  size: 175x  parent: WHelp
+    text:
+      | Scoring Points
+
+--- id: RKeyboardShortcutsWHelp
+    widget: TLabRadioButton  size: x  parent: WHelp
+    text:
+      | Keyboard Shortcuts
+
+--- id: ROptionsWHelp
+    widget: TLabRadioButton  size: x  parent: WHelp
+    text:
+      | Options
+
+--- id: RBonusesWHelp
+    widget: TLabRadioButton  size: x  parent: WHelp
+    text:
+      | Bonuses
+
+--- id: RRegistrationWHelp
+    widget: TLabRadioButton  size: x  parent: WHelp
+    text:
+      | Registration
+
+--- id: RAboutPuzzleLabWHelp
+    widget: TLabRadioButton  size: x  parent: WHelp
+    text:
+      | About Puzzle Lab
+
+--- id: LabelTIntroductionWHelp
+    widget: TLabLabel  size: 495x470  parent: TIntroductionWHelp
+    text:
+      | In this game you will find yourself in a beautiful fantasy garden inhabited by fairy creatures. The garden was decorated with beautiful patterns made of little twigs. One day a terrible hurricane swept down and destroyed them, having left little of what used to be the garden's main attraction. Your mission is to connect twigs and restore the original patterns.
+      | 
+      | Twigs pass by at the bottom part of the screen, slowly accumulating. The initial twig is already on the playing field, you should connect to it a matching twig and continue connecting twigs with each other until you reach the top of the screen. All twigs should be connected, otherwise you'll never reach the top. If some twig has an open joint, you won't move up, because it is necessary that all elements on the playing field be connected with each other. It is also important to watch the conveyer, because when it overfills, you lose.
+      | 
+      | In some levels there is an object on the playing field, which you should entwine into your pattern with the help of twigs. There are also flying objects which hinder you from placing twigs, so you should wait until they pass by. Magic tools will help you during the game - you may use the Clipper to cut unnecessary elements or to insert twigs of the desired shape, and the Hammer to smash twigs at the bottom of the screen to prevent the conveyer from overfilling.
+
+--- id: LabelTGettingStartedWHelp
+    widget: TLabLabel  size: 495x470  parent: TGettingStartedWHelp
+    text:
+      | When you start the game, you are suggested to select a starting bonus and the level of difficulty.
+      | 
+      | You may choose between the following starting bonuses: the Hammer, the Amphora and Additional Score. Having chosen one of the starting bonuses, you will get more magic tools or additional points.
+      | 
+      | After you selected a starting bonus, choose the level of difficulty of the game. You can play in the following game modes:
+      | 
+      | No Lose - you never lose, but you don't score points
+      | 
+      | Easy - twigs move slowly and you score some points
+      | 
+      | Normal  - twigs appear at a normal speed and you earn points for your actions
+      | 
+      | Hard  - twigs appear at a high speed and you can get a higher score
+
+--- id: LabelTPlayingFieldWHelp
+    widget: TLabLabel  size: 495x470  parent: TPlayingFieldWHelp
+    text:
+      | The playing field consists of three parts. In the center there is the field for restoring a pattern. The initial twig is already given, you should connect to it another twig and continue until you reach the top.
+      | 
+      | At the bottom part of the screen there is the conveyer which gradually fills with twigs of various shapes. When there is no empty space left, you lose the game. You must use twigs for restoring the original pattern.
+      | 
+      | On the right there is the information panel and the magic tools. The information panel displays your score, the current level and the "Menu" button.
+      | 
+      | The magic tools, the Amphora and the Hammer, can help you in the course of the game a lot. You may use the Amphora to to create twigs of the desired shape or to cut the unnecessary elements, and the Hammer to smash twigs in the conveyer and on the playing field. Below the instruments there is the Drop Section, it may be used for throwing out the unnecessary twigs.
+
+--- id: LabelTHowToPlayWHelp
+    widget: TLabLabel  size: 495x470  parent: THowToPlayWHelp
+    text:
+      | The basic rules of the game are as follows:
+      | 
+      | - Left-click the twig you want to use.
+      | 
+      | - Rotate the twig if it is necessary by clicking the right mouse      button.
+      | 
+      | - Attach the twig to the one on the playing field by left-clicking     the mouse.
+      | 
+      | - Connect all the twigs on the playing field with each other.
+      | 
+      | - Connect the group of twigs to the top of the tree.
+
+--- id: LabelTArrangingTwigsWHelp
+    widget: TLabLabel  size: 495x470  parent: TArrangingTwigsWHelp
+    text:
+      | Twigs are delivered by the conveyer at the bottom of the screen. The goal of the game is to connect the twigs with each other on the playing field, so as to reach the top of the screen. The twigs in the conveyer are slowly accumulating, so you should keep an eye on it not to let it overfill, otherwise the game will end. Along with common twigs, there are two special types of twigs: Mystery Twigs - you don't know what shape they have until you take them, and Lucky Twigs - when you use them you get certain bonuses. On the playing field you can also see Transparent Twigs - you should cover them with twigs of the same shape.
+      | 
+      | Twigs can have various shapes, and all of them have different number of joints. When a twig has an open joint, there is light coming from it to show that it is possible to connect another twig to it. Lower joints shouldn't be left open, because moving upwards is only possible when all twigs are connected with each other. Open joints preventing you from moving up are indicated with green light. If it is possible to connect one twig to another, you'll see a green arrow, and if it's impossible - you'll see a red cross.
+
+--- id: LabelTMagicToolsWHelp
+    widget: TLabLabel  size: 495x470  parent: TMagicToolsWHelp
+    text:
+      | Magic Tools can help you to pass the game levels. The number in the top right-hand corner of the tool icon shows how many tools of this type you have. Some bonuses may increase the number of uses of a tool.
+      | 
+      | Hammer. This tool can be used for smashing twigs in the conveyer and on the playing field (except the initial ones). Use the hammer to smash the twigs that don't fit in your pattern to free up space for the new ones.
+      | 
+      | USING THE HAMMER: Click on the hammer icon to select it. Place the hammer on a desired twig and click the left mouse button to smash it. You can smash several twigs in a row. If you want to drop the hammer, just click the right mouse button.
+      | 
+      | Amphora. You may want to use this tool in two cases: when you cannot find a twig of the desired shape and when you need to cut the unnecessary elements.
+      | 
+      | USING THE AMPHORA: Click on the icon to select this tool. To create a missing twig place the amphora in the desired position on the playing field and click the left mouse button. To cut the unnecessary elements place the amphora on the desired twig and click it. Click the right mouse button to drop the amphora.
+
+--- id: LabelTSkillsAndExperienceWHelp
+    widget: TLabLabel  size: 495x470  parent: TSkillsAndExperienceWHelp
+    text:
+      | At the end of each level you are given some points of Experience. The number of experience points depends on the number of twigs which you used in restoring patterns in the previous level, and on the number of twig combinations you've made (one point for each combination, and two points if all combinations were made).
+      | 
+      | You can allot your experience points among the five Skills which are shown in the left part of the dialog window:
+      | 
+      | Time Control - allows you not to lose for some time even when the conveyer has overfilled with gems.
+      | 
+      | Drop Section Accelerator - makes the Drop Section work faster.
+      | 
+      | Good Luck - brings more Lucky Twigs (the ones that have bonuses).
+      | 
+      | Amphora - creates twigs of the desired shape and cuts the unnecessary elements.
+      | 
+      | Hammer -  smashes the unnecessary twigs in the conveyer and on the playing field.
+
+--- id: LabelTCombinationsWHelp
+    widget: TLabLabel  size: 495x470  parent: TCombinationsWHelp
+    text:
+      | If you make special twig combinations, while restoring a pattern, you may get various bonuses. Making combinations is not difficult: you should connect twigs the way it is shown on the picture in the right-hand part of the screen. When you make a combination, the picture disappears, and a new one appears for you to make with the help of twigs.
+
+--- id: LabelTScoringPointsWHelp
+    widget: TLabLabel  size: 495x470  parent: TScoringPointsWHelp
+    text:
+      | You score points for each twig on the field. The number of points for each twig depends on the number of joints it has. It means that twigs with a larger number of joints bring more points. Besides, some bonuses obtained for making twig combinations and using bonus twigs also bring additional points.
+      | 
+      | During the game you also earn Experience Points. The number of experience points depends on the number of twigs which you used in restoring patterns, and on the number of twig combinations you've made (one point for each combination, and two points if all combinations were made). So, try to use gems with a larger number of joints and make twig combinations - and you'll be able to improve your skills.
+
+--- id: LabelTShortcutsWHelp
+    widget: TLabLabel  size: 495x470  parent: TShortcutsWHelp
+    text:
+      | Space bar - pick up the first twig in the conveyer. If the conveyer is empty, a new twig will be generated.
+      | 
+      | '1', '2'... '9' -  pick up the twig with the corresponding number in the conveyer.
+      | 
+      | F3 - take (place back) the Hammer.
+      | 
+      | F4 - take (place back) the Amphora.
+      | 
+      | Del - throw away the selected twig.
+      | 
+      | Esc - view the menu.
+      | 
+      | Cheat Codes
+      | 
+      | The following cheat codes are available for the registered users:
+      | 
+      | 1. _AddHammers - F5 F7 F7 F8 F6. Number of uses: 5. Gives you five additional hammers. You may only use it  five times during a level.
+      | 
+      | 2._AddAmphoras - F5 F6 F8 F7 F8. Number of uses: 5. Gives you five additional amphoras. You may only use it five times during a level.
+      | 
+      | 3. _ExplodeTwigs - F5 F8 F7 F6 F7 F8. Number of uses: 5. Blows up all the twigs in the conveyer. You may only use it five times during a level.
+
+--- id: LabelTBonusesWHelp
+    widget: TLabLabel  size: 495x470  parent: TBonusesWHelp
+    text:
+      | You may get the following bonuses if you make twig combinations or use bonus twigs:
+      | 
+      | 1. Smashing Bomb - clears the conveyer, freeing space for new twigs.
+      | 
+      | 2. Additional Hammers - gives you a certain number of Magic Hammers.
+      | 
+      | 3. Additional Amphoras - gives you a certain number of Magic Clippers.
+      | 
+      | 4. Additional Points - gives you additional points to increase your score.
+      | 
+      | 5. Drop Section Accelerator - makes twigs disappear faster so that you can throw out more twigs.
+      | 
+      | 6. Good Luck - makes all twigs in the conveyer having a bonus.
+      | 
+      | 7. Time Control - temporary bonus that allows you not to lose for some time when the conveyer overfills.
+
+--- id: LabelTOptionsWHelp
+    widget: TLabLabel  size: 495x470  parent: TOptionsWHelp
+    text:
+      | You may regulate the following game options:
+      | 
+      | Language - select the language of the game
+      | 
+      | Turn off hints - check this box if you don't want to see hints
+      | 
+      | Full screen - check this box to play in full screen mode
+      | 
+      | 32 bit color - check this box to see the true colors
+      | 
+      | Music Volume - regulate the volume of music
+      | 
+      | Sound Volume - regulate the volume of sound
+
+--- id: LabelTRegistrationWHelp
+    widget: TLabLabel  size: 495x470  parent: TRegistrationWHelp
+    text:
+      | This is a trial version. You can use it for 14 days or run 14 times (whichever expires first). Registering the game removes all limitations and opens access to all levels. For details see:
+      | 
+      | www.puzzlelab.com
+      | 
+      | As a registered user you receive the following benefits:
+      | 
+      | - Hours of absorbing gameplay
+      | 
+      | - Access to new exciting levels
+      | 
+      | - Many other lovely creatures
+      | 
+      | - A variety of twig combinations
+      | 
+      | - Cheat codes: _AddHammers, _AddAmphoras, _ExplodeTwigs
+
+--- id: LabelTAboutWHelp
+    widget: TLabLabel  size: 495x470  parent: TAboutWHelp
+    text:
+      | Acknowledgements
+      | 
+      | Puzzle Lab Studio wants to say a special word of thanks to those who contributed in various ways to this project:
+      | 
+      | Anastassia Fomina, Andrey Fomin, Pavel Moskvin, Oleg Ryabinin, Sophia Shishatskaya, Aleksei Fadeev, Dmitry Gorbatkov, Mikhail Tretyakov, Nadezhda Moskvina, Sergey Potapov, Sergey Zakharov, Anton Pishchour, Sergey Kaminsky, Olesya Derkach.
+
+--- id: BCloseWHelp
+    widget: TLabButton  size: x  parent: WHelp
+    text:
+      | Close
+
+--- id: LLevel7WBetweenLevelMenu
+    widget: TLabLabel  size: 300x70  parent: TLevel7WBetweenLevelMenu
+    text:
+      | Lighting The Street Lamps In The Centaur's Dark Garden
+
+--- id: LLevel8WBetweenLevelMenu
+    widget: TLabLabel  size: 300x70  parent: TLevel8WBetweenLevelMenu
+    text:
+      | In The Domain Of The Green-Haired Nymph
+
+--- id: LabelWExitToMainMenu
+    widget: TLabLabel  size: 330x60  parent: WExitToMainMenu
+    text:
+      |  Are you sure you want to exit to main menu?
+
+--- id: BOkWExitToMainMenu
+    widget: TLabButton  size: x  parent: WExitToMainMenu
+    text:
+      | OK
+
+--- id: BCancelWExitToMainMenu
+    widget: TLabButton  size: x  parent: WExitToMainMenu
+    text:
+      | Cancel
+
+--- id: LHintSkillLive
+    widget: TLabLabel  size: 600x  parent: WHints
+    text:
+      | Time Control - allows you not to lose for some time even when the conveyer has overfilled with gems.
+
+--- id: LHintSkillDropAccel
+    widget: TLabLabel  size: 600x  parent: WHints
+    text:
+      | Drop Section Accelerator - makes the Drop Section work faster.
+
+--- id: LHintSkillLuckyTwig
+    widget: TLabLabel  size: 600x  parent: WHints
+    text:
+      | Good Luck - brings more Lucky Twigs (the ones that have bonuses).
+
+--- id: LHintSkillAmphora
+    widget: TLabLabel  size: 600x  parent: WHints
+    text:
+      | Amphora - creates twigs of the desired shape and cuts the unnecessary elements.
+
+--- id: LHintSkillHammer
+    widget: TLabLabel  size: 600x  parent: WHints
+    text:
+      | Hammer -  smashes the unnecessary twigs in the conveyer and on the playing field.
+
+--- id: LHintClosedLink
+    widget: TLabLabel  size: 600x  parent: WHints
+    text:
+      | You can't  lock a pattern, otherwise you won't be able to connect all twigs.
+
+--- id: LHintFirstTakeBonusFishka
+    widget: TLabLabel  size: 600x  parent: WHints
+    text:
+      | This is a Bonus Twig. If you use it, you'll get a bonus.
+
+--- id: LHintFirstTakeQuestFishka
+    widget: TLabLabel  size: 600x  parent: WHints
+    text:
+      | This is a Puzzle Twig. You don't know what shape it has until you take it.
+
+--- id: LHintFirstTakeFishka
+    widget: TLabLabel  size: 600x  parent: WHints
+    text:
+      | You can link twigs with each other by connecting the joints that have light coming out of them.
+
+--- id: LHintMatchingJoints
+    widget: TLabLabel  size: 600x  parent: WHints
+    text:
+      | You can only connect twigs that have matching joints.
+
+--- id: LHintFirstTransparentFishka
+    widget: TLabLabel  size: 600x  parent: WHints
+    text:
+      | These are Transparent Twigs. You should cover them with twigs of the same shape.
+
+--- id: LHintTransparentTwig
+    widget: TLabLabel  size: 600x  parent: WHints
+    text:
+      | You should cover transparent twigs with twigs of the same shape.
+
+--- id: LHintLevelTop
+    widget: TLabLabel  size: 600x  parent: WHints
+    text:
+      | Now conenct all twigs to restore the pattern and complete the level.
+
+--- id: REasyWStartDialog
+    widget: TLabRadioButton  size: 70x  parent: WStartDialog
+    text:
+      | Easy
+
+--- id: LHintFishComb
+    widget: TLabLabel  size: 600x  parent: WHints
+    text:
+      | You've made a twig combination and got a bonus.
+
+--- id: LLinksWNotEnabled
+    widget: TLabLabel  size: 420x  parent: WNotEnabled
+    text:
+      | www.puzzlelab.com
+
+--- id: BBuyNowWNotEnabled
+    widget: TLabButton  size: x  parent: WNotEnabled
+    text:
+      | Buy Now
+
+--- id: LTrialThanksLabel
+    widget: TLabLabel  size: 600x  parent: WHints
+    text:
+      | Thank you for trying our game!
+
+--- id: LTrialHopeLabel
+    widget: TLabLabel  size: 600x  parent: WHints
+    text:
+      | We hope you'll like it!
+
+--- id: LTrialConditionLabel
+    widget: TLabLabel  size: 800x  parent: WHints
+    text:
+      | This is a trial version. You can use it for 14 days or run 14 times (whichever expires first). Registering the game removes all limitation and opens access to all levels. For details see
+
+--- id: LTrialOrderLabel
+    widget: TLabLabel  size: 200x  parent: WHints
+    text:
+      | Order Page
+
+--- id: LTrialTimesLabel
+    widget: TLabLabel  size: x  parent: WHints
+    text:
+      | times
+
+--- id: LTrialDaysLabel
+    widget: TLabLabel  size: x  parent: WHints
+    text:
+      | days
+
+--- id: LTrialFiveMinutesLabel
+    widget: TLabLabel  size: 400x  parent: WHints
+    text:
+      | Now you have only 5 minutes to play
+
+--- id: LTrialPlayButton
+    widget: TLabLabel  size: x  parent: WHints
+    text:
+      | Play
+
+--- id: LTrialQuitButton
+    widget: TLabLabel  size: x  parent: WHints
+    text:
+      | Quit
+
+--- id: LTrialEnterKeyButton
+    widget: TLabLabel  size: 200x  parent: WHints
+    text:
+      | Enter Registration Key
+
+--- id: LTrialRegistrationButton
+    widget: TLabLabel  size: 150x  parent: WHints
+    text:
+      | Registration
+
+--- id: LTrialRegErrorLabel
+    widget: TLabLabel  size: 200x  parent: WHints
+    text:
+      | Registration error!
+
+--- id: RDEUWLanguage
+    widget: added by enu_10.lng  size: x
+    text:
+      | German
+
+--- id: RRUSWLanguage
+    widget: added by enu_10.lng  size: x
+    text:
+      | Russian
+
+--- id: RFRAWLanguage
+    widget: added by enu_10.lng  size: x
+    text:
+      | French
+
+--- id: RPTBWLanguage
+    widget: added by enu_10.lng  size: x
+    text:
+      | Portuguese
+
+=== LEVEL FILE CONTEXT (assets/levels/LevelN.txt) ===
+
+level 0: {"name": "Tutorial Level", "music": "Natureopt.mo3", "RainEffect": "Rain", "FragPicture": "FragPic4.png", "BonusElement": 0, "Bomb": 0, "MakeGhostRect": 0, "HidenFishkaPicture": 1, "fishka": 61, "ghost": 0}
+level 1: {"name": "TestLevel", "hero": "Elf1_2.png", "music": "Natureopt.mo3", "RainEffect": "Rain", "FragPicture": "FragPic4.png", "BonusElement": 0, "Bomb": 0, "MakeGhostRect": 0, "HidenFishkaPicture": 1, "fishka": 131, "ghost": 10}
+level 2: {"name": "TestLevel", "hero": "fairy.png", "music": "Natureopt.mo3", "RainEffect": "Rain", "FragPicture": "FragPic4.png", "BonusElement": 7, "Bomb": 0, "MakeGhostRect": 0, "HidenFishkaPicture": 1, "fishka": 222, "ghost": 20}
+level 3: {"name": "Level3", "hero": "shunter.png", "music": "Sad Song.mo3", "LevelEffect": "RoundBlicks", "FragPicture": "FragPic4.png", "BonusElement": 4, "Bomb": 0, "MakeGhostRect": 0, "HidenFishkaPicture": 1, "fishka": 111, "ghost": 54}
+level 4: {"name": "Level3", "hero": "sova.png", "music": "Sensetive.mo3", "FragPicture": "FragPic4.png", "BonusElement": 0, "Bomb": 0, "MakeGhostRect": 0, "HidenFishkaPicture": 1, "fishka": 198, "ghost": 36}
+level 5: {"name": "Level3", "hero": "elf.png", "music": "Sensetive.mo3", "FragPicture": "FragPic4.png", "BonusElement": 5, "Bomb": 10, "MakeGhostRect": 0, "HidenFishkaPicture": 1, "fishka": 153, "ghost": 31}
+level 6: {"name": "Level3", "hero": "Doggy.png", "music": "Natureopt.mo3", "FragPicture": "FragPic4.png", "BonusElement": 0, "Bomb": 0, "MakeGhostRect": 0, "HidenFishkaPicture": 1, "fishka": 154, "ghost": 43}
+level 7: {"name": "Level7", "hero": "centaur.png", "music": "Natureopt.mo3", "LevelEffect": "RoundBlicks", "FragPicture": "FragPic4.png", "BonusElement": 5, "Bomb": 0, "MakeGhostRect": 0, "HidenFishkaPicture": 1, "fishka": 130, "ghost": 13}
+level 8: {"name": "Level8", "hero": "driada.png", "music": "Sensetive.mo3", "FragPicture": "FragPic4.png", "BonusElement": 0, "Bomb": 0, "MakeGhostRect": 0, "HidenFishkaPicture": 1, "fishka": 142, "ghost": 31}
+level 9: {"name": "Level9", "hero": "gnom.png", "music": "Sensetive.mo3", "FragPicture": "FragPic4.png", "BonusElement": 3, "Bomb": 6, "MakeGhostRect": 0, "HidenFishkaPicture": 1, "fishka": 99, "ghost": 24}
+level 10: {"name": "Level10", "hero": "borovik.png", "music": "Sad Song.mo3", "FragPicture": "FragPic4.png", "BonusElement": 4, "Bomb": 0, "MakeGhostRect": 0, "HidenFishkaPicture": 1, "fishka": 143, "ghost": 37}
+level 11: {"name": "Level11", "hero": "harpy.png", "music": "Natureopt.mo3", "FireEffect": "Fire", "FragPicture": "FragPic4.png", "BonusElement": 3, "Bomb": 6, "MakeGhostRect": 0, "HidenFishkaPicture": 1, "fishka": 180, "ghost": 73}
+level 12: {"name": "Level12", "hero": "frog.png", "music": "Sensetive.mo3", "FragPicture": "FragPic4.png", "BonusElement": 0, "Bomb": 0, "MakeGhostRect": 0, "HidenFishkaPicture": 1, "fishka": 129, "ghost": 29}
+level 13: {"name": "Level13", "hero": "mag.png", "music": "Natureopt.mo3", "FragPicture": "FragPic4.png", "BonusElement": 1, "Bomb": 0, "MakeGhostRect": 0, "HidenFishkaPicture": 1, "fishka": 118, "ghost": 36}
+level 14: {"name": "Level14", "hero": "satyr.png", "music": "Sad Song.mo3", "RainEffect": "FlowerFall", "FragPicture": "FragPic4.png", "BonusElement": 0, "Bomb": 0, "MakeGhostRect": 0, "HidenFishkaPicture": 1, "fishka": 129, "ghost": 41}
+level 15: {"name": "Level15", "hero": "winder.png", "music": "Natureopt.mo3", "FireEffect": "SnowWind", "FragPicture": "FragPic4.png", "BonusElement": 0, "Bomb": 0, "MakeGhostRect": 2, "HidenFishkaPicture": 1, "fishka": 145, "ghost": 0}
+level 16: {"name": "Level16", "hero": "kalmar.png", "music": "Natureopt.mo3", "FragPicture": "FragPic4.png", "BonusElement": 3, "Bomb": 6, "MakeGhostRect": 0, "HidenFishkaPicture": 1, "fishka": 128, "ghost": 28}
+level 17: {"name": "Level17", "hero": "slon.png", "music": "Sensetive.mo3", "FragPicture": "FragPic4.png", "BonusElement": 0, "Bomb": 0, "MakeGhostRect": 0, "HidenFishkaPicture": 1, "fishka": 182, "ghost": 38}

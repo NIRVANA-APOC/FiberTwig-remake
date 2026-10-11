@@ -49,10 +49,13 @@ same snapshot, The
 localizations of `lng/*.lng` are switched at runtime (bitmap font
 `Arial12lat.png`/`Arial12cyr.png`, CP1251/CP1252 byte indexing) and now
 include **Simplified Chinese** (`简体中文`, `lng/chs_105.lng`): that file is
-UTF-8 and is drawn with the bundled Noto Sans SC subset
-(`assets/fonts/NotoSansSC-UI.ttf`, SIL OFL — see `assets/fonts/OFL.txt`),
-which also wraps the Chinese text per character. `--language=CODE` starts the
-game in a language without touching `options.cfg`.
+UTF-8 and is drawn with the bundled LXGW WenKai Screen subset
+(`assets/fonts/LXGWWenKaiScreen-UI.ttf`, SIL OFL — see `assets/fonts/OFL.txt`),
+whose Kai strokes match the original hand-painted art where a geometric sans did
+not. Chinese text wraps per character, never leaves closing punctuation at the
+start of a line and balances the last line of a paragraph instead of ending it
+in a stub. `--language=CODE` starts the game in a language without touching
+`options.cfg`.
 
 ![language](docs/language-chs.png)
 
@@ -227,14 +230,27 @@ The camera is automatic (original auto-follow); there is no manual scrolling.
 `../tools/decrypt_levels.py`. Music was converted from the BASS `*.mo3`
 modules with `openmpt123` and `oggenc`; the damaged WAV headers were rewritten.
 
-`assets/fonts/NotoSansSC-UI.ttf` is the only added artwork: a subset of Noto
-Sans SC (SIL OFL 1.1) used for the Simplified Chinese localization. Both
-localization files are generated and can be rebuilt:
+`assets/fonts/LXGWWenKaiScreen-UI.ttf` is the only added artwork: a subset of
+LXGW WenKai Screen / 霞鹜文楷屏幕阅读版 (SIL OFL 1.1), a Kai face whose brush
+strokes match the game's hand-painted garden art, used for the Simplified
+Chinese localization. The face it replaced is kept next to it as
+`assets/fonts/NotoSansSC-UI.ttf` (licence `assets/fonts/OFL-NotoSansSC.txt`);
+`tools/make_chs_font.py --face noto-sans-sc` rebuilds it. Both the localization
+and the font subset are generated and can be rebuilt:
 
 ```bash
-python tools/make_chs_lng.py     # remake/assets/lng/chs_105.lng
+python tools/make_chs_lng.py     # i18n/zh_*.json -> remake/assets/lng/chs_105.lng
 python tools/make_chs_font.py    # the font subset of chs_105.lng
 ```
+
+The translations themselves are the three reviewed per-block files in `i18n/`
+(`zh_ui.json`, `zh_help.json`, `zh_levels.json`); `i18n/glossary.md` is the term
+base they obey and `i18n/fitcheck.py` checks every caption against the widget
+box it is drawn in.
+
+The font subset is always derived from the `.lng` on disk, so re-run the second
+command after changing any caption: a glyph that is not in the subset would
+otherwise be drawn with a system font.
 
 ## Tests
 

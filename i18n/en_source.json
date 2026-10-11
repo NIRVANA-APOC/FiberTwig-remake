@@ -1,0 +1,2506 @@
+{
+  "records": [
+    {
+      "id": "BNewWTitle",
+      "class": "TLabButton",
+      "size": [
+        "190",
+        ""
+      ],
+      "text": "New Game",
+      "parent": "WTitle",
+      "TShiftX": "3"
+    },
+    {
+      "id": "BLoadWTitle",
+      "class": "TLabButton",
+      "size": [
+        "190",
+        ""
+      ],
+      "text": "Load Game",
+      "parent": "WTitle",
+      "TShiftX": "3"
+    },
+    {
+      "id": "BScoresWTitle",
+      "class": "TLabButton",
+      "size": [
+        "190",
+        ""
+      ],
+      "text": "High Scores",
+      "parent": "WTitle",
+      "TShiftX": "3"
+    },
+    {
+      "id": "BQuitWTitle",
+      "class": "TLabButton",
+      "size": [
+        "190",
+        ""
+      ],
+      "text": "Quit",
+      "parent": "WTitle",
+      "TShiftX": "-1"
+    },
+    {
+      "id": "BMenuWGame",
+      "class": "TLabButton",
+      "size": [
+        "150",
+        ""
+      ],
+      "text": "Menu",
+      "parent": "WGame",
+      "TShiftX": "0"
+    },
+    {
+      "id": "LSelectBonusWStartDialog",
+      "class": "TLabLabel",
+      "size": [
+        "420",
+        ""
+      ],
+      "text": "Select Starting Bonus",
+      "parent": "WStartDialog",
+      "Alignment": "taCenter"
+    },
+    {
+      "id": "RHammerWStartDialog",
+      "class": "TLabRadioButton",
+      "size": [
+        "90",
+        "130"
+      ],
+      "text": "Hammer (+5)",
+      "parent": "WStartDialog",
+      "Layout": "tlBottom",
+      "Alignment": "taCenter",
+      "TShiftX": "3",
+      "RadioGroup": "0"
+    },
+    {
+      "id": "RAmphoraWStartDialog",
+      "class": "TLabRadioButton",
+      "size": [
+        "90",
+        "130"
+      ],
+      "text": "Amphora (+5)",
+      "parent": "WStartDialog",
+      "Layout": "tlBottom",
+      "Alignment": "taCenter",
+      "TShiftX": "2",
+      "RadioGroup": "0"
+    },
+    {
+      "id": "RScoreWStartDialog",
+      "class": "TLabRadioButton",
+      "size": [
+        "90",
+        "130"
+      ],
+      "text": "Score (+200)",
+      "parent": "WStartDialog",
+      "Layout": "tlBottom",
+      "Alignment": "taCenter",
+      "TShiftX": "3",
+      "RadioGroup": "0"
+    },
+    {
+      "id": "LSelectDifficultyWStartDialog",
+      "class": "TLabLabel",
+      "size": [
+        "368",
+        ""
+      ],
+      "text": "Select Difficulty Level",
+      "parent": "WStartDialog"
+    },
+    {
+      "id": "RNoLoseWStartDialog",
+      "class": "TLabRadioButton",
+      "size": [
+        "100",
+        ""
+      ],
+      "text": "No Lose",
+      "parent": "WStartDialog",
+      "Layout": "tlTop",
+      "TShiftX": "30",
+      "RadioGroup": "1"
+    },
+    {
+      "id": "RNormalWStartDialog",
+      "class": "TLabRadioButton",
+      "size": [
+        "90",
+        ""
+      ],
+      "text": "Normal",
+      "parent": "WStartDialog",
+      "TShiftX": "30",
+      "RadioGroup": "1"
+    },
+    {
+      "id": "RHardWStartDialog",
+      "class": "TLabRadioButton",
+      "size": [
+        "70",
+        ""
+      ],
+      "text": "Hard",
+      "parent": "WStartDialog",
+      "TShiftX": "30",
+      "RadioGroup": "1"
+    },
+    {
+      "id": "BBackWStartDialog",
+      "class": "TLabButton",
+      "size": [
+        "150",
+        ""
+      ],
+      "text": "Back",
+      "parent": "WStartDialog",
+      "TShiftX": "1"
+    },
+    {
+      "id": "BPlayWStartDialog",
+      "class": "TLabButton",
+      "size": [
+        "200",
+        ""
+      ],
+      "text": "Play",
+      "parent": "WStartDialog",
+      "TShiftX": "-4"
+    },
+    {
+      "id": "BResumeWMenu",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Resume",
+      "parent": "WMenu",
+      "TShiftX": "0"
+    },
+    {
+      "id": "BAbortWMenu",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Abort Level",
+      "parent": "WMenu",
+      "TShiftX": "0"
+    },
+    {
+      "id": "BHelpWMenu",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Help",
+      "parent": "WMenu"
+    },
+    {
+      "id": "BOptionsWTitle",
+      "class": "TLabButton",
+      "size": [
+        "190",
+        ""
+      ],
+      "text": "Options",
+      "parent": "WTitle",
+      "TShiftX": "1"
+    },
+    {
+      "id": "BHelpWTitle",
+      "class": "TLabButton",
+      "size": [
+        "190",
+        ""
+      ],
+      "text": "Help",
+      "parent": "WTitle",
+      "TShiftX": "-1"
+    },
+    {
+      "id": "BLoadWMenu",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Load Game",
+      "parent": "WMenu",
+      "TShiftX": "1"
+    },
+    {
+      "id": "BOptionsWMenu",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Options",
+      "parent": "WMenu",
+      "TShiftX": "-1"
+    },
+    {
+      "id": "BQuitWMenu",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Quit",
+      "parent": "WMenu",
+      "TShiftX": "-3"
+    },
+    {
+      "id": "LabelWAbortLivelDialog",
+      "class": "TLabLabel",
+      "size": [
+        "330",
+        "60"
+      ],
+      "text": "Are you sure you want to abort the game?",
+      "parent": "WAbortLevelDialog",
+      "Alignment": "taCenter"
+    },
+    {
+      "id": "BOkWAbortLivelDialog",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "OK",
+      "parent": "WAbortLevelDialog",
+      "TShiftX": "-3"
+    },
+    {
+      "id": "BCancelWAbortLivelDialog",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Cancel",
+      "parent": "WAbortLevelDialog",
+      "TShiftX": "-1"
+    },
+    {
+      "id": "LLevelWBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "100",
+        ""
+      ],
+      "text": "Level",
+      "parent": "WBetweenLevelMenu",
+      "Alignment": "taRight"
+    },
+    {
+      "id": "LScoreWBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "100",
+        ""
+      ],
+      "text": "Score:",
+      "parent": "WBetweenLevelMenu",
+      "Alignment": "taRight"
+    },
+    {
+      "id": "BLoadWBetweenLevelMenu",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Load Game",
+      "parent": "WBetweenLevelMenu",
+      "TShiftX": "-1"
+    },
+    {
+      "id": "BSaveWBetweenLevelMenu",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Save Game",
+      "parent": "WBetweenLevelMenu",
+      "TShiftX": "-1"
+    },
+    {
+      "id": "BOptionsWBetweenLevelMenu",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Options",
+      "parent": "WBetweenLevelMenu",
+      "TShiftX": "-4"
+    },
+    {
+      "id": "BHelpWBetweenLevelMenu",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Help",
+      "parent": "WBetweenLevelMenu",
+      "TShiftX": "-5"
+    },
+    {
+      "id": "BMainMenuWBetweenLevelMenu",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Main Menu",
+      "parent": "WBetweenLevelMenu"
+    },
+    {
+      "id": "BNextLevelWBetweenLevelMenu",
+      "class": "TLabButton",
+      "size": [
+        "190",
+        ""
+      ],
+      "text": "Next Level",
+      "parent": "WBetweenLevelMenu",
+      "TShiftX": "1"
+    },
+    {
+      "id": "LLoadWLoad",
+      "class": "TLabLabel",
+      "size": [
+        "200",
+        ""
+      ],
+      "text": "Load the game",
+      "parent": "WLoad",
+      "TShiftX": "4"
+    },
+    {
+      "id": "LNameWLoad",
+      "class": "TLabLabel",
+      "size": [
+        "200",
+        ""
+      ],
+      "text": "Game name:",
+      "parent": "WLoad"
+    },
+    {
+      "id": "BLoadWLoad",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Load",
+      "parent": "WLoad"
+    },
+    {
+      "id": "BDeleteWLoad",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Delete",
+      "parent": "WLoad"
+    },
+    {
+      "id": "BCancelWLoad",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Cancel",
+      "parent": "WLoad"
+    },
+    {
+      "id": "LabelWDeleteGameDialog",
+      "class": "TLabLabel",
+      "size": [
+        "305",
+        "60"
+      ],
+      "text": "Are you sure you want to delete the saved game name?",
+      "parent": "WDeleteGameDialog",
+      "Alignment": "taCenter",
+      "TShiftX": "3"
+    },
+    {
+      "id": "BOkWDeleteGameDialog",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "OK",
+      "parent": "WDeleteGameDialog"
+    },
+    {
+      "id": "BCancelWDeleteGameDialog",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Cancel",
+      "parent": "WDeleteGameDialog",
+      "TShiftX": "-1"
+    },
+    {
+      "id": "LabelWQuitGameDialog",
+      "class": "TLabLabel",
+      "size": [
+        "305",
+        "80"
+      ],
+      "text": "Are you sure you want to quit the game and lose all the points you have scored?",
+      "parent": "WQuitGameDialog",
+      "Alignment": "taCenter",
+      "TShiftX": "3"
+    },
+    {
+      "id": "BOkWQuitGameDialog",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "OK",
+      "parent": "WQuitGameDialog"
+    },
+    {
+      "id": "BCancelWQuitGameDialog",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Cancel",
+      "parent": "WQuitGameDialog",
+      "TShiftX": "-1"
+    },
+    {
+      "id": "LabelWReplaceGameDialog",
+      "class": "TLabLabel",
+      "size": [
+        "310",
+        "80"
+      ],
+      "text": "The game with such name already exists. Are you sure you want to replace it?",
+      "parent": "WReplaceGameDialog",
+      "Alignment": "taCenter"
+    },
+    {
+      "id": "BOkWReplaceGameDialog",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "OK",
+      "parent": "WReplaceGameDialog"
+    },
+    {
+      "id": "BCancelWReplaceGameDialog",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Cancel",
+      "parent": "WReplaceGameDialog",
+      "TShiftX": "-1"
+    },
+    {
+      "id": "LSaveWSave",
+      "class": "TLabLabel",
+      "size": [
+        "200",
+        ""
+      ],
+      "text": "Save the game",
+      "parent": "WSave"
+    },
+    {
+      "id": "LNameWSave",
+      "class": "TLabLabel",
+      "size": [
+        "200",
+        ""
+      ],
+      "text": "Game name:",
+      "parent": "WSave"
+    },
+    {
+      "id": "BSaveWSave",
+      "class": "TLabButton",
+      "size": [
+        "150",
+        "45"
+      ],
+      "text": "Save",
+      "parent": "WSave",
+      "TShiftX": "0",
+      "TShiftY": "0"
+    },
+    {
+      "id": "BDeleteWSave",
+      "class": "TLabButton",
+      "size": [
+        "150",
+        "45"
+      ],
+      "text": "Delete",
+      "parent": "WSave",
+      "TShiftX": "2",
+      "TShiftY": "0"
+    },
+    {
+      "id": "BCancelWSave",
+      "class": "TLabButton",
+      "size": [
+        "150",
+        "45"
+      ],
+      "text": "Cancel",
+      "parent": "WSave",
+      "TShiftX": "0",
+      "TShiftY": "0"
+    },
+    {
+      "id": "RENUWLanguage",
+      "class": "TLabRadioButton",
+      "size": [
+        "160",
+        ""
+      ],
+      "text": "English",
+      "parent": "WLanguage",
+      "TShiftX": "30",
+      "RadioGroup": "3"
+    },
+    {
+      "id": "LabelWClearDialog",
+      "class": "TLabLabel",
+      "size": [
+        "310",
+        "60"
+      ],
+      "text": "Are you sure you want to clear the High Scores List?",
+      "parent": "WClearDialog",
+      "Alignment": "taCenter",
+      "TShiftX": "4"
+    },
+    {
+      "id": "BOkWClearDialog",
+      "class": "TLabButton",
+      "size": [
+        "150",
+        "45"
+      ],
+      "text": "OK",
+      "parent": "WClearDialog",
+      "TShiftX": "0",
+      "TShiftY": "0"
+    },
+    {
+      "id": "BCancelWClearDialog",
+      "class": "TLabButton",
+      "size": [
+        "150",
+        "45"
+      ],
+      "text": "Cancel",
+      "parent": "WClearDialog",
+      "TShiftX": "2",
+      "TShiftY": "0"
+    },
+    {
+      "id": "LMusicWOptions",
+      "class": "TLabLabel",
+      "size": [
+        "180",
+        ""
+      ],
+      "text": "Music Volume",
+      "parent": "WOptions",
+      "Alignment": "taCenter"
+    },
+    {
+      "id": "LSoundWOptions",
+      "class": "TLabLabel",
+      "size": [
+        "180",
+        ""
+      ],
+      "text": "Sound Volume",
+      "parent": "WOptions",
+      "Alignment": "taCenter"
+    },
+    {
+      "id": "RMusic80WOptions",
+      "class": "TLabRadioButton",
+      "size": [
+        "80",
+        ""
+      ],
+      "text": "80 %",
+      "parent": "WOptions",
+      "TShiftX": "35",
+      "RadioGroup": "4"
+    },
+    {
+      "id": "RMusic60WOptions",
+      "class": "TLabRadioButton",
+      "size": [
+        "80",
+        ""
+      ],
+      "text": "60 %",
+      "parent": "WOptions",
+      "TShiftX": "35",
+      "RadioGroup": "4"
+    },
+    {
+      "id": "RMusic40WOptions",
+      "class": "TLabRadioButton",
+      "size": [
+        "80",
+        ""
+      ],
+      "text": "40 %",
+      "parent": "WOptions",
+      "TShiftX": "35",
+      "RadioGroup": "4"
+    },
+    {
+      "id": "RMusic20WOptions",
+      "class": "TLabRadioButton",
+      "size": [
+        "80",
+        ""
+      ],
+      "text": "20 %",
+      "parent": "WOptions",
+      "TShiftX": "35",
+      "RadioGroup": "4"
+    },
+    {
+      "id": "RNoMusicWOptions",
+      "class": "TLabRadioButton",
+      "size": [
+        "110",
+        ""
+      ],
+      "text": "No Music",
+      "parent": "WOptions",
+      "TShiftX": "30",
+      "RadioGroup": "4"
+    },
+    {
+      "id": "RSound80WOptions",
+      "class": "TLabRadioButton",
+      "size": [
+        "100",
+        ""
+      ],
+      "text": "80 %",
+      "parent": "WOptions",
+      "TShiftX": "35",
+      "RadioGroup": "5"
+    },
+    {
+      "id": "RSound60WOptions",
+      "class": "TLabRadioButton",
+      "size": [
+        "80",
+        ""
+      ],
+      "text": "60 %",
+      "parent": "WOptions",
+      "TShiftX": "35",
+      "RadioGroup": "5"
+    },
+    {
+      "id": "RSound40WOptions",
+      "class": "TLabRadioButton",
+      "size": [
+        "80",
+        ""
+      ],
+      "text": "40 %",
+      "parent": "WOptions",
+      "TShiftX": "35",
+      "RadioGroup": "5"
+    },
+    {
+      "id": "RSound20WOptions",
+      "class": "TLabRadioButton",
+      "size": [
+        "80",
+        ""
+      ],
+      "text": "20 %",
+      "parent": "WOptions",
+      "TShiftX": "35",
+      "RadioGroup": "5"
+    },
+    {
+      "id": "RNoSoundWOptions",
+      "class": "TLabRadioButton",
+      "size": [
+        "115",
+        ""
+      ],
+      "text": "No Sound",
+      "parent": "WOptions",
+      "TShiftX": "30",
+      "RadioGroup": "5"
+    },
+    {
+      "id": "CheckBoxHintsWOptions",
+      "class": "TLabCheckBox",
+      "size": [
+        "160",
+        ""
+      ],
+      "text": "Turn off hints",
+      "parent": "WOptions"
+    },
+    {
+      "id": "BLanguageWOptions",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Language",
+      "parent": "WOptions",
+      "TShiftX": "2"
+    },
+    {
+      "id": "BOkWOptions",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "OK",
+      "parent": "WOptions"
+    },
+    {
+      "id": "BCancelWOptions",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Cancel",
+      "parent": "WOptions",
+      "TShiftX": "-1"
+    },
+    {
+      "id": "BOkWFinishLevelDialog",
+      "class": "TLabButton",
+      "size": [
+        "152",
+        ""
+      ],
+      "text": "OK",
+      "parent": "WFinishLevelDialog",
+      "TShiftX": "-1"
+    },
+    {
+      "id": "LabelWGameOverDialog",
+      "class": "TLabLabel",
+      "size": [
+        "300",
+        ""
+      ],
+      "text": "Game over! Try once again...",
+      "parent": "WGameOverDialog",
+      "Alignment": "taCenter"
+    },
+    {
+      "id": "BOkWGameOverDialog",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "OK",
+      "parent": "WGameOverDialog"
+    },
+    {
+      "id": "LabelWGameFinishedDialog",
+      "class": "TLabLabel",
+      "size": [
+        "360",
+        "90"
+      ],
+      "text": "Congratulations!\n\nYou have completely finished Fiber Twig!",
+      "parent": "WGameFinishedDialog",
+      "Layout": "tlTop",
+      "Alignment": "taCenter"
+    },
+    {
+      "id": "BOkWGameFinishedDialog",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "OK",
+      "parent": "WGameFinishedDialog"
+    },
+    {
+      "id": "LYourNameWGameFinishedDialog",
+      "class": "TLabLabel",
+      "size": [
+        "150",
+        ""
+      ],
+      "text": "Your name:",
+      "parent": "WGameFinishedDialog",
+      "Alignment": "taRight"
+    },
+    {
+      "id": "LabelWHighScores",
+      "class": "TLabLabel",
+      "size": [
+        "340",
+        ""
+      ],
+      "text": "High Scores List",
+      "parent": "WHighScores",
+      "Alignment": "taCenter"
+    },
+    {
+      "id": "BOkWHighScores",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "OK",
+      "parent": "WHighScores"
+    },
+    {
+      "id": "BClearWHighScores",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Clear",
+      "parent": "WHighScores",
+      "TShiftX": "-1"
+    },
+    {
+      "id": "BOkWLanguage",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "OK",
+      "parent": "WLanguage",
+      "TShiftX": "-3"
+    },
+    {
+      "id": "CheckBoxColorWOptions",
+      "class": "TLabCheckBox",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "32 bit color",
+      "parent": "WOptions"
+    },
+    {
+      "id": "CheckBoxFullScreenWOptions",
+      "class": "TLabCheckBox",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Full screen",
+      "parent": "WOptions"
+    },
+    {
+      "id": "LLevelWGame",
+      "class": "TLabLabel",
+      "size": [
+        "90",
+        ""
+      ],
+      "text": "Level:",
+      "parent": "WGame",
+      "Alignment": "taRight"
+    },
+    {
+      "id": "LLevelNumWGame",
+      "class": "TLabLabel",
+      "size": [
+        "50",
+        ""
+      ],
+      "text": "1",
+      "parent": "WGame",
+      "Alignment": "taRight"
+    },
+    {
+      "id": "LScoreWGame",
+      "class": "TLabLabel",
+      "size": [
+        "90",
+        ""
+      ],
+      "text": "Score:",
+      "parent": "WGame",
+      "Alignment": "taRight"
+    },
+    {
+      "id": "LScoreCountWGame",
+      "class": "TLabLabel",
+      "size": [
+        "70",
+        ""
+      ],
+      "text": "000000",
+      "parent": "WGame",
+      "Alignment": "taRight"
+    },
+    {
+      "id": "LDropSectionWGame",
+      "class": "TLabLabel",
+      "size": [
+        "186",
+        ""
+      ],
+      "text": "DROP SECTION",
+      "parent": "WGame",
+      "Alignment": "taCenter"
+    },
+    {
+      "id": "LHammerCountWGame",
+      "class": "TLabLabel",
+      "size": [
+        "40",
+        ""
+      ],
+      "text": "0",
+      "parent": "WGame"
+    },
+    {
+      "id": "LClipperCountWGame",
+      "class": "TLabLabel",
+      "size": [
+        "40",
+        ""
+      ],
+      "text": "0",
+      "parent": "WGame"
+    },
+    {
+      "id": "LLoadingWProgressBar",
+      "class": "TLabLabel",
+      "size": [
+        "230",
+        ""
+      ],
+      "text": "Loading...",
+      "parent": "WProgressBar",
+      "Alignment": "taCenter"
+    },
+    {
+      "id": "LNotEnabledWNotEnabled",
+      "class": "TLabLabel",
+      "size": [
+        "390",
+        "220"
+      ],
+      "text": "We hope you'll like it!\n\nThis is a trial version. You can use it for 14 days\n\nor run 14 times (whichever expires first).\n\nRegistering the game removes all limitation and\n\nopens access to all levels. For details see",
+      "parent": "WNotEnabled",
+      "Alignment": "taCenter"
+    },
+    {
+      "id": "BOkWNotEnabled",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Maybe later",
+      "parent": "WNotEnabled",
+      "TShiftX": "-1"
+    },
+    {
+      "id": "LLevelNumWBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "30",
+        ""
+      ],
+      "text": "00.",
+      "parent": "WBetweenLevelMenu",
+      "Alignment": "taRight"
+    },
+    {
+      "id": "LScoreCountWBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "86",
+        ""
+      ],
+      "text": "0",
+      "parent": "WBetweenLevelMenu",
+      "Alignment": "taRight"
+    },
+    {
+      "id": "LHammerCountWBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "34",
+        ""
+      ],
+      "text": "0",
+      "parent": "WBetweenLevelMenu",
+      "Alignment": "taRight"
+    },
+    {
+      "id": "LExperienceWBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "140",
+        ""
+      ],
+      "text": "Experience:",
+      "parent": "WBetweenLevelMenu",
+      "Alignment": "taRight"
+    },
+    {
+      "id": "LClipperCountWBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "34",
+        ""
+      ],
+      "text": "0",
+      "parent": "WBetweenLevelMenu",
+      "Alignment": "taRight"
+    },
+    {
+      "id": "LLevelCompleteWFinishLevelDialog",
+      "class": "TLabLabel",
+      "size": [
+        "246",
+        ""
+      ],
+      "text": "Level Complete !!!",
+      "parent": "WFinishLevelDialog",
+      "Alignment": "taCenter"
+    },
+    {
+      "id": "LYourScoreWGameFinishedDialog",
+      "class": "TLabLabel",
+      "size": [
+        "135",
+        ""
+      ],
+      "text": "Your Score:",
+      "parent": "WGameFinishedDialog"
+    },
+    {
+      "id": "LYourHammerWGameFinishedDialog",
+      "class": "TLabLabel",
+      "size": [
+        "130",
+        ""
+      ],
+      "text": "Your Hammers:",
+      "parent": "WGameFinishedDialog"
+    },
+    {
+      "id": "LYourCapsWGameFinishedDialog",
+      "class": "TLabLabel",
+      "size": [
+        "130",
+        ""
+      ],
+      "text": "Your Amphoras:",
+      "parent": "WGameFinishedDialog"
+    },
+    {
+      "id": "LTotalScoreWGameFinishedDialog",
+      "class": "TLabLabel",
+      "size": [
+        "150",
+        ""
+      ],
+      "text": "Total Score:",
+      "parent": "WGameFinishedDialog",
+      "Alignment": "taRight"
+    },
+    {
+      "id": "LYourScoreCountWGameFinishedDialog",
+      "class": "TLabLabel",
+      "size": [
+        "100",
+        ""
+      ],
+      "text": "0",
+      "parent": "WGameFinishedDialog"
+    },
+    {
+      "id": "LYourHammerCountWGameFinishedDialog",
+      "class": "TLabLabel",
+      "size": [
+        "300",
+        ""
+      ],
+      "text": "0",
+      "parent": "WGameFinishedDialog"
+    },
+    {
+      "id": "LYourCapsCountWGameFinishedDialog",
+      "class": "TLabLabel",
+      "size": [
+        "100",
+        ""
+      ],
+      "text": "0",
+      "parent": "WGameFinishedDialog"
+    },
+    {
+      "id": "LTotalScoreCountWGameFinishedDialog",
+      "class": "TLabLabel",
+      "size": [
+        "100",
+        ""
+      ],
+      "text": "0",
+      "parent": "WGameFinishedDialog"
+    },
+    {
+      "id": "LExperienceCountWBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "40",
+        ""
+      ],
+      "text": "0",
+      "parent": "WBetweenLevelMenu",
+      "Alignment": "taCenter"
+    },
+    {
+      "id": "LLuckyTwigCountWBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "34",
+        ""
+      ],
+      "text": "0",
+      "parent": "WBetweenLevelMenu",
+      "Alignment": "taRight"
+    },
+    {
+      "id": "LDropAccelCountWBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "34",
+        ""
+      ],
+      "text": "0",
+      "parent": "WBetweenLevelMenu",
+      "Alignment": "taRight"
+    },
+    {
+      "id": "LLiveCountWBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "34",
+        ""
+      ],
+      "text": "0",
+      "parent": "WBetweenLevelMenu",
+      "Alignment": "taRight"
+    },
+    {
+      "id": "LabLabel203203",
+      "class": "TLabLabel",
+      "size": [
+        "10",
+        ""
+      ],
+      "text": "+",
+      "parent": "WBetweenLevelMenu"
+    },
+    {
+      "id": "LabLabel204204",
+      "class": "TLabLabel",
+      "size": [
+        "10",
+        ""
+      ],
+      "text": "+",
+      "parent": "WBetweenLevelMenu"
+    },
+    {
+      "id": "LabLabel205205",
+      "class": "TLabLabel",
+      "size": [
+        "10",
+        ""
+      ],
+      "text": "+",
+      "parent": "WBetweenLevelMenu"
+    },
+    {
+      "id": "LabLabel206206",
+      "class": "TLabLabel",
+      "size": [
+        "10",
+        ""
+      ],
+      "text": "+",
+      "parent": "WBetweenLevelMenu"
+    },
+    {
+      "id": "LabLabel207207",
+      "class": "TLabLabel",
+      "size": [
+        "10",
+        ""
+      ],
+      "text": "+",
+      "parent": "WBetweenLevelMenu"
+    },
+    {
+      "id": "LLiveExpWBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "30",
+        ""
+      ],
+      "text": "0",
+      "parent": "WBetweenLevelMenu"
+    },
+    {
+      "id": "LDropAccelExpWBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "30",
+        ""
+      ],
+      "text": "0",
+      "parent": "WBetweenLevelMenu"
+    },
+    {
+      "id": "LLuckyTwigExpWBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "30",
+        ""
+      ],
+      "text": "0",
+      "parent": "WBetweenLevelMenu"
+    },
+    {
+      "id": "LAmphoraExpWBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "30",
+        ""
+      ],
+      "text": "0",
+      "parent": "WBetweenLevelMenu"
+    },
+    {
+      "id": "LHammerExpWBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "30",
+        ""
+      ],
+      "text": "0",
+      "parent": "WBetweenLevelMenu"
+    },
+    {
+      "id": "LCombDoneWGame",
+      "class": "TLabLabel",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Combinations Done !",
+      "parent": "WGame",
+      "Alignment": "taCenter"
+    },
+    {
+      "id": "LCombCountWGame",
+      "class": "TLabLabel",
+      "size": [
+        "60",
+        ""
+      ],
+      "text": "0 / 0",
+      "parent": "WGame",
+      "Alignment": "taRight"
+    },
+    {
+      "id": "LLiveCountWGame",
+      "class": "TLabLabel",
+      "size": [
+        "20",
+        ""
+      ],
+      "text": "90",
+      "parent": "WGame",
+      "Alignment": "taCenter"
+    },
+    {
+      "id": "LLevel1WBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "300",
+        "70"
+      ],
+      "text": "Among The Flowers In The Garden Of The Beautiful Enchantress",
+      "parent": "TLevel1WBetweenLevelMenu",
+      "Layout": "tlTop",
+      "level": 1
+    },
+    {
+      "id": "LLevel2WBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "300",
+        "70"
+      ],
+      "text": "Composing A Seven-Note Melody For The Lady On The Bird",
+      "parent": "TLevel2WBetweenLevelMenu",
+      "Layout": "tlTop",
+      "level": 2
+    },
+    {
+      "id": "LLevel3WBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "300",
+        "70"
+      ],
+      "text": "Lighting Up The Way For The Star Hunter",
+      "parent": "TLevel3WBetweenLevelMenu",
+      "Layout": "tlTop",
+      "level": 3
+    },
+    {
+      "id": "LLevel4WBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "300",
+        "70"
+      ],
+      "text": "Solving The Puzzle Of The Wise Owl",
+      "parent": "TLevel4WBetweenLevelMenu",
+      "Layout": "tlTop",
+      "level": 4
+    },
+    {
+      "id": "LLevel5WBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "300",
+        "70"
+      ],
+      "text": "In The Ivy Garden Of The Elf Musician",
+      "parent": "TLevel5WBetweenLevelMenu",
+      "Layout": "tlTop",
+      "level": 5
+    },
+    {
+      "id": "LLevel6WBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "300",
+        "70"
+      ],
+      "text": "Making Bone-Like Patterns For The Watchdog",
+      "parent": "TLevel6WBetweenLevelMenu",
+      "Layout": "tlTop",
+      "level": 6
+    },
+    {
+      "id": "LLevel9WBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "300",
+        "70"
+      ],
+      "text": "The Old Dwarf Watching Over The Forest Labyrinths",
+      "parent": "TLevel9WBetweenLevelMenu",
+      "Layout": "tlTop",
+      "level": 9
+    },
+    {
+      "id": "LLevel10WBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "300",
+        "70"
+      ],
+      "text": "Playing Hide-And-Seek With Mushrooms",
+      "parent": "TLevel10WBetweenLevelMenu",
+      "Layout": "tlTop",
+      "level": 10
+    },
+    {
+      "id": "LLevel11WBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "300",
+        "70"
+      ],
+      "text": "Paying A Visit To The Gorgeous Harpy",
+      "parent": "TLevel11WBetweenLevelMenu",
+      "Layout": "tlTop",
+      "level": 11
+    },
+    {
+      "id": "LLevel12WBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "300",
+        "70"
+      ],
+      "text": "Meeting With The Frog Queen, The Ruler Of The Underwater Kingdom",
+      "parent": "TLevel12WBetweenLevelMenu",
+      "Layout": "tlTop",
+      "level": 12
+    },
+    {
+      "id": "LLevel13WBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "300",
+        "70"
+      ],
+      "text": "Moving Through The Thick Bushes In The Magician's Garden",
+      "parent": "TLevel13WBetweenLevelMenu",
+      "Layout": "tlTop",
+      "level": 13
+    },
+    {
+      "id": "LLevel14WBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "300",
+        "70"
+      ],
+      "text": "Falling Flowers In The Satyr's Beautiful Garden",
+      "parent": "TLevel14WBetweenLevelMenu",
+      "Layout": "tlTop",
+      "level": 14
+    },
+    {
+      "id": "LLevel15WBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "300",
+        "70"
+      ],
+      "text": "The Spirit Of Wind, Singing His Joyous Song In The Skies",
+      "parent": "TLevel15WBetweenLevelMenu",
+      "Layout": "tlTop",
+      "level": 15
+    },
+    {
+      "id": "LLevel16WBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "300",
+        "70"
+      ],
+      "text": " An Exciting Adventure In The Giant Squid's Garden",
+      "parent": "TLevel16WBetweenLevelMenu",
+      "Layout": "tlTop",
+      "level": 16
+    },
+    {
+      "id": "LLevel17WBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "300",
+        "70"
+      ],
+      "text": "Meeting With The Master Of All Creatures - The Flying Elefant",
+      "parent": "TLevel17WBetweenLevelMenu",
+      "Layout": "tlTop",
+      "level": 17
+    },
+    {
+      "id": "LDropAccelCounWGame",
+      "class": "TLabLabel",
+      "size": [
+        "20",
+        ""
+      ],
+      "text": "90",
+      "parent": "WGame"
+    },
+    {
+      "id": "BDemoWLoad",
+      "class": "TLabButton",
+      "size": [
+        "190",
+        ""
+      ],
+      "text": "Demo",
+      "parent": "WTitle",
+      "TShiftX": "0"
+    },
+    {
+      "id": "RIntroductionWHelp",
+      "class": "TLabRadioButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Introduction",
+      "parent": "WHelp"
+    },
+    {
+      "id": "RGettingStartedWHelp",
+      "class": "TLabRadioButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Getting Started",
+      "parent": "WHelp"
+    },
+    {
+      "id": "RPlayingFieldWHelp",
+      "class": "TLabRadioButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Playing Field",
+      "parent": "WHelp"
+    },
+    {
+      "id": "RHowToPlayWHelp",
+      "class": "TLabRadioButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "How To Play",
+      "parent": "WHelp"
+    },
+    {
+      "id": "RArrangingTwigsWHelp",
+      "class": "TLabRadioButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Arranging Twigs",
+      "parent": "WHelp"
+    },
+    {
+      "id": "RMagicToolsWHelp",
+      "class": "TLabRadioButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Magic Tools",
+      "parent": "WHelp"
+    },
+    {
+      "id": "RSkillsAndExperienceWHelp",
+      "class": "TLabRadioButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Skills And Experience",
+      "parent": "WHelp"
+    },
+    {
+      "id": "RCombinationsWHelp",
+      "class": "TLabRadioButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Combinations",
+      "parent": "WHelp"
+    },
+    {
+      "id": "RScoringPointsWHelp",
+      "class": "TLabRadioButton",
+      "size": [
+        "175",
+        ""
+      ],
+      "text": "Scoring Points",
+      "parent": "WHelp"
+    },
+    {
+      "id": "RKeyboardShortcutsWHelp",
+      "class": "TLabRadioButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Keyboard Shortcuts",
+      "parent": "WHelp"
+    },
+    {
+      "id": "ROptionsWHelp",
+      "class": "TLabRadioButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Options",
+      "parent": "WHelp"
+    },
+    {
+      "id": "RBonusesWHelp",
+      "class": "TLabRadioButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Bonuses",
+      "parent": "WHelp"
+    },
+    {
+      "id": "RRegistrationWHelp",
+      "class": "TLabRadioButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Registration",
+      "parent": "WHelp"
+    },
+    {
+      "id": "RAboutPuzzleLabWHelp",
+      "class": "TLabRadioButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "About Puzzle Lab",
+      "parent": "WHelp"
+    },
+    {
+      "id": "LabelTIntroductionWHelp",
+      "class": "TLabLabel",
+      "size": [
+        "495",
+        "470"
+      ],
+      "text": "In this game you will find yourself in a beautiful fantasy garden inhabited by fairy creatures. The garden was decorated with beautiful patterns made of little twigs. One day a terrible hurricane swept down and destroyed them, having left little of what used to be the garden's main attraction. Your mission is to connect twigs and restore the original patterns.\n\nTwigs pass by at the bottom part of the screen, slowly accumulating. The initial twig is already on the playing field, you should connect to it a matching twig and continue connecting twigs with each other until you reach the top of the screen. All twigs should be connected, otherwise you'll never reach the top. If some twig has an open joint, you won't move up, because it is necessary that all elements on the playing field be connected with each other. It is also important to watch the conveyer, because when it overfills, you lose.\n\nIn some levels there is an object on the playing field, which you should entwine into your pattern with the help of twigs. There are also flying objects which hinder you from placing twigs, so you should wait until they pass by. Magic tools will help you during the game - you may use the Clipper to cut unnecessary elements or to insert twigs of the desired shape, and the Hammer to smash twigs at the bottom of the screen to prevent the conveyer from overfilling.",
+      "parent": "TIntroductionWHelp",
+      "Layout": "tlTop"
+    },
+    {
+      "id": "LabelTGettingStartedWHelp",
+      "class": "TLabLabel",
+      "size": [
+        "495",
+        "470"
+      ],
+      "text": "When you start the game, you are suggested to select a starting bonus and the level of difficulty.\n\nYou may choose between the following starting bonuses: the Hammer, the Amphora and Additional Score. Having chosen one of the starting bonuses, you will get more magic tools or additional points.\n\nAfter you selected a starting bonus, choose the level of difficulty of the game. You can play in the following game modes:\n\nNo Lose - you never lose, but you don't score points\n\nEasy - twigs move slowly and you score some points\n\nNormal  - twigs appear at a normal speed and you earn points for your actions\n\nHard  - twigs appear at a high speed and you can get a higher score",
+      "parent": "TGettingStartedWHelp",
+      "Layout": "tlTop"
+    },
+    {
+      "id": "LabelTPlayingFieldWHelp",
+      "class": "TLabLabel",
+      "size": [
+        "495",
+        "470"
+      ],
+      "text": "The playing field consists of three parts. In the center there is the field for restoring a pattern. The initial twig is already given, you should connect to it another twig and continue until you reach the top.\n\nAt the bottom part of the screen there is the conveyer which gradually fills with twigs of various shapes. When there is no empty space left, you lose the game. You must use twigs for restoring the original pattern.\n\nOn the right there is the information panel and the magic tools. The information panel displays your score, the current level and the \"Menu\" button.\n\nThe magic tools, the Amphora and the Hammer, can help you in the course of the game a lot. You may use the Amphora to to create twigs of the desired shape or to cut the unnecessary elements, and the Hammer to smash twigs in the conveyer and on the playing field. Below the instruments there is the Drop Section, it may be used for throwing out the unnecessary twigs.",
+      "parent": "TPlayingFieldWHelp",
+      "Layout": "tlTop"
+    },
+    {
+      "id": "LabelTHowToPlayWHelp",
+      "class": "TLabLabel",
+      "size": [
+        "495",
+        "470"
+      ],
+      "text": "The basic rules of the game are as follows:\n\n- Left-click the twig you want to use.\n\n- Rotate the twig if it is necessary by clicking the right mouse      button.\n\n- Attach the twig to the one on the playing field by left-clicking     the mouse.\n\n- Connect all the twigs on the playing field with each other.\n\n- Connect the group of twigs to the top of the tree.",
+      "parent": "THowToPlayWHelp",
+      "Layout": "tlTop"
+    },
+    {
+      "id": "LabelTArrangingTwigsWHelp",
+      "class": "TLabLabel",
+      "size": [
+        "495",
+        "470"
+      ],
+      "text": "Twigs are delivered by the conveyer at the bottom of the screen. The goal of the game is to connect the twigs with each other on the playing field, so as to reach the top of the screen. The twigs in the conveyer are slowly accumulating, so you should keep an eye on it not to let it overfill, otherwise the game will end. Along with common twigs, there are two special types of twigs: Mystery Twigs - you don't know what shape they have until you take them, and Lucky Twigs - when you use them you get certain bonuses. On the playing field you can also see Transparent Twigs - you should cover them with twigs of the same shape.\n\nTwigs can have various shapes, and all of them have different number of joints. When a twig has an open joint, there is light coming from it to show that it is possible to connect another twig to it. Lower joints shouldn't be left open, because moving upwards is only possible when all twigs are connected with each other. Open joints preventing you from moving up are indicated with green light. If it is possible to connect one twig to another, you'll see a green arrow, and if it's impossible - you'll see a red cross.",
+      "parent": "TArrangingTwigsWHelp",
+      "Layout": "tlTop"
+    },
+    {
+      "id": "LabelTMagicToolsWHelp",
+      "class": "TLabLabel",
+      "size": [
+        "495",
+        "470"
+      ],
+      "text": "Magic Tools can help you to pass the game levels. The number in the top right-hand corner of the tool icon shows how many tools of this type you have. Some bonuses may increase the number of uses of a tool.\n\nHammer. This tool can be used for smashing twigs in the conveyer and on the playing field (except the initial ones). Use the hammer to smash the twigs that don't fit in your pattern to free up space for the new ones.\n\nUSING THE HAMMER: Click on the hammer icon to select it. Place the hammer on a desired twig and click the left mouse button to smash it. You can smash several twigs in a row. If you want to drop the hammer, just click the right mouse button.\n\nAmphora. You may want to use this tool in two cases: when you cannot find a twig of the desired shape and when you need to cut the unnecessary elements.\n\nUSING THE AMPHORA: Click on the icon to select this tool. To create a missing twig place the amphora in the desired position on the playing field and click the left mouse button. To cut the unnecessary elements place the amphora on the desired twig and click it. Click the right mouse button to drop the amphora.",
+      "parent": "TMagicToolsWHelp",
+      "Layout": "tlTop"
+    },
+    {
+      "id": "LabelTSkillsAndExperienceWHelp",
+      "class": "TLabLabel",
+      "size": [
+        "495",
+        "470"
+      ],
+      "text": "At the end of each level you are given some points of Experience. The number of experience points depends on the number of twigs which you used in restoring patterns in the previous level, and on the number of twig combinations you've made (one point for each combination, and two points if all combinations were made).\n\nYou can allot your experience points among the five Skills which are shown in the left part of the dialog window:\n\nTime Control - allows you not to lose for some time even when the conveyer has overfilled with gems.\n\nDrop Section Accelerator - makes the Drop Section work faster.\n\nGood Luck - brings more Lucky Twigs (the ones that have bonuses).\n\nAmphora - creates twigs of the desired shape and cuts the unnecessary elements.\n\nHammer -  smashes the unnecessary twigs in the conveyer and on the playing field.",
+      "parent": "TSkillsAndExperienceWHelp",
+      "Layout": "tlTop"
+    },
+    {
+      "id": "LabelTCombinationsWHelp",
+      "class": "TLabLabel",
+      "size": [
+        "495",
+        "470"
+      ],
+      "text": "If you make special twig combinations, while restoring a pattern, you may get various bonuses. Making combinations is not difficult: you should connect twigs the way it is shown on the picture in the right-hand part of the screen. When you make a combination, the picture disappears, and a new one appears for you to make with the help of twigs.",
+      "parent": "TCombinationsWHelp",
+      "Layout": "tlTop"
+    },
+    {
+      "id": "LabelTScoringPointsWHelp",
+      "class": "TLabLabel",
+      "size": [
+        "495",
+        "470"
+      ],
+      "text": "You score points for each twig on the field. The number of points for each twig depends on the number of joints it has. It means that twigs with a larger number of joints bring more points. Besides, some bonuses obtained for making twig combinations and using bonus twigs also bring additional points.\n\nDuring the game you also earn Experience Points. The number of experience points depends on the number of twigs which you used in restoring patterns, and on the number of twig combinations you've made (one point for each combination, and two points if all combinations were made). So, try to use gems with a larger number of joints and make twig combinations - and you'll be able to improve your skills.",
+      "parent": "TScoringPointsWHelp",
+      "Layout": "tlTop"
+    },
+    {
+      "id": "LabelTShortcutsWHelp",
+      "class": "TLabLabel",
+      "size": [
+        "495",
+        "470"
+      ],
+      "text": "Space bar - pick up the first twig in the conveyer. If the conveyer is empty, a new twig will be generated.\n\n'1', '2'... '9' -  pick up the twig with the corresponding number in the conveyer.\n\nF3 - take (place back) the Hammer.\n\nF4 - take (place back) the Amphora.\n\nDel - throw away the selected twig.\n\nEsc - view the menu.\n\nCheat Codes\n\nThe following cheat codes are available for the registered users:\n\n1. _AddHammers - F5 F7 F7 F8 F6. Number of uses: 5. Gives you five additional hammers. You may only use it  five times during a level.\n\n2._AddAmphoras - F5 F6 F8 F7 F8. Number of uses: 5. Gives you five additional amphoras. You may only use it five times during a level.\n\n3. _ExplodeTwigs - F5 F8 F7 F6 F7 F8. Number of uses: 5. Blows up all the twigs in the conveyer. You may only use it five times during a level.",
+      "parent": "TShortcutsWHelp",
+      "Layout": "tlTop"
+    },
+    {
+      "id": "LabelTBonusesWHelp",
+      "class": "TLabLabel",
+      "size": [
+        "495",
+        "470"
+      ],
+      "text": "You may get the following bonuses if you make twig combinations or use bonus twigs:\n\n1. Smashing Bomb - clears the conveyer, freeing space for new twigs.\n\n2. Additional Hammers - gives you a certain number of Magic Hammers.\n\n3. Additional Amphoras - gives you a certain number of Magic Clippers.\n\n4. Additional Points - gives you additional points to increase your score.\n\n5. Drop Section Accelerator - makes twigs disappear faster so that you can throw out more twigs.\n\n6. Good Luck - makes all twigs in the conveyer having a bonus.\n\n7. Time Control - temporary bonus that allows you not to lose for some time when the conveyer overfills.",
+      "parent": "TBonusesWHelp",
+      "Layout": "tlTop"
+    },
+    {
+      "id": "LabelTOptionsWHelp",
+      "class": "TLabLabel",
+      "size": [
+        "495",
+        "470"
+      ],
+      "text": "You may regulate the following game options:\n\nLanguage - select the language of the game\n\nTurn off hints - check this box if you don't want to see hints\n\nFull screen - check this box to play in full screen mode\n\n32 bit color - check this box to see the true colors\n\nMusic Volume - regulate the volume of music\n\nSound Volume - regulate the volume of sound",
+      "parent": "TOptionsWHelp",
+      "Layout": "tlTop"
+    },
+    {
+      "id": "LabelTRegistrationWHelp",
+      "class": "TLabLabel",
+      "size": [
+        "495",
+        "470"
+      ],
+      "text": "This is a trial version. You can use it for 14 days or run 14 times (whichever expires first). Registering the game removes all limitations and opens access to all levels. For details see:\n\nwww.puzzlelab.com\n\nAs a registered user you receive the following benefits:\n\n- Hours of absorbing gameplay\n\n- Access to new exciting levels\n\n- Many other lovely creatures\n\n- A variety of twig combinations\n\n- Cheat codes: _AddHammers, _AddAmphoras, _ExplodeTwigs",
+      "parent": "TRegistrationWHelp",
+      "Layout": "tlTop"
+    },
+    {
+      "id": "LabelTAboutWHelp",
+      "class": "TLabLabel",
+      "size": [
+        "495",
+        "470"
+      ],
+      "text": "Acknowledgements\n\nPuzzle Lab Studio wants to say a special word of thanks to those who contributed in various ways to this project:\n\nAnastassia Fomina, Andrey Fomin, Pavel Moskvin, Oleg Ryabinin, Sophia Shishatskaya, Aleksei Fadeev, Dmitry Gorbatkov, Mikhail Tretyakov, Nadezhda Moskvina, Sergey Potapov, Sergey Zakharov, Anton Pishchour, Sergey Kaminsky, Olesya Derkach.",
+      "parent": "TAboutWHelp",
+      "Layout": "tlTop"
+    },
+    {
+      "id": "BCloseWHelp",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Close",
+      "parent": "WHelp"
+    },
+    {
+      "id": "LLevel7WBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "300",
+        "70"
+      ],
+      "text": "Lighting The Street Lamps In The Centaur's Dark Garden",
+      "parent": "TLevel7WBetweenLevelMenu",
+      "Layout": "tlTop",
+      "level": 7
+    },
+    {
+      "id": "LLevel8WBetweenLevelMenu",
+      "class": "TLabLabel",
+      "size": [
+        "300",
+        "70"
+      ],
+      "text": "In The Domain Of The Green-Haired Nymph",
+      "parent": "TLevel8WBetweenLevelMenu",
+      "Layout": "tlTop",
+      "level": 8
+    },
+    {
+      "id": "LabelWExitToMainMenu",
+      "class": "TLabLabel",
+      "size": [
+        "330",
+        "60"
+      ],
+      "text": " Are you sure you want to exit to main menu?",
+      "parent": "WExitToMainMenu",
+      "Alignment": "taCenter"
+    },
+    {
+      "id": "BOkWExitToMainMenu",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "OK",
+      "parent": "WExitToMainMenu"
+    },
+    {
+      "id": "BCancelWExitToMainMenu",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Cancel",
+      "parent": "WExitToMainMenu"
+    },
+    {
+      "id": "LHintSkillLive",
+      "class": "TLabLabel",
+      "size": [
+        "600",
+        ""
+      ],
+      "text": "Time Control - allows you not to lose for some time even when the conveyer has overfilled with gems.",
+      "parent": "WHints"
+    },
+    {
+      "id": "LHintSkillDropAccel",
+      "class": "TLabLabel",
+      "size": [
+        "600",
+        ""
+      ],
+      "text": "Drop Section Accelerator - makes the Drop Section work faster.",
+      "parent": "WHints"
+    },
+    {
+      "id": "LHintSkillLuckyTwig",
+      "class": "TLabLabel",
+      "size": [
+        "600",
+        ""
+      ],
+      "text": "Good Luck - brings more Lucky Twigs (the ones that have bonuses).",
+      "parent": "WHints"
+    },
+    {
+      "id": "LHintSkillAmphora",
+      "class": "TLabLabel",
+      "size": [
+        "600",
+        ""
+      ],
+      "text": "Amphora - creates twigs of the desired shape and cuts the unnecessary elements.",
+      "parent": "WHints"
+    },
+    {
+      "id": "LHintSkillHammer",
+      "class": "TLabLabel",
+      "size": [
+        "600",
+        ""
+      ],
+      "text": "Hammer -  smashes the unnecessary twigs in the conveyer and on the playing field.",
+      "parent": "WHints"
+    },
+    {
+      "id": "LHintClosedLink",
+      "class": "TLabLabel",
+      "size": [
+        "600",
+        ""
+      ],
+      "text": "You can't  lock a pattern, otherwise you won't be able to connect all twigs.",
+      "parent": "WHints"
+    },
+    {
+      "id": "LHintFirstTakeBonusFishka",
+      "class": "TLabLabel",
+      "size": [
+        "600",
+        ""
+      ],
+      "text": "This is a Bonus Twig. If you use it, you'll get a bonus.",
+      "parent": "WHints"
+    },
+    {
+      "id": "LHintFirstTakeQuestFishka",
+      "class": "TLabLabel",
+      "size": [
+        "600",
+        ""
+      ],
+      "text": "This is a Puzzle Twig. You don't know what shape it has until you take it.",
+      "parent": "WHints"
+    },
+    {
+      "id": "LHintFirstTakeFishka",
+      "class": "TLabLabel",
+      "size": [
+        "600",
+        ""
+      ],
+      "text": "You can link twigs with each other by connecting the joints that have light coming out of them.",
+      "parent": "WHints"
+    },
+    {
+      "id": "LHintMatchingJoints",
+      "class": "TLabLabel",
+      "size": [
+        "600",
+        ""
+      ],
+      "text": "You can only connect twigs that have matching joints.",
+      "parent": "WHints"
+    },
+    {
+      "id": "LHintFirstTransparentFishka",
+      "class": "TLabLabel",
+      "size": [
+        "600",
+        ""
+      ],
+      "text": "These are Transparent Twigs. You should cover them with twigs of the same shape.",
+      "parent": "WHints"
+    },
+    {
+      "id": "LHintTransparentTwig",
+      "class": "TLabLabel",
+      "size": [
+        "600",
+        ""
+      ],
+      "text": "You should cover transparent twigs with twigs of the same shape.",
+      "parent": "WHints"
+    },
+    {
+      "id": "LHintLevelTop",
+      "class": "TLabLabel",
+      "size": [
+        "600",
+        ""
+      ],
+      "text": "Now conenct all twigs to restore the pattern and complete the level.",
+      "parent": "WHints"
+    },
+    {
+      "id": "REasyWStartDialog",
+      "class": "TLabRadioButton",
+      "size": [
+        "70",
+        ""
+      ],
+      "text": "Easy",
+      "parent": "WStartDialog",
+      "TShiftX": "30",
+      "RadioGroup": "1"
+    },
+    {
+      "id": "LHintFishComb",
+      "class": "TLabLabel",
+      "size": [
+        "600",
+        ""
+      ],
+      "text": "You've made a twig combination and got a bonus.",
+      "parent": "WHints"
+    },
+    {
+      "id": "LLinksWNotEnabled",
+      "class": "TLabLabel",
+      "size": [
+        "420",
+        ""
+      ],
+      "text": "www.puzzlelab.com",
+      "parent": "WNotEnabled",
+      "Alignment": "taCenter"
+    },
+    {
+      "id": "BBuyNowWNotEnabled",
+      "class": "TLabButton",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Buy Now",
+      "parent": "WNotEnabled"
+    },
+    {
+      "id": "LTrialThanksLabel",
+      "class": "TLabLabel",
+      "size": [
+        "600",
+        ""
+      ],
+      "text": "Thank you for trying our game!",
+      "parent": "WHints"
+    },
+    {
+      "id": "LTrialHopeLabel",
+      "class": "TLabLabel",
+      "size": [
+        "600",
+        ""
+      ],
+      "text": "We hope you'll like it!",
+      "parent": "WHints"
+    },
+    {
+      "id": "LTrialConditionLabel",
+      "class": "TLabLabel",
+      "size": [
+        "800",
+        ""
+      ],
+      "text": "This is a trial version. You can use it for 14 days or run 14 times (whichever expires first). Registering the game removes all limitation and opens access to all levels. For details see",
+      "parent": "WHints"
+    },
+    {
+      "id": "LTrialOrderLabel",
+      "class": "TLabLabel",
+      "size": [
+        "200",
+        ""
+      ],
+      "text": "Order Page",
+      "parent": "WHints"
+    },
+    {
+      "id": "LTrialTimesLabel",
+      "class": "TLabLabel",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "times",
+      "parent": "WHints"
+    },
+    {
+      "id": "LTrialDaysLabel",
+      "class": "TLabLabel",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "days",
+      "parent": "WHints"
+    },
+    {
+      "id": "LTrialFiveMinutesLabel",
+      "class": "TLabLabel",
+      "size": [
+        "400",
+        ""
+      ],
+      "text": "Now you have only 5 minutes to play",
+      "parent": "WHints"
+    },
+    {
+      "id": "LTrialPlayButton",
+      "class": "TLabLabel",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Play",
+      "parent": "WHints"
+    },
+    {
+      "id": "LTrialQuitButton",
+      "class": "TLabLabel",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Quit",
+      "parent": "WHints"
+    },
+    {
+      "id": "LTrialEnterKeyButton",
+      "class": "TLabLabel",
+      "size": [
+        "200",
+        ""
+      ],
+      "text": "Enter Registration Key",
+      "parent": "WHints"
+    },
+    {
+      "id": "LTrialRegistrationButton",
+      "class": "TLabLabel",
+      "size": [
+        "150",
+        ""
+      ],
+      "text": "Registration",
+      "parent": "WHints"
+    },
+    {
+      "id": "LTrialRegErrorLabel",
+      "class": "TLabLabel",
+      "size": [
+        "200",
+        ""
+      ],
+      "text": "Registration error!",
+      "parent": "WHints"
+    },
+    {
+      "id": "RDEUWLanguage",
+      "class": "added by enu_10.lng",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "German"
+    },
+    {
+      "id": "RRUSWLanguage",
+      "class": "added by enu_10.lng",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Russian"
+    },
+    {
+      "id": "RFRAWLanguage",
+      "class": "added by enu_10.lng",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "French"
+    },
+    {
+      "id": "RPTBWLanguage",
+      "class": "added by enu_10.lng",
+      "size": [
+        "",
+        ""
+      ],
+      "text": "Portuguese"
+    }
+  ],
+  "runtime": {
+    "LLevelWGameValue": "the level number drawn next to LLevelWGame",
+    "LScoreWGameValue": "the score drawn next to LScoreWGame",
+    "LCombDoneWGameValue": "the combination counter, e.g. \"1 / 5\"",
+    "LHammerCountWGameValue": "the hammer count drawn over the tool icon",
+    "LCapsCountWGameValue": "the amphora count drawn over the tool icon"
+  },
+  "levels": {
+    "0": {
+      "name": "Tutorial Level",
+      "music": "Natureopt.mo3",
+      "RainEffect": "Rain",
+      "FragPicture": "FragPic4.png",
+      "BonusElement": 0,
+      "Bomb": 0,
+      "MakeGhostRect": 0,
+      "HidenFishkaPicture": 1,
+      "fishka": 61,
+      "ghost": 0
+    },
+    "1": {
+      "name": "TestLevel",
+      "hero": "Elf1_2.png",
+      "music": "Natureopt.mo3",
+      "RainEffect": "Rain",
+      "FragPicture": "FragPic4.png",
+      "BonusElement": 0,
+      "Bomb": 0,
+      "MakeGhostRect": 0,
+      "HidenFishkaPicture": 1,
+      "fishka": 131,
+      "ghost": 10
+    },
+    "2": {
+      "name": "TestLevel",
+      "hero": "fairy.png",
+      "music": "Natureopt.mo3",
+      "RainEffect": "Rain",
+      "FragPicture": "FragPic4.png",
+      "BonusElement": 7,
+      "Bomb": 0,
+      "MakeGhostRect": 0,
+      "HidenFishkaPicture": 1,
+      "fishka": 222,
+      "ghost": 20
+    },
+    "3": {
+      "name": "Level3",
+      "hero": "shunter.png",
+      "music": "Sad Song.mo3",
+      "LevelEffect": "RoundBlicks",
+      "FragPicture": "FragPic4.png",
+      "BonusElement": 4,
+      "Bomb": 0,
+      "MakeGhostRect": 0,
+      "HidenFishkaPicture": 1,
+      "fishka": 111,
+      "ghost": 54
+    },
+    "4": {
+      "name": "Level3",
+      "hero": "sova.png",
+      "music": "Sensetive.mo3",
+      "FragPicture": "FragPic4.png",
+      "BonusElement": 0,
+      "Bomb": 0,
+      "MakeGhostRect": 0,
+      "HidenFishkaPicture": 1,
+      "fishka": 198,
+      "ghost": 36
+    },
+    "5": {
+      "name": "Level3",
+      "hero": "elf.png",
+      "music": "Sensetive.mo3",
+      "FragPicture": "FragPic4.png",
+      "BonusElement": 5,
+      "Bomb": 10,
+      "MakeGhostRect": 0,
+      "HidenFishkaPicture": 1,
+      "fishka": 153,
+      "ghost": 31
+    },
+    "6": {
+      "name": "Level3",
+      "hero": "Doggy.png",
+      "music": "Natureopt.mo3",
+      "FragPicture": "FragPic4.png",
+      "BonusElement": 0,
+      "Bomb": 0,
+      "MakeGhostRect": 0,
+      "HidenFishkaPicture": 1,
+      "fishka": 154,
+      "ghost": 43
+    },
+    "7": {
+      "name": "Level7",
+      "hero": "centaur.png",
+      "music": "Natureopt.mo3",
+      "LevelEffect": "RoundBlicks",
+      "FragPicture": "FragPic4.png",
+      "BonusElement": 5,
+      "Bomb": 0,
+      "MakeGhostRect": 0,
+      "HidenFishkaPicture": 1,
+      "fishka": 130,
+      "ghost": 13
+    },
+    "8": {
+      "name": "Level8",
+      "hero": "driada.png",
+      "music": "Sensetive.mo3",
+      "FragPicture": "FragPic4.png",
+      "BonusElement": 0,
+      "Bomb": 0,
+      "MakeGhostRect": 0,
+      "HidenFishkaPicture": 1,
+      "fishka": 142,
+      "ghost": 31
+    },
+    "9": {
+      "name": "Level9",
+      "hero": "gnom.png",
+      "music": "Sensetive.mo3",
+      "FragPicture": "FragPic4.png",
+      "BonusElement": 3,
+      "Bomb": 6,
+      "MakeGhostRect": 0,
+      "HidenFishkaPicture": 1,
+      "fishka": 99,
+      "ghost": 24
+    },
+    "10": {
+      "name": "Level10",
+      "hero": "borovik.png",
+      "music": "Sad Song.mo3",
+      "FragPicture": "FragPic4.png",
+      "BonusElement": 4,
+      "Bomb": 0,
+      "MakeGhostRect": 0,
+      "HidenFishkaPicture": 1,
+      "fishka": 143,
+      "ghost": 37
+    },
+    "11": {
+      "name": "Level11",
+      "hero": "harpy.png",
+      "music": "Natureopt.mo3",
+      "FireEffect": "Fire",
+      "FragPicture": "FragPic4.png",
+      "BonusElement": 3,
+      "Bomb": 6,
+      "MakeGhostRect": 0,
+      "HidenFishkaPicture": 1,
+      "fishka": 180,
+      "ghost": 73
+    },
+    "12": {
+      "name": "Level12",
+      "hero": "frog.png",
+      "music": "Sensetive.mo3",
+      "FragPicture": "FragPic4.png",
+      "BonusElement": 0,
+      "Bomb": 0,
+      "MakeGhostRect": 0,
+      "HidenFishkaPicture": 1,
+      "fishka": 129,
+      "ghost": 29
+    },
+    "13": {
+      "name": "Level13",
+      "hero": "mag.png",
+      "music": "Natureopt.mo3",
+      "FragPicture": "FragPic4.png",
+      "BonusElement": 1,
+      "Bomb": 0,
+      "MakeGhostRect": 0,
+      "HidenFishkaPicture": 1,
+      "fishka": 118,
+      "ghost": 36
+    },
+    "14": {
+      "name": "Level14",
+      "hero": "satyr.png",
+      "music": "Sad Song.mo3",
+      "RainEffect": "FlowerFall",
+      "FragPicture": "FragPic4.png",
+      "BonusElement": 0,
+      "Bomb": 0,
+      "MakeGhostRect": 0,
+      "HidenFishkaPicture": 1,
+      "fishka": 129,
+      "ghost": 41
+    },
+    "15": {
+      "name": "Level15",
+      "hero": "winder.png",
+      "music": "Natureopt.mo3",
+      "FireEffect": "SnowWind",
+      "FragPicture": "FragPic4.png",
+      "BonusElement": 0,
+      "Bomb": 0,
+      "MakeGhostRect": 2,
+      "HidenFishkaPicture": 1,
+      "fishka": 145,
+      "ghost": 0
+    },
+    "16": {
+      "name": "Level16",
+      "hero": "kalmar.png",
+      "music": "Natureopt.mo3",
+      "FragPicture": "FragPic4.png",
+      "BonusElement": 3,
+      "Bomb": 6,
+      "MakeGhostRect": 0,
+      "HidenFishkaPicture": 1,
+      "fishka": 128,
+      "ghost": 28
+    },
+    "17": {
+      "name": "Level17",
+      "hero": "slon.png",
+      "music": "Sensetive.mo3",
+      "FragPicture": "FragPic4.png",
+      "BonusElement": 0,
+      "Bomb": 0,
+      "MakeGhostRect": 0,
+      "HidenFishkaPicture": 1,
+      "fishka": 182,
+      "ghost": 38
+    }
+  }
+}
