@@ -31,9 +31,12 @@ tree (`assets/data/interface.json`) with the original backgrounds
   four difficulty modes **No Lose / Easy / Normal / Hard** — shown only for
   New Game from the title screen; loading a save resumes directly with the
   stored values and no dialog appears between levels or after a retry. Like the
-  original, Easy multiplies the generator period by 1.5, Hard by 0.7 and No
-  Lose skips the overfull game over (belt speed and scoring do not depend on
-  the difficulty),
+  original, No Lose skips the overfull game over; Easy/Normal/Hard scale the
+  generator period **and** the conveyor speed.  The original only scales the
+  period (×1.5/×0.7, belt speed and scoring are constant), but since that felt
+  barely noticeable the remake widens the modes so they are obvious from the
+  first seconds of play (see `DIFF_PERIOD`/`DIFF_BELT`: Easy ×1.75 period,
+  ×0.75 belt; Hard ×0.6 period, ×1.3 belt; `--difficulty=MODE` forces one),
 * the in-game screen: 600×500 play field, right panel with the Menu button,
   level/score, the current combination preview, hammer/amphora icons and
   counts, the DROP SECTION area and its arrow button,
@@ -43,7 +46,9 @@ tree (`assets/data/interface.json`) with the original backgrounds
 * pause menu, between-level experience/skill screen
   (Time Control / Drop Section Accelerator / Good Luck / Amphora / Hammer —
   the arrow buttons allocate the experience points and, as in the original,
-  the **left arrow spends a point while the right arrow takes it back** — the
+  the **left arrow spends a point while the right arrow takes it back** (the
+  `Experience:` counter at the top shows the *remaining* points and drops /
+  rises with every add / take-back) — the
   level description tab `TLevelN` at its original place at the bottom of the
   screen (227, 515) with the "Level N" line at (174/278, 485), and the level's
   hero portrait from `<HeroPicture>`), load/save (with the `TLabGrid` list, its
@@ -102,7 +107,7 @@ from the shipped screenshots, see §10 of the report):
 * conveyor: the original numbers — new twigs enter at x=799, bottom aligned at
   y=585, at most **26** twigs; they travel left at **25 px/s** in the original
   (measured from `demo.dat`), pile up at x≤5 with a 2 px gap and are fed
-  automatically every `Generator period` (ms, ×1.5 on Easy, ×0.7 on Hard;
+  automatically every `Generator period` (ms, ×1.75 on Easy, ×0.6 on Hard;
   the type is the ordered `<FishTypeSequence>` when the level has one and a
   weighted pseudo-random draw over `<FProb>` otherwise). **For playability
   the remake runs the belt at 2× the original speed** (`--beltspeed=N` sets it
@@ -219,6 +224,7 @@ loaded directly from the extracted files, so no import step is required.
 | `--piecetest` | multi-cell piece checks (whole artwork, whole-piece removal) |
 | `--filltest[=N]` | fills level N cell by cell and checks the completion rule |
 | `--beltspeed=N` | conveyor speed in px/s (default 50 = 2× the original) |
+| `--difficulty=normal\|easy\|hard\|nolose` | force a difficulty without the New Game dialog |
 | `--language=enu\|deu\|fra\|ptb\|rus\|chs` | start in a language (`options.cfg` is not changed) |
 | `--allbonus` | every generated twig is lucky (flash-test) |
 | `--allquest` | every generated twig is mystery (icon-test) |

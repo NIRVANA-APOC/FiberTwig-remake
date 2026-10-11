@@ -23,6 +23,13 @@ const BELT_SLOT := 40.0
 const BELT_BOTTOM := 585.0          # belt items are bottom aligned here (original: 0x249)
 const BELT_SPEED := 25.0            # original: measured from demo.dat (10259 px / 409 s)
 const BELT_SPEED_SCALE := 2.0       # playability: the original feels slow at 60 fps
+## Difficulty.  The original only scales the generator period (Easy x1.5,
+## Hard x0.7, FUN_0049b22c) and No Lose skips the overfull game over; the
+## remake widens the modes and also scales the conveyor so the choice is
+## obvious within seconds instead of only in the spawn rate.  `--difficulty=`
+## forces one of them for testing.
+const DIFF_PERIOD := {"normal": 1.0, "easy": 1.75, "hard": 0.6, "nolose": 1.0}
+const DIFF_BELT := {"normal": 1.0, "easy": 0.75, "hard": 1.3, "nolose": 1.0}
 const BELT_ENTRY := 799.0           # new twigs enter here (original)
 const BELT_CAPACITY := 26           # original: belt count < 0x1a
 const BELT_GAP := 2.0               # original spacing constant _DAT_004b977c
@@ -88,6 +95,7 @@ var debug_complex := false
 var hint_take_fishka := true
 var hint_take_quest := true
 var hint_take_bonus := true
+var belt_base := BELT_SPEED * BELT_SPEED_SCALE   # before the difficulty scale
 var belt_speed := BELT_SPEED * BELT_SPEED_SCALE
 ## Board cache: "next cells" of the PutAllow rule, the component id of every
 ## cell and the open joints per component.  It is rebuilt lazily whenever the
@@ -299,7 +307,10 @@ func _ready() -> void:
 		elif a == "--complex":
 			debug_complex = true
 		elif a.begins_with("--beltspeed="):
-			belt_speed = maxf(5.0, float(a.split("=")[1]))
+			belt_base = maxf(5.0, float(a.split("=")[1]))
+			belt_speed = belt_base
+		elif a.begins_with("--difficulty="):
+			_set_forced_difficulty(a.split("=", true, 1)[1])
 		elif a == "--allbonus":
 			debug_all_bonus = true
 		elif a == "--allquest":
@@ -872,7 +883,7 @@ func _apply_checkbox(widget: String) -> void:
 			_apply_fullscreen()
 
 func _add_skill(which: String, delta: int) -> void:
-	var remaining := experience - int(plus.otb) - int(plus.luck) - int(plus.cap) - int(plus.life) - int(plus.hammer)
+	var remaining := _experience_left()
 	if delta > 0 and remaining <= 0:
 		return
 	if delta < 0 and int(plus[which]) <= 0:
@@ -885,6 +896,13 @@ func _add_skill(which: String, delta: int) -> void:
 	else:
 		skills[which] += delta
 	_write_save("autosave")
+
+## The points that are still unallocated: the original keeps this counter in
+## DAT_004bafdc and shows it in `LExperienceCountWBetweenLevelMenu`; the left
+## (add) arrow decrements it and the right (take back) arrow increments it
+## again (FUN_00488afc / the other B*WBetweenLevelMenu handlers).
+func _experience_left() -> int:
+	return experience - int(plus.otb) - int(plus.luck) - int(plus.cap) - int(plus.life) - int(plus.hammer)
 
 func _selected_language() -> String:
 	for code in OriginalUI.LANGS:
@@ -1184,6 +1202,38 @@ func _apply_start_bonus() -> void:
 		1: caps_total += 5
 		2: total_score += 200
 
+## --difficulty=normal|easy|hard|nolose (debug): force the difficulty without
+## going through the New Game dialog.
+func _set_forced_difficulty(name: String) -> bool:
+	var d := name.to_lower()
+	if not d in ["normal", "easy", "hard", "nolose"]:
+		return false
+	diff_flags = {"no_lose": d == "nolose", "easy": d == "easy",
+		"normal": d == "normal", "hard": d == "hard"}
+	ui.checked["RNoLoseWStartDialog"] = diff_flags.no_lose
+	ui.checked["REasyWStartDialog"] = diff_flags.easy
+	ui.checked["RNormalWStartDialog"] = diff_flags.normal
+	ui.checked["RHardWStartDialog"] = diff_flags.hard
+	return true
+
+func _difficulty_key() -> String:
+	if diff_flags.no_lose:
+		return "nolose"
+	if diff_flags.easy:
+		return "easy"
+	if diff_flags.hard:
+		return "hard"
+	return "normal"
+
+func _difficulty_belt_scale() -> float:
+	return float(DIFF_BELT.get(_difficulty_key(), 1.0))
+
+func _difficulty_period_scale() -> float:
+	return float(DIFF_PERIOD.get(_difficulty_key(), 1.0))
+
+func _difficulty_name() -> String:
+	return _difficulty_key()
+
 func _set_difficulty_from_ui() -> void:
 	diff_flags.no_lose = ui.checked.get("RNoLoseWStartDialog", false)
 	diff_flags.easy = ui.checked.get("REasyWStartDialog", false)
@@ -1250,13 +1300,8 @@ func start_level(idx: int, sync_difficulty := true) -> void:
 	speed_up_t = 0.0
 	all_bonus = false
 	level_done = false
-	generator_period = max(0.3, float(level.generator_period) / 1000.0)
-	# original FUN_0049b22c: Easy x1.5, Hard x0.7 (interpreting the period as
-	# the countdown step), Normal unchanged
-	if diff_flags.easy:
-		generator_period *= 1.5
-	elif diff_flags.hard:
-		generator_period *= 0.7
+	generator_period = max(0.3, float(level.generator_period) / 1000.0) * _difficulty_period_scale()
+	belt_speed = belt_base * _difficulty_belt_scale()
 	generator_t = generator_period
 	sequence.clear()
 	for v in level.fish_type_sequence:
@@ -1284,7 +1329,7 @@ func start_level(idx: int, sync_difficulty := true) -> void:
 	ui.captions["LLevelNumWGame"] = str(level_index + 1)
 	# the original aims the camera at the lowest open joint already at level start
 	_camera_follow()
-	print("[level] %s fishkas=%d ghosts=%d maprows=%d pictures=%d period=%d cam=%.0f" % [level.name, level.fishkas.size(), world.ghosts.size(), level.picture_map.get("rows", []).size(), level.pictures.size(), level.generator_period, cam_y])
+	print("[level] %s fishkas=%d ghosts=%d maprows=%d pictures=%d period=%d gen=%.2fs diff=%s cam=%.0f" % [level.name, level.fishkas.size(), world.ghosts.size(), level.picture_map.get("rows", []).size(), level.pictures.size(), level.generator_period, generator_period, _difficulty_name(), cam_y])
 	queue_redraw()
 
 func _level_aborted() -> void:
@@ -3239,7 +3284,7 @@ func _between_captions() -> void:
 	ui.captions["LLevelWBetweenLevelMenu"] = level_caption if level_caption != "" else "Level"
 	ui.captions["LLevelNumWBetweenLevelMenu"] = str(level_index + 1)
 	ui.captions["LScoreCountWBetweenLevelMenu"] = str(total_score)
-	ui.captions["LExperienceCountWBetweenLevelMenu"] = str(experience)
+	ui.captions["LExperienceCountWBetweenLevelMenu"] = str(_experience_left())
 	ui.captions["LHammerCountWBetweenLevelMenu"] = str(hammers_total)
 	ui.captions["LClipperCountWBetweenLevelMenu"] = str(caps_total)
 	ui.captions["LLiveCountWBetweenLevelMenu"] = str(int(skills.life))
@@ -3717,15 +3762,22 @@ func _fix_test() -> void:
 	hammers_total = 3
 	_exec_actions("BLeftLiveWBetweenLevelMenu", "up")
 	var left_add: bool = int(plus.life) == 1
+	_between_captions()
+	var exp_after_add: String = str(ui.captions["LExperienceCountWBetweenLevelMenu"])
 	_exec_actions("BRightLiveWBetweenLevelMenu", "up")
 	var right_sub: bool = int(plus.life) == 0
+	_between_captions()
+	var exp_after_take: String = str(ui.captions["LExperienceCountWBetweenLevelMenu"])
+	# the top counter is the *remaining* experience: it drops on add and comes
+	# back on take-back (original DAT_004bafdc)
+	var exp_sync: bool = exp_after_add == "4" and exp_after_take == "5"
 	_exec_actions("BLeftHammerWBetweenLevelMenu", "up")
 	var left_hammer: bool = int(plus.hammer) == 1 and hammers_total == 4
 	_exec_actions("BRightHammerWBetweenLevelMenu", "up")
 	var right_hammer: bool = int(plus.hammer) == 0 and hammers_total == 3
-	if not (left_add and right_sub and left_hammer and right_hammer):
+	if not (left_add and right_sub and left_hammer and right_hammer and exp_sync):
 		fails += 1
-	print("[fixtest] skill arrows left+=%s right-=%s hammer %s/%s" % [str(left_add), str(right_sub), str(left_hammer), str(right_hammer)])
+	print("[fixtest] skill arrows left+=%s right-=%s hammer %s/%s exp %s->%s" % [str(left_add), str(right_sub), str(left_hammer), str(right_hammer), exp_after_add, exp_after_take])
 	# --- amphora preview ----------------------------------------------------
 	start_level(0)
 	progress_t = 0.0
@@ -3825,20 +3877,47 @@ func _fix_test() -> void:
 	if not light_ok:
 		fails += 1
 	print("[fixtest] hint lights (light1..4 + UpArrow)=%s" % str(light_ok))
-	# --- difficulty: Easy x1.5 / Hard x0.7 the generator period, No Lose ----
-	# skips the overfull game over (original FUN_0049b22c / 0x48b62f) -------
+	# --- difficulty: the generator period and the conveyor scale by mode ----
+	# (the original only has x1.5/x0.7; the remake widens it, see DIFF_*) ---
 	var base_period := float(LevelLoader.parse_level("res://assets/levels/Level3.txt").generator_period) / 1000.0
 	diff_flags = {"no_lose": false, "easy": true, "normal": false, "hard": false}
 	start_level(3, false)
 	var easy_period := generator_period
+	var easy_belt := belt_speed
 	diff_flags = {"no_lose": false, "easy": false, "normal": false, "hard": true}
 	start_level(3, false)
 	var hard_period := generator_period
-	var diff_ok: bool = absf(easy_period - base_period * 1.5) < 0.001 \
-		and absf(hard_period - base_period * 0.7) < 0.001
+	var hard_belt := belt_speed
+	var diff_ok: bool = absf(easy_period - base_period * float(DIFF_PERIOD.easy)) < 0.001 \
+		and absf(hard_period - base_period * float(DIFF_PERIOD.hard)) < 0.001 \
+		and absf(easy_belt - belt_base * float(DIFF_BELT.easy)) < 0.001 \
+		and absf(hard_belt - belt_base * float(DIFF_BELT.hard)) < 0.001
 	if not diff_ok:
 		fails += 1
-	print("[fixtest] difficulty periods base=%.3f easy=%.3f hard=%.3f" % [base_period, easy_period, hard_period])
+	print("[fixtest] difficulty base period=%.3f easy=%.3f(x%.2f,belt %.0f) hard=%.3f(x%.2f,belt %.0f)" % [
+		base_period, easy_period, float(DIFF_PERIOD.easy), easy_belt,
+		hard_period, float(DIFF_PERIOD.hard), hard_belt])
+	# the radios of the New Game dialog must feed the running level
+	var lv0_period := float(LevelLoader.parse_level("res://assets/levels/Level0.txt").generator_period) / 1000.0
+	new_game_pending = true
+	stack = ["WTitle"]
+	_push_modal("WStartDialog")
+	_click_widget("REasyWStartDialog", Vector2.ZERO)
+	var radio_checked: bool = bool(ui.checked.get("REasyWStartDialog", false)) \
+		and not bool(ui.checked.get("RNormalWStartDialog", false))
+	_method("BPlayWStartDialogMouseUp")
+	var radio_easy_ok: bool = radio_checked and diff_flags.easy and not diff_flags.hard \
+		and absf(generator_period - lv0_period * float(DIFF_PERIOD.easy)) < 0.001
+	new_game_pending = true
+	stack = ["WTitle"]
+	_push_modal("WStartDialog")
+	_click_widget("RHardWStartDialog", Vector2.ZERO)
+	_method("BPlayWStartDialogMouseUp")
+	var radio_hard_ok: bool = diff_flags.hard and not diff_flags.easy \
+		and absf(generator_period - lv0_period * float(DIFF_PERIOD.hard)) < 0.001
+	if not (radio_easy_ok and radio_hard_ok):
+		fails += 1
+	print("[fixtest] difficulty dialog easy=%s hard=%s (period now %.2f)" % [str(radio_easy_ok), str(radio_hard_ok), generator_period])
 	# a jammed belt must not end the game with No Lose (and must without it)
 	diff_flags = {"no_lose": false, "easy": false, "normal": true, "hard": false}
 	start_level(3, false)

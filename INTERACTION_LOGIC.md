@@ -185,6 +185,10 @@ Twig 记录（`DAT_004bae08`，每条 `0x38` 字节）：
 
 ## 8. 进度 / 难度 / 奖励（与交互相关的部分）
 
+- **经验加点**：顶部 `Experience:` 显示的是 **剩余未分配点数**（`DAT_004bafdc`）：
+  左箭头加点时 `[0x4bafdc]--`、右箭头回退时 `[0x4bafdc]++`，同时刷新
+  `LExperienceCountWBetweenLevelMenu` 与各技能的 `+N`（`0x488afc` 起的一组分枝处理函数）；
+  加点把点数加到对应技能/道具上，回退时撤回；存盘里只存总经验与已分配数（见 `save_codec.py`）。
 - **Time Control**（`DAT_004baeb8` 截止时刻）：生效期间不判负，HUD `LLiveCountWGame` 显示剩余秒。
 - **Drop Section Accelerator**（`DAT_004baebc` 截止时刻 + `_DAT_004baeb4` 间隔）：弃枝冷却缩短。
 - **Good Luck**：提高幸运枝概率（生成时的概率乘 (1+luck/100)，见关卡数据）。
@@ -194,6 +198,9 @@ Twig 记录（`DAT_004bae08`，每条 `0x38` 字节）：
     另外在传送带间距累加器 `DAT_004baeac` 上加/减 1 px（`0x49791c` 等处的取整修正，视觉几乎不可见）；
   - **No Lose**（`DAT_004b97a0`）：`0x48b62f` 直接跳整段塞满判定，既不显示 `ProgressOTT` 警告也不会 Game Over；
   - 传送带速度（25 px/s）与计分 `FishkaScore` **不随难度变化**（两个难度标志除上述位置外无其它读引用）。
+  - **remake 的放大**：原版差异偏小，重制版有意放大并额外缩放传送带（`DIFF_PERIOD`/`DIFF_BELT`）：
+    Easy 生成周期 ×1.75、传送带 ×0.75；Hard 生成周期 ×0.6、传送带 ×1.3；No Lose 传送带不变。
+    可用 `--difficulty=normal|easy|hard|nolose` 直接验证（`[level]` 行会打印 `gen=` 与实际难度）。
 - **随机数**：类型/神秘枝/幸运枝都用 Delphi RTL 的确定性 LCG
   `RandSeed = RandSeed * 0x08088405 + 1`（`0x402c30` 整数、`0x402c48` 实数），
   启动时 `Randomize`（`0x4029d8`）以 `GetLocalTime` 的“当天毫秒数”作种子（调用点 `0x489fb7`），
