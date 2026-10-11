@@ -421,8 +421,6 @@ func _draw_node(o: CanvasItem, name: String, origin: Vector2, interactive: bool,
 	var cls: String = n.Class
 	if cls == "TLabTabForm" and not _is_tab_visible(name): return
 	var pos := origin + Vector2(float(prop(name, "Left", 0)), float(prop(name, "Top", 0)))
-	if cls == "TLabTabForm" and name.begins_with("TLevel") and name.ends_with("WBetweenLevelMenu"):
-		pos = Vector2(183, 75)
 	var size := Vector2(float(prop(name, "Width", 0)), float(prop(name, "Height", 0)))
 	var rect := Rect2(pos, size)
 	var over := interactive and rect.has_point(mouse)

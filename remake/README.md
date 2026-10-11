@@ -28,9 +28,12 @@ tree (`assets/data/interface.json`) with the original backgrounds
   filmstrip: `ProgressLine.png` as the frame plus one 10×13 `ProgressOT.png`
   tile per 10 px column (21 columns inset by 5 px, matching the captures),
 * pause menu, between-level experience/skill screen
-  (Time Control / Drop Section Accelerator / Good Luck / Amphora / Hammer with
-  the +/- arrows, the level description tab `TLevelN` and the level's hero
-  portrait from `<HeroPicture>`), load/save (with the `TLabGrid` list, its
+  (Time Control / Drop Section Accelerator / Good Luck / Amphora / Hammer —
+  the arrow buttons allocate the experience points and, as in the original,
+  the **left arrow spends a point while the right arrow takes it back** — the
+  level description tab `TLevelN` at its original place at the bottom of the
+  screen (227, 515) with the "Level N" line at (174/278, 485), and the level's
+  hero portrait from `<HeroPicture>`), load/save (with the `TLabGrid` list, its
   `0xC0C0C0` cursor row and the name edit box), options, help, high-score list
   and all confirmation dialogs.
 
@@ -39,7 +42,10 @@ RunMethod` actions stored in the interface file, so the navigation is the
 original one (e.g. `Options → Language` stacks the language dialog on top of
 the options dialog and returns there). Options keep the two radio groups of
 the original (`100…20 %`, `No Music` / `No Sound`); `Cancel` restores the
-state from when the dialog was opened and `OK` writes `options.cfg`. The
+state from when the dialog was opened and `OK` writes `options.cfg`. The saved
+`FullScreenMode` is applied when the game starts (not only after visiting the
+Options dialog) and a live checkbox change is reverted by `Cancel` through the
+same snapshot, The
 localizations of `lng/*.lng` are switched at runtime (bitmap font
 `Arial12lat.png`/`Arial12cyr.png`, CP1251/CP1252 byte indexing) and now
 include **Simplified Chinese** (`简体中文`, `lng/chs_105.lng`): that file is

@@ -763,16 +763,19 @@ func _method(name: String) -> void:
 			start_level(level_index)
 		"BOkWGameFinishedDialogMouseUp":
 			_save_score(player_name, total_score)
-		"BRightLiveWBetweenLevelMenuMouseUp": _add_skill("life", 1)
-		"BLeftLiveWBetweenLevelMenuMouseUp": _add_skill("life", -1)
-		"BRightDropAccelWBetweenLevelMenuMouseUp": _add_skill("otb", 1)
-		"BLeftDropAccelWBetweenLevelMenuMouseUp": _add_skill("otb", -1)
-		"BRightLuckyTwigWBetweenLevelMenuMouseUp": _add_skill("luck", 1)
-		"BLeftLuckyTwigWBetweenLevelMenuMouseUp": _add_skill("luck", -1)
-		"BRightAmphoraWBetweenLevelMenuMouseUp": _add_skill("cap", 1)
-		"BLeftAmphoraWBetweenLevelMenuMouseUp": _add_skill("cap", -1)
-		"BRightHammerWBetweenLevelMenuMouseUp": _add_skill("hammer", 1)
-		"BLeftHammerWBetweenLevelMenuMouseUp": _add_skill("hammer", -1)
+		# The original screen uses the arrows the other way round from what one
+		# would expect: the left arrow spends a point on the skill, the right
+		# arrow takes it back.
+		"BRightLiveWBetweenLevelMenuMouseUp": _add_skill("life", -1)
+		"BLeftLiveWBetweenLevelMenuMouseUp": _add_skill("life", 1)
+		"BRightDropAccelWBetweenLevelMenuMouseUp": _add_skill("otb", -1)
+		"BLeftDropAccelWBetweenLevelMenuMouseUp": _add_skill("otb", 1)
+		"BRightLuckyTwigWBetweenLevelMenuMouseUp": _add_skill("luck", -1)
+		"BLeftLuckyTwigWBetweenLevelMenuMouseUp": _add_skill("luck", 1)
+		"BRightAmphoraWBetweenLevelMenuMouseUp": _add_skill("cap", -1)
+		"BLeftAmphoraWBetweenLevelMenuMouseUp": _add_skill("cap", 1)
+		"BRightHammerWBetweenLevelMenuMouseUp": _add_skill("hammer", -1)
+		"BLeftHammerWBetweenLevelMenuMouseUp": _add_skill("hammer", 1)
 		"BOkWClearDialogMouseUp":
 			scores.clear()
 			_save_scores()
@@ -829,7 +832,7 @@ func _apply_checkbox(widget: String) -> void:
 			world.show_hints = not value
 		"CheckBoxFullScreenWOptions":
 			opt_fullscreen = value
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if value else DisplayServer.WINDOW_MODE_WINDOWED)
+			_apply_fullscreen()
 
 func _add_skill(which: String, delta: int) -> void:
 	var remaining := experience - int(plus.otb) - int(plus.luck) - int(plus.cap) - int(plus.life) - int(plus.hammer)
@@ -862,7 +865,7 @@ func _apply_language(code: String) -> void:
 		window.title = "Fiber Twig 重制版" if code == "chs" else "Fiber Twig Remake"
 	# refresh captions that the game owns
 	ui.captions["LLevelNumWGame"] = str(level_index + 1)
-	ui.captions["LLevelNumWBetweenLevelMenu"] = "%02d." % (level_index + 1)
+	ui.captions["LLevelNumWBetweenLevelMenu"] = str(level_index + 1)
 	if stack.has("WBetweenLevelMenu"):
 		_between_captions()
 	queue_redraw()
@@ -942,8 +945,20 @@ func _restore_options() -> void:
 	opt_hints_off = bool(opt_snapshot["hints"])
 	opt_fullscreen = bool(opt_snapshot["fullscreen"])
 	opt_bpp32 = bool(opt_snapshot["bpp"])
-	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if opt_fullscreen else DisplayServer.WINDOW_MODE_WINDOWED)
 	_apply_options()
+
+## Apply the saved FullScreenMode to the window.  It has to run at startup
+## (options.cfg is read before the first frame) as well as live when the
+## Options dialog changes the checkbox; Cancel restores the snapshot and
+## re-applies this.
+func _apply_fullscreen() -> void:
+	if DisplayServer.get_name() == "headless":
+		return
+	var want := DisplayServer.WINDOW_MODE_FULLSCREEN if opt_fullscreen else DisplayServer.WINDOW_MODE_WINDOWED
+	if DisplayServer.window_get_mode() != want:
+		DisplayServer.window_set_mode(want)
+		if OS.get_environment("FT_DEBUG") == "1":
+			print("[fullscreen] %s" % ("fullscreen" if opt_fullscreen else "windowed"))
 
 func _apply_options() -> void:
 	ui.checked["CheckBoxColorWOptions"] = opt_bpp32
@@ -955,6 +970,7 @@ func _apply_options() -> void:
 	for code in OriginalUI.LANGS:
 		ui.checked["R%sWLanguage" % code.to_upper()] = code == opt_language
 	world.show_hints = not opt_hints_off
+	_apply_fullscreen()
 	_music_player.volume_db = [6.0, -2.0, -6.0, -12.0, -20.0, -80.0][opt_music]
 	for p in _audio_players:
 		p.volume_db = [0.0, -3.0, -6.0, -10.0, -16.0, -80.0][opt_sound]
@@ -2951,7 +2967,7 @@ func _between_captions() -> void:
 	if ui.overrides.has("LLevelWBetweenLevelMenu") and ui.overrides["LLevelWBetweenLevelMenu"].has("Caption"):
 		level_caption = str(ui.overrides["LLevelWBetweenLevelMenu"]["Caption"]).strip_edges()
 	ui.captions["LLevelWBetweenLevelMenu"] = level_caption if level_caption != "" else "Level"
-	ui.captions["LLevelNumWBetweenLevelMenu"] = "%02d." % (level_index + 1)
+	ui.captions["LLevelNumWBetweenLevelMenu"] = str(level_index + 1)
 	ui.captions["LScoreCountWBetweenLevelMenu"] = str(total_score)
 	ui.captions["LExperienceCountWBetweenLevelMenu"] = str(experience)
 	ui.captions["LHammerCountWBetweenLevelMenu"] = str(hammers_total)
@@ -3422,6 +3438,21 @@ func _fix_test() -> void:
 	if not skill_ok:
 		fails += 1
 	print("[fixtest] skill hints %s -> %s -> %s" % [skill1, skill2, hint_label])
+	# --- between-level arrows: left spends a point, right takes it back ------
+	experience = 5
+	plus = {"otb": 0, "luck": 0, "cap": 0, "life": 0, "hammer": 0}
+	hammers_total = 3
+	_exec_actions("BLeftLiveWBetweenLevelMenu", "up")
+	var left_add: bool = int(plus.life) == 1
+	_exec_actions("BRightLiveWBetweenLevelMenu", "up")
+	var right_sub: bool = int(plus.life) == 0
+	_exec_actions("BLeftHammerWBetweenLevelMenu", "up")
+	var left_hammer: bool = int(plus.hammer) == 1 and hammers_total == 4
+	_exec_actions("BRightHammerWBetweenLevelMenu", "up")
+	var right_hammer: bool = int(plus.hammer) == 0 and hammers_total == 3
+	if not (left_add and right_sub and left_hammer and right_hammer):
+		fails += 1
+	print("[fixtest] skill arrows left+=%s right-=%s hammer %s/%s" % [str(left_add), str(right_sub), str(left_hammer), str(right_hammer)])
 	# --- amphora preview ----------------------------------------------------
 	start_level(0)
 	progress_t = 0.0
@@ -3486,6 +3517,15 @@ func _fix_test() -> void:
 	if not load_ok:
 		fails += 1
 	print("[fixtest] load level=%d score=%d hammers=%d hard=%s dialog=%s" % [level_index, total_score, hammers_total, str(diff_flags.hard), str(stack.has("WStartDialog"))])
+	# --- options: the fullscreen snapshot is restored by Cancel ----------------
+	opt_fullscreen = true
+	_snapshot_options()
+	opt_fullscreen = false
+	_restore_options()
+	var fs_ok: bool = opt_fullscreen and bool(ui.checked.get("CheckBoxFullScreenWOptions", false))
+	if not fs_ok:
+		fails += 1
+	print("[fixtest] fullscreen snapshot restore=%s" % str(fs_ok))
 	print("[fixtest] failures=%d" % fails)
 
 func _level_picture_visible(pic_name: String) -> bool:
