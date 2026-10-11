@@ -134,7 +134,11 @@ from the shipped screenshots, see §10 of the report):
   per-twig phase, `FUN_00490abc`),
   the seven bonuses of `BonusTypes.dat`
   (+2 hammers, bomb, +2 amphoras, +100 points, drop accelerator, all twigs
-  lucky, time control),
+  lucky, time control); the hammer / amphora / score bonuses pop the tool
+  picture as a spark at the cursor and drift upward while fading out over 2 s,
+  with `GetFishka.wav` (the original `GiveHammer` / `GiveClipper` / `GiveScore`
+  SparkCloneEffects), and ClearSteck shatters the whole belt with the
+  `HammerFishka` star sparks,
 * scoring from `FishkaScore`, combinations from `FishCombinations.dat` with the
   level's `CombSequence` (checked strictly in sequence and anchored at the twig
   that was just placed, like `FUN_004aa128`), the original hint texts (black

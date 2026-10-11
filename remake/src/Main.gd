@@ -167,9 +167,9 @@ var capture_saved := 0
 var combo_counter := 0
 var combo_step := 0                  # DAT_004bae98: index of the current combination
 var skill_hover_label := ""          # between-level skill row currently hovered
-## Hammer / ClearSteck sparks (`HammerFishka`, a SparkCloneEffect of
-## EffectsType.dat: 15 x star.png, gravity 150, fade 255->0 over ~1 s).
-var sparks: Array = []               # screen space {pos, vel, t, life}
+## Hammer / ClearSteck / pick-up sparks (`HammerFishka`, `GiveHammer`,
+## `GiveClipper` and `GiveScore` SparkCloneEffects of EffectsType.dat).
+var sparks: Array = []               # screen space {pos, vel, grav, t, life, tex, frames, clip?}
 var level_done := false
 ## The game only runs while WGame is the topmost form (the level start progress
 ## bar and the pause menu are pushed on top of it).
@@ -290,6 +290,8 @@ func _ready() -> void:
 				if not belt.is_empty():
 					belt[belt.size() - 1].x = 200.0 + i * 90.0
 			_give_bonus(1)
+			mouse_pos = Vector2(300.0, 260.0)
+			_give_bonus(0)
 			var dshape := LevelLoader.single_shape(13)
 			drop_belt.append({"type": 13, "shape": dshape, "x": 650.0, "y": DROP_BOTTOM - 40.0,
 				"span": 40.0, "h": 40.0, "bonus": false, "quest": false, "phase": 0.0})
@@ -2286,6 +2288,7 @@ func _give_bonus(kind: int) -> void:
 	match kind:
 		0:
 			hammers += 2
+			_spawn_icon_spark("res://assets/game/hammer1.png")
 			_play_effect("GiveHammer")
 		1:
 			# ClearSteck (original FUN_004aa9e4): the HammerFishka effect is
@@ -2297,9 +2300,11 @@ func _give_bonus(kind: int) -> void:
 			_play_effect("HammerFishkaSound")
 		2:
 			caps += 2
+			_spawn_icon_spark("res://assets/game/cap1.png")
 			_play_effect("GiveClipper")
 		3:
 			score += 100
+			_spawn_icon_spark("res://assets/game/ScoreStar.png")
 			_play_effect("GiveScore")
 		4:
 			speed_up_t = 60.0
@@ -2394,15 +2399,40 @@ func _play_music(file_name: String) -> void:
 ## with gravity that fade out (EffectsType.dat: SparkNum 15, VecY 200,
 ## GravY 150, TB 255 / TE 0, TTC 1000, 4 frames at 100 ms).
 func _spawn_hammer_sparks(pos: Vector2, count := 15) -> void:
+	var tex := AssetLib.texture("res://assets/game/star.png")
 	for _i in count:
 		var a := randf() * TAU
 		var speed := randf_range(120.0, 260.0)
 		sparks.append({
 			"pos": pos,
 			"vel": Vector2(cos(a), sin(a)) * speed,
+			"grav": 150.0,
 			"t": 0.0,
 			"life": randf_range(0.7, 1.0),
+			"tex": tex,
+			"frames": 4,
 		})
+
+## The original pick-up feedback for a tool / score bonus (`GiveHammer`,
+## `GiveClipper`, `GiveScore` in EffectsType.dat): a single spark of the tool
+## picture at the mouse cursor (SparkSX/SY = %MouseCursor), drifting upward
+## (GravY -30), fading 255->0 over 2 s (SparkTTC 2000) and clipped to the play
+## field (SparkClipper 5 5 605 490).  The sound (GetFishka.wav) is played by
+## _play_effect().
+func _spawn_icon_spark(path: String) -> void:
+	var tex := AssetLib.texture(path)
+	if tex == null:
+		return
+	sparks.append({
+		"pos": mouse_pos,
+		"vel": Vector2(2.0, 20.0).rotated(randf_range(1.0, 3.0)),
+		"grav": -30.0,
+		"t": 0.0,
+		"life": 2.0,
+		"tex": tex,
+		"frames": 1,
+		"clip": Rect2(5.0, 5.0, 600.0, 485.0),
+	})
 
 func _update_sparks(delta: float) -> void:
 	for i in range(sparks.size() - 1, -1, -1):
@@ -2411,21 +2441,25 @@ func _update_sparks(delta: float) -> void:
 		if float(s.t) >= float(s.life):
 			sparks.remove_at(i)
 			continue
-		s.vel.y += 150.0 * delta
+		s.vel.y += float(s.get("grav", 150.0)) * delta
 		s.pos += s.vel * delta
 
 func _draw_sparks(o: Control) -> void:
-	if sparks.is_empty():
-		return
-	var tex := AssetLib.texture("res://assets/game/star.png")
-	if tex == null:
-		return
 	for s in sparks:
+		var tex: Texture2D = s.get("tex", null)
+		if tex == null:
+			continue
 		var f: float = clampf(float(s.t) / float(s.life), 0.0, 1.0)
-		var frame := int(float(s.t) * 10.0) % 4
-		var pos: Vector2 = s.pos
-		o.draw_texture_rect_region(tex, Rect2(pos.x - 16.0, pos.y - 16.0, 32.0, 32.0),
-			Rect2(frame * 24.0, 0.0, 24.0, 24.0), Color(1, 1, 1, 1.0 - f))
+		var frames := maxi(1, int(s.get("frames", 4)))
+		var frame := int(float(s.t) * 10.0) % frames if frames > 1 else 0
+		var fw := float(tex.get_width()) / float(frames)
+		var fh := float(tex.get_height())
+		var dest := Rect2(float(s.pos.x) - fw * 0.5, float(s.pos.y) - fh * 0.5, fw, fh)
+		var col := Color(1, 1, 1, 1.0 - f)
+		if s.has("clip"):
+			_draw_region_clipped(o, tex, dest, Rect2(frame * fw, 0.0, fw, fh), s.clip, col)
+		else:
+			o.draw_texture_rect_region(tex, dest, Rect2(frame * fw, 0.0, fw, fh), col)
 
 func _play_sound(name: String) -> void:
 	var s := AssetLib.sound("res://assets/game/%s" % name)
@@ -2847,11 +2881,14 @@ func _draw_combo(o: Control) -> void:
 func _draw_twig_clipped(o: CanvasItem, tex: Texture2D, pos: Vector2, clip: Rect2, col := Color.WHITE) -> void:
 	if tex == null:
 		return
-	var dest := Rect2(pos, tex.get_size())
+	_draw_region_clipped(o, tex, Rect2(pos, tex.get_size()), Rect2(Vector2.ZERO, tex.get_size()), clip, col)
+
+## Draw the source region `src` of `tex` into `dest`, intersected with `clip`.
+func _draw_region_clipped(o: CanvasItem, tex: Texture2D, dest: Rect2, src: Rect2, clip: Rect2, col := Color.WHITE) -> void:
 	var r := dest.intersection(clip)
 	if r.size.x < 1.0 or r.size.y < 1.0:
 		return
-	o.draw_texture_rect_region(tex, r, Rect2(r.position - dest.position, r.size), col)
+	o.draw_texture_rect_region(tex, r, Rect2(src.position + (r.position - dest.position), r.size), col)
 
 func _draw_belt(o: Control) -> void:
 	var lenta := AssetLib.texture("res://assets/game/lenta.png")
@@ -3355,6 +3392,21 @@ func _fix_test() -> void:
 	if not sparks_ok:
 		fails += 1
 	print("[fixtest] clearsteck twigs=%d sparks=%d" % [belt_n, sparks.size()])
+	# --- tool / score bonuses spawn the original icon spark at the cursor ----
+	sparks.clear()
+	mouse_pos = Vector2(300.0, 250.0)
+	_give_bonus(0)
+	var is0: bool = sparks.size() == 1 and sparks[0].get("tex") != null \
+		and int(sparks[0].get("frames", 0)) == 1 and absf(float(sparks[0].get("grav", 0.0)) + 30.0) < 0.01 \
+		and absf(float(sparks[0].get("life", 0.0)) - 2.0) < 0.01 \
+		and Vector2(sparks[0].get("pos", Vector2.ZERO)) == Vector2(300.0, 250.0)
+	_give_bonus(2)
+	var is1: bool = sparks.size() == 2
+	_give_bonus(3)
+	var is2: bool = sparks.size() == 3
+	if not (is0 and is1 and is2):
+		fails += 1
+	print("[fixtest] icon sparks hammer=%s clipper=%s score=%s" % [str(is0), str(is1), str(is2)])
 	# --- between-level skill hints follow the pointer ------------------------
 	stack = ["WBetweenLevelMenu"]
 	mouse_pos = Vector2(90, 125)
