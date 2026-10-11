@@ -1250,11 +1250,12 @@ func start_level(idx: int, sync_difficulty := true) -> void:
 	all_bonus = false
 	level_done = false
 	generator_period = max(0.3, float(level.generator_period) / 1000.0)
-	# original: Easy multiplies the generator period by 1.5, Hard by ~0.85
+	# original FUN_0049b22c: Easy x1.5, Hard x0.7 (interpreting the period as
+	# the countdown step), Normal unchanged
 	if diff_flags.easy:
 		generator_period *= 1.5
 	elif diff_flags.hard:
-		generator_period *= 0.85
+		generator_period *= 0.7
 	generator_t = generator_period
 	sequence.clear()
 	for v in level.fish_type_sequence:
@@ -1462,7 +1463,8 @@ func _pickup(slot: int, from_drop := false) -> void:
 	var t: Dictionary = (drop_belt[slot] if from_drop else belt[slot])
 	var quest := bool(t.quest)
 	# the original reveals a mystery twig the moment it is taken
-	held = {"type": t.type, "shape": t.shape, "bonus": t.bonus, "quest": false, "revealed": true}
+	held = {"type": t.type, "shape": t.shape, "bonus": t.bonus, "quest": false, "revealed": true,
+		"phase": float(t.get("phase", 0.0))}
 	has_held = true
 	if from_drop:
 		drop_belt.remove_at(slot)
@@ -2117,7 +2119,8 @@ func _take_back_last() -> void:
 	world.pieces = snap.pieces
 	score = int(snap.score)
 	ghosts_covered = int(snap.ghosts_covered)
-	held = {"type": int(snap.shape.masks[0]), "shape": snap.shape, "bonus": bool(snap.bonus), "quest": false}
+	held = {"type": int(snap.shape.masks[0]), "shape": snap.shape, "bonus": bool(snap.bonus), "quest": false,
+		"phase": randf() * TAU}
 	has_held = true
 	_play_effect("TakeFishka")
 	_invalidate_board()
@@ -2974,7 +2977,12 @@ func _update_generator(delta: float) -> void:
 ## Game over when the belt is completely jammed: more than 5 twigs, the first
 ## one at the left stop, the last one pressed against the previous one, no twig
 ## moved, no Time Control - for about two seconds (original FUN_0048b2d0).
+## The No Lose difficulty jumps over this check completely (0x48b62f).
 func _update_overfull(delta: float) -> void:
+	if diff_flags.no_lose:
+		overfull = false
+		overfull_t = 0.0
+		return
 	var full_now := false
 	if belt.size() > 5 and not belt_moved and no_lose_t <= 0.0 and not level_done:
 		var last: Dictionary = belt[belt.size() - 1]
@@ -3115,7 +3123,15 @@ func _draw_game(o: Control, interactive: bool) -> void:
 		var shape: Dictionary = held.get("shape", {})
 		var t := LevelLoader.shape_texture(shape)
 		if t:
-			o.draw_texture(t, mouse_pos - Vector2(20, 20) + LevelLoader.shape_art_offset(shape), Color(1, 1, 1, 0.9))
+			var hpos := mouse_pos - Vector2(20, 20) + LevelLoader.shape_art_offset(shape)
+			o.draw_texture(t, hpos, Color(1, 1, 1, 0.9))
+			if bool(held.get("bonus", false)):
+				# a lucky twig keeps its golden pulse while it is carried (same
+				# formula as the conveyor, FUN_00490abc)
+				var k := (sin(_time * 1000.0 / 300.0 + float(held.get("phase", 0.0))) * 64.0 + 150.0) / 255.0
+				var flash := AssetLib.flash_texture(t)
+				if flash:
+					o.draw_texture(flash, hpos, Color(1, 1, 1, k))
 	if no_lose_t > 0.0:
 		o.draw_rect(Rect2(0, 0, 600, 500), Color(0, 0.4, 0.2, 0.08), true)
 
@@ -3804,6 +3820,59 @@ func _fix_test() -> void:
 	if not light_ok:
 		fails += 1
 	print("[fixtest] hint lights (light1..4 + UpArrow)=%s" % str(light_ok))
+	# --- difficulty: Easy x1.5 / Hard x0.7 the generator period, No Lose ----
+	# skips the overfull game over (original FUN_0049b22c / 0x48b62f) -------
+	var base_period := float(LevelLoader.parse_level("res://assets/levels/Level3.txt").generator_period) / 1000.0
+	diff_flags = {"no_lose": false, "easy": true, "normal": false, "hard": false}
+	start_level(3, false)
+	var easy_period := generator_period
+	diff_flags = {"no_lose": false, "easy": false, "normal": false, "hard": true}
+	start_level(3, false)
+	var hard_period := generator_period
+	var diff_ok: bool = absf(easy_period - base_period * 1.5) < 0.001 \
+		and absf(hard_period - base_period * 0.7) < 0.001
+	if not diff_ok:
+		fails += 1
+	print("[fixtest] difficulty periods base=%.3f easy=%.3f hard=%.3f" % [base_period, easy_period, hard_period])
+	# a jammed belt must not end the game with No Lose (and must without it)
+	diff_flags = {"no_lose": false, "easy": false, "normal": true, "hard": false}
+	start_level(3, false)
+	progress_t = 0.0
+	_pop_modal("WProgressBar")
+	belt = []
+	for i in 6:
+		belt.append({"type": 13, "shape": LevelLoader.single_shape(13), "x": 5.0, "y": 545.0,
+			"span": 40.0, "h": 40.0, "bonus": false, "quest": false, "phase": 0.0})
+	no_lose_t = 0.0
+	level_done = false
+	diff_flags.no_lose = false
+	_update_overfull(OVERFULL_TIME)
+	var lose_ok: bool = _top() == "WGameOverDialog"
+	if _top() == "WGameOverDialog":
+		_pop_modal("WGameOverDialog")
+	diff_flags.no_lose = true
+	overfull = false
+	overfull_t = 0.0
+	for i in 20:
+		_update_overfull(OVERFULL_TIME / 10.0)
+	var nolose_ok: bool = not overfull and _top() != "WGameOverDialog"
+	if not (lose_ok and nolose_ok):
+		fails += 1
+	print("[fixtest] overfull game over=%s, no-lose blocks it=%s" % [str(lose_ok), str(nolose_ok)])
+	diff_flags = {"no_lose": false, "easy": false, "normal": true, "hard": false}
+	# --- a lucky twig keeps its pulse data while it is carried ----------------
+	start_level(0)
+	progress_t = 0.0
+	_pop_modal("WProgressBar")
+	belt = []
+	belt.append({"type": 13, "shape": LevelLoader.single_shape(13), "x": 100.0, "y": 545.0,
+		"span": 40.0, "h": 40.0, "bonus": true, "quest": false, "phase": 1.25})
+	_pickup(0)
+	var lucky_ok: bool = has_held and bool(held.get("bonus", false)) \
+		and absf(float(held.get("phase", -1.0)) - 1.25) < 0.001
+	if not lucky_ok:
+		fails += 1
+	print("[fixtest] carried lucky twig bonus=%s phase=%.2f" % [str(held.get("bonus", false)), float(held.get("phase", -1.0))])
 	# --- title bird wobble (original FUN_004946a8) ---------------------------
 	stack = ["WTitle"]
 	_time = 0.0

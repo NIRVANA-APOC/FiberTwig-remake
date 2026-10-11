@@ -30,7 +30,10 @@ tree (`assets/data/interface.json`) with the original backgrounds
 * *Select Starting Bonus* dialog (Hammer +5 / Amphora +5 / Score +200) with the
   four difficulty modes **No Lose / Easy / Normal / Hard** — shown only for
   New Game from the title screen; loading a save resumes directly with the
-  stored values and no dialog appears between levels or after a retry,
+  stored values and no dialog appears between levels or after a retry. Like the
+  original, Easy multiplies the generator period by 1.5, Hard by 0.7 and No
+  Lose skips the overfull game over (belt speed and scoring do not depend on
+  the difficulty),
 * the in-game screen: 600×500 play field, right panel with the Menu button,
   level/score, the current combination preview, hammer/amphora icons and
   counts, the DROP SECTION area and its arrow button,
@@ -99,7 +102,9 @@ from the shipped screenshots, see §10 of the report):
 * conveyor: the original numbers — new twigs enter at x=799, bottom aligned at
   y=585, at most **26** twigs; they travel left at **25 px/s** in the original
   (measured from `demo.dat`), pile up at x≤5 with a 2 px gap and are fed
-  automatically every `Generator period` (ms, ×1.5 on Easy). **For playability
+  automatically every `Generator period` (ms, ×1.5 on Easy, ×0.7 on Hard;
+  the type is the ordered `<FishTypeSequence>` when the level has one and a
+  weighted pseudo-random draw over `<FProb>` otherwise). **For playability
   the remake runs the belt at 2× the original speed** (`--beltspeed=N` sets it
   explicitly, `--beltspeed=25` restores the original). The arrow button
   generates one immediately and postpones the next automatic one. Game over

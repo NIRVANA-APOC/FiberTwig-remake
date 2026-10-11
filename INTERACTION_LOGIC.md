@@ -127,7 +127,7 @@ Twig 记录（`DAT_004bae08`，每条 `0x38` 字节）：
 ## 4. 传送带（Steck）
 
 - **生成**（`FUN_0048c82c`）：
-  - 自动：每 `_DAT_004bae48` ms（`<Generator period="...">`；Easy ×1.5）一根；
+  - 自动：每 `_DAT_004bae48` ms（`<Generator period="...">`；Easy ×1.5、Hard ×0.7）一根；
   - 箭头按钮：立即一根，并把下一次自动生成推迟一个周期（`demo.dat` 每次点击后约 100 ms 出现 `<NewFishkaInSteck>`）；
   - 上限：带上的枝数 `< 26`；
   - 新枝：x = **799**；y = `585 − 贴图高度`（底边对齐）；形状按关卡 `FishTypeSequence`/`FishkaProb` 分布随机；
@@ -188,7 +188,18 @@ Twig 记录（`DAT_004bae08`，每条 `0x38` 字节）：
 - **Time Control**（`DAT_004baeb8` 截止时刻）：生效期间不判负，HUD `LLiveCountWGame` 显示剩余秒。
 - **Drop Section Accelerator**（`DAT_004baebc` 截止时刻 + `_DAT_004baeb4` 间隔）：弃枝冷却缩短。
 - **Good Luck**：提高幸运枝概率（生成时的概率乘 (1+luck/100)，见关卡数据）。
-- **难度**：生成周期 Easy ×1.5；`DAT_004bafc1/c2` 为作弊/难度开关。
+- **难度**（`FUN_0049b22c`，三个开关字节 `DAT_004b97a0`/`DAT_004bafc1`/`DAT_004bafc2`）：
+  - **Easy**（`DAT_004bafc2`）：生成周期 ×**1.5**（常量在 `0x49ea44`）；
+  - **Hard**（`DAT_004bafc1`）：生成周期 ×**0.7**（80-bit 常量在 `0x49ea38`）；
+    另外在传送带间距累加器 `DAT_004baeac` 上加/减 1 px（`0x49791c` 等处的取整修正，视觉几乎不可见）；
+  - **No Lose**（`DAT_004b97a0`）：`0x48b62f` 直接跳整段塞满判定，既不显示 `ProgressOTT` 警告也不会 Game Over；
+  - 传送带速度（25 px/s）与计分 `FishkaScore` **不随难度变化**（两个难度标志除上述位置外无其它读引用）。
+- **随机数**：类型/神秘枝/幸运枝都用 Delphi RTL 的确定性 LCG
+  `RandSeed = RandSeed * 0x08088405 + 1`（`0x402c30` 整数、`0x402c48` 实数），
+  启动时 `Randomize`（`0x4029d8`）以 `GetLocalTime` 的“当天毫秒数”作种子（调用点 `0x489fb7`），
+  因此是**伪随机**：同一次运行序列固定，重开游戏换种子。
+  形状选择：关卡有 `<FishTypeSequence>` 就按列表顺序循环（只有 Level0 有）；
+  否则按 `<FProb prob>` 权重线性抽取（`0x4701cc`：先求和，再 `Random(总和)` 定位区间）。
 - **过关条件**（原版 `FUN_004a0538` 返回真）：所有枝同属一个连通块 **且不存在任何开放关节**
   （指向空格或未覆盖透明枝的关节都算开放）；**没有“到达顶行”这一独立条件** —— 图案顶部同样要闭合。
   最后一块封住网络时（同时满足连通+无开放关节）→ `WFinishLevelDialog`。
