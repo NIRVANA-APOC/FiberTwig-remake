@@ -2757,17 +2757,24 @@ func _draw_foreground(o: Control) -> void:
 	_draw_hint(o)
 
 func _draw_progress(o: Control) -> void:
+	# WProgressBar draws its ProgressLine.png background itself (widget picture
+	# 0); the fill is the 10x13 ProgressOT.png segment tiled across the bar.
+	# The original insets the row of segments (21 columns of 10 px fit into the
+	# 220 px bar with a 5 px margin) and every column is one full segment.
 	ui.draw_form(o, "WProgressBar", false)
 	var p: Dictionary = ui.nodes["ProgressBarWProgressBar"]
 	var o0 := _abs_origin("ProgressBarWProgressBar")
 	var frac := clampf(1.0 - progress_t / 0.45, 0.0, 1.0)
-	var line := AssetLib.texture("res://assets/game/ProgressLine.png")
 	var ot := AssetLib.texture("res://assets/game/ProgressOT.png")
-	if line:
-		o.draw_texture(line, o0)
-	if ot:
-		o.draw_texture_rect_region(ot, Rect2(o0.x, o0.y, float(p.Width) * frac, float(p.Height) * 0.75),
-			Rect2(0, 0, float(ot.get_width()) * frac, float(ot.get_height()) * 0.75))
+	if ot == null:
+		return
+	var seg_w := float(ot.get_width())
+	var seg_h := float(ot.get_height())
+	var max_n := int(floor((float(p.Width) - 10.0) / seg_w))
+	var n := mini(max_n, int(floor((float(p.Width) - 10.0) * frac / seg_w)))
+	var y := o0.y + (float(p.Height) - seg_h) * 0.5
+	for i in n:
+		o.draw_texture(ot, Vector2(o0.x + 5.0 + i * seg_w, y))
 
 func _draw_hint(o: Control) -> void:
 	if message_t <= 0.0 or message == "":

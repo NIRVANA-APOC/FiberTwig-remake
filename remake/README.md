@@ -24,6 +24,9 @@ tree (`assets/data/interface.json`) with the original backgrounds
 * the in-game screen: 600×500 play field, right panel with the Menu button,
   level/score, the current combination preview, hammer/amphora icons and
   counts, the DROP SECTION area and its arrow button,
+* the level-loading progress bar (`WProgressBar`) is the original segmented
+  filmstrip: `ProgressLine.png` as the frame plus one 10×13 `ProgressOT.png`
+  tile per 10 px column (21 columns inset by 5 px, matching the captures),
 * pause menu, between-level experience/skill screen
   (Time Control / Drop Section Accelerator / Good Luck / Amphora / Hammer with
   the +/- arrows, the level description tab `TLevelN` and the level's hero
