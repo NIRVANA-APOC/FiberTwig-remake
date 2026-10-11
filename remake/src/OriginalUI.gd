@@ -11,7 +11,10 @@ extends RefCounted
 ##
 ## The Simplified Chinese localization cannot use that 12 px atlas, so its
 ## language file is UTF-8 and its captions are drawn with the bundled subset of
-## Noto Sans SC (assets/fonts/NotoSansSC-UI.ttf) and wrapped per character.
+## LXGW WenKai Screen (assets/fonts/LXGWWenKaiScreen-UI.ttf, a Kai face with the
+## brush strokes the painted garden art calls for, see tools/make_chs_font.py)
+## and wrapped per character.  The subset pins its line metrics to the 14 px
+## line box of the grid below, so it sits exactly where the old sans subset did.
 ## Strings outside the subset (say a name typed by the user) fall back to a
 ## system CJK font.
 
@@ -52,8 +55,12 @@ const LANG_SUFFIX := {"enu": "10", "deu": "15", "fra": "20", "ptb": "60", "rus":
 ## Chinese one is always its native name.
 const LANG_NAMES := {"enu": "English", "deu": "German", "fra": "French",
 	"ptb": "Portuguese", "rus": "Russian", "chs": "简体中文"}
-const CJK_FONT_PATH := "res://assets/fonts/NotoSansSC-UI.ttf"
+const CJK_FONT_PATH := "res://assets/fonts/LXGWWenKaiScreen-UI.ttf"
 const CJK_FONT_SIZE := 14
+## Punctuation a Chinese line may not begin with (it belongs to the line before)
+## and may not end with (it belongs to the line after).  See _wrap_paragraph.
+const CLOSING_PUNCT := "，。、！？：；）」』”’…—·%"
+const OPENING_PUNCT := "（「『“‘"
 const CJK_FONT_NAMES := ["Microsoft YaHei UI", "Microsoft YaHei",
 	"Noto Sans CJK SC", "Noto Sans SC", "Source Han Sans SC", "PingFang SC",
 	"Hiragino Sans GB", "WenQuanYi Micro Hei", "SimHei", "DengXian", "sans-serif"]
@@ -220,8 +227,9 @@ func _ensure_language_widgets() -> void:
 		nodes[name]["Width"] = 160
 		nodes[name]["Height"] = 20
 
-## The bundled font (a Noto Sans SC subset) draws the Chinese captions; a
-## system CJK font covers characters outside the subset.
+## The bundled font (a LXGW WenKai Screen subset, see tools/make_chs_font.py)
+## draws the Chinese captions; a system CJK font covers characters outside the
+## subset.
 func _load_cjk_font() -> void:
 	var sys := SystemFont.new()
 	sys.font_names = PackedStringArray(CJK_FONT_NAMES)
@@ -363,7 +371,41 @@ func wrapped(s: String, width: float) -> Array[String]:
 
 ## Word wrap that can also break inside a word: the Chinese text has no spaces
 ## between words, so a paragraph is a single "word" there.
+##
+## A greedy break leaves the last line of a paragraph as a stub when the text is
+## a few glyphs longer than a whole number of lines ("太满。" alone on a line).
+## The same text fits in the same number of lines at a slightly narrower width,
+## so the widest width that still fits is searched for: the block keeps its line
+## count and the lines come out even.
 func _wrap_paragraph(p: String, width: float) -> Array[String]:
+	var lines := _wrap_rough(p, width)
+	var need := lines.size()
+	# Search in whole pixels: the break positions only change at integer widths,
+	# and a fractional guess can land just below the widest feasible width.
+	var lo := 1
+	var hi := int(ceil(width))
+	while lo < hi:
+		@warning_ignore("integer_division")
+		var mid := (lo + hi + 1) / 2
+		if _wrap_rough(p, float(mid)).size() <= need:
+			lo = mid
+		else:
+			hi = mid - 1
+	var even := _wrap_rough(p, float(lo))
+	# Use the narrowed width only when it really produces a more even block: the
+	# widest line must still be at least half the box, otherwise a short
+	# paragraph would be squeezed into a narrow column.
+	if even.size() == need:
+		var widest := 0.0
+		for l in even:
+			widest = maxf(widest, text_width(l))
+		if widest >= width * 0.5:
+			lines = even
+	_fix_breaks(lines, width)
+	return lines
+
+## The plain greedy break: fill every line as far as it goes.
+func _wrap_rough(p: String, width: float) -> Array[String]:
 	var lines: Array[String] = []
 	var line := ""
 	for word in p.split(" ", false):
@@ -387,6 +429,26 @@ func _wrap_paragraph(p: String, width: float) -> Array[String]:
 	if not line.is_empty() or lines.is_empty():
 		lines.append(line)
 	return lines
+
+## A line may not begin with the punctuation that closes the line before it, nor
+## end with the punctuation that opens the line after it: the glyph crosses the
+## break (a pixel or two over the box) so the text reads correctly.
+func _fix_breaks(lines: Array[String], width: float) -> void:
+	for i in range(lines.size() - 1):
+		var cur := lines[i]
+		var nxt := lines[i + 1]
+		while nxt.length() > 0 and CLOSING_PUNCT.contains(nxt[0]) \
+				and text_width(cur + nxt[0]) <= width + 1.0:
+			cur += nxt[0]
+			nxt = nxt.substr(1)
+		while cur.length() > 1 and OPENING_PUNCT.contains(cur[cur.length() - 1]):
+			var moved := cur[cur.length() - 1]
+			if text_width(moved + nxt) > width:
+				break
+			cur = cur.substr(0, cur.length() - 1)
+			nxt = moved + nxt
+		lines[i] = cur
+		lines[i + 1] = nxt
 
 func begin_frame(pos: Vector2) -> void:
 	mouse = pos
