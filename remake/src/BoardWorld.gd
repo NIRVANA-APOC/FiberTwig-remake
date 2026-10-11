@@ -229,8 +229,6 @@ func _draw() -> void:
 			var t := LevelLoader.type_texture(info.type)
 			if t:
 				draw_texture(t, o)
-		if info.get("glow", 0.0) > 0.0:
-			draw_rect(Rect2(o.x + 8, o.y + 8, 24, 24), Color(1, 1, 0.5, info.glow), false, 3.0)
 	# multi-cell fishkas (double / triple / skoba) keep their whole artwork after
 	# they are placed - the original stores one twig record per piece, not one
 	# per covered cell, and drawing each cell separately would mutate the piece
@@ -349,8 +347,3 @@ func _physics_process(delta: float) -> void:
 		explosions[i].t += delta
 		if explosions[i].t >= float(explosions[i].life):
 			explosions.remove_at(i)
-	# the just-placed highlight is a short flash, not a permanent outline
-	for cell in cells:
-		var info: Dictionary = cells[cell]
-		if info.get("glow", 0.0) > 0.0:
-			info.glow = maxf(0.0, float(info.glow) - delta * 0.8)

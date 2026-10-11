@@ -1846,7 +1846,7 @@ func _place(cell: Vector2i) -> void:
 	var connected := false
 	for p in placement:
 		var t: int = p.type
-		var info := {"type": t, "locked": false, "unhammer": false, "glow": 0.5}
+		var info := {"type": t, "locked": false, "unhammer": false}
 		if piece_id >= 0:
 			info["piece"] = piece_id
 		world.cells[p.cell] = info
@@ -2004,7 +2004,7 @@ func _use_amphora(cell: Vector2i) -> void:
 		return
 	last_placed = {}
 	for p in shape_placement(cell, shape):
-		world.cells[p.cell] = {"type": p.type, "locked": false, "unhammer": false, "glow": 0.5}
+		world.cells[p.cell] = {"type": p.type, "locked": false, "unhammer": false}
 		if world.ghosts.has(p.cell) and int(world.ghosts[p.cell]) == p.type:
 			world.ghosts.erase(p.cell)
 			ghosts_covered += 1
@@ -3521,11 +3521,14 @@ func _piece_test() -> void:
 		if int(world.cells[p.cell].get("piece", -2)) != pid:
 			cells_ok = false
 	print("[piecetest] placed=%s piece=%d all_cells_tagged=%s pieces=%d" % [str(spot), pid, str(cells_ok), world.pieces.size()])
-	world._physics_process(1.0)   # the placement highlight must fade out
-	var glow := 0.0
+	world._physics_process(1.0)   # keep the world update path exercised
+	# the original has no placement highlight; make sure no leftover glow field
+	# (drawn as a yellow box) is attached to the placed cells
+	var glow := 0
 	for p in placement:
-		glow += float(world.cells[p.cell].get("glow", 0.0))
-	print("[piecetest] glow_after_1s=%.2f (expect 0.00)" % glow)
+		if world.cells[p.cell].has("glow"):
+			glow += 1
+	print("[piecetest] highlight_fields=%d (expect 0)" % glow)
 	_remove_fishka(placement[0].cell)
 	var gone := true
 	for p in placement:
