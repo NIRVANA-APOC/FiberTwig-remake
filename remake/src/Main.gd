@@ -130,6 +130,7 @@ var overfull_t := 0.0
 var drop_belt: Array = []           # reverse (drop section) conveyor
 var drop_cd := 0.0
 var drop_belt_offset := 0.0         # drop belt texture scroll (FUN_00490abc)
+var belt_offset := 0.0               # main belt texture scroll; only advances while the game runs
 ## The original DAT_004bae78 keeps the index of the most recently placed twig;
 ## clicking it with an empty hand takes it back into the hand (FUN_004971b8).
 var last_placed: Dictionary = {}
@@ -2906,6 +2907,10 @@ func _process(delta: float) -> void:
 	_sync_cursor()
 
 func _update_game(delta: float) -> void:
+	# The conveyor strip only scrolls while the level actually runs: a pause
+	# menu or the finish/game-over dialog freezes all belts (the twigs already
+	# stop because _update_game is not called then).
+	belt_offset = fmod(belt_offset + belt_speed * delta, DROP_BELT_PERIOD)
 	if no_lose_t > 0.0:
 		no_lose_t = maxf(0.0, no_lose_t - delta)
 	if speed_up_t > 0.0:
@@ -3176,7 +3181,7 @@ func _draw_belt(o: Control) -> void:
 	if lenta:
 		# main conveyor: the original blits a 789 px wide window of lenta.png at
 		# (5, 587), so the strip stops at the panel frame like the twigs do
-		var off := fmod(_time * belt_speed, DROP_BELT_PERIOD)
+		var off := belt_offset
 		o.draw_texture_rect_region(lenta, BELT_STRIP, Rect2(off, 0.0, BELT_STRIP.size.x, BELT_STRIP.size.y))
 		# The drop section has its own conveyor at its bottom edge, moving in
 		# the opposite direction (original FUN_00490abc: source rect
@@ -3873,6 +3878,30 @@ func _fix_test() -> void:
 	if not lucky_ok:
 		fails += 1
 	print("[fixtest] carried lucky twig bonus=%s phase=%.2f" % [str(held.get("bonus", false)), float(held.get("phase", -1.0))])
+	# --- pause / win freeze the conveyor strip too ---------------------------
+	start_level(0)
+	progress_t = 0.0
+	_pop_modal("WProgressBar")
+	var belt_before := belt_offset
+	_update_game(0.25)
+	var belt_runs: bool = not is_equal_approx(belt_offset, belt_before)
+	stack = ["WGame", "WMenu"]
+	var belt_paused := belt_offset
+	var drop_paused := drop_belt_offset
+	_process(0.25)
+	var paused_ok: bool = is_equal_approx(belt_offset, belt_paused) \
+		and is_equal_approx(drop_belt_offset, drop_paused)
+	stack = ["WGame"]
+	level_done = true
+	_push_modal("WFinishLevelDialog")
+	var belt_won := belt_offset
+	_process(0.25)
+	var won_ok: bool = is_equal_approx(belt_offset, belt_won)
+	_pop_modal("WFinishLevelDialog")
+	level_done = false
+	if not (belt_runs and paused_ok and won_ok):
+		fails += 1
+	print("[fixtest] conveyor runs=%s pause-freeze=%s win-freeze=%s" % [str(belt_runs), str(paused_ok), str(won_ok)])
 	# --- title bird wobble (original FUN_004946a8) ---------------------------
 	stack = ["WTitle"]
 	_time = 0.0
