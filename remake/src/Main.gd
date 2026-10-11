@@ -3526,6 +3526,16 @@ func _fix_test() -> void:
 	if not fs_ok:
 		fails += 1
 	print("[fixtest] fullscreen snapshot restore=%s" % str(fs_ok))
+	# --- original hint-light textures ----------------------------------------
+	var light_ok := true
+	for bit in [1, 2, 4, 8]:
+		if world._light_texture(int(bit)) == null:
+			light_ok = false
+	if AssetLib.texture("res://assets/game/UpArrow.png") == null:
+		light_ok = false
+	if not light_ok:
+		fails += 1
+	print("[fixtest] hint lights (light1..4 + UpArrow)=%s" % str(light_ok))
 	print("[fixtest] failures=%d" % fails)
 
 func _level_picture_visible(pic_name: String) -> bool:

@@ -78,8 +78,11 @@ from the shipped screenshots, see §10 of the report):
   replaced instead of being drawn on top,
 * background "Fone" pictures are screen anchored, decorations are world
   anchored, rain (`RainEffect`) uses the `RainDrop`/`MidRain`/`SmRain` sprites,
-* light streaks from every open joint (`Blick1.png`, 4-frame sparkle, stretched
-  along the joint),
+* hint lights from every open joint (`FUN_004921d0`): the soft `light1..4.PNG`
+  glow is projected into the empty cell the joint points at (white); the light
+  cells on the row the camera follows are tinted green (`FUN_004b293c` lerps
+  the picture towards `TColor 0x8000`) with a random intensity refreshed every
+  200 ms, and an `UpArrow.png` at (570, 5) points at light cells above the view,
 * conveyor: the original numbers — new twigs enter at x=799, bottom aligned at
   y=585, at most **26** twigs; they travel left at **25 px/s** in the original
   (measured from `demo.dat`), pile up at x≤5 with a 2 px gap and are fed

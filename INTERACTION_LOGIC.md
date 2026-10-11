@@ -264,6 +264,7 @@ Twig 记录（`DAT_004bae08`，每条 `0x38` 字节）：
 | New Game 从第 1 关开始 | `BNewWTitleMouseUp` 是唯一进入难度框的路径 | `new_game_pending` + `_reset_campaign()`；`_next_level()` 直接开始下一关，不再弹难度框；**载入存档也直接恢复（`start_level(..., false)`），不弹难度/初始增益框** |
 | 传送带 / 弃枝区图层 | `FUN_00490abc` 将 twig 与 lenta 条带裁剪在 `0x31a`（794px）以内；游戏场景（传送带、弃枝枝）绘制在面板控件之后 | `BELT_CLIP`/`_draw_twig_clipped()` 裁剪 twig 与闪光；主 lenta 同原版画在 `(5,587)` 宽 789；`_draw_belt`/`_draw_sparks` 移到 `ui.draw_form("WGame")` 之后，弃枝区的 twig 现在盖住“丢弃区”字样 |
 | 技能加点箭头方向 | 原版 Left/Right 箭头行为与直觉相反：**左箭头加点、右箭头减点** | `_method` 中 `BLeft*` → `_add_skill(+1)`，`BRight*` → `_add_skill(-1)`（life/otb/luck/cap/hammer 五组） |
+| 树枝提示特效 | `FUN_004921d0`：对每个“灯光格”（开放关节指向的空格）画 `Light1..4.png`（按回指关节的方向，40×40 软光斑）；+5 标志（与最低灯光行同排）的格子用 `FUN_004b293c` 向 `TColor 0x8000` 插值成绿色，每 200 ms 随机强度闪烁；有灯光在视野上方时在 (570,5) 画 `UpArrow.png` | `BoardWorld._draw_joint_lights()` 收集全部灯光格，白/绿按最低行判定（ghost 格保持白色），绿色用 `Color(1,1,1).lerp(Color(0,0.5,0), _light_tint)` 模拟插值，每 0.2 s 刷新 `_light_tint`；UpArrow 以世界坐标 `(570, 5+cam_y)` 画在屏幕 (570,5) |
 | 全屏选项 | 原版启动时读取 `options.cfg` 的 `FullScreenMode` 并立即生效；复选框改动即时生效，Cancel 恢复快照 | `_apply_fullscreen()` 在 `_apply_options()`（启动）与复选框改动/`_restore_options()` 时调用；无头测试跳过 |
 | 关卡文本介绍位置 | .li 中 `TLevelN` 位于 `(227,515)`（屏幕下方，英雄像下方），`LLevelW/Num` 位于 `(174/278,485)`；原版关卡号无前导零/句点 | 删除 `OriginalUI` 里把 `TLevelN` 强移到 `(183,75)` 的特例，按 .li 坐标绘制；`LLevelNumWBetweenLevelMenu` 改为 `str(level_index+1)` |
 | 难度框只弹一次 | WTitle 的 `ShowModal WStartDialog` | 同上一行：只在 New Game 且确认后应用 |

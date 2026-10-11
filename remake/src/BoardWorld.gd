@@ -36,6 +36,8 @@ var point_cells: Dictionary = {}     # Vector2i -> true
 ## The element that each point cell belongs to (for the trigger check).
 var point_element: Dictionary = {}   # Vector2i -> element dictionary
 var _bg_ref := 0.0
+var _light_tint := 0.6               # green light lerp amount (random every 200 ms)
+var _light_t := 0.0
 var _pictures_back: Array = []
 var _pictures_front: Array = []
 var _camera: Camera2D
@@ -95,6 +97,10 @@ func update_camera() -> void:
 
 func _process(delta: float) -> void:
 	_time += delta
+	_light_t += delta
+	if _light_t >= 0.2:
+		_light_t -= 0.2
+		_light_tint = randf_range(0.4, 1.0)
 	queue_redraw()
 
 ## Show/hide a <Picture> by name (RemovePicture / ShowPicture of a bonus
@@ -275,34 +281,58 @@ func _draw() -> void:
 		var f: float = clampf(float(ex.t) / float(ex.life), 0.0, 1.0)
 		draw_texture(t2, ex.pos, Color(1, 1, 1, 1.0 - f))
 
-## Light that escapes from open joints: Blick1.png is a 4 frame sparkle sheet
-## (4 x 8x8) drawn stretched along the joint (the RoundBlicks effect uses
-## RoundLongYEffect with a 30..55 px radius).
+## The original hint lights (FUN_004921d0): every open joint projects the soft
+## light1..4.PNG glow of `EffectsType`/level art into the empty cell it points
+## at.  The glow faces the joint, so the sprite is picked by the direction from
+## the light cell back to the joint (up/right/down/left -> light1..4).  The
+## light cells on the row the camera follows (the lowest one) are tinted green
+## and flicker (colour 0x8000, a random intensity refreshed every 200 ms); an
+## UpArrow at (570, 5) points at light cells above the view.
 func _draw_joint_lights(top: float, bottom: float) -> void:
-	var h := AssetLib.texture_rot("res://assets/game/Blick1.png", 0)   # horizontal streak
-	var v := AssetLib.texture_rot("res://assets/game/Blick1.png", 1)   # vertical streak
-	if h == null or v == null:
-		return
-	var frame := int(_time * 8.0) % 4
-	var pulse := 0.65 + 0.35 * sin(_time * 4.0)
-	var src_h := Rect2(frame * 8, 0, 8, 8)
+	var lights: Array = []          # {cell, back} back = dir from cell to the joint
+	var max_y := -9999
+	var above := false
 	for cell in cells:
 		var info: Dictionary = cells[cell]
-		var o := LevelLoader.cell_origin(cell)
-		if o.y < top - 64 or o.y > bottom + 64:
-			continue
-		var centre := o + Vector2(20, 20)
 		for dir in DIRS:
 			if not (info.type & dir.bit):
 				continue
-			var n: Variant = cells.get(cell + dir.d)
-			if n != null and (int(n.type) & dir.opp) != 0:
+			var n: Vector2i = cell + dir.d
+			var occupied: Variant = cells.get(n)
+			if occupied != null and (int(occupied.type) & int(dir.opp)) != 0:
 				continue
-			var p := centre + Vector2(dir.d.x, dir.d.y) * 20.0
-			if dir.d.x != 0:
-				draw_texture_rect_region(h, Rect2(p.x - 12, p.y - 3.5, 46, 7), src_h, Color(1, 1, 1, pulse))
-			else:
-				draw_texture_rect_region(v, Rect2(p.x - 3.5, p.y - 12, 7, 46), src_h, Color(1, 1, 1, pulse))
+			lights.append({"cell": n, "back": int(dir.opp)})
+			max_y = maxi(max_y, n.y)
+			if float(n.y) * 40.0 < cam_y:
+				above = true
+	# the green flicker of the original is one random value for all lights
+	for l in lights:
+		var cell: Vector2i = l.cell
+		var o := LevelLoader.cell_origin(cell)
+		if o.y < top - 44 or o.y > bottom + 44:
+			continue
+		var tex := _light_texture(int(l.back))
+		if tex == null:
+			continue
+		if cell.y == max_y and not ghosts.has(cell):
+			# FUN_004b293c lerps the light picture towards TColor 0x8000 (green)
+			# by a random amount refreshed every 200 ms
+			draw_texture(tex, o, Color(1, 1, 1).lerp(Color(0.0, 0.5, 0.0), _light_tint))
+		else:
+			draw_texture(tex, o)
+	if above and not lights.is_empty():
+		var arrow := AssetLib.texture("res://assets/game/UpArrow.png")
+		if arrow:
+			# screen anchored at (570, 5) - this is the world space viewport
+			draw_texture(arrow, Vector2(570, 5 + cam_y))
+
+func _light_texture(back_bit: int) -> Texture2D:
+	match back_bit:
+		1: return AssetLib.texture("res://assets/squares/light1.PNG")
+		2: return AssetLib.texture("res://assets/squares/light2.PNG")
+		4: return AssetLib.texture("res://assets/squares/light3.PNG")
+		8: return AssetLib.texture("res://assets/squares/light4.PNG")
+	return null
 
 ## Rain effect: RainDrop.png sprites (the .aim files scale it to 20x40 "MidRain"
 ## and 13x24 "SmRain"), alpha 150 / 100 per EffectsType.dat.
