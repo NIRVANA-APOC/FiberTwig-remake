@@ -1869,6 +1869,11 @@ func _place(cell: Vector2i) -> void:
 			sc = int(level.fishka_score[t2])
 		score += sc
 	if bool(held.get("bonus", false)):
+		# the original clears the lucky-twig flag before paying out
+		# (FUN_004971b8 +0x15), so taking the twig back cannot re-trigger the
+		# bonus with a different random effect every time
+		if not last_placed.is_empty():
+			last_placed["bonus"] = false
 		_play_effect("PutBonusFishka")
 		_give_bonus(_roll_bonus(level.fishka_bonus_prob))
 	has_held = false
@@ -2014,9 +2019,6 @@ func _use_amphora(cell: Vector2i) -> void:
 ## A snapshot of everything a placement can change, used by the take-back of
 ## the most recent twig (original DAT_004bae78).
 func _board_snapshot(shape: Dictionary, bonus: bool, covered: Array) -> Dictionary:
-	var done: Array = []
-	for c in combos:
-		done.append(bool(c.get("done", false)))
 	return {
 		"shape": shape.duplicate(true),
 		"bonus": bonus,
@@ -2025,10 +2027,6 @@ func _board_snapshot(shape: Dictionary, bonus: bool, covered: Array) -> Dictiona
 		"ghosts": world.ghosts.duplicate(),
 		"pieces": world.pieces.duplicate(true),
 		"score": score,
-		"combos_done": done,
-		"combo_step": combo_step,
-		"combo_counter": combo_counter,
-		"combo_preview": combo_preview.duplicate(true),
 		"ghosts_covered": ghosts_covered,
 	}
 
@@ -2043,9 +2041,13 @@ func _hit_last_placed(pos: Vector2) -> bool:
 			return true
 	return false
 
-## Take the last placed twig back into the hand (rollback): the board is
-## restored to the state right before that placement and the twig is held
-## again.  Only the newest twig supports this (original FUN_004971b8).
+## Take the last placed twig back into the hand (rollback): the board,
+## transparent targets and the placement score are restored to the state
+## right before that placement and the twig is held again.  Only the newest
+## twig supports this (original FUN_004971b8).  Effects that were already paid
+## out - the lucky-twig bonus, finished combinations - are NOT undone, exactly
+## like the original (FUN_004aa5ac only recomputes the component ids), so the
+## take-back cannot be used to farm them.
 func _take_back_last() -> void:
 	if last_placed.is_empty():
 		return
@@ -2056,12 +2058,6 @@ func _take_back_last() -> void:
 	world.pieces = snap.pieces
 	score = int(snap.score)
 	ghosts_covered = int(snap.ghosts_covered)
-	combo_step = int(snap.combo_step)
-	combo_counter = int(snap.combo_counter)
-	combo_preview = snap.combo_preview
-	var done: Array = snap.combos_done
-	for i in range(mini(done.size(), combos.size())):
-		combos[i].done = bool(done[i])
 	held = {"type": int(snap.shape.masks[0]), "shape": snap.shape, "bonus": bool(snap.bonus), "quest": false}
 	has_held = true
 	_play_effect("TakeFishka")
@@ -3251,6 +3247,25 @@ func _fix_test() -> void:
 		if not (placed_ok and back_ok):
 			fails += 1
 		print("[fixtest] rollback placed=%s back=%s held=%d cells=%d" % [str(placed_ok), str(back_ok), int(held.get("type", -1)), world.cells.size()])
+		# a lucky twig keeps its flag only until the payout: place/take-back
+		# must not re-roll the random bonus every time
+		held = {"type": 13, "shape": LevelLoader.single_shape(13), "bonus": true, "quest": false}
+		has_held = true
+		_place(spot)
+		var lucky1: bool = not last_placed.is_empty() and not bool(last_placed.get("bonus", true))
+		# simulate that this placement finished a combination: the take-back
+		# must not roll the combo progress back (original FUN_004aa5ac only
+		# recomputes the component ids)
+		combo_step = 1
+		combo_counter = 1
+		_game_click(o)
+		var lucky2: bool = has_held and not bool(held.get("bonus", true))
+		var combo_kept: bool = combo_step == 1
+		_place(spot)
+		var lucky3: bool = not bool(last_placed.get("bonus", true))
+		if not (lucky1 and lucky2 and lucky3 and combo_kept):
+			fails += 1
+		print("[fixtest] lucky flag payout=%s takeback=%s replace=%s combo_kept=%s" % [str(lucky1), str(lucky2), str(lucky3), str(combo_kept)])
 	# --- drop section: cooldown starts after the twig is destroyed -----------
 	start_level(0)
 	progress_t = 0.0

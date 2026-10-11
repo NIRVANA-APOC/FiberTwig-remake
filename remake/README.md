@@ -97,9 +97,13 @@ from the shipped screenshots, see §10 of the report):
   second, opposite-running `lenta` strip of the original (drawn at 610,482,
   source `0x3f-scroll … 0xf7-scroll`),
 * the **most recently placed twig** can be taken back into the hand by clicking
-  it (original `DAT_004bae78`): the board, ghosts, score and combo progress are
-  restored exactly as before that placement.  Older twigs stay fixed; any board
-  change (hammer, amphora, another placement) ends the rollback window,
+  it (original `DAT_004bae78`): the board, transparent targets and the placement
+  score are restored exactly as before that placement.  Older twigs stay fixed;
+  any board change (hammer, amphora, another placement) ends the rollback
+  window.  Effects that were already paid out (lucky-twig bonus, finished
+  combinations) are not undone — the original clears the lucky flag before it
+  pays out and `FUN_004aa5ac` only recomputes the components — so place /
+  take-back cannot farm them,
 * placement rules, straight from the executable: the covered cells must be free
   (transparent targets must match their joint mask exactly), every joint that
   meets a neighbour must be answered by the opposite joint, PutAllow

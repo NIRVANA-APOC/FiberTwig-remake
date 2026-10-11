@@ -251,7 +251,7 @@ Twig 记录（`DAT_004bae08`，每条 `0x38` 字节）：
 
 | 问题 | 原版依据 | remake 实现 |
 |---|---|---|
-| 取回刚放置的枝 | `FUN_004971b8`：`DAT_004bae78` 保存最近放置的 twig 下标；空手点击它时即使 `TakeAllow=taDenied` 也能拿回（state 1→3），其它场上枝仍需 `DAT_004baded` | `last_placed` 快照 + `_take_back_last()`：恢复放置前的 cell/ghost/pieces/score/combo，并把该枝放回手中；命中检测用屏幕坐标 + `cam_y` 换算到世界坐标（否则点击无效）；锤子/水壶/新放置会清除该状态 |
+| 取回刚放置的枝 | `FUN_004971b8`：`DAT_004bae78` 保存最近放置的 twig 下标；空手点击它时即使 `TakeAllow=taDenied` 也能拿回（state 1→3），其它场上枝仍需 `DAT_004baded`；幸运枝在发放奖励前先清 `+0x15` 标志；`FUN_004aa5ac` 只重算连通块，不回退组合进度/已发奖励 | `last_placed` 快照 + `_take_back_last()`：恢复 cell/ghost/pieces/score 并把该枝放回手中（命中检测用屏幕坐标 + `cam_y`）；发放幸运奖励时把快照的 bonus 标志清 0，组合进度不回退，因此反复放置/回滚无法反复触发奖励；锤子/水壶/新放置会清除该状态 |
 | 破碎特效（ClearSteck / 锤子） | `FUN_004aa9e4`：对带上每根枝先调 `HammerFishka` 特效再移除，最后一声 `HammerFishkaSound`；该特效是 `EffectsType.dat` 的 SparkCloneEffect（`star.png` 15 颗，重力 150，255→0 淡出约 1 s，4 帧每 100 ms） | `_spawn_hammer_sparks()`/`_update_sparks()`/`_draw_sparks()`；锤子与 `_give_bonus(1)` 均调用（ClearSteck 实现为逐枝生成火花再清带） |
 | Next Level 技能提示 | 提示只在鼠标悬停对应增益时显示 | `_skill_hover()` 跟踪当前行：换行立即刷新提示、离开关闭；行区域改为各技能实际控件范围 (40,72/172/272/372/472,130×80) |
 | 水壶虚影 | `FUN_004a30c4` 在鼠标格生成形状 | `_amphora_shape_at()` 供 `_use_amphora` 与 `_update_hover` 共用，工具选中时显示同款虚影预览 |
