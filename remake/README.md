@@ -165,9 +165,10 @@ from the shipped screenshots, see §10 of the report):
   wash with amount `Sin(ms/300 + phase)*64 + 150` (period ≈1.9 s, random
   per-twig phase, `FUN_00490abc`),
   the seven bonuses of `BonusTypes.dat`
-  (+2 hammers, bomb, +2 amphoras, +100 points, drop accelerator, all twigs
-  lucky, time control); the hammer / amphora / score bonuses pop the tool
-  picture as a spark at the cursor and drift upward while fading out over 2 s,
+  (+2 hammers, bomb, +2 amphoras, +100 points, drop accelerator, making the
+  twigs then on the belt lucky, time control); the hammer / amphora / score
+  bonuses pop the tool picture as a spark at the cursor and drift upward while
+  fading out over 2 s,
   with `GetFishka.wav` (the original `GiveHammer` / `GiveClipper` / `GiveScore`
   SparkCloneEffects), and ClearSteck shatters the whole belt with the
   `HammerFishka` star sparks,

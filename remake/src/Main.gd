@@ -158,7 +158,6 @@ var generator_t := 0.0
 var generator_period := 4.0
 var no_lose_t := 0.0
 var speed_up_t := 0.0
-var all_bonus := false
 var debug_all_bonus := false       # --allbonus: every generated twig is lucky
 var debug_all_quest := false       # --allquest: every generated twig is mystery
 var sequence: Array = []
@@ -1306,7 +1305,6 @@ func start_level(idx: int, sync_difficulty := true) -> void:
 	score = 0
 	no_lose_t = 0.0
 	speed_up_t = 0.0
-	all_bonus = false
 	level_done = false
 	generator_period = max(0.3, float(level.generator_period) / 1000.0) * _difficulty_period_scale()
 	belt_speed = belt_base * _difficulty_belt_scale()
@@ -1618,7 +1616,7 @@ func _spawn_twig(force := false) -> bool:
 		is_quest = true
 	if debug_all_quest and quest_pic != "":
 		is_quest = true
-	if all_bonus or debug_all_bonus:
+	if debug_all_bonus:
 		is_bonus = true
 	elif bonus_prob > 0.0 and randf() < bonus_prob * (1.0 + float(skills.luck) / 100.0):
 		is_bonus = true
@@ -2457,7 +2455,12 @@ func _give_bonus(kind: int) -> void:
 			speed_up_t = 60.0
 			_play_effect("GiveSpeedUpOtb")
 		5:
-			all_bonus = true
+			# original FUN_004aa9e4 (`MakeFishesWithBonus`, record offset +0x14):
+			# only the twigs on the conveyor *at this moment* get +0x15 set.  The
+			# spawn function FUN_0048c82c keeps rolling the level's bonus
+			# probability `_DAT_004bae8c` for every new twig, so this bonus is a
+			# one-shot on the current belt, not a permanent "all twigs lucky"
+			# flag.
 			for t in belt:
 				t.bonus = true
 			_play_effect("GiveBonusFishka")
@@ -4039,6 +4042,24 @@ func _fix_test() -> void:
 	if not sparks_ok:
 		fails += 1
 	print("[fixtest] clearsteck twigs=%d sparks=%d" % [belt_n, sparks.size()])
+	# --- MakeFishesWithBonus is a one-shot on the twigs currently on the belt --
+	# original FUN_004aa9e4 (`MakeFishesWithBonus`, +0x14) sets +0x15 only on the
+	# entries of the conveyor list DAT_004baf90; the spawn function FUN_0048c82c
+	# still rolls the level probability for every new twig --------------------
+	start_level(0)
+	progress_t = 0.0
+	_pop_modal("WProgressBar")
+	bonus_prob = 0.0
+	_spawn_twig(true)
+	_spawn_twig(true)
+	_give_bonus(5)
+	var fishbonus_marked: bool = belt.size() == 2 \
+		and bool(belt[0].get("bonus", false)) and bool(belt[1].get("bonus", false))
+	_spawn_twig(true)
+	var fishbonus_new_plain: bool = belt.size() == 3 and not bool(belt[2].get("bonus", true))
+	if not (fishbonus_marked and fishbonus_new_plain):
+		fails += 1
+	print("[fixtest] make-fishes-with-bonus marked=%s new-after=%s" % [str(fishbonus_marked), str(fishbonus_new_plain)])
 	# --- tool / score bonuses spawn the original icon spark at the cursor ----
 	sparks.clear()
 	user_mouse = Vector2(300.0, 250.0)
