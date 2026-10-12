@@ -168,10 +168,11 @@ from the shipped screenshots, see §10 of the report):
   (+2 hammers, bomb, +2 amphoras, +100 points, drop accelerator, making the
   twigs then on the belt lucky, time control); the hammer / amphora / score
   bonuses pop the tool picture as a spark at the cursor and drift upward while
-  fading out over 2 s,
-  with `GetFishka.wav` (the original `GiveHammer` / `GiveClipper` / `GiveScore`
-  SparkCloneEffects), and ClearSteck shatters the whole belt with the
-  `HammerFishka` star sparks,
+  fading out over 2 s, with `GetFishka.wav` (the original `GiveHammer` /
+  `GiveClipper` / `GiveScore` SparkCloneEffects), the drop accelerator / time
+  control show a HUD count and their `DropAxelIcon` / `LiveIcon` badge while
+  active (`FUN_0048b2d0` / `FUN_00493c30`), and ClearSteck shatters the whole
+  belt with the `HammerFishka` star sparks,
 * scoring from `FishkaScore`, combinations from `FishCombinations.dat` with the
   level's `CombSequence` (checked strictly in sequence and anchored at the twig
   that was just placed, like `FUN_004aa128`), the original hint texts (black
@@ -231,6 +232,8 @@ loaded directly from the extracted files, so no import step is required.
 | `--language=enu\|deu\|fra\|ptb\|rus\|chs` | start in a language (`options.cfg` is not changed) |
 | `--allbonus` | every generated twig is lucky (flash-test) |
 | `--allquest` | every generated twig is mystery (icon-test) |
+| `--speedup[=s]` | start every level with the Drop Section Accelerator reward running (default 60 s, the original duration; debug) |
+| `--timectl[=s]` | start every level with the Time Control reward running (default 60 s, the original duration; debug) |
 | `--capture=path,delay[,interval,count]` | save viewport PNGs (frame, then numbered) and quit |
 
 | input | action |

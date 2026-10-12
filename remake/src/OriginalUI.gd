@@ -95,7 +95,11 @@ func _init() -> void:
 	# Runtime state of the reference session (assets/*.png).
 	for name in ["RHammerWStartDialog", "RNormalWStartDialog", "RENUWLanguage", "RIntroductionWHelp"]:
 		checked[name] = true
-	for name in ["RRegistrationWHelp", "LCombDoneWGame", "LLiveCountWGame", "LDropAccelCounWGame", "LFiveMinutModeTime"]:
+	# The two WGame countdown labels (LLiveCountWGame / LDropAccelCounWGame)
+	# are not listed here: the original shows them only while their timed
+	# reward is running, so Main._update_timer_hud() toggles them every frame
+	# like FUN_0048b2d0.
+	for name in ["RRegistrationWHelp", "LCombDoneWGame", "LFiveMinutModeTime"]:
 		hidden[name] = true
 
 func _set_font(cyr: bool) -> void:

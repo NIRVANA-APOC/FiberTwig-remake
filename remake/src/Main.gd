@@ -160,6 +160,8 @@ var no_lose_t := 0.0
 var speed_up_t := 0.0
 var debug_all_bonus := false       # --allbonus: every generated twig is lucky
 var debug_all_quest := false       # --allquest: every generated twig is mystery
+var debug_speedup_t := 0.0         # --speedup[=s]: Drop Section Accelerator on
+var debug_timectl_t := 0.0         # --timectl[=s]: Time Control on
 var sequence: Array = []
 var sequence_index := 0
 var quest_pic := ""
@@ -322,6 +324,14 @@ func _ready() -> void:
 			debug_all_bonus = true
 		elif a == "--allquest":
 			debug_all_quest = true
+		elif a == "--speedup" or a.begins_with("--speedup="):
+			debug_speedup_t = 60.0
+			if a.begins_with("--speedup="):
+				debug_speedup_t = maxf(1.0, float(a.split("=", true, 1)[1]))
+		elif a == "--timectl" or a.begins_with("--timectl="):
+			debug_timectl_t = 60.0
+			if a.begins_with("--timectl="):
+				debug_timectl_t = maxf(1.0, float(a.split("=", true, 1)[1]))
 		elif a == "--demo":
 			_start_demo()
 	for a in args:
@@ -1303,8 +1313,10 @@ func start_level(idx: int, sync_difficulty := true) -> void:
 	hammers = hammers_total
 	caps = caps_total
 	score = 0
-	no_lose_t = 0.0
-	speed_up_t = 0.0
+	# debug flags: keep one of the two timed rewards active from the start
+	# (`--speedup[=s]` Drop Section Accelerator, `--timectl[=s]` Time Control)
+	no_lose_t = debug_timectl_t
+	speed_up_t = debug_speedup_t
 	level_done = false
 	generator_period = max(0.3, float(level.generator_period) / 1000.0) * _difficulty_period_scale()
 	belt_speed = belt_base * _difficulty_belt_scale()
@@ -2453,6 +2465,10 @@ func _give_bonus(kind: int) -> void:
 			_play_effect("GiveScore")
 		4:
 			speed_up_t = 60.0
+			# GiveSpeedUpOtb (EffectsType.dat): DropAxel1.png at the cursor,
+			# grav -30, 2 s fade, clipped to the play field.  (The same record
+			# also bursts 8 star.png pieces around (700,430), not implemented.)
+			_spawn_icon_spark("res://assets/game/DropAxel1.png")
 			_play_effect("GiveSpeedUpOtb")
 		5:
 			# original FUN_004aa9e4 (`MakeFishesWithBonus`, record offset +0x14):
@@ -2466,6 +2482,8 @@ func _give_bonus(kind: int) -> void:
 			_play_effect("GiveBonusFishka")
 		6:
 			no_lose_t = 60.0
+			# GiveTimeToNoLoose (EffectsType.dat): Live1.png at the cursor.
+			_spawn_icon_spark("res://assets/game/Live1.png")
 			_play_effect("GiveTimeToNoLose")
 
 func _connected_components() -> Array:
@@ -3191,6 +3209,21 @@ func _draw_hint(o: Control) -> void:
 	for i in lines.size():
 		ui.draw_text(o, lines[i], Vector2(pos.x, pos.y + i * 18), Color(1, 1, 1))
 
+## Countdown labels of the two timed rewards.  The original main loop
+## (FUN_0048b2d0) makes the label visible only while its deadline is in the
+## future (`DAT_004baeb8` Time Control / `DAT_004baebc` Drop Section
+## Accelerator) and writes the remaining seconds into it; when the timer
+## expires the label is hidden again.  Under No Lose difficulty the original
+## never switches the Time Control label on (0x48b510) - the heart badge is
+## the only indicator there.
+func _update_timer_hud() -> void:
+	var drop_active := speed_up_t > 0.0
+	ui.captions["LDropAccelCounWGame"] = str(int(ceil(speed_up_t)))
+	ui.hidden["LDropAccelCounWGame"] = not drop_active
+	var live_active := no_lose_t > 0.0
+	ui.captions["LLiveCountWGame"] = str(int(ceil(no_lose_t)))
+	ui.hidden["LLiveCountWGame"] = not live_active or diff_flags.no_lose
+
 func _draw_game(o: Control, interactive: bool) -> void:
 	# HUD labels from the original layout
 	ui.captions["LLevelNumWGame"] = str(level_index + 1)
@@ -3198,8 +3231,20 @@ func _draw_game(o: Control, interactive: bool) -> void:
 	ui.captions["LHammerCountWGame"] = str(hammers)
 	ui.captions["LClipperCountWGame"] = str(caps)
 	ui.captions["LCombCountWGame"] = "%d / %d" % [combos_done_count(), combos.size()]
-	ui.captions["LDropAccelCounWGame"] = str(int(ceil(speed_up_t))) if speed_up_t > 0.0 else str(int(skills.otb))
-	ui.captions["LLiveCountWGame"] = str(int(ceil(no_lose_t))) if no_lose_t > 0.0 else str(int(skills.life))
+	_update_timer_hud()
+	# Active reward badges of the original render function (FUN_00493c30): the
+	# shield while the Drop Section Accelerator runs at (606,388), the heart
+	# while Time Control runs at (719,498) - and in No Lose mode the heart is
+	# drawn permanently (0x493e0e jumps to the draw when `DAT_004b97a0` is set,
+	# even with no deadline pending).  Labels are drawn afterwards, over them.
+	if speed_up_t > 0.0:
+		var dax := AssetLib.texture("res://assets/game/DropAxelIcon.png")
+		if dax:
+			o.draw_texture(dax, Vector2(606, 388))
+	if no_lose_t > 0.0 or diff_flags.no_lose:
+		var live := AssetLib.texture("res://assets/game/LiveIcon.png")
+		if live:
+			o.draw_texture(live, Vector2(719, 498), Color(1, 1, 1, 180.0 / 255.0))
 	ui.draw_form(o, "WGame", interactive)
 	# The conveyor and its twigs are part of the game scene and are drawn after
 	# the panel widgets: a dropped twig covers the "DROP SECTION" caption and a
@@ -4072,9 +4117,39 @@ func _fix_test() -> void:
 	var is1: bool = sparks.size() == 2
 	_give_bonus(3)
 	var is2: bool = sparks.size() == 3
-	if not (is0 and is1 and is2):
+	_give_bonus(4)
+	var is3: bool = sparks.size() == 4 \
+		and sparks[3].get("tex") == AssetLib.texture("res://assets/game/DropAxel1.png")
+	_give_bonus(6)
+	var is4: bool = sparks.size() == 5 \
+		and sparks[4].get("tex") == AssetLib.texture("res://assets/game/Live1.png")
+	if not (is0 and is1 and is2 and is3 and is4):
 		fails += 1
-	print("[fixtest] icon sparks hammer=%s clipper=%s score=%s" % [str(is0), str(is1), str(is2)])
+	print("[fixtest] icon sparks hammer=%s clipper=%s score=%s speedup=%s live=%s" % [str(is0), str(is1), str(is2), str(is3), str(is4)])
+	# --- the two timed rewards show their count only while running -------------
+	# original FUN_0048b2d0: the label is visible while `now < deadline` and
+	# carries the remaining seconds; FUN_00493c30 draws the badge icon, and the
+	# Time Control label is never switched on in No Lose mode (0x48b510) ------
+	start_level(0)
+	progress_t = 0.0
+	_pop_modal("WProgressBar")
+	diff_flags = {"no_lose": false, "easy": false, "normal": true, "hard": false}
+	_update_timer_hud()
+	var t_off: bool = bool(ui.hidden.get("LDropAccelCounWGame", false)) \
+		and bool(ui.hidden.get("LLiveCountWGame", false))
+	speed_up_t = 12.5
+	no_lose_t = 7.5
+	_update_timer_hud()
+	var t_on: bool = not ui.hidden["LDropAccelCounWGame"] and not ui.hidden["LLiveCountWGame"] \
+		and str(ui.captions["LDropAccelCounWGame"]) == "13" \
+		and str(ui.captions["LLiveCountWGame"]) == "8"
+	diff_flags.no_lose = true
+	_update_timer_hud()
+	var t_nolose: bool = ui.hidden["LLiveCountWGame"] and not ui.hidden["LDropAccelCounWGame"]
+	diff_flags.no_lose = false
+	if not (t_off and t_on and t_nolose):
+		fails += 1
+	print("[fixtest] timer badges idle-hidden=%s active=%s no-lose-heart-only=%s" % [str(t_off), str(t_on), str(t_nolose)])
 	# --- between-level skill hints follow the pointer ------------------------
 	stack = ["WBetweenLevelMenu"]
 	user_mouse = Vector2(90, 125)
