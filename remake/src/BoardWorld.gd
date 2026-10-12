@@ -1,5 +1,6 @@
 extends Node2D
 const LevelLoader := preload("res://src/LevelLoader.gd")
+const EffectEmitters := preload("res://src/EffectEmitters.gd")
 
 ## Renders the playfield using the geometry measured from the shipped
 ## screenshots (assets/Game-*.png -> design 800x600 space):
@@ -44,6 +45,9 @@ var _camera: Camera2D
 var _time := 0.0
 var rain := ""
 var show_hints := true
+var emitters: EffectEmitters = null
+## Cells converted by <MakeGhostRect> (reported by --contenttest).
+var ghost_rect_converted: Array = []
 
 func setup(p_level: Dictionary) -> void:
 	level = p_level
@@ -56,10 +60,15 @@ func setup(p_level: Dictionary) -> void:
 	explosions.clear()
 	point_cells.clear()
 	point_element.clear()
+	ghost_rect_converted.clear()
 	for g in level.get("ghosts", []):
 		ghosts[g.cell] = g.type
 	for f in level.get("fishkas", []):
 		cells[f.cell] = {"type": f.type, "locked": true, "unhammer": f.unhammer}
+	# <MakeGhostRect> was already applied by LevelLoader.apply_make_ghost_rects(),
+	# so the converted twigs are no longer in level.fishkas and are already in
+	# level.ghosts; this only mirrors the result for --contenttest.
+	ghost_rect_converted = level.get("ghost_rect_converted", []).duplicate()
 	# Bonus points are hidden twigs in the original (state 5, FUN_0049a7e4);
 	# they occupy their cell with the <Point border> mask and can neither be
 	# picked nor hammered.  They join the network like a normal twig.
@@ -85,15 +94,73 @@ func setup(p_level: Dictionary) -> void:
 	if not _pictures_back.is_empty():
 		_bg_ref = float(_pictures_back[0].y)
 	rain = str(level.get("rain", ""))
+	# <FireEffect> spark emitters and the <RainEffect> driver, both parameterised
+	# from the shipped EffectsType.dat recipes (see EffectEmitters.gd).
+	if emitters == null:
+		emitters = EffectEmitters.new()
+	emitters.setup(level, _picture_world_pos)
 	if _camera == null:
 		_camera = Camera2D.new()
 		_camera.enabled = true
 		add_child(_camera)
 	update_camera()
 
+## <Picture>/<PictureMap> motion.  Formula from A5 (implementation-grade):
+##   offsetX = alX*sin(beX*T) + gaX*cos(beX*T) + laX*T + lbX     (same for Y)
+##   final   = picture base position + offset
+## T is ELAPSED MILLISECONDS, wrapping at CURVE_T_LIMIT: the parser OVERWRITES the
+## authored `t` with that limit, so `t` is NOT a cycle length.
+##
+## `ga` reading: A5 measured the running original (Level15 Y period 4080 ms against
+## this model's 4189 ms, inside 3 %), so `ga` is treated as a COSINE AMPLITUDE.
+## 22 of the 45 shipped records have ga == 0 on both axes, which makes the cosine
+## and phase readings algebraically identical; the residual worst case is ~0.08 px.
+## The reading is a documented CHOICE, not a proven fact.
+const CURVE_T_LIMIT := 20000000.0
+
+func _curve_offset(curve: Dictionary) -> Vector2:
+	if curve.is_empty():
+		return Vector2.ZERO
+	var t := fmod(_time * 1000.0, CURVE_T_LIMIT)
+	var ox: float = float(curve.get("alX", 0.0)) * sin(float(curve.get("beX", 0.0)) * t) \
+			+ float(curve.get("gaX", 0.0)) * cos(float(curve.get("beX", 0.0)) * t) \
+			+ float(curve.get("laX", 0.0)) * t + float(curve.get("lbX", 0.0))
+	var oy: float = float(curve.get("alY", 0.0)) * sin(float(curve.get("beY", 0.0)) * t) \
+			+ float(curve.get("gaY", 0.0)) * cos(float(curve.get("beY", 0.0)) * t) \
+			+ float(curve.get("laY", 0.0)) * t + float(curve.get("lbY", 0.0))
+	return Vector2(ox, oy)
+
+## Final world position of a picture, i.e. base + curve offset.  Pictures without
+## a curve keep their authored position.
+func picture_pos(pic: Dictionary) -> Vector2:
+	var base := Vector2(float(pic.get("x", 0)), float(pic.get("y", 0)))
+	var curve: Dictionary = pic.get("curve", {})
+	if curve.is_empty():
+		return base
+	return base + _curve_offset(curve)
+
+## The picture map's own <MapMovingCurve>; the brick lattice is drawn at
+## map origin + offset.
+func map_curve_offset() -> Vector2:
+	var pm: Dictionary = level.get("picture_map", {})
+	if pm.is_empty():
+		return Vector2.ZERO
+	return _curve_offset(pm.get("curve", {}))
+
 func update_camera() -> void:
 	if _camera:
 		_camera.position = Vector2(300, cam_y + 250)
+
+## <MakeGhostRect> is applied by LevelLoader (it mutates the level's own fishka and
+## ghost lists, so the two counts always agree with the board).  This helper is
+## kept only so the board can report the converted cells.
+func _picture_world_pos(name: String) -> Variant:
+	for pic in _pictures_back + _pictures_front:
+		if str(pic.get("name", "")) == name:
+			if not bool(pic.get("visible", true)):
+				return null
+			return picture_pos(pic)
+	return null
 
 func _process(delta: float) -> void:
 	_time += delta
@@ -176,17 +243,22 @@ func _draw() -> void:
 		var tex := _picture_texture(pic)
 		if tex == null:
 			continue
-		var y: float = float(pic.y) - _bg_ref - 88.0     # screen space
+		# NOTE: a "Fone" picture is modelled in mixed space (its y is screen
+		# relative, its x world).  The curve offset is applied in the picture's
+		# stored frame, i.e. as authored - see IMPLEMENTATION_NOTES.md.
+		var off := _curve_offset(pic.get("curve", {}))
+		var y: float = float(pic.y) + off.y - _bg_ref - 88.0     # screen space
 		if y > 500.0 or y + tex.get_height() < 0:
 			continue
-		draw_texture(tex, Vector2(float(pic.x), cam_y + y))   # world space = camera + screen
-	# brick map
+		draw_texture(tex, Vector2(float(pic.x) + off.x, cam_y + y))   # world space = camera + screen
+	# brick map (its own <MapMovingCurve>, evaluated with laX/lbX = 0)
 	var pm: Dictionary = level.get("picture_map", {})
 	if not pm.is_empty():
 		var rows: Array = pm.rows
 		var images: Array = pm.images
-		var my := float(pm.y)
-		var mx := float(pm.x) + 5.0
+		var moff := map_curve_offset()
+		var my := float(pm.y) + moff.y
+		var mx := float(pm.x) + 5.0 + moff.x
 		var r0 := maxi(int(floor((cam_y - 40 - my) / CELL)), 0)
 		var r1 := mini(int(ceil((cam_y + 540 - my) / CELL)), rows.size() - 1)
 		for r in range(r0, r1 + 1):
@@ -206,10 +278,10 @@ func _draw() -> void:
 		var tex2 := _picture_texture(pic)
 		if tex2 == null:
 			continue
-		var y2 := float(pic.y)
-		if y2 > bottom or y2 + tex2.get_height() < top:
+		var wp := picture_pos(pic)
+		if wp.y > bottom or wp.y + tex2.get_height() < top:
 			continue
-		draw_texture(tex2, Vector2(float(pic.x), y2))
+		draw_texture(tex2, wp)
 	if show_hints:
 		for bp in bonus_points:
 			if bp.active:
@@ -266,8 +338,11 @@ func _draw() -> void:
 			var t := LevelLoader.type_texture(preview_type)
 			if t:
 				draw_texture(t, o, col)
-	if rain == "Rain":
+	if rain != "":
 		_draw_rain()
+	if emitters:
+		emitters.draw(self, cam_y, top, bottom)
+		emitters.draw_rounds(self, cam_y, top, bottom)
 	for e in effects:
 		var tt: float = e.t
 		var o := LevelLoader.cell_origin(e.cell)
@@ -334,41 +409,19 @@ func _light_texture(back_bit: int) -> Texture2D:
 		8: return AssetLib.texture("res://assets/squares/light4.PNG")
 	return null
 
-## Rain effect: RainDrop.png sprites (the .aim files scale it to 20x40 "MidRain"
-## and 13x24 "SmRain"), alpha 150 / 100 per EffectsType.dat.
-var _drops: Array = []
-func _init_drops() -> void:
-	if not _drops.is_empty():
-		return
-	var rng := RandomNumberGenerator.new()
-	rng.seed = 20240501
-	for i in 110:
-		_drops.append({
-			"x": rng.randf() * 680.0 - 40.0,
-			"y": rng.randf() * 560.0,
-			"v": rng.randf_range(320.0, 620.0),
-			"small": i % 3 == 0,
-		})
-
+## Rain effect: driven by the EffectsType.dat [RainEffect] slots (see
+## EffectEmitters.RAIN_RECIPES).  "Rain" uses the MidRain/SmRain surfaces and
+## "FlowerFall" (Level14) the 9-frame FlowerOne.png sheet with its MoveSin drift.
 func _draw_rain() -> void:
-	var mid := AssetLib.texture("res://assets/squares/MidRain.pNg")
-	var sm := AssetLib.texture("res://assets/squares/SmRain.pNg")
-	if mid == null or sm == null:
-		return
-	_init_drops()
-	for d in _drops:
-		var v := float(d.v)
-		var y := cam_y + fmod(float(d.y) + _time * v, 560.0) - 60.0
-		var x := float(d.x) - (y - cam_y) * 0.10
-		if bool(d.small):
-			draw_texture(sm, Vector2(x, y), Color(1, 1, 1, 0.55))
-		else:
-			draw_texture(mid, Vector2(x, y), Color(1, 1, 1, 0.75))
+	if emitters:
+		emitters.draw_rain(self, cam_y, _time)
 
 func add_effect(cell: Vector2i, color: Color) -> void:
 	effects.append({"cell": cell, "color": color, "t": 0.0})
 
 func _physics_process(delta: float) -> void:
+	if emitters:
+		emitters.step(delta)
 	for i in range(effects.size() - 1, -1, -1):
 		effects[i].t += delta * 1.6
 		if effects[i].t >= 1.0:

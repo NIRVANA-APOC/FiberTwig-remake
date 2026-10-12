@@ -47,6 +47,17 @@ python tools/make_chs_lng.py     # i18n/zh_*.json -> remake/assets/lng/chs_105.l
 python tools/make_chs_font.py    # remakes the CJK subset from that .lng
 ```
 
+## Why this exists: the middleware route
+
+`remake/` is not the end product. The stated goal is a **three-phase** route, because
+the shipped original cannot practically be modified or extended with modern tooling:
+
+1. reverse-engineer the original and rebuild it 1:1 in Godot — the **middleware** (this phase);
+2. treat the middleware as a **frozen reference** and rebuild the game from it with AI-assisted automated refactoring;
+3. optimise performance and extend gameplay on that rebuilt base.
+
+The middleware is authoritative for **formats and rule structure**, while the **shipped original remains authoritative for exact pixel/parameter fidelity** — it is a rough 1:1 in places (effects and some UI paths are approximations). See [`MIDDLEWARE.md`](MIDDLEWARE.md) for the phases, the reference/authority hierarchy, the rules the refactor phase must follow, and how to verify fidelity.
+
 ## Highlights of the analysis
 
 * **`.zxc` archive format** — a simple 48-byte-entry table; all art, sound,

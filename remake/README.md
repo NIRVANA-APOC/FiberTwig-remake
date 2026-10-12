@@ -222,8 +222,10 @@ loaded directly from the extracted files, so no import step is required.
 | `--demotest` | headless run of the whole demo: isolation, progress and return to the title |
 | `--sparkdemo` | ClearSteck the conveyor (hammer-spark effect check) |
 | `--piecetest` | multi-cell piece checks (whole artwork, whole-piece removal) |
+| `--contenttest` | level-content regression: the six `<PutFishka>` cells of level 13, the `<MakeGhostRect>` conversion invariants of level 15, the `<FireEffect>`/`<RainEffect>` census and every effect asset |
 | `--filltest[=N]` | fills level N cell by cell and checks the completion rule |
 | `--beltspeed=N` | conveyor speed in px/s (default 50 = 2× the original) |
+| `--raincols=N` | **calibration-only, not a player option**: rain columns across the 1000 px band (default `RAIN_SPREAD_COLS = 30`). Exists so the density can be swept to reproduce the calibration attempt documented in `../work/reveng/IMPLEMENTATION_NOTES.md` §4.1 without editing a constant; `0` (the default) uses the shipped constant |
 | `--difficulty=normal\|easy\|hard\|nolose` | force a difficulty without the New Game dialog |
 | `--language=enu\|deu\|fra\|ptb\|rus\|chs` | start in a language (`options.cfg` is not changed) |
 | `--allbonus` | every generated twig is lucky (flash-test) |
@@ -319,16 +321,60 @@ reached.
 * `FragPicN.png` (a runtime generated picture referenced by `<FragPicture>`) is
   not available in the archive; the panel shows the level's first combination
   instead of that blueprint.
+* **"Abort Level" stays on the current level's page** (`BAbortWMenu` →
+  `WAbortLevelDialog` → OK): on level 1 it returns to the main menu, otherwise it
+  shows the between-level page for the level you just aborted, whose "next level"
+  button retries that same level (`level_index` is not changed and no experience
+  is settled). Note this page is *visually the same* as the one shown after
+  **winning** a level — after a win the index has already advanced, so in both
+  cases the page displays one level number and its "next level" button proceeds to
+  it. Two known consequences, both intentional:
+  * aborting can read as "it advanced", because the screen is the one you normally
+    see on the way forward. It is not advancing: `--contenttest` asserts the index
+    is unchanged and the caption still names the aborted level.
+  * on level 1 the main menu is shown instead, so there is no way to retry level 1
+    from the between-level page — use New Game.
 * The joint masks of the multi-cell shapes (`double*`, `tripl*`, `skoba*`) are
 taken from the artwork (checked pixel-wise by `--shapetest`), not from the
   executable's shape table;
-* `<MakeGhostRect>` (level 15 only) and `<FireEffect>` are not implemented.
+* `<MakeGhostRect>` (level 15 only), `<FireEffect>`, `<RainEffect
+  name="FlowerFall">`, `<PutFishka>`, `<MovingCurve>`/`<MapMovingCurve>` and
+  `<LevelEffect name="RoundBlicks">` are **implemented** (see
+  `../work/reveng/IMPLEMENTATION_NOTES.md`; `--contenttest` asserts the level
+  content). What remains open from those systems:
+  * `FragPicN.png` (a runtime generated picture referenced by `<FragPicture>`) is
+    not available in the archive; the panel shows the level's first combination
+    instead of that blueprint — the original's generation rule is still unknown.
+  * `SparkAngle`, `SparkRandomAngle`'s RNG call and the per-frame integration of
+    `GravX/GravY` are not decoded; the emitters use the engine's own direction
+    maths (`vx = VecX*sin(phase)`, `vy = VecY*cos(phase)`, `phase = -pi + 2*pi*i/N`)
+    and the table's cadence, but the remaining per-frame detail is open.
+  * RoundBlicks: whether the three `[RoundCloneEffect]` records run concurrently
+    or as a timed cycle is unknown (`ROUND_CYCLE` in `src/EffectEmitters.gd`), and
+    `Roundar`/`Roundbr` as ellipse semi-axes is derived, not instruction-level.
+  * `<MoveSin>` (used by FlowerFall) is the spark-side evaluator; only `alX` is
+    used, as a sway amplitude. Its full parameter meaning is undecoded.
+  * Rain density (`RAIN_SPREAD_COLS = 30` columns across the 1000 px band) is a
+    documented **choice** anchored to the table's in-flight particle count
+    (`RainHeight / RainSpeed / RainBornEvery` = 120 for MidRain), not a measured
+    optimum: three detectors (bright-run, motion-mask, white top-hat) were built
+    and none separated the rain layer from the static twig artwork well enough to
+    discriminate between settings. The particle COUNT is the table derivation;
+    only the horizontal spread is a choice.
+  * The curve formula's `ga` term is implemented as a cosine amplitude. That is a
+    documented choice, not a proven fact: it is undecidable from the shipped data
+    (22 of the 45 records have `ga == 0` on both axes; the measured worst case is
+    ≈0.08 px).
 * The invalid placement preview is tinted red; the original tint could not be
   measured from the captures.
 * The hero portrait is drawn at its native size at the label position (the
   shipped `elf.png` is exactly 120×360); how the original fits the wider
   portraits is unknown.
-* Moving `<Picture>` elements (`MovingCurve`) are drawn at their base position.
+* Moving `<Picture>` elements are drawn along their `<MovingCurve>`: the offset is
+  `alX*sin(beX*T) + gaX*cos(beX*T) + laX*T + lbX` per axis with `T` as elapsed
+  milliseconds (the authored `t` is overwritten by the engine's 20 000 000 ms
+  limit, so it is not a period), added to the picture's base position.
+  `<MapMovingCurve>` is the same evaluator with `laX`/`lbX` zero.
 * The original `ClosedLink` test was recovered from the executable
   (`FUN_004a1130`/`FUN_004a1360`): only a placement that leaves a component
   without open joints (while other components exist) is refused, and the

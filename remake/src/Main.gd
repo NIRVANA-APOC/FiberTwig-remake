@@ -13,6 +13,7 @@ extends Control
 
 const LevelLoader := preload("res://src/LevelLoader.gd")
 const BoardWorld := preload("res://src/BoardWorld.gd")
+const EffectEmitters := preload("res://src/EffectEmitters.gd")
 const LayerOverlay := preload("res://src/Overlay.gd")
 const OriginalUI := preload("res://src/OriginalUI.gd")
 
@@ -285,6 +286,10 @@ func _ready() -> void:
 		_help_test()
 		get_tree().quit()
 		return
+	if "--contenttest" in args:
+		_content_test()
+		get_tree().quit()
+		return
 	if "--shapetest" in args:
 		_shape_test()
 		get_tree().quit()
@@ -309,6 +314,9 @@ func _ready() -> void:
 		elif a.begins_with("--beltspeed="):
 			belt_base = maxf(5.0, float(a.split("=")[1]))
 			belt_speed = belt_base
+		elif a.begins_with("--raincols="):
+			# calibration override for the rain density measurement only
+			EffectEmitters.rain_cols_override = maxi(1, int(a.split("=")[1]))
 		elif a.begins_with("--difficulty="):
 			_set_forced_difficulty(a.split("=", true, 1)[1])
 		elif a == "--allbonus":
@@ -1332,10 +1340,36 @@ func start_level(idx: int, sync_difficulty := true) -> void:
 	print("[level] %s fishkas=%d ghosts=%d maprows=%d pictures=%d period=%d gen=%.2fs diff=%s cam=%.0f" % [level.name, level.fishkas.size(), world.ghosts.size(), level.picture_map.get("rows", []).size(), level.pictures.size(), level.generator_period, generator_period, _difficulty_name(), cam_y])
 	queue_redraw()
 
+## "Abort Level" (WMenu: BAbortWMenu -> ShowModal WAbortLevelDialog ->
+## BOkWAbortLivelDialogMouseUp -> here).
+##
+## Destination is explicit and the current level is PRESERVED:
+##   * level 0        -> back to the main menu (the idiom WTitle users use;
+##                       _stop_game() alone would leave the board visible)
+##   * any other level -> the CURRENT level's between-level page, so its
+##                       "next level" button retries THIS level.
+## No reward is settled: only a COMPLETED level runs the reward logic.  See
+## _finish_level(completed).
 func _level_aborted() -> void:
 	score = 0
 	last_placed = {}
+	# A level that was already completed set level_done = true in _check_state();
+	# leaving it set suppressed the win check on the retry, making the level
+	# unwinnable.  start_level() clears it too, but abort leads to the
+	# between-level screen rather than straight into a level, so clear it here.
+	level_done = false
 	_stop_game()
+	if level_index == 0:
+		stack = ["WTitle"]
+		_enter_form("WTitle")
+		queue_redraw()
+		return
+	# level_index is deliberately NOT changed.  _finish_level() increments it
+	# before entering this screen, so the screen shows the level that is about to
+	# be played; with the index untouched that is the CURRENT level and its
+	# "next level" button retries it.  Reload the data so the page cannot show
+	# another index's hero picture or description.
+	level = LevelLoader.parse_level("res://assets/levels/Level%d.txt" % level_index)
 	stack = ["WBetweenLevelMenu"]
 	_enter_form("WBetweenLevelMenu")
 	queue_redraw()
@@ -1343,11 +1377,18 @@ func _level_aborted() -> void:
 func _next_level() -> void:
 	# The between-level menu continues the campaign directly: the difficulty /
 	# start-bonus dialog belongs to "New Game" only (original WBetweenLevelMenu
-	# action BNextLevelWBetweenLevelMenuMouseUp).
+	# action BNextLevelWBetweenLevelMenuMouseUp).  After an abort level_index is
+	# unchanged, so this retries the same level.
 	start_level(level_index)
 	queue_redraw()
 
-func _finish_level() -> void:
+## One path for both endings; `completed` is the only difference between them.
+##   completed == true  -> settle the reward, advance (or finish the campaign)
+##   completed == false -> abort: score already cleared, index unchanged
+func _finish_level(completed: bool = true) -> void:
+	if not completed:
+		_level_aborted()
+		return
 	total_score += score
 	var used := world.cells.size()
 	var exp_gain := int(used / 10) + combos_done_count()
@@ -3590,6 +3631,278 @@ func _shape_test() -> void:
 ## Smoke test for the October fixes: take-back of the newest twig, the drop
 ## section cooldown, the sequential combo check and the bonus element scene
 ## changes.
+## Regression self-test for the level content that used to be parsed and dropped:
+## <PutFishka> (Level13) and <MakeGhostRect> (Level15).  The PutFishka cells are
+## asserted as FACT because the mapping is engine-confirmed (FUN_0049A7E4 ->
+## FUN_00499E80); the MakeGhostRect count is asserted as the number the shipped
+## rectangles actually contain.
+func _content_test() -> void:
+	var fails := 0
+
+	# --- <PutFishka>: Level13 (index 13) has exactly six pre-placements -------
+	var want := {
+		Vector2i(14, 201): 1, Vector2i(8, 196): 2, Vector2i(12, 196): 15,
+		Vector2i(6, 192): 2, Vector2i(14, 191): 8, Vector2i(10, 189): 5,
+	}
+	start_level(13)
+	progress_t = 0.0
+	_pop_modal("WProgressBar")
+	var got := {}
+	for f in level.get("put_fishka_cells", []):
+		got[f.cell] = int(f.type)
+	var missing: Array = []
+	for c in want:
+		if not got.has(c) or int(got[c]) != int(want[c]):
+			missing.append(c)
+	var extra: Array = []
+	for c in got:
+		if not want.has(c):
+			extra.append(c)
+	# every one must really sit on the board as a locked, non-scoring twig
+	var on_board := 0
+	for c in want:
+		if world.cells.has(c) and int(world.cells[c].type) == int(want[c]) \
+				and bool(world.cells[c].get("locked", false)):
+			on_board += 1
+	var put_ok: bool = got.size() == 6 and missing.is_empty() and extra.is_empty() \
+			and on_board == 6
+	if not put_ok:
+		fails += 1
+	print("[contenttest] putfishka level=13 parsed=%d on_board=%d missing=%s extra=%s -> %s"
+			% [got.size(), on_board, str(missing), str(extra), "PASS" if put_ok else "FAIL"])
+
+	# the cells must be inside the play field (15 columns) and the picture map.
+	# (board_rows is the PICTURE-MAP row range, i.e. level.board_top..board_bottom,
+	# NOT the placed cells' span - those are reported separately below.)
+	var in_field := true
+	var row_lo := 999
+	var row_hi := -999
+	for c in want:
+		if c.x < 0 or c.x > 14 or c.y < int(level.board_top) or c.y > int(level.board_bottom):
+			in_field = false
+		row_lo = mini(row_lo, c.y)
+		row_hi = maxi(row_hi, c.y)
+	if not in_field:
+		fails += 1
+	print("[contenttest] putfishka in_field=%s placed_rows=%d..%d board_rows=%d..%d"
+			% [str(in_field), row_lo, row_hi, int(level.board_top), int(level.board_bottom)])
+
+	# --- <MakeGhostRect>: the loader owns the conversion ----------------------
+	# Level15 (index 15) has no <GhostFishka> at all, so its two rectangles are
+	# the only ghost source.  Asserted as an INVARIANT on the parsed data:
+	#   ghosts_after == ghosts_before + converted
+	#   fishkas_after == fishkas_before - converted
+	var lv15 := LevelLoader.parse_level("res://assets/levels/Level15.txt")
+	var decl: int = int(lv15.get("ghosts_before_rects", -1))
+	var fis_before: int = int(lv15.get("fishkas_before_rects", -1))
+	var conv: int = (lv15.get("ghost_rect_converted", []) as Array).size()
+	var fis_after: int = (lv15.get("fishkas", []) as Array).size()
+	var gh_after: int = (lv15.get("ghosts", []) as Array).size()
+	var inv_ok: bool = decl == 0 and conv == 18 \
+			and gh_after == decl + conv \
+			and fis_after == fis_before - conv
+	if not inv_ok:
+		fails += 1
+	print("[contenttest] ghostrect invariants declared=%d converted=%d ghosts=%d fishkas %d->%d -> %s"
+			% [decl, conv, gh_after, fis_before, fis_after, "PASS" if inv_ok else "FAIL"])
+
+	# --- <MakeGhostRect>: board-level result ---------------------------------
+	start_level(15)
+	progress_t = 0.0
+	_pop_modal("WProgressBar")
+	var rects: int = (level.get("make_ghost_rects", []) as Array).size()
+	var converted: int = world.ghost_rect_converted.size()
+	var distinct: bool = converted == _unique_count(world.ghost_rect_converted)
+	var still_placed := 0
+	for c in world.ghost_rect_converted:
+		if world.cells.has(c):
+			still_placed += 1
+	var masks_ok := true
+	var in_board := true
+	var all_ghosts := true
+	for c in world.ghost_rect_converted:
+		var t: int = int(world.ghosts.get(c, 0))
+		if t < 1 or t > 15:
+			masks_ok = false
+		if c.x < 0 or c.x > 14 or c.y < int(level.board_top) or c.y > int(level.board_bottom):
+			in_board = false
+		if not world.ghosts.has(c):
+			all_ghosts = false
+	var rect_ok: bool = rects == 2 and converted == 18 and distinct \
+			and still_placed == 0 and masks_ok and in_board and all_ghosts \
+			and world.ghosts.size() == converted
+	if not rect_ok:
+		fails += 1
+	print("[contenttest] ghostrect level=15 rects=%d converted=%d distinct=%s still_placed=%d masks_in_1..15=%s in_board=%s all_ghosts=%s board_ghosts=%d -> %s"
+			% [rects, converted, str(distinct), still_placed, str(masks_ok),
+				str(in_board), str(all_ghosts), world.ghosts.size(),
+				"PASS" if rect_ok else "FAIL"])
+
+	# a converted cell is a coverable transparent target, not a placed twig
+	var cover_ok := true
+	if world.ghost_rect_converted.is_empty():
+		cover_ok = false
+	else:
+		var probe: Vector2i = world.ghost_rect_converted[0]
+		var gtype: int = int(world.ghosts.get(probe, 0))
+		if not _joints_consistent([{"cell": probe, "type": gtype}]):
+			cover_ok = false
+	if not cover_ok:
+		fails += 1
+	print("[contenttest] ghostrect coverable=%s" % str(cover_ok))
+
+	# --- <FireEffect> parsing: Level11 has 14, Level15 has 2 ------------------
+	var fire_total := 0
+	var fire_ok := true
+	for i in 18:
+		var lv := LevelLoader.parse_level("res://assets/levels/Level%d.txt" % i)
+		var n: int = (lv.get("fire_effects", []) as Array).size()
+		fire_total += n
+		if i == 11 and n != 14:
+			fire_ok = false
+		if i == 15 and n != 2:
+			fire_ok = false
+		for e in lv.get("fire_effects", []):
+			if not EffectEmitters.SPARK_RECIPES.has(str(e.name)):
+				fire_ok = false
+	if fire_total != 16 or not fire_ok:
+		fails += 1
+	print("[contenttest] fireeffects total=%d level11=14_level15=2=%s -> %s"
+			% [fire_total, str(fire_ok), "PASS" if (fire_total == 16 and fire_ok) else "FAIL"])
+
+	# --- rain surfaces: every <RainEffect> name must have a recipe ------------
+	var rain_names := {}
+	for i in 18:
+		var lv2 := LevelLoader.parse_level("res://assets/levels/Level%d.txt" % i)
+		var r := str(lv2.get("rain", ""))
+		if r != "":
+			rain_names[r] = int(rain_names.get(r, 0)) + 1
+	var rain_ok := true
+	for r in rain_names:
+		if not EffectEmitters.has_rain(r):
+			rain_ok = false
+	if not rain_ok:
+		fails += 1
+	print("[contenttest] rainsurfaces %s all_have_recipes=%s -> %s"
+			% [str(rain_names), str(rain_ok), "PASS" if rain_ok else "FAIL"])
+
+	# The rain band is 1000 px wide, so the driver MUST spread particles across it.
+	# A previous revision placed every particle at the same x and drew a single
+	# thin vertical streak down the screen; this assertion is what catches that.
+	var spread_ok := true
+	var spread_report := []
+	for r in rain_names:
+		var cols := EffectEmitters.rain_distinct_columns(str(r))
+		spread_report.append("%s=%d" % [str(r), cols])
+		if cols < 5:
+			spread_ok = false
+	if not spread_ok:
+		fails += 1
+	print("[contenttest] rainspread columns %s (>=5 required) -> %s"
+			% [str(spread_report), "PASS" if spread_ok else "FAIL"])
+
+	# --- every referenced effect asset must resolve ---------------------------
+	var asset_missing: Array = []
+	for rec in EffectEmitters.SPARK_RECIPES.values():
+		var p := "res://assets/squares/%s" % str(rec.surface)
+		if AssetLib.texture(p) == null:
+			asset_missing.append(p)
+	for slots in EffectEmitters.RAIN_RECIPES.values():
+		for rec2 in slots:
+			var p2 := "res://assets/squares/%s" % str(rec2.surface)
+			if AssetLib.texture(p2) == null:
+				asset_missing.append(p2)
+	if not asset_missing.is_empty():
+		fails += 1
+	print("[contenttest] effectassets missing=%s -> %s"
+			% [str(asset_missing), "PASS" if asset_missing.is_empty() else "FAIL"])
+
+	fails += _abort_test()
+
+	print("[contenttest] %s (%d failures)" % ["PASS" if fails == 0 else "FAIL", fails])
+
+## "Abort Level" regression.  Drives the REAL widget-action dispatch
+## (BOkWAbortLivelDialogMouseUp -> _level_aborted) rather than calling the
+## private handler, so the test covers the authored path.
+##
+## User-visible requirement: aborting stays on the CURRENT level's between-level
+## page (so "next level" retries it), or returns to the main menu on level 1; the
+## experience/reward is NOT settled on abort.
+func _abort_test() -> int:
+	var fails := 0
+
+	# --- case 1: mid-campaign (index 3) ---------------------------------------
+	start_level(3)
+	progress_t = 0.0
+	_pop_modal("WProgressBar")
+	var idx_before := level_index
+	var exp_before := experience
+	var exp_left_before := _experience_left()
+	# a level the player had already finished leaves level_done set; abort must
+	# clear it or the retry can never win
+	level_done = true
+	_exec_actions("BOkWAbortLivelDialog", "MouseUp")
+	var c1_top: bool = _top() == "WBetweenLevelMenu"
+	var c1_idx: bool = level_index == idx_before
+	var c1_exp: bool = experience == exp_before and _experience_left() == exp_left_before
+	var c1_done: bool = not level_done
+	var c1_score: bool = score == 0
+	var c1_cap: bool = ui.captions.get("LLevelNumWBetweenLevelMenu", "") == str(idx_before + 1)
+	var c1_level: bool = int(level.get("board_bottom", -1)) > 0
+	var c1: bool = c1_top and c1_idx and c1_exp and c1_done and c1_score and c1_cap and c1_level
+	if not c1:
+		fails += 1
+	print("[contenttest] abort mid top=%s(WBetweenLevelMenu) index %d->%d exp %d->%d level_done=%s score=%d caption=%s level_loaded=%s -> %s"
+			% [_top(), idx_before, level_index, exp_before, experience, str(level_done),
+				score, str(ui.captions.get("LLevelNumWBetweenLevelMenu", "")), str(c1_level),
+				"PASS" if c1 else "FAIL"])
+
+	# --- case 2: the retry reaches WGame at the SAME index --------------------
+	_next_level()
+	progress_t = 0.0
+	_pop_modal("WProgressBar")
+	var c2: bool = level_index == idx_before and stack.has("WGame")
+	if not c2:
+		fails += 1
+	print("[contenttest] abort retry index=%d (expect %d) in_game=%s -> %s"
+			% [level_index, idx_before, str(stack.has("WGame")), "PASS" if c2 else "FAIL"])
+
+	# --- case 3: level 1 (index 0) returns to the main menu -------------------
+	start_level(0)
+	progress_t = 0.0
+	_pop_modal("WProgressBar")
+	level_done = true
+	_exec_actions("BOkWAbortLivelDialog", "MouseUp")
+	var c3: bool = _top() == "WTitle" and level_index == 0 and not level_done and score == 0
+	if not c3:
+		fails += 1
+	print("[contenttest] abort level1 top=%s(WTitle) index=%d level_done=%s score=%d -> %s"
+			% [_top(), level_index, str(level_done), score, "PASS" if c3 else "FAIL"])
+
+	# --- case 4: a COMPLETED level still advances and pays out ----------------
+	# so the shared _finish_level(completed) refactor did not change the win path
+	start_level(3)
+	progress_t = 0.0
+	_pop_modal("WProgressBar")
+	var exp_before2 := experience
+	total_score = 0
+	score = 100
+	_finish_level(true)
+	var c4: bool = level_index == 4 and experience > exp_before2 and total_score == 100 \
+			and _top() == "WBetweenLevelMenu"
+	if not c4:
+		fails += 1
+	print("[contenttest] finish advance index=%d (expect 4) exp %d->%d total=%d top=%s -> %s"
+			% [level_index, exp_before2, experience, total_score, _top(),
+				"PASS" if c4 else "FAIL"])
+	return fails
+
+func _unique_count(a: Array) -> int:
+	var seen := {}
+	for v in a:
+		seen[v] = true
+	return seen.size()
+
 func _fix_test() -> void:
 	var fails := 0
 	# --- rollback of the newest placed twig ---------------------------------

@@ -55,6 +55,25 @@ static func frag_cell(frag: int) -> Vector2i:
 static func ghost_cell(x: int, y: int) -> Vector2i:
 	return Vector2i(int(round((x - 25) / float(CELL))), int(round((y - 20) / float(CELL))))
 
+## <PutFishka x y type> places a pre-placed twig at level start.  ENGINE-CONFIRMED
+## rule (effects-re, handler in FUN_0049A7E4, callee FUN_00499E80): the parser
+## computes local_68 = yFile - camY + 245 - 15 and FUN_00499E80 re-adds camY - 245,
+## so the camera cancels and worldY = yFile - 15; the cell is admitted by the
+## strict window pointsY < worldY < pointsY + 60 with an exact x match.  That is
+## floor((x-5)/40), floor((y-15)/40) - the same -15 convention as <GhostFishka>
+## and <Point>/<Bomb>.
+## The six shipped Level13 records, all unambiguous under this rule:
+##   (580,8058,t1)->(14,201)  (347,7860,t2)->(8,196)   (505,7860,t15)->(12,196)
+##   (268,7700,t2)->( 6,192)  (576,7694,t8)->(14,191)  (420,7580,t5)->(10,189)
+## The (5,18) offset seen earlier reproduces all six under flooring but is not
+## the rule; (5,15) is (it is simply -15, so the row is floor((y-15)/40)).
+const PUTFISHKA_OFF_X := 5
+const PUTFISHKA_OFF_Y := 15
+
+static func putfishka_cell(x: int, y: int) -> Vector2i:
+	return Vector2i(int(floor((x - PUTFISHKA_OFF_X) / float(CELL))),
+			int(floor((y - PUTFISHKA_OFF_Y) / float(CELL))))
+
 ## Top-left pixel of a cell's artwork in the original world coordinate system.
 ## Measured from assets/Game-*.png: the twig artwork sits at (40*col + 5, 40*row),
 ## which is exactly the grid stored in Squares_Points.dat (x = 5 + 40*c, y = 40*r).
@@ -244,6 +263,8 @@ static func parse_level(path: String) -> Dictionary:
 		"bombs": [],
 		"make_ghost_rects": [],
 		"put_fishkas": [],
+		"fire_effects": [],
+		"round_blicks": [],
 	}
 
 	var raw := FileAccess.get_file_as_bytes(path)
@@ -294,6 +315,14 @@ static func parse_level(path: String) -> Dictionary:
 						lvl.fishka_with_bonus = _f(attrs.get("prob", "0"))
 					"LevelEffect":
 						lvl.level_effects.append(attrs)
+						# <LevelEffect name="RoundBlicks" x y>: a positioned
+						# Blick1 burst.  x/y are WORLD pixels - the parser does
+						# NOT apply the PutFishka/-15 adjustment here.
+						if str(attrs.get("name", "")) == "RoundBlicks":
+							lvl.round_blicks.append({
+								"x": _f(attrs.get("x", "0")),
+								"y": _f(attrs.get("y", "0")),
+							})
 					"Picture":
 						if not empty:
 							current_picture = {
@@ -314,7 +343,16 @@ static func parse_level(path: String) -> Dictionary:
 							})
 					"MovingCurve":
 						if not current_picture.is_empty():
-							current_picture.curve = attrs
+							current_picture.curve = _curve_from(attrs)
+					"MapMovingCurve":
+						if not current_map.is_empty():
+							current_map["curve"] = _curve_from(attrs)
+					"MoveSin":
+						# <MoveSin> feeds the TWIG-SPARK record (FUN_004A3E9C),
+						# NOT the picture curve evaluator - keep the two paths
+						# separate.
+						if not current_map.is_empty():
+							current_map["move_sin"] = attrs
 					"FishkaProb":
 						pass
 					"FProb":
@@ -331,6 +369,8 @@ static func parse_level(path: String) -> Dictionary:
 								"one_height": _f(attrs.get("OneHeight", "40")),
 								"images": [],
 								"rows": [],
+								"curve": {},
+								"move_sin": {},
 							}
 							lvl.picture_map = current_map
 					"Fishka":
@@ -381,7 +421,26 @@ static func parse_level(path: String) -> Dictionary:
 					"MakeGhostRect":
 						lvl.make_ghost_rects.append(attrs)
 					"PutFishka":
-						lvl.put_fishkas.append(attrs)
+						lvl.put_fishkas.append({
+							"x": _f(attrs.get("x", "0")),
+							"y": _f(attrs.get("y", "0")),
+							"type": int(_f(attrs.get("type", "0"))),
+							# the handler also reads `ghost` and marks the
+							# element ghost-class when its screen y resolves to
+							# 0; no shipped record does, but keep the field
+							# rather than silently dropping it
+							"ghost": attrs.get("ghost", "") == "true",
+						})
+					"FireEffect":
+						lvl.fire_effects.append({
+							"name": attrs.get("name", ""),
+							"x": _f(attrs.get("x", "0")),
+							"y": _f(attrs.get("y", "0")),
+							# the record's runevery overrides the effect's
+							# [EffectTypeRunEvery]; 0 = use the table value
+							"runevery": _f(attrs.get("runevery", "0")),
+							"followpic": attrs.get("followpic", ""),
+						})
 				# Text bearing elements
 				if tag in ["FishTypeSequence", "FishkaScore", "FishkaBonusProb", "CombSequence",
 						"OneCombBonusProb", "AllCombBonusProb", "Images", "map"]:
@@ -444,10 +503,34 @@ static func parse_level(path: String) -> Dictionary:
 			continue
 		fishkas.append({"cell": cell, "type": f.type, "unhammer": f.unhammer, "frag": f.frag})
 	lvl["fishkas"] = fishkas
+	# <PutFishka> = pre-placed twigs.  They join the board exactly like <Fishka>
+	# (they count towards the network, they never score and they are locked), so
+	# they are appended to the same list; `source` keeps them distinguishable for
+	# the self-test and for the ledger.
+	var put := []
+	for p in lvl.put_fishkas:
+		var pc := putfishka_cell(int(p.get("x", 0)), int(p.get("y", 0)))
+		var rec := {
+			"cell": pc,
+			"type": int(p.get("type", 0)),
+			"unhammer": false,
+			"frag": -1,
+			"source": "putfishka",
+			"px": int(p.get("x", 0)),
+			"py": int(p.get("y", 0)),
+		}
+		put.append(rec)
+		fishkas.append(rec)
+	lvl["put_fishka_cells"] = put
 	var ghosts := []
 	for g in lvl.ghosts:
 		ghosts.append({"cell": ghost_cell(g.x, g.y), "type": g.type, "x": g.x, "y": g.y})
 	lvl["ghosts"] = ghosts
+	# <MakeGhostRect> runs HERE, on the parsed level data, so that the level's own
+	# counts stay honest: a converted twig LEAVES `fishkas` and ENTERS `ghosts`.
+	# Doing it later (in BoardWorld.setup) left `fishkas` still containing the
+	# converted twigs, so the printed pattern size no longer described the board.
+	apply_make_ghost_rects(lvl)
 	# Board bounds come from the picture map.
 	var pm: Dictionary = lvl.picture_map
 	if not pm.is_empty():
@@ -462,6 +545,79 @@ static func parse_level(path: String) -> Dictionary:
 
 static func _f(s: String) -> float:
 	return s.replace(",", ".").to_float()
+
+## <MakeGhostRect left top right bottom> is world-pixel.  A pre-placed twig
+## converts when its cell origin (40*col + 5, 40*row) lies inside the rectangle.
+## The twig LEAVES `fishkas` (so it no longer blocks, connects or carries a joint
+## light) and ENTERS `ghosts` with the same joint mask (which is what keeps it
+## coverable by the same shape).  Mutates `lvl` and records the converted cells in
+## `lvl.ghost_rect_converted` so callers can assert
+##   ghosts_after == ghosts_before + converted   AND
+##   fishkas_after == fishkas_before - converted
+static func apply_make_ghost_rects(lvl: Dictionary) -> Array:
+	var rects: Array = lvl.get("make_ghost_rects", [])
+	lvl["ghosts_before_rects"] = (lvl.get("ghosts", []) as Array).size()
+	lvl["fishkas_before_rects"] = (lvl.get("fishkas", []) as Array).size()
+	var converted: Array = []
+	if rects.is_empty():
+		lvl["ghost_rect_converted"] = converted
+		return converted
+	var ghosts: Array = lvl.get("ghosts", [])
+	var existing := {}
+	for g in ghosts:
+		existing[g.cell] = true
+	var kept: Array = []
+	for f in lvl.get("fishkas", []):
+		var hit := false
+		for r in rects:
+			var left := _f(str(r.get("left", "0")))
+			var top := _f(str(r.get("top", "0")))
+			var right := _f(str(r.get("right", "0")))
+			var bottom := _f(str(r.get("bottom", "0")))
+			if right < left:
+				var tl := left
+				left = right
+				right = tl
+			if bottom < top:
+				var tt := top
+				top = bottom
+				bottom = tt
+			var o := cell_origin(f.cell)
+			if o.x >= left and o.x <= right and o.y >= top and o.y <= bottom:
+				hit = true
+				break
+		if hit and not existing.has(f.cell):
+			ghosts.append({"cell": f.cell, "type": int(f.type), "x": 0, "y": 0,
+				"from_rect": true})
+			existing[f.cell] = true
+			converted.append(f.cell)
+		else:
+			kept.append(f)
+	lvl["fishkas"] = kept
+	lvl["ghosts"] = ghosts
+	lvl["ghost_rect_converted"] = converted
+	return converted
+
+## <MovingCurve>/<MapMovingCurve> attribute set.  Formula is implementation-grade
+## from A5: offsetX = alX*sin(beX*T) + gaX*cos(beX*T) + laX*T + lbX (same for Y),
+## final position = picture base position + offset, T = elapsed MILLISECONDS
+## wrapping at 20 000 000 (the parser OVERWRITES the authored `t` with that limit,
+## so `t` is NOT a period).  <MapMovingCurve> is the same evaluator with laX/lbX
+## zero; it is not a separate code path.  Missing attributes default to 0.
+static func _curve_from(attrs: Dictionary) -> Dictionary:
+	var keys := ["alX", "beX", "gaX", "laX", "lbX", "alY", "beY", "gaY", "laY", "lbY"]
+	var out := {}
+	var any := false
+	for k in keys:
+		if attrs.has(k):
+			out[k] = _f(str(attrs[k]))
+			any = true
+		else:
+			out[k] = 0.0
+	if not any:
+		return {}
+	out["source"] = attrs
+	return out
 
 static func _vec2(s: String) -> Vector2:
 	var parts := s.split(",", false)
