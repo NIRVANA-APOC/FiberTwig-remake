@@ -167,6 +167,18 @@ var sequence_index := 0
 var quest_pic := ""
 var quest_prob := 0.0
 var bonus_prob := 0.0
+## Twig type draw (remake playability change).  `--draw=orig` restores the
+## original independent weighted draw over `<FProb>`; the default "bag" deals
+## every weight once per shuffle bag so no type can starve or flood the belt,
+## and `--pity=N` force-deals a type absent for N draws (`0` = off, default 40).
+## See `_next_twig_name()` and `--drawtest`.
+var draw_orig := false
+var pity_gap := 40
+var _bag: Array = []
+var _bag_since := {}
+var _bag_last := ""
+var _bag_rebuilds := 0
+var _bag_forced := 0
 var combo_preview := []
 # debug: --capture=<path>,<delay>[,<interval>,<count>] saves viewport PNGs
 var capture_path := ""
@@ -255,6 +267,10 @@ func _ready() -> void:
 	for a in OS.get_cmdline_args() + OS.get_cmdline_user_args():
 		if a.begins_with("--language="):
 			opt_language = a.split("=")[1]
+		elif a.begins_with("--draw="):
+			draw_orig = a.split("=", true, 1)[1] == "orig"
+		elif a.begins_with("--pity="):
+			pity_gap = maxi(0, int(a.split("=", true, 1)[1]))
 	_apply_language(opt_language)
 	_apply_options()
 	_refresh_saves()
@@ -299,6 +315,14 @@ func _ready() -> void:
 		_fix_test()
 		get_tree().quit()
 		return
+	for a in args:
+		if a == "--drawtest" or a.begins_with("--drawtest="):
+			var dlvl := 2
+			if a.begins_with("--drawtest="):
+				dlvl = clampi(int(a.split("=")[1]), 0, 17)
+			_draw_test(dlvl)
+			get_tree().quit()
+			return
 	for a in args:
 		if a == "--filltest" or a.begins_with("--filltest="):
 			var flevel := 0
@@ -1325,6 +1349,11 @@ func start_level(idx: int, sync_difficulty := true) -> void:
 	for v in level.fish_type_sequence:
 		sequence.append(int(v))
 	sequence_index = 0
+	_bag.clear()
+	_bag_since.clear()
+	_bag_last = ""
+	_bag_rebuilds = 0
+	_bag_forced = 0
 	quest_pic = str(level.hidden_fishka)
 	quest_prob = float(level.hidden_fishka_prob)
 	bonus_prob = float(level.fishka_with_bonus)
@@ -1666,21 +1695,151 @@ func _next_twig_shape() -> Dictionary:
 		var t := int(sequence[sequence_index % sequence.size()])
 		sequence_index += 1
 		return LevelLoader.single_shape(t)
+	return LevelLoader.shape_of_name(_next_twig_name())
+
+## Name of the next generated twig.
+##
+## `--draw=orig` restores the original independent weighted draw over `<FProb>`
+## (`0x4701cc`: sum the weights, then `Random(total)` picks the interval).  The
+## default "bag" mode is a playability change on top of those numbers: the
+## weights become a shuffle bag, i.e. every type is dealt exactly `prob` times
+## per bag, spread out and never twice in a row, so no type can starve or flood
+## the belt.  `--pity=N` force-deals a type absent for N draws (`0` = off,
+## default 40, which caps every gap while shifting the weights by under 1%).
+## Long-run frequencies keep following the
+## `<FProb>` weights, see `--drawtest`.
+func _next_twig_name() -> String:
+	if not draw_orig:
+		return _bag_next_name()
 	var probs: Array = level.fishka_prob
-	if probs.is_empty():
-		return LevelLoader.single_shape(1 + randi() % 15)
 	var total := 0
 	for p in probs:
 		total += maxi(0, int(p.prob))
 	if total <= 0:
-		return LevelLoader.single_shape(1 + randi() % 15)
+		return LevelLoader.type_name(1 + randi() % 15)
 	var r := randi() % total
 	var acc := 0
 	for p in probs:
 		acc += maxi(0, int(p.prob))
 		if r < acc:
-			return LevelLoader.shape_of_name(str(p.name))
-	return LevelLoader.single_shape(1)
+			return str(p.name)
+	return LevelLoader.type_name(1)
+
+## `<FProb>` entries with a positive weight (file order), or the original
+## uniform 1..15 fallback when the level has none.
+func _bag_spec() -> Array:
+	var spec: Array = []
+	var total := 0
+	for p in level.fishka_prob:
+		var w := maxi(0, int(p.prob))
+		if w > 0:
+			spec.append({"name": str(p.name), "weight": w})
+			total += w
+	if total <= 0:
+		for t in range(1, 16):
+			spec.append({"name": LevelLoader.type_name(t), "weight": 1})
+	return spec
+
+## Refills the bag: `weight` copies of every type, arranged so that equal names
+## are never adjacent.  The arrangement is a greedy "most remaining copies
+## first" spread with random tie-breaks, rebuilt until the first and last card
+## differ (a circularly safe spread), then rotated so the first card differs
+## from the previous bag's last card `_bag_last` as well.  The quotas stay
+## exact while the order varies.  The pity counters survive the refill: the bag
+## is only a quota schedule.
+func _bag_refill() -> void:
+	var spec := _bag_spec()
+	var total := 0
+	for e in spec:
+		var name := str(e.name)
+		total += int(e.weight)
+		if not _bag_since.has(name):
+			_bag_since[name] = 0
+	for attempt in 16:
+		_bag.clear()
+		var counts := {}
+		for e in spec:
+			counts[str(e.name)] = int(counts.get(str(e.name), 0)) + int(e.weight)
+		var prev := ""
+		for i in total:
+			var best := -1
+			var cand: Array = []
+			for name in counts:
+				var c := int(counts[name])
+				if c <= 0 or name == prev:
+					continue
+				if c > best:
+					best = c
+					cand = [name]
+				elif c == best:
+					cand.append(name)
+			if cand.is_empty():
+				# only possible when one weight exceeds half of the bag (never
+				# in the shipped levels); keep the quotas, relax the no-repeat rule
+				for name in counts:
+					if int(counts[name]) > 0:
+						cand.append(name)
+			var pick := str(cand[randi() % cand.size()])
+			_bag.append(pick)
+			counts[pick] = int(counts[pick]) - 1
+			prev = pick
+		if total <= 1 or str(_bag[0]) != str(_bag[total - 1]):
+			break
+	# random rotation: the first card must differ from the previous draw; the
+	# circular spread above then keeps the whole linear deal repeat-free
+	if total > 1:
+		var wrap_ok := str(_bag[0]) != str(_bag[total - 1])
+		var start := randi() % total
+		for k in total:
+			var r := (start + k) % total
+			if str(_bag[r]) == _bag_last or (r > 0 and not wrap_ok):
+				continue
+			var rot: Array = []
+			for m in total:
+				rot.append(_bag[(r + m) % total])
+			_bag = rot
+			break
+	_bag_rebuilds += 1
+
+## The type with the largest drought once it passed `pity_gap`, or "".
+func _bag_pity_target() -> String:
+	if pity_gap <= 0:
+		return ""
+	var best := ""
+	var best_since := pity_gap - 1
+	for name in _bag_since:
+		var s := int(_bag_since[name])
+		if s > best_since:
+			best = str(name)
+			best_since = s
+	return best
+
+func _bag_next_name() -> String:
+	if _bag.is_empty():
+		_bag_refill()
+	var name := _bag_pity_target()
+	if name != "":
+		# the forced deal consumes a bag quota of that type when it is still
+		# there, otherwise it is an extra card (pity boosts rare types a bit)
+		_bag_forced += 1
+		var idx := _bag.find(name)
+		if idx >= 0:
+			_bag.remove_at(idx)
+			# removing a card can bring two equal ones together; repair locally
+			if idx > 0 and idx < _bag.size() and str(_bag[idx - 1]) == str(_bag[idx]):
+				for j in range(idx + 1, _bag.size()):
+					if str(_bag[j]) != str(_bag[idx - 1]):
+						var tmp: Variant = _bag[idx]
+						_bag[idx] = _bag[j]
+						_bag[j] = tmp
+						break
+	else:
+		name = str(_bag.pop_front())
+	for nm in _bag_since:
+		_bag_since[nm] = int(_bag_since[nm]) + 1
+	_bag_since[name] = 0
+	_bag_last = name
+	return name
 
 ## Cells a shape would occupy when its top left cell is placed at `cell`.
 func shape_placement(cell: Vector2i, shape: Dictionary) -> Array:
@@ -3950,6 +4109,71 @@ func _unique_count(a: Array) -> int:
 	for v in a:
 		seen[v] = true
 	return seen.size()
+
+## Headless self-test of the twig type draw (`--drawtest[=LEVEL]`): prints the
+## long-run frequency of every `<FProb>` weight, the largest gap and the longest
+## run, and checks the bag/pity guarantees.  `--draw=orig` and `--pity=N` can be
+## combined with it to compare the modes.
+func _draw_test(lvl: int) -> void:
+	start_level(lvl)
+	sequence.clear()
+	_bag.clear()
+	_bag_since.clear()
+	_bag_last = ""
+	var names: Array = []
+	var weights := {}
+	var total := 0
+	for e in _bag_spec():
+		var name := str(e.name)
+		if not weights.has(name):
+			names.append(name)
+			weights[name] = 0
+		weights[name] = int(weights[name]) + int(e.weight)
+		total += int(e.weight)
+	var draws := 100000
+	var counts := {}
+	var gap := {}
+	var max_gap := {}
+	var run_of := {}
+	var max_run := {}
+	var adjacent := 0
+	var prev := ""
+	for i in draws:
+		var n := _next_twig_name()
+		counts[n] = int(counts.get(n, 0)) + 1
+		for nm in names:
+			gap[nm] = int(gap.get(nm, 0)) + 1
+		max_gap[n] = maxi(int(max_gap.get(n, 0)), int(gap[n]))
+		gap[n] = 0
+		if n == prev:
+			adjacent += 1
+		run_of[n] = int(run_of.get(n, 0)) + 1 if n == prev else 1
+		max_run[n] = maxi(int(max_run.get(n, 0)), int(run_of[n]))
+		prev = n
+	var fails := 0
+	for nm in names:
+		var want := 100.0 * float(weights[nm]) / float(total)
+		var got := 100.0 * float(counts.get(nm, 0)) / float(draws)
+		# the pity cap trades a little frequency accuracy for the gap guarantee
+		var slack := 0.5
+		if not draw_orig and pity_gap > 0:
+			slack += 100.0 / float(pity_gap)
+		var ok := absf(got - want) <= slack
+		if not ok:
+			fails += 1
+		print("[drawtest] %-8s weight=%5.2f%% actual=%5.2f%% maxgap=%3d maxrun=%d %s" % [
+			nm, want, got, int(max_gap.get(nm, 0)), int(max_run.get(nm, 0)), "ok" if ok else "OFF"])
+	if not draw_orig:
+		# pure bag mode never repeats; with pity the forced deals can
+		# occasionally break a pair, but must stay a rare exception
+		if adjacent != 0 and (pity_gap <= 0 or adjacent * 500 >= draws):
+			fails += 1
+		if pity_gap > 0:
+			for nm in names:
+				if int(max_gap.get(nm, 0)) > pity_gap + names.size():
+					fails += 1
+	print("[drawtest] level=%d draws=%d mode=%s pity=%d bag_rebuilds=%d forced=%d adjacent=%d fails=%d" % [
+		lvl, draws, "orig" if draw_orig else "bag", pity_gap, _bag_rebuilds, _bag_forced, adjacent, fails])
 
 func _fix_test() -> void:
 	var fails := 0

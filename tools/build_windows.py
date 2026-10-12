@@ -43,7 +43,7 @@ PROJECT = os.path.join(ROOT, "remake")
 OUT_DIR = os.path.join(ROOT, "build", "windows")
 PRESET = "Windows Desktop"
 APP = "FiberTwigRemake"
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 
 # Extensions Godot would import (and therefore must be forced to keep as-is).
 IMPORTABLE = {
@@ -395,6 +395,7 @@ def smoke_test(exe: str) -> None:
         ["--helptest"],
         ["--closetest"],
         ["--piecetest"],
+        ["--drawtest"],
         ["--autotest=0"],
     ]
     for args in tests:
@@ -433,11 +434,16 @@ def write_extra_files(dist: str) -> None:
 
 
 def make_zip(dist: str, zip_path: str, top: str) -> None:
+    # only the shipped files are packed: a stale executable left in the dist
+    # directory (e.g. from an older app name) must never end up in the archive
+    keep = {APP + ".exe", "README.txt"}
     with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED, compresslevel=6) as zf:
         for dirpath, _dirnames, filenames in os.walk(dist):
             for fn in filenames:
                 full = os.path.join(dirpath, fn)
                 rel = os.path.relpath(full, dist)
+                if rel not in keep and rel.split(os.sep)[0] != "LICENSES":
+                    continue
                 zf.write(full, os.path.join(top, rel))
     log(f"zip: {zip_path} ({os.path.getsize(zip_path) / 1048576:.1f} MiB)")
 

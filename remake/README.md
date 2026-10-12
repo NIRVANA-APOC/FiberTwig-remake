@@ -108,9 +108,15 @@ from the shipped screenshots, see §10 of the report):
   y=585, at most **26** twigs; they travel left at **25 px/s** in the original
   (measured from `demo.dat`), pile up at x≤5 with a 2 px gap and are fed
   automatically every `Generator period` (ms, ×1.75 on Easy, ×0.6 on Hard;
-  the type is the ordered `<FishTypeSequence>` when the level has one and a
-  weighted pseudo-random draw over `<FProb>` otherwise). **For playability
-  the remake runs the belt at 2× the original speed** (`--beltspeed=N` sets it
+  the type is the ordered `<FishTypeSequence>` when the level has one and,
+  otherwise, a weighted draw over `<FProb>`). **For playability the remake
+  deals those weights as a shuffle bag** (`--draw=bag`, the default): each
+  type is dealt exactly `prob` times per bag, spread out and never twice in a
+  row, so it cannot starve or flood the belt; `--draw=orig` restores the
+  original independent draw and `--pity=N` adds a hard "absent for N draws"
+  guarantee (default 40 draws; it slightly boosts the rare types). `--drawtest`
+  prints the frequencies, gaps and runs. **Also for playability the remake
+  runs the belt at 2× the original speed** (`--beltspeed=N` sets it
   explicitly, `--beltspeed=25` restores the original). The arrow button
   generates one immediately and postpones the next automatic one. Game over
   only when the belt is completely jammed (first twig at the stop, last two
@@ -234,6 +240,9 @@ works both in the editor and inside the exported pack.  See
 | `--contenttest` | level-content regression: the six `<PutFishka>` cells of level 13, the `<MakeGhostRect>` conversion invariants of level 15, the `<FireEffect>`/`<RainEffect>` census and every effect asset |
 | `--filltest[=N]` | fills level N cell by cell and checks the completion rule |
 | `--beltspeed=N` | conveyor speed in px/s (default 50 = 2× the original) |
+| `--draw=bag\|orig` | twig type draw: exact weighted shuffle bag (default) or the original independent draw |
+| `--pity=N` | in bag mode, force-deal a type absent for N draws (default 40, `0` = off; slightly boosts the rare types) |
+| `--drawtest[=N]` | type-draw check: frequencies vs `<FProb>`, largest gap and longest run of level N (default 2) |
 | `--raincols=N` | **calibration-only, not a player option**: rain columns across the 1000 px band (default `RAIN_SPREAD_COLS = 30`). Exists so the density can be swept to reproduce the calibration attempt documented in `../work/reveng/IMPLEMENTATION_NOTES.md` §4.1 without editing a constant; `0` (the default) uses the shipped constant |
 | `--difficulty=normal\|easy\|hard\|nolose` | force a difficulty without the New Game dialog |
 | `--language=enu\|deu\|fra\|ptb\|rus\|chs` | start in a language (`options.cfg` is not changed) |
@@ -317,6 +326,9 @@ godot --headless --path remake -- --langtest
 
 # verifies that every help topic switches the visible page
 godot --headless --path remake -- --helptest
+
+# checks the twig type draw of level 3 (frequencies, gaps, no-repeat)
+godot --headless --path remake -- --drawtest=2
 ```
 
 The self test is a smoke test, not a proof of solvability: it reports how many
