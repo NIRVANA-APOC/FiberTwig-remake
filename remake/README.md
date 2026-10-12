@@ -207,6 +207,13 @@ godot --path remake                     # or the bundled engine:
 The project works with any Godot 4.x (tested with 4.7). All resources are
 loaded directly from the extracted files, so no import step is required.
 
+For the self-contained Windows build the assets are packed with the `keep`
+importer (raw bytes) and the preset's `include_filter` covers the plain data
+files; `AssetLib` therefore addresses assets by their `res://` path, which
+works both in the editor and inside the exported pack.  See
+[`../README.md`](../README.md) ("Building the Windows release") and
+[`../WINDOWS.md`](../WINDOWS.md) for the build script.
+
 | flag | meaning |
 |---|---|---|
 | `--screen=WTitle\|WStartDialog\|WOptions\|WLanguage\|WHelp\|WLoad\|WSave\|WHighScores\|WMenu\|WBetweenLevelMenu\|WGame` | jump to a screen |

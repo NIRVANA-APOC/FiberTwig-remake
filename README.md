@@ -15,6 +15,12 @@ tools/                Python tools recovered from the analysis
   artmatch.py         locate original artwork inside the reference screenshots
   make_chs_lng.py     merged Simplified Chinese localization -> remake/assets/lng/chs_105.lng
   make_chs_font.py    LXGW WenKai Screen subset (CJK font) -> remake/assets/fonts/
+  fetch_export_templates.py  download just the Windows export template (HTTP range
+                      requests; ~105 MiB instead of the full 1.2 GiB .tpz)
+  build_windows.py    build the self-contained Windows release (keep-importer
+                      packing + pack verification + smoke tests + zip)
+  pck_list.py         list/extract a Godot .pck or an embedded pack
+  extract_icon.py     pull the original icon out of FiberTwig.exe
 i18n/                 the Chinese localization sources (see i18n/glossary.md)
   extract_en.py       every English caption in interface order -> i18n/en_source.json
   split_blocks.py     the three translation briefs -> i18n/en_{ui,help,levels}.md
@@ -100,6 +106,30 @@ tools/Godot_v4.7.2-stable_linux.x86_64 --path remake
 See [`remake/README.md`](remake/README.md) for controls and implementation
 notes, and [`REVERSE_ENGINEERING.md`](REVERSE_ENGINEERING.md) for the full
 technical report.
+
+## Building the Windows release
+
+```bat
+build-windows.cmd                 :: Windows: full build + smoke test
+build-windows.cmd --fetch-templates   :: download the export template if missing
+python tools/build_windows.py     :: any platform (same script)
+```
+
+The build writes a single self-contained executable
+(`build/windows/FiberTwigRemake.exe`, engine + embedded pack, ~126 MB, with the
+original game's icon and version metadata) and the distributable archive
+`build/FiberTwigRemake-Windows-x86_64.zip` (README + licences included).
+
+Two things make the export work: the remake reads its art, audio, fonts and
+data **raw** at runtime, so the build marks every asset under `remake/assets/`
+with `importer="keep"` (a normal export would replace PNG/WAV/TTF with
+`.ctex`/`.fontdata` and drop `.dat`/`.li`/`.lng` files entirely) and adds every
+asset extension to the preset's include filter.  The script then opens the
+finished executable, checks that every source asset is present in the embedded
+pack byte-for-byte, and runs the game's headless regression tests
+(`--wintest`, `--testsound`, `--langtest`, `--helptest`, `--closetest`,
+`--piecetest`, `--autotest=0`) against it.  See [`WINDOWS.md`](WINDOWS.md) for
+the details in Chinese.
 
 ## Legal
 

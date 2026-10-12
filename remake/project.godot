@@ -7,7 +7,9 @@ config_version=5
 [application]
 
 config/name="Fiber Twig Remake"
+config/version="1.0.0"
 config/description="Reverse-engineered remake of Puzzle Lab's Fiber Twig (2004)."
+config/icon="res://icon.png"
 run/main_scene="res://scenes/Main.tscn"
 config/features=PackedStringArray("4.4")
 

@@ -37,13 +37,17 @@ func resolve(path: String) -> String:
 			return hit
 	return path
 
+## Version of the data files: the game always reads the *raw* files shipped in
+## the pack (they are exported with the "keep" importer, see
+## tools/build_windows.py), so res:// paths are used directly.  This also works
+## when running from the project directory in the editor.
 func texture(path: String) -> Texture2D:
 	if _textures.has(path):
 		return _textures[path]
 	var real := resolve(path)
 	var tex: Texture2D = null
 	if FileAccess.file_exists(real):
-		var img := Image.load_from_file(ProjectSettings.globalize_path(real))
+		var img := Image.load_from_file(real)
 		if img != null and not img.is_empty():
 			tex = ImageTexture.create_from_image(img)
 	_textures[path] = tex
@@ -93,7 +97,7 @@ func music(path: String) -> AudioStream:
 	var s: AudioStream = null
 	var real := resolve(path)
 	if FileAccess.file_exists(real):
-		s = AudioStreamOggVorbis.load_from_file(ProjectSettings.globalize_path(real))
+		s = AudioStreamOggVorbis.load_from_file(real)
 		if s is AudioStreamOggVorbis:
 			(s as AudioStreamOggVorbis).loop = true
 	_sounds[path] = s

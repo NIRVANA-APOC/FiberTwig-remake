@@ -35,6 +35,48 @@ start.cmd --headless -- --autotest=0 --complex
 脚本会自动优先使用 `tools\` 下的 Godot，找不到时回退到 PATH 里的 `godot`；
 检测到 `--headless` 时自动改用 `console.exe` 以保留命令行输出。
 
+## 构建 Windows 发行版
+
+```bat
+build-windows.cmd                       :: 完整构建（导出 + 校验 + 冒烟测试 + 打包）
+build-windows.cmd --no-smoke            :: 只导出
+build-windows.cmd --fetch-templates     :: 缺导出模板时自动下载（只取需要的两个文件，约 105 MB）
+```
+
+产物：
+
+* `build\windows\FiberTwigRemake.exe` —— 单文件发行版（引擎 + 内嵌 PCK，约 126 MB），
+  自包含游戏、美术、音乐与六种语言；PE 图标与版本信息已写入（图标取自原版
+  `FiberTwig.exe`，见 `tools\extract_icon.py`）；
+* `build\FiberTwigRemake-Windows-x86_64.zip`（约 57 MB）—— 含 `README.txt` 与
+  `LICENSES\`（Godot MIT、两款 CJK 字体的 OFL、原版 license.txt）。
+
+`tools\build_windows.py` 的步骤：
+
+1. 临时写 `remake\export_presets.cfg`（Windows Desktop，`embed_pck=true`、
+   `debug/export_console_wrapper=0`、图标 `res://icon.ico`）；
+2. 给 `remake\assets\` 下所有会被 Godot 导入的文件写 `importer="keep"` 的
+   `.import`，并把资产扩展名全部加入预设 `include_filter` —— 游戏运行时用
+   `Image.load_from_file` / `FontFile.load_dynamic_font` / `FileAccess` 直接读原始
+   PNG/WAV/OGG/TTF 与 `.dat/.li/.lng/.xml`，而普通导出会把图片/音频/字体换成
+   `.ctex`/`.fontdata`（游戏读不了），并直接丢弃没有导入器的数据文件；
+3. `--headless --import` + `--headless --export-release`；
+4. 用 `tools\pck_list.py` 解析成品 exe 的内嵌 PCK，逐个核对 `assets\` 下每个文件
+   都存在且大小一致（478 个资产）；
+5. 直接用成品 exe 跑 `--wintest / --testsound / --langtest / --helptest /
+   --closetest / --piecetest / --autotest=0`，有 `SCRIPT ERROR` 即失败；
+6. 恢复项目的 `.import` 与 `export_presets.cfg`（`--keep-imports` 可保留），
+   生成 README/许可文件并压缩 zip。
+
+导出模板放在 `%APPDATA%\Godot\export_templates\4.7.2.stable\`，只需
+`windows_release_x86_64.exe`（+ 控制台版）。官方 `.tpz` 有 1.2 GB，
+`tools\fetch_export_templates.py` 通过 HTTP Range 只下载需要的那几个条目
+（`tools\pck_list.py` 逆向了 PCK 格式，这个脚本逆向了 zip 中央目录）。
+
+为保证导出可用，`remake\src\AssetLib.gd` 读取贴图/音乐时直接用 `res://` 路径
+（导出后 `ProjectSettings.globalize_path()` 返回相对路径，指向包内文件会失败）；
+`remake\docs\.gdignore` 让编辑器跳过文档截图，避免它们被导入进包（省约 8 MB）。
+
 ## 中文界面（简体中文）
 
 游戏内置 6 种语言：英语、德语、法语、葡萄牙语、俄语，以及新增的
